@@ -1,0 +1,77 @@
+@mixin transform($type) {
+	transform: $type;
+	-webkit-transform: $type;
+	-moz-transform: $type;
+	-ms-transform: $type;
+	-o-transform: $type;
+}
+
+@mixin transition($property, $time, $animation) {
+	transition: $property $time $animation;
+	-webkit-transition: $property $time $animation;
+	-moz-transition: $property $time $animation;
+	-ms-transition: $property $time $animation;
+	-o-transition: $property $time $animation;
+}
+
+@mixin radius($px) {
+	border-radius: $px;
+	-webkit-border-radius: $px;
+	-moz-border-radius: $px;
+	-ms-border-radius: $px;
+	-o-border-radius: $px;
+}
+
+@mixin box_shadow($x, $y, $blur, $spread, $color) {
+	-webkit-box-shadow: $x $y $blur $spread $color;
+	-moz-box-shadow: $x $y $blur $spread $color;
+	box-shadow: $x $y $blur $spread $color;
+}
+
+@mixin square($size, $radius: 0) {
+	width: $size;
+	height: $size;
+
+	@if $radius != 0 {
+		@include radius($radius);
+	}
+}
+
+@mixin form_control( $placeholder_bg ) {
+
+	& ~ label.placeholder {
+		@include transition( all, .3s, ease );
+	}
+
+	&:focus ~ label.placeholder,
+	&:valid ~ label.placeholder {
+		font-size: 80%;
+		top: -5px;
+		left: 10px;
+		padding: 0 5px;
+		background-color: $placeholder_bg;
+		line-height: 10px;
+
+		&.white {
+			background-color: $color_default;
+		}
+	}
+
+	@content;
+}
+
+@mixin button($bg) {
+	background-color: $bg;
+	
+	&:not([disabled]):hover,
+	&:not([disabled]):focus,
+	*:not([disabled]):active {
+		background-color: darken($bg, 5%) !important;
+	}
+}
+
+@mixin custom_card($radius, $shadow_position, $shadow_spread) {
+	background: $color_default;
+	@include radius($radius);
+	@include box_shadow(0, $shadow_position, $shadow_spread, 0, rgba($color_dark, .15) !important);
+}

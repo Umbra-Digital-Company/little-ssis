@@ -1,0 +1,12 @@
+{
+    "short_name": "SIS",
+    "name": "Sunnies Integrated Systems",
+    "icons": [{
+        "src": "/favicon.ico",
+        "type": "image/png",
+        "sizes": "250x250"
+    }],
+    "start_url": "/",
+    "display": "fullscreen",
+    "scope": "/"
+}

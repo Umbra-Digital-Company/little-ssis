@@ -1,0 +1,36 @@
+#topbar {
+
+	.home {
+		width: 50px;
+	}
+
+	.burger {
+		width: 30px;
+		height: 40px;
+		position: relative;
+		cursor: pointer;
+
+		> span {
+			background-color: #f7f7f7;
+			position: absolute;
+			display: block;
+			height: 2px;
+			margin-top: -1px;
+			width: 30px;
+			left: 0;
+			
+			&:first-of-type {
+				top: 10px;
+			}
+
+			&:nth-of-type(2) {
+				width: 20px;
+				top: 50%;
+			}
+
+			&:last-of-type {
+				bottom: 9px;
+			}
+		}
+	}
+}

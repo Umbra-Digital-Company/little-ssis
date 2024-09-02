@@ -1,0 +1,79 @@
+#vvmChangeTemplate .templates .template-block {
+	height: 100px;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+#vvmChangeTemplate .templates .template-block-selected>div {
+	background-color: $color_default;
+	padding: 5px 0;
+	@include radius(10px);
+	@include box_shadow(0, 3px, 6px, 0, rgba($color_dark, .25) !important);
+}
+
+#vvmChangeTemplate .templates .template-block>div {
+	height: 100%;
+}
+
+#vvmChangeTemplate .templates .template-block>div>div {
+	border-radius: 10px;
+}
+
+#vvmChangeTemplate .templates .template-block .block {
+	height: 100%;
+}
+
+#vvmChangeTemplate .templates .template-block .frame {
+	height: 22%;
+	background-color: #cccccc;
+}
+
+#vvmChangeTemplate .templates .template-block .frame-fh {
+	height: 100%;
+}
+
+#vvmChangeTemplate .templates .template-block .frame-fh .left {}
+
+#vvmChangeTemplate .templates .template-block .frame-fh .right {}
+
+#vvmChangeTemplate .templates .template-block .frame-row {
+	height: 22%;
+}
+
+#vvmChangeTemplate .templates .template-block .frame-row>div {
+	height: 100%;
+}
+
+#vvmChangeTemplate .templates .template-block .frame-double {
+	height: 48%;
+}
+
+#vvmChangeTemplate .templates .template-block .spacer {
+	height: 4%;
+}
+
+#vvmChangeTemplate .templates .template-block .col-spacer {
+	width: 10px;
+}
+
+#vvmChangeTemplate .templates .template-block .row-column {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#vvmChangeTemplate .templates .template-block .row-column .block,
+#vvmChangeTemplate .templates .template-block .row-column .frame {
+	border-radius: 5px;
+}
+
+#vvmChangeTemplate .templates .template-block .bg-gray {
+	background-color: #282828;
+}
+
+#vvmChangeTemplate .button {
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+}

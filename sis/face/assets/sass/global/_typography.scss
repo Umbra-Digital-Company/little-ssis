@@ -1,0 +1,124 @@
+a {
+	text-decoration: none !important;
+	outline: none !important;
+}
+
+p {
+	margin: 0;
+}
+
+.large {
+	font-size: 125%;
+}
+
+.h1 {
+	font-size: $fz_huge;
+	margin: 0;
+}
+
+.h2 {
+	font-size: $fz_large;
+	margin: 0;
+}
+
+.h3 {
+	font-size: $fz_medium;
+	margin: 0;
+}
+
+.text-primary {
+	color: $color_primary !important;
+}
+
+.text-secondary {
+	color: $color_secondary !important;
+}
+
+.text-danger {
+	color: $color_danger !important;
+}
+
+.text-danger-dark {
+	color: darken($color_danger, 20%) !important;
+}
+
+.text-success {
+	color: $color_success !important;
+}
+
+.text-success-dark {
+	color: darken($color_success, 20%) !important;
+}
+
+.text-dark {
+	color: $color_dark !important;
+}
+
+.text-gray {
+	color: $color_gray !important;
+}
+
+.text-white {
+	color: $color_default !important;
+}
+
+.bg-danger {
+	background-color: $color_danger !important;
+}
+
+.bg-success {
+	background-color: $color_success !important;
+}
+
+.bg-primary {
+	background-color: $color_primary !important;
+}
+
+.bg-secondary {
+	background-color: $color_secondary !important;
+}
+
+.bg-white {
+	background-color: $color_default !important;
+}
+
+.bg-gray {
+	background-color: $color_gray !important;
+}
+
+.bg-danger-light {
+	background-color: rgba($color_danger, .35) !important;
+}
+
+.bg-success-light {
+	background-color: rgba($color_success, .35) !important;
+}
+
+.bg-success-lighten {
+	background-color: lighten($color_success, 30%) !important;
+}
+
+.bg-doctor-lighten {
+	background-color: lighten($color_doctor, 60%) !important;
+}
+
+.bg-primary-light {
+	background-color: rgba($color_primary, .35) !important;
+}
+
+.bg-secondary-light {
+	background-color: rgba($color_secondary, .35) !important;
+}
+
+.bg-white-light {
+	background-color: rgba($color_default, .35) !important;
+}
+
+.border-secondary {
+	border-color: $color_secondary !important;
+}
+
+.font-bold {
+	font-family: $ff_bold;
+	font-weight: 700;
+}

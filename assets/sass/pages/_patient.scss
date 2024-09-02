@@ -1,0 +1,25 @@
+.div-search-filter {
+
+	.form-control {
+		max-width: 300px;
+	}
+
+	.btn {
+		width: 100%;
+
+		@media (min-width:768px) {
+			width: auto;
+		}
+	}
+}
+
+.div-page-filter {
+
+	.form-control {
+		max-width: 100%;
+
+		@media (min-width:768px) {
+			width: 200px;
+		}
+	}
+}

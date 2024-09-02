@@ -1,0 +1,147 @@
+.template_preview {
+	
+	padding: 30px;
+	min-height: 100vh;
+
+	> .row {
+		min-height: calc(100vh - 60px);
+		height: 100%;
+		position: relative;
+		z-index: 5;
+	}
+
+	.panel-col {
+		width: 600px;
+		max-width: 600px;
+		min-width: 600px;
+
+		.wall-holder {
+			height: 100%;
+			padding: 30px 10px;
+			position: relative;
+			background: #fff;
+			@include radius(10px);
+			@include box_shadow(0, 6px, 18px, 0, rgba($color_dark, .15) !important);
+
+			&#drawer-preview {
+				background: #caa177;
+			}
+
+			> div {
+				height: 100%;
+			}
+		}
+	}
+}
+
+.template-preview-title {
+	width: 100%;
+	max-width: 1170px;
+
+	select {
+		width: auto;
+	}
+}
+
+.wall-block-preview {
+
+	padding: 30px;
+
+	> .row {
+		margin: 0 -30px;
+	}
+
+	&.banner-main {
+		padding: 20px 20px;
+
+		canvas {
+			width: 100%;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+
+	&.banner-sub  {
+		padding: 30px 20px;
+			
+		canvas {
+			width: 100%;
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			max-height: 100px;
+		}
+	}
+
+	&.bs-100 {
+		background-image: url(/vvm/images/wall/1x4-separated.png);
+		background-repeat: no-repeat;
+		background-position: center 10px;
+		background-size: 100%;
+	}
+
+	&.bs-200 {
+		background-image: url(/vvm/images/wall/thin-shelf.png);
+		background-repeat: no-repeat;
+		background-position: bottom 16px center;
+		background-size: 95%;
+	}
+
+	&.drawer-layout {
+		padding: 20px 20px;
+		
+		canvas {
+			width: 100%;
+			background-image: url('/vvm/images/wall/drawer.png');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+
+	.mini-tooltip {
+		display: none;
+	}
+}
+
+.drawer-block {
+	padding: 20px;
+
+	.edit-drawer-template {
+		display: none;
+	}
+
+	.rounded-container {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		height: 100%;
+
+		canvas {
+			display: block;
+			width: 100%;
+			height: 100%;
+			@include radius(15px);
+		}
+
+		> div {
+			height: 50px;
+			padding: 10px;
+			background: #fff;
+			@include radius(15px);
+		}
+
+		.mini-tooltip {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: 100%;
+			@include transform(translateY(-50%));
+
+			> span {
+				white-space: nowrap;
+			}
+		}
+	}
+}

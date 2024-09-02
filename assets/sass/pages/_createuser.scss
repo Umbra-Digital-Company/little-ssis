@@ -1,0 +1,37 @@
+form {
+
+	.btn {
+		width: 100%;
+
+		@media (min-width: 768px) {
+			width: auto;
+		}
+	}
+}
+
+.table-responsive {
+	width: 100%;
+	max-height: 700px;
+	height: 100%;
+	overflow-y: auto;
+
+	&.sm {
+		max-height: 350px;
+	}
+
+	thead tr:nth-child(1) th {
+		background: $color_primary;
+		position: sticky;
+		top: 0;
+		z-index: 10;
+	}
+
+	td, th {
+		border-top: none;
+		white-space: nowrap;
+	}
+}
+
+.btn-delete-user {
+	cursor: pointer;
+}

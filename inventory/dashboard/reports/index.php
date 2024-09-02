@@ -1,0 +1,123 @@
+<?php 
+
+$sDocRoot = $_SERVER["DOCUMENT_ROOT"];
+
+session_save_path($sDocRoot ."/cgi-bin/tmp");
+session_start();
+
+////////////////////////////////////////////////
+
+$page = 'dashboard';
+$page_url = 'variance-report';
+
+$filter_page = 'variance_report';
+$group_name = 'aim';
+
+////////////////////////////////////////////////
+
+// Set access for Admin and Warehouse account
+// if($_SESSION['user_login']['userlvl'] != '1') {
+
+// 	header('location: /');
+// 	exit;
+
+// }
+
+// Required includes
+require $sDocRoot."/includes/connect.php";
+require $sDocRoot."/includes/header_v2.php";
+require $sDocRoot."/includes/v2/functions.php";
+require $sDocRoot."/includes/dashboard/set_date.php";
+require $sDocRoot."/inventory/includes/aim_setup.php";
+require $sDocRoot."/includes/grab_laboratory.php";
+require $sDocRoot."/includes/grab_stores.php";
+require $sDocRoot."/inventory/includes/grab_all_transferable_items.php";
+require $sDocRoot."/inventory/includes/grab_global_variance_report.php";
+// 2.0
+require $sDocRoot."/functions.php";
+require $sDocRoot."/header.php";
+require $sDocRoot."/sidebar_v2.php";
+require $sDocRoot."/top-bar.php";
+require $sDocRoot."/footer.php";
+
+// Check for GET 
+if(isset($_GET['id']) && $_GET['id'] != '') {
+
+	require $sDocRoot."/inventory/includes/grab_all_receivable_specific.php";
+
+}
+else {
+
+	require $sDocRoot."/inventory/includes/grab_all_receivable.php";
+
+};
+
+$_SESSION['permalink'] = $filter_page; 
+
+?>
+
+<?= get_header($page_url) ?>
+
+<div class="row no-gutters align-items-strech flex-nowrap">
+
+	<?= get_sidebar($page_url,$page) ?>
+
+	<div id="ssis-main" class="col <?= str_replace(' ','-',$page_url) ?>">
+			
+		<?= get_topbar($page_url) ?>
+
+		<div class="ssis-content">
+
+			<div class="variance-report-table">
+
+				<?php if ( !empty($arrVariance) ) { ?>
+					
+					<div class="table-default table-responsive">
+						<table class="table table-striped mb-0">
+							<thead>
+								<tr>
+									<th class="small text-white text-uppercase">type</th>
+									<th class="small text-white text-uppercase">from</th>
+									<th class="small text-white text-uppercase">to</th>
+									<th class="small text-white text-uppercase">reference number</th>
+									<th class="small text-white text-uppercase">date sent</th>
+									<th class="small text-white text-uppercase"></th>
+								</tr>
+							</thead>
+							<tbody>
+
+							<?php for($i=0;$i<sizeof($arrVariance);$i++){ ?>
+								<tr>
+								<td nowrap class=" text-uppercase text-<?= $arrVariance[$i]['direction'] == 'out' ? 'danger' : 'success' ?>"><?= $arrVariance[$i]['direction'] ?></td>
+									<td nowrap class=""><?= ucwords(str_replace(['ali','mw','sm','mtc','-'], ['ALI','MW','SM','MTC',' '],$arrVariance[$i]['stock_from_branch'])) ?></td>
+									<td nowrap class=""><?= ucwords(str_replace(['ali','mw','sm','mtc','-'], ['ALI','MW','SM','MTC',' '],$arrVariance[$i]['store_to_name'])) ?></td>
+									<td nowrap class=""><?= $arrVariance[$i]['reference_number'] ?></td>
+									<td nowrap class=""><?= cvdate2($arrVariance[$i]['date_created']) ?></td>
+									<td nowrap class=""><a href="view/?ref_num=<?= $arrVariance[$i]['reference_number'] ?>" class="text-primary text-uppercase font-bold">view</a></td>	
+								</tr>
+							<?php } ?>
+							</tbody>
+						</table>
+					</div>
+
+				<?php  } else { ?>
+				
+					<div class="text-center p-4 mt-4">
+						<h4>You don't have any variance report</h4>
+					</div>
+				
+				<?php  } ?>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/js/select2.min.js"></script>
+<script src="/js/signature.js"></script>
+<script src="/js/inventory.js"></script>
+
+<?= get_footer() ?>
