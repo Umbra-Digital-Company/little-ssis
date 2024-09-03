@@ -237,7 +237,7 @@ switch ( $page ) {
 				default 					   : $custom_title = $page;
 			} 
 
-			if($page == 'contact-tracing-form' && $_GET['guest'] == "true") {
+			if($page == 'contact-tracing-form' && isset($_GET['guest']) == "true") {
 				$custom_title = "Guest Checkout";
 			}
 

@@ -236,7 +236,10 @@ switch ( $page ) {
 
 		?>
 		
-		<?php if ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' ) :
+		<?php if ( isset($_SESSION['customer_page']) && isset($_SESSION['customer_page']) == 'YES' ) :
+
+
+
 
 			switch ( $page ) {
 				case 'health-declaration-form' 		: $step = 1; break;
