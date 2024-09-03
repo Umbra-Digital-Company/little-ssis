@@ -1,0 +1,57 @@
+#ssis_sidebar {
+	position: fixed;
+	width: 100%;
+	max-width: 575px;
+	top: 150px;
+	left: 0;
+	z-index: 500;
+	height: 100vh;
+	display: none;
+	background-color: $color_default;
+	@include transition(top, .1s, ease-in);
+
+	&.show {
+		top: 0;
+	}
+	
+	.sidebar-top {
+		padding: 20px;
+		@include box_shadow(0, 2px, 6px, -3px, rgba($color_dark, .25) !important);
+
+		.logo {
+			max-height: 40px;
+		}
+	}
+
+	#ssis_menu {
+
+		li {
+
+			&:first-of-type {
+				padding: 0 20px;
+			}
+
+			a {
+				padding: 5px 20px;
+				display: block;
+				color: $color_dark;
+				width: 100%;
+			}
+
+		 	canvas {
+				background-position: center;
+				background-size: 20px 20px;
+				background-repeat: no-repeat;
+				display: block;
+				background-color: $color_primary;
+				@include square(40px, 40px);
+			}
+		}
+	}
+
+	#hide_sidebar {
+		display: block;
+		max-width: 30px;
+		cursor: pointer;
+	}
+}

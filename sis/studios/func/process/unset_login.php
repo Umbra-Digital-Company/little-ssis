@@ -1,0 +1,10 @@
+<?php 
+session_save_path($_SERVER["DOCUMENT_ROOT"]."/cgi-bin/tmp");
+session_start();
+if(isset($_SESSION['login_set'])){
+    unset($_SESSION['login_set']);
+}
+if(isset($_SESSION['guest_customer'])){
+    unset($_SESSION['guest_customer']);
+}
+?>

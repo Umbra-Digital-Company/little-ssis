@@ -1,0 +1,39 @@
+@-webkit-keyframes myOrbit {
+    from { -webkit-transform: rotate(0deg) translateX(25px) rotate(0deg); }
+    to   { -webkit-transform: rotate(360deg) translateX(25px) rotate(-360deg); }
+}
+
+@-moz-keyframes myOrbit {
+    from { -moz-transform: rotate(0deg) translateX(25px) rotate(0deg); }
+    to   { -moz-transform: rotate(360deg) translateX(25px) rotate(-360deg); }
+}
+
+@-o-keyframes myOrbit {
+    from { -o-transform: rotate(0deg) translateX(25px) rotate(0deg); }
+    to   { -o-transform: rotate(360deg) translateX(25px) rotate(-360deg); }
+}
+
+@keyframes myOrbit {
+    from { transform: rotate(0deg) translateX(25px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(25px) rotate(-360deg); }
+}
+
+@-webkit-keyframes mySpinner {
+    from { -webkit-transform: rotate(0deg) }
+    to   { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes mySpinner {
+    from { -moz-transform: rotate(0deg) }
+    to   { -moz-transform: rotate(360deg); }
+}
+
+@-o-keyframes mySpinner {
+    from { -o-transform: rotate(0deg) }
+    to   { -o-transform: rotate(360deg); }
+}
+
+@keyframes mySpinner {
+    from { transform: rotate(0deg) }
+    to   { transform: rotate(360deg); }
+}
