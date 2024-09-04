@@ -268,6 +268,28 @@ body {
   margin: 0 auto;
 }
 
+#ssis_sidebar {
+  padding: 10px 24px 15px 24px; /* top right bottom left */
+  position: fixed;
+  width: 100%;
+  /* max-width: 575px; */
+  top: 150px;
+  left: 0;
+  scrollbar-width: none;
+  overflow-y: auto;
+  z-index: 500;
+  height: 100vh;
+  display: none;
+  background-color: #f0f0f0;
+  transition: top 0.1s ease-in;
+  -webkit-transition: top 0.1s ease-in;
+  -moz-transition: top 0.1s ease-in;
+  -ms-transition: top 0.1s ease-in;
+  -o-transition: top 0.1s ease-in;
+}
+#ssis_sidebar.show {
+  top: 0;
+}
 #ssis_sidebar .sidebar-top {
   border-bottom: 1px solid #dcdcdc; /* Example thickness and color */
   background-color: white;
@@ -298,7 +320,7 @@ body {
 #ssis_sidebar #ssis_menu li a:hover,
 #ssis_sidebar #ssis_menu li a.active {
   /* Add .active class for selected item */
-  background-color: #e5f1eb; /* Desired background color on hover or selected */
+  background-color: #ebf2fb; /* Desired background color on hover or selected */
   font-weight: bold;
   border-radius: 15px;
   border: none;
