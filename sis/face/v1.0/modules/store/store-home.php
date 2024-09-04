@@ -102,7 +102,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 		}
 	</style>
 
-	<div class="container">
+	<div class="container ">
 		<div class="row align-items-stretch row-tiles mb-4" style="display: none;">
 			<div class="col-6 align-items-stretch" style="align-self: stretch;">
 				<div class="col-12 custom-card h-100 bg-orange-tile">
