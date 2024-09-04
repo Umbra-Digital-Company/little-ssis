@@ -195,17 +195,17 @@ switch ( $page ) {
 		<div class="account">
 			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-account-assistant.png" alt="account" class="img-fluid"></a>
 		</div>
+
+		<!-- logo -->
 		<div class="account-name">
 			<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
-			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-studios-logo-black.png?v=1614047286" style=" max-width: 120px;">
+			 <p class="small m-0 ">Sunnies Studios</p>
+			<!-- <img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-studios-logo-black.png?v=1614047286" style=" max-width: 120px;"> -->
 		</div>
-		<div class="language">
-			<img src="<?= get_url('images/icons') ?>/icon-language-primary.png" alt="language" class="img-fluid">
-			<div class="lang-opt">
-				<a href="/sis/studios/func/process/switch_language.php?language_setting=us">English</a>
-				<a href="/sis/studios/func/process/switch_language.php?language_setting=vn">Vietnamese</a>
-			</div>
+		<div class="account">
+			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-account-assistant.png" alt="account" class="img-fluid"></a>
 		</div>
+
 
 	<?php endif ?>
 
@@ -468,15 +468,15 @@ switch ( $page ) {
 <style>
 
 	body #admin-bar {
-		background-color: #ffffff;
-		border-radius: 0;
-	    -webkit-border-radius: 0;
+		background-color: #0B5893;
+		border-radius: 16px;
+	    -webkit-border-radius: 16px;
 	    -moz-border-radius: 0;
 	    -ms-border-radius: 0;
 	    -o-border-radius: 0;
 	}
 	#ssis_header {
-        background-color: #e8e8e4;
+        background-color: #0B5893;
     }
 
 	.btn {

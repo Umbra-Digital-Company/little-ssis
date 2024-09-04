@@ -41,68 +41,25 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 	?>
 
 	<link rel="stylesheet" type="text/css" href="/sis/studios/v1.0/modules/store/little_sis.css?v=12345">
-	<style type="text/css">
-		body>.container {
-			overflow-y: scroll !important;
-		}
+	<style>
 
-		.h-100 {
-			height: 100%;
-		}
+	/* Default min-height */
+	main {
+		margin-top:100px;
+		min-height: calc(100vh - 210px);
+	}
 
-		.row-tiles {
-			height: auto;
+	/* Adjust for tablets */
+	@media (max-height: 768px) { /* Adjust the max-width value based on your specific tablet breakpoints */
+		main {
+			min-height: calc(100vh - 250px); /* New min-height for tablets */
 		}
+	}
 
-		.bg-orange-tile {
-			background-color: #D36327;
-		}
+</style>
 
-		.bg-yellow-tile {
-			background-color: #E8C560;
-		}
-
-		.bg-pink-tile {
-			background-color: #F0DBD5;
-		}
-
-		.bg-tan-tile {
-			background-color: #EADFCD;
-		}
-
-		.bg-blue-tile {
-			background-color: #054A70;
-		}
-
-		.bg-green-tile {
-			background-color: #9BA17B;
-		}
-		.bg-black-tile {
-			background-color: #352b27;
-		}
-
-		.bg-orange-tile>p,
-		.bg-blue-tile,
-		.bg-green-tile,
-		.bg-black-tile {
-			color: #fff;
-		}
-
-		.bg-yellow-tile>p,
-		.bg-pink-tile>p,
-		.bg-tan-tile>p {
-			color: #352b27;
-		}
-
-		.img-holder {
-			height: 300px;
-			width: 100%;
-			background-size: cover;
-			background-position: center;
-		}
-	</style>
-
-	<div class="container-fluid little-sis">
+<div class="dashboard-container">
+	<div class= "content-wrapper">
 		<div class="row align-items-stretch row-tiles mb-4" style="display: none;">
 			<div class="col-6 align-items-stretch" style="align-self: stretch;">
 				<div class="col-12 custom-card h-100 bg-orange-tile">
@@ -187,6 +144,6 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 				</div>
 			</div>			
 		</div>
+	
 	</div>
-
 <?php } ?>
