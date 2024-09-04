@@ -79,55 +79,50 @@ switch ( $page ) {
 
 ?>
 
-<style type="text/css">
-	
-	main {
-		top: 0;
-		border-radius: 0;
-    	background: #fff;
+<style>
+	.sidebar-top .container{
+		max-width: 100% !important;
 	}
-	body header {
-		position: relative;		
-    	padding: 60px 10px !important;
+	/* .doctor-hover:hover {
+		
+	} */
+	#ssis_sidebar #ssis_menu li .doctor-hover:hover{
+		background-color: #E2E9F3;
 	}
-	#ssis_sidebar {
-		background-color: #ffffff;
-	}
-	.form-control:focus ~ label.placeholder, .form-control:valid ~ label.placeholder {
-		background-color: #ffffff;
-	}	
-	p {
-		font-family: SharpGroteskSemiBold,serif;
-	}
-
 </style>
 
+
 <div id="ssis_sidebar">
-	<div class="sidebar-top d-flex align-items-center no-gutters">
+	<div class="sidebar-top d-flex align-items-center justify-content-end no-gutters pb-3">
 		<div class="col">
-			<div class="d-flex align-items-center">
-				<a href="#" id="hide_sidebar">
-					<img src="<?= get_url('images/icons') ?>/icon-left-arrow.png" alt="left arrow" class="img-fluid">
-				</a>
+			
+			<div class="d-flex align-items-center justify-content-between">
+				<p style="font-size: 14px; color: #B7B7B7;"> SSIS v 4.0.0 </p>
+				
 				<p class="h2 mb-0 ml-4"><?= (isset($_SESSION['name'])) ? ucwords( $_SESSION['name'] ) : '' ?></p>
+				<a href="#" id="hide_sidebar">
+					<!-- changing to X -->
+					<img src="<?= get_url('images/icons') ?>/icon-close.png" alt="left arrow" class="img-fluid">
+				</a>
 			</div>
 		</div>
-		<img src="<?= get_url('images/logo') ?>/logo-full-dark.png" alt="left arrow" class="img-fluid logo">
+		
 	</div>
-	<nav id="ssis_menu" class="mt-4">
+	<nav id="ssis_menu"  >
 
 		<ul class="nav-list nav flex-column mb-4">
-			<li class="text-secondary text-uppercase mb-3 font-bold"><?= $arrTranslate['Pages'] ?></li>
-			<li>
+			<li class="text-secondary text-uppercase mb-3 font-bold"></li>
+			<li >
 				<a class="d-flex align-items-center" href="./?page=store-home">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-home.png);"></canvas>
+					
 					<span class="h3 ml-3"><?= $arrTranslate['Home'] ?></span>
 				</a>
 			</li>
 			<?php if(isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
 				<li>
 					<a class="d-flex align-items-center" href="/studios/dispatch-studios">
-						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
+						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-dispatch.png);"></canvas>
 						<span class="h3 ml-3"><?= $arrTranslate['Dispatch'] ?></span>
 					</a>
 				</li>
@@ -140,13 +135,21 @@ switch ( $page ) {
 					</a>
 				</li>
 			<?php } ?>
+			<?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
+				<li>
+					<a class="d-flex align-items-center" href="#">
+						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
+						<span class="h3 ml-3">Transactions</span>
+					</a>
+				</li>
+			<?php } ?>
 		</ul>
-
-		<ul class="nav-list nav flex-column">
-			<li class="text-secondary text-uppercase mb-3 font-bold"><?= $arrTranslate['Account'] ?></li>
+		<hr style="border-top: 2px solid #eeeeee; max-width: 95%">
+		<ul class="nav-list nav flex-column ">
+		<li class="text-secondary text-uppercase mb-2 font-bold"></li>
 			<li>
-				<a class="d-flex align-items-center" href="/sis/studios/func/logout.php?path_loc=v1.0">
-					<canvas class="bg-danger" style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
+				<a class="d-flex align-items-center mb-4" href="/sis/studios/func/logout.php?path_loc=v1.0">
+					<canvas style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
 					<span class="h3 ml-3"><?= $arrTranslate['Logout'] ?></span>
 				</a>
 			</li>
