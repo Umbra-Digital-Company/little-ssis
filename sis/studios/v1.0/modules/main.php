@@ -195,18 +195,17 @@ switch ( $page ) {
 
 	<?php else : ?>
 
-		<div class="account">
-			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-account-assistant.png" alt="account" class="img-fluid"></a>
+		<div class="">
+			
 		</div>
 
 		<!-- logo -->
 		<div class="account-name">
 			<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
-			 <p class="small m-0 ">Sunnies Studios</p>
-			<!-- <img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-studios-logo-black.png?v=1614047286" style=" max-width: 120px;"> -->
+			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-studios-logo-white.png?v=1614047286" style=" max-width: 200px;">
 		</div>
 		<div class="account">
-			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-account-assistant.png" alt="account" class="img-fluid"></a>
+			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
 		</div>
 
 
