@@ -82,7 +82,7 @@ switch ( $page ) {
 <style type="text/css">
 	
 	main {
-		top: 0;
+		top: 100px;
 		border-radius: 0;
     	background: #fff;
 	}
@@ -237,10 +237,6 @@ switch ( $page ) {
 		?>
 		
 		<?php if ( isset($_SESSION['customer_page']) && isset($_SESSION['customer_page']) == 'YES' ) :
-
-
-
-
 			switch ( $page ) {
 				case 'health-declaration-form' 		: $step = 1; break;
 				case 'contact-tracing-form' 		: $step = 1; break;
