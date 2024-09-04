@@ -41,25 +41,68 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 	?>
 
 	<link rel="stylesheet" type="text/css" href="/sis/studios/v1.0/modules/store/little_sis.css?v=12345">
-	<style>
-
-	/* Default min-height */
-	main {
-		margin-top:100px;
-		min-height: calc(100vh - 210px);
-	}
-
-	/* Adjust for tablets */
-	@media (max-height: 768px) { /* Adjust the max-width value based on your specific tablet breakpoints */
-		main {
-			min-height: calc(100vh - 250px); /* New min-height for tablets */
+	<style type="text/css">
+		
+		
+		.row-tiles {
+			height: auto;
 		}
-	}
 
-</style>
+		.bg-orange-tile {
+			background-color: #D36327;
+		}
 
-<div class="dashboard-container">
-	<div class= "content-wrapper">
+		.bg-yellow-tile {
+			background-color: #E8C560;
+		}
+
+		.bg-pink-tile {
+			background-color: #F0DBD5;
+		}
+
+		.bg-tan-tile {
+			background-color: #EADFCD;
+		}
+
+		.bg-blue-tile {
+			background-color: #054A70;
+		}
+
+		.bg-green-tile {
+			background-color: #9BA17B;
+		}
+		.bg-black-tile {
+			background-color: #352b27;
+		}
+
+		.bg-orange-tile>p,
+		.bg-blue-tile,
+		.bg-green-tile,
+		.bg-black-tile {
+			color: #fff;
+		}
+
+		.bg-yellow-tile>p,
+		.bg-pink-tile>p,
+		.bg-tan-tile>p {
+			color: #352b27;
+		}
+
+		.img-holder {
+			height: 300px;
+			width: 100%;
+			background-size: cover;
+			border-radius: 16px;
+			background-position: center;
+		}
+		.video {
+			height: 300px;
+			width: 100%;
+			background-size: cover;
+			border-radius: 16px;
+		}
+	</style>
+
 		<div class="row align-items-stretch row-tiles mb-4" style="display: none;">
 			<div class="col-6 align-items-stretch" style="align-self: stretch;">
 				<div class="col-12 custom-card h-100 bg-orange-tile">
@@ -78,13 +121,27 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 		<?php if (count($arrTextImages) > 0) { ?>
 			<?php if ($arrTextImages[0]['video'] != '' && $arrTextImages[0]['video_status'] == 1) { ?>
 
-				<div class="d-flex justify-content-center mb-4">
-					<video autoplay muted loop playsinline style="width: 100%;height: auto;">
+				<div class="d-flex justify-content-center mb-4 ">
+					<video autoplay muted loop playsinline style="width: 100%;height: auto; border-radius: 16px;">
 						<source src="/studios/studios-settings/videos/<?= $arrTextImages[0]['video'] ?>" type="video/mp4">
 					</video>
 				</div>
 
 			<?php } ?>
+
+			<!-- recommended -->
+			<div class="row">
+				<div class="col-12 mb-4 ">
+					<div class="col-md-12 custom-card bg-white-tile " style ="border-radius: 16px;">
+						<p class="mb-2 font font-weight-bold ml-3 mt-3" style="font-size: 18px"><?= $arrTranslate['Recommended'] ?></p>
+						<ol>
+							<?php foreach ($arrRecommended as $key => $value) { ?>
+								<li style="font-size: 16px"><?= ucwords(strtolower($value['item_name'])) ?></li>
+							<?php } ?>
+						</ol>
+					</div>
+				</div>
+			</div>
 			<?php if ($arrTextImages[0]['image_1'] != '' && $arrTextImages[0]['image_1_status'] == 1) { ?>
 
 				<div class="d-flex justify-content-center mb-4">
@@ -100,18 +157,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 			<?php } ?>
 		<?php } ?>
-		<div class="row">
-			<div class="col-12 mb-4">
-				<div class="col-md-12 custom-card bg-pink-tile">
-					<p class="mb-4"><?= $arrTranslate['Recommended'] ?>:</p>
-					<ol>
-						<?php foreach ($arrRecommended as $key => $value) { ?>
-							<li style="font-size: 14px"><?= strtoupper($value['item_name']) ?></li>
-						<?php } ?>
-					</ol>
-				</div>
-			</div>
-		</div>
+		
 		<?php if ($arrTextImages[0]['image_2'] != ''  && $arrTextImages[0]['image_2_status'] == 1) { ?>
 
 			<div class="d-flex justify-content-center mb-4">
@@ -119,31 +165,28 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			</div>
 
 		<?php } ?>
-		<div class="row">
-			<div class="col-6 mt-4">
-				<div class="customer-account text-center">
-					<a href="./?page=contact-tracing-form&type=sign-up">
-						<button class="btn bg-blue-tile" style="padding-top: 30px; padding-bottom: 30px; font-size: 16px; height: auto;"><?= $arrTranslate['Sign Up'] ?></button>
-					</a>
+		<div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
+			<div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+		
+				<div class="row" >
+					<div class="col-12 ">
+						<div class="customer-account text-center">
+							<a href="./?page=contact-tracing-form&type=sign-up">
+								<button class="btn bg-blue-tile" style="padding: 16px 20px 16px 20px; font-size: 18px;height: 56px; border-radius: 28px; font-weight: 700;" >Log in or Sign up </button>
+							</a>
+						</div>
+					</div>
+					
 				</div>
+				<div class="row">
+					<div class="col-12 mt-3">
+						<div class="customer-account text-center">
+							<a href="./?page=contact-tracing-form&guest=true">
+								<button class="btn btn-not-cancel" style="padding: 16px 20px 16px 20px; font-size: 18px;height: 56px; border-radius: 28px; font-weight: 400;">Continue as guest</button>
+							</a>
+						</div>
+				</div>	
 			</div>
-			<div class="col-6 mt-4">
-				<div class="customer-account text-center">
-					<a href="./?page=contact-tracing-form&type=log-in">
-						<button class="btn bg-green-tile" style="padding-top: 30px; padding-bottom: 30px; font-size: 16px; height: auto;"><?= $arrTranslate['Log In'] ?></button>
-					</a>
-				</div>
-			</div>
+		
 		</div>
-		<div class="row">
-			<div class="col-12 mt-4">
-				<div class="customer-account text-center">
-					<a href="./?page=contact-tracing-form&guest=true">
-						<button class="btn bg-black-tile" style="padding-top: 30px;padding-bottom: 30px;font-size: 16px;height: auto;background: #352b27;"><?= $arrTranslate['Continue as Guest'] ?></button>
-					</a>
-				</div>
-			</div>			
-		</div>
-	
-	</div>
 <?php } ?>
