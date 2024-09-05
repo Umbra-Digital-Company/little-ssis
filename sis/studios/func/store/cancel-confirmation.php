@@ -16,18 +16,18 @@ $arrTranslate = grabLanguageTags();
 		<div class="modal-content cancel" style="padding: 20px;">
 			<div class="modal-body">
 				<div class="text-center" style="margin-bottom: 20px;">
-					<span class="font-bold text-center" style="font-size: 16px;">Are you sure you want to leave?</span>
+					<span class="font-bold text-center" style="font-size: 18px;">Are you sure you want to leave?</span>
 				</div>
 				<div class="text-center">
 					<?php if(isset($_SESSION['language_setting']) && $_SESSION['language_setting'] == 'vn') {?>
-					<p style="font-size: 16px;"><?= $arrTranslate['You are about to cancel this order. If you\'d wish to proceed please type "SSIS" in the input below'] ?>.</p>
+					<p style="font-size: 18px;"><?= $arrTranslate['You are about to cancel this order. If you\'d wish to proceed please type "SSIS" in the input below'] ?>.</p>
 					<?php }else{ ?>
 						<p>You are about to cancel this order. If you'd wish to proceed please type "SSIS" in the input below.</p>
 					<?php } ?>
 				</div>
 				<div class="form-group mt-3">
 					<input type="password" id="password_confirmation" class="form-control" required>
-					<label for="password_confirmation" class="placeholder">Password</label>
+					<label for="password_confirmation" class="placeholder">Type SSIS to confirm</label>
 				</div>
 				<div class="text-center mt-4">
 					<button class="btn btn-discontinue" id="yes_button">Yes, discontinue my order</button>

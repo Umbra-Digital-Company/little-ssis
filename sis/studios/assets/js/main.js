@@ -14,6 +14,8 @@ $(document).ready(function () {
 		}, seconds);
 	}
 
+
+	
 	const ajaxSubmit = ( file, form) => { // submit form via ajax
 		$.post( file, $("form#"+form).serialize(), function(d) {
 			$('#msg').html("");
@@ -1659,5 +1661,22 @@ $(document).ready(function () {
 	$('.language').on('click', function() {
 		$(this).find('.lang-opt').toggle('fade');
 	});
+
+	document.getElementById('guestForm').addEventListener('input', function() {
+        var isFormValid = true;
+        
+        // Check each input field for validity
+        var lastname = document.getElementById('lastname').value.trim();
+        var firstname = document.getElementById('firstname').value.trim();
+        var gender = document.getElementById('gender').value;
+        var ageRange = document.getElementById('age_range').value;
+
+        if (!lastname || !firstname || !gender || !ageRange) {
+            isFormValid = false;
+        }
+
+        // Enable or disable the submit button based on form validity
+        document.getElementById('guest-submit').disabled = !isFormValid;
+    });
 
 });

@@ -4,14 +4,24 @@
   .page-store-home #ssis_header {
     display: none;
   }
+
   .page-store-home #ssis_sidebar {
     max-width: 100%;
   }
+
   .page-store-home main {
     margin-top: 100px;
   }
   .page-store-home .little-sis .img-holder {
     height: 280px;
+  }
+
+  .page-contact-tracing-form #ssis_sidebar {
+    max-width: 100%;
+  }
+
+  .page-contact-tracing-form #ssis_sidebar {
+    display: none;
   }
 
   /** SHOP PAGES **/

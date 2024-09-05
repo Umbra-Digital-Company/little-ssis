@@ -98,49 +98,63 @@ if ( !isset($_SESSION['customer_id']) ) {
 
  //showArray($_SESSION);
 ?>
+
+
 <?php if(isset($_GET['guest'])){ ?>
+
 	
-		<div class="wrapper">
-			<form action="/sis/studios/func/process/guest_register.php?path_loc=v1.0" method="post">
-		        <div class="d-flex form-group justify-content-center mt-4">
-					<input type="text" name="firstname" class="form-control" id="firstname" autocomplete="off" autofocus />
-					<label class="placeholder" for="firstname" style="margin-left:15px;"><?= $arrTranslate['First Name'] ?></label>
+	
+		<div class="wrapper-guest customer-guest">
+			<h1 class="text-start mb-4 font-weight-bold text-uppercase" style ="font-size: 18px;">GUEST ACCOUNT</h1>
+			<form action="/sis/studios/func/process/guest_register.php?path_loc=v1.0" method="post" class="form-guest" id="guestForm" id="guestForm>
+				<input type="hidden" name="specs_branch" value="<?= 'This Store Name' ?>">
+				<input type="hidden" name="joining_date" value="<?= date('Y/m/d'); ?>">
+
+
+				<div class="form-group mt-4">
+					<input type="text" name="lastname" class="form-control" id="lastname" autocomplete="off" autofocus required/>
+					<label class="placeholder" for="lastname">Last Name</label>
 				</div>
-				<div class="d-flex form-group justify-content-center mt-4">
-					<input type="text" name="lastname" class="form-control" id="lastname" autocomplete="off" />
-					<label class="placeholder" for="lastname" style="margin-left:15px;"><?= $arrTranslate['Last Name'] ?></label>
+				<div class="form-group mt-4">
+					<input type="text" name="firstname" class="form-control" id="firstname" autocomplete="off"  required />
+					<label class="placeholder" for="firstname">First Name</label>
 				</div>
-				<div class="row mt-4">
-					<div class="form-group gender col-12">
-						<div class="d-flex no-gutters">
-							<div class="col">
-								<input class="sr-only" type="radio" id="gender-male" name="gender" value="Male" <?php if( (isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) && ($arrCustomer[0]['gender']=='male' || ( isset($_SESSION['temp_data']) && $_SESSION['gender']=='Male') ) ){ ?> checked='checked' <?php  } ?> required>
-								<label class="form-control col" for="gender-male"><?= $arrTranslate['Male'] ?></label>
-							</div>
-							<div class="col">
-								<input class="sr-only" type="radio" id="gender-female" name="gender" value="Female" <?php if( (isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) && ($arrCustomer[0]['gender']=='female' || ( isset($_SESSION['temp_data']) && $_SESSION['gender']=='Female') ) ){ ?> checked='checked' <?php  } ?> required>
-								<label class="form-control col" for="gender-female"><?= $arrTranslate['Female'] ?></label>
-							</div>
-						</div>
-					</div>
-				</div>		
-				<div class="form-group">
-					<select class="text-left s-a mh-40 select form-control" name="age_range" id="age_range" required>
-						<option value="" disabled selected>-</option>
-						<option value="1">0-12</option>
-						<option value="13">13-18</option>
-						<option value="19">19-22</option>
-						<option value="23">23-27</option>
-						<option value="28">28-34</option>
-						<option value="35">35-40</option>
-						<option value="41">41-50</option>
-						<option value="51">51-60</option>
-						<option value="61">61+</option>
+				
+				
+				
+				<div class="form-group mt-4">
+					<select class="text-left s-a mh-40 select form-control" name="gender" id="gender" required>
+						<option value="" disabled selected></option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						
 					</select>
-					<label class="placeholder" for="age_range"><?= $arrTranslate['Age Group'] ?></label>
+					<label class="placeholder" for="gender">I identify as</label>
 				</div>
-		        <div class="text-center mt-4">
-		            <input type="submit" class="btn btn-black" value="<?= $arrTranslate['Proceed'] ?>">
+
+				<div class="form-group mt-4">
+					<select class="text-left s-a mh-40 select form-control" name="age_range" id="age_range" required>
+						<option value="" disabled selected></option>
+						<option value="1">0-12</option>
+						<option value="13">13-17</option>
+						<option value="18">18-24</option>
+						<option value="25">25-34</option>
+						<option value="35">35-44</option>
+						<option value="45">45-54</option>
+						<option value="55">55-64</option>
+						<option value="65">65+</option>
+					</select>
+					<label class="placeholder" for="age_range">Age Group</label>
+				</div>
+        
+		       
+				<div class="text-center mt-4">
+       				 <input type="submit" id="guest-submit" class="btn btn-primary" value="<?= $arrTranslate['Proceed'] ?>" disabled>
+    			</div>
+				<div class="text-center mt-4">
+		            <a>
+		                <div  style="color: #919191; font-size: 18px; font-weight: 400">Log in with your Sunnies Club account to earn points</div>
+		            </a>
 		        </div>
 		    </form>
 	    </div>
@@ -149,6 +163,7 @@ if ( !isset($_SESSION['customer_id']) ) {
 		<div class="switch-layout">
 			<span class="switch-animation <?= ( isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) ? 'slide' : '' ?>"></span>
 			<div class="account-navigation d-flex no-gutters">
+					
 					<a href="#create-content" class="col-6 text-center account-option <?= ( !isset($_SESSION['customer_id']) && !isset($_SESSION['temp_data']) ) ? 'active' : '' ?>"><?= $arrTranslate['Register'] ?></a>
 					<a href="#use-content" class="col-6 text-center account-option <?= ( isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) ? 'active' : '' ?>"><?= $arrTranslate['Log In'] ?></a>
 			</div>
@@ -157,74 +172,90 @@ if ( !isset($_SESSION['customer_id']) ) {
 
 	<div class="account-content mt-4" id="use-content">
 		<!-- <p class="font-bold text-uppercase text-primary">log in account</p> -->
-		<form method="post" id="use_account" name="use_account" autocomplete="off" class="mt-0">
+		<div class = "account-login">
+			<form method="post" id="use_account" name="use_account" autocomplete="off" class="mt-0">
+				
+				<p class="font-bold text-uppercase text-primary"><?= $arrTranslate['Personal Details'] ?> Xavier</p>
 
-			<p class="font-bold text-uppercase text-primary"><?= $arrTranslate['Personal Details'] ?></p>
-
-			<div class="d-flex form-row form-group justify-content-center mt-3">
-				<div class="form-group col-md-2 col-sm-2" id="div_area_codes" style='padding-left: 0px; padding-right: 0px; margin: 0px; display: none'>
-					<select class="text-left select mh-40 form-control" name="country_codes_login" id="country_codes_login" style="margin: 0px; padding-top:0px; padding-bottom:0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">
-						<option></option>
-					</select>
-					<label class="placeholder" for="country_codes_login">Area Code</label>
-				</div>
-				<div class="form-group col-md-12 col-sm-12" id="div_mobile_number" >
-					<input type="text" name="username" class="form-control text-lowercase" id="username" required="required"  autocomplete="nope" />
-					<label class="placeholder" for="username" style="margin-left:15px;"><?= $arrTranslate['Email or Mobile Number'] ?></label>
-					<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>
-				</div>
-			</div>
-
-			<p class="font-bold text-uppercase text-primary mt-3"><?= $arrTranslate['Birthdate'] ?></p>
-
-			<div class="d-flex form-row form-group justify-content-center mt-3">
-				<div class="col-4 form-group">
-					<select name="month" id="birthMonth" class="form-control">
-						<option value=""><?= strtoupper($arrTranslate['Month']) ?></option>
-						<?php
-							$arrMonth = ['Jan' => 'January','Feb' => 'February','Mar' => 'March', 'Apr' => 'April', 'May' => 'May', 'Jun' => 'June', 'Jul' => 'July', 'Aug' => 'August', 'Sep'=> 'September', 'Oct' => 'October', 'Nov' => 'November', 'Dec' => 'December'];
-
-							foreach($arrMonth as $key => $value){
-						?>
-						<option value="<?= $key ?>"><?= $value ?></option>
-							<?php } ?>
-					</select>
-				</div>
-				<div class="col-4 form-group">
-					<select name="day" id="birthDay" class="form-control ">
-						<option value=""><?= strtoupper($arrTranslate['Day']) ?></option>
-						<?php
-							for($i = 1; $i <=31; $i++){
-								$i = ( $i < 10) ? '0'.$i : $i;
-						?>
-							<option value="<?= $i ?>"><?= $i?></option>
-						<?php } ?>
-					</select>
-				</div>
-				<div class="col-4 form-group">
-					<select name="year" id="birthYear" class="form-control ">
-						<option value=""><?= strtoupper($arrTranslate['Year']) ?></option>
-						<?php
-							$year = date('Y');
-							for($i = $year; $i >=1920; $i--){
-						?>
-							<option value="<?= $i ?>"><?= $i?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			
-			<div class="text-center mt-5">
-				<div class="form-row">
-					<div class="col-md-12 form-group">
-						<input type="button" name="btnsubmit" id="btnsubmit" value="<?= $arrTranslate['Continue'] ?>" class="btn btn-primary" />
+				<div class="d-flex form-row form-group justify-content-center mt-3">
+					<div class="form-group col-md-2 col-sm-2" id="div_area_codes" style='padding-left: 0px; padding-right: 0px; margin: 0px; display: none'>
+						<select class="text-left select mh-40 form-control" name="country_codes_login" id="country_codes_login" style="margin: 0px; padding-top:0px; padding-bottom:0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">
+							<option></option>
+						</select>
+						<label class="placeholder" for="country_codes_login">Area Code</label>
+					</div>
+					<div class="form-group col-md-12 col-sm-12" id="div_mobile_number" >
+						<input type="text" name="username" class="form-control text-lowercase" id="username" required="required"  autocomplete="nope" />
+						<label class="placeholder" for="username" ><?= $arrTranslate['Email or Mobile Number'] ?></label>
+						<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>
+					</div>
+					<div class="form-group col-md-12 col-sm-12 mt-4" id="div_mobile_number" >
+						<input type="text" name="username" class="form-control text-lowercase" id="username" required="required"  autocomplete="nope" />
+						<label class="placeholder" for="username" "><?= $arrTranslate['Birthdate'] ?></label>
+						<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>
 					</div>
 				</div>
-			</div>
-			<div class="text-center mt-3">
-				<p class="text-danger" id="msg"></p>
-			</div>
-		</form>
+
+				<!-- <p class="font-bold text-uppercase text-primary mt-3"><?= $arrTranslate['Birthdate'] ?></p> -->
+
+				<!-- <div class="d-flex form-row form-group justify-content-center mt-3">
+					<div class="col-4 form-group">
+						<select name="month" id="birthMonth" class="form-control">
+							<option value=""><?= strtoupper($arrTranslate['Month']) ?></option>
+							<?php
+								$arrMonth = ['Jan' => 'January','Feb' => 'February','Mar' => 'March', 'Apr' => 'April', 'May' => 'May', 'Jun' => 'June', 'Jul' => 'July', 'Aug' => 'August', 'Sep'=> 'September', 'Oct' => 'October', 'Nov' => 'November', 'Dec' => 'December'];
+
+								foreach($arrMonth as $key => $value){
+							?>
+							<option value="<?= $key ?>"><?= $value ?></option>
+								<?php } ?>
+						</select>
+					</div>
+					<div class="col-4 form-group">
+						<select name="day" id="birthDay" class="form-control ">
+							<option value=""><?= strtoupper($arrTranslate['Day']) ?></option>
+							<?php
+								for($i = 1; $i <=31; $i++){
+									$i = ( $i < 10) ? '0'.$i : $i;
+							?>
+								<option value="<?= $i ?>"><?= $i?></option>
+							<?php } ?>
+						</select>
+					</div>
+					<div class="col-4 form-group">
+						<select name="year" id="birthYear" class="form-control ">
+							<option value=""><?= strtoupper($arrTranslate['Year']) ?></option>
+							<?php
+								$year = date('Y');
+								for($i = $year; $i >=1920; $i--){
+							?>
+								<option value="<?= $i ?>"><?= $i?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div> -->
+				
+				<div class="text-center mt-2">
+					<div class="form-row">
+						<div class="col-md-12 form-group">
+							<input type="button" name="btnsubmit" id="btnsubmit" value="<?= $arrTranslate['Continue'] ?>" class="btn btn-primary" />
+						</div>
+					</div>
+				</div>
+				<div class="text-center ">
+					<div class="form-row">
+						<div class="col-md-12 form-group">
+							<a href="/sis/studios/v1.0/?page=contact-tracing-form&guest=true">
+								<input type="button" class="btn btn-not-cancel"  value="Check out as Guest"  />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="text-center mt-3">
+					<p class="text-danger" id="msg"></p>
+				</div>
+			</form>
+		</div>
 		<script type="text/javascript">
 			$('#username').on('keydown', function () {
 				if ($.isNumeric($(this).val())) {
@@ -451,7 +482,7 @@ if ( !isset($_SESSION['customer_id']) ) {
 			</div>
 
 			
-
+							
 			<p class="font-bold text-uppercase text-primary mt-2"><?= $arrTranslate['Contact Details'] ?></p>
 			<div class="form-row no-gutters mt-3">
 				<div class="col-12">
