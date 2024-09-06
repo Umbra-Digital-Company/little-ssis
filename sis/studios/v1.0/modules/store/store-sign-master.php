@@ -15,6 +15,8 @@ if ( trim($_POST['month']) == '' || trim($_POST['day']) == '' || trim($_POST['ye
 	$valid=false;
 }
 
+
+
 if ( $valid ) {
 	$username 		= $_POST['username'];
 	$password 		= $_POST['month'].$_POST['day'].$_POST['year'];

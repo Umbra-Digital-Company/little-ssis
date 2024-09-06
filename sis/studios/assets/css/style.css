@@ -352,7 +352,7 @@ body {
 }
 body #admin-bar {
   margin: 0 auto;
-  background-color: #46797a;
+  background-color: #0b5893;
   position: fixed;
   max-width: 715px;
   padding: 20px;
@@ -752,8 +752,8 @@ body.customer-page {
   align-items: center !important; /* Center text vertically */
   justify-content: center !important; /* Center text horizontally */
   height: 50px;
-  color: #46797a; /* Button text color */
-  border: 2px solid #46797a; /* Border color and thickness */
+  color: #0b5893; /* Button text color */
+  border: 2px solid #0b5893; /* Border color and thickness */
   cursor: pointer; /* Pointer cursor on hover */
   white-space: nowrap; /* Prevent text wrapping */
   background-color: #ffffff !important;
@@ -804,7 +804,7 @@ body.customer-page {
   cursor: pointer; /* Pointer cursor on hover */
   font-family: "Surt-Bold" !important;
   white-space: nowrap; /* Prevent text wrapping */
-  background-color: #46797a;
+  background-color: #0b5893;
 }
 
 .btn-add-bag-change {
@@ -900,7 +900,7 @@ body.customer-page {
 .btn-primary:disabled:not([disabled]):hover,
 .btn-primary:disabled:not([disabled]):focus,
 .btn-primary:disabled *:not([disabled]):active {
-  background-color: #46797a !important;
+  background-color: #0b5893 !important;
 }
 
 .btn-secondary {
@@ -1542,7 +1542,7 @@ main {
 }
 
 .account-login {
-  height: 336px;
+  height: 300px;
   max-width: 715px;
   margin: 0 auto;
   background: #ffffff !important;
@@ -1972,30 +1972,77 @@ hr {
 }
 
 .switch-layout {
+  background: #fff;
   position: relative;
-  width: 250px;
+  max-width: 287px;
   overflow: hidden;
   margin: 0 auto;
-  border: 1px solid #a19f9d;
-  border-radius: 40px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  -ms-border-radius: 40px;
-  -o-border-radius: 40px;
+  height: 64px;
+  border-radius: 36px;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+  -ms-border-radius: 36px;
+  -o-border-radius: 36px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.04);
 }
-.switch-layout .switch-animation {
-  width: 135px;
-  display: block;
+
+.switch-layout-gender {
+  background: #fff;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 70px;
+  border: #f0f0f0 2px solid;
+  border-radius: 36px;
+  padding: 5px;
+}
+
+.switch-layout-gender .account-navigation {
+  display: flex;
+  justify-content: space-between;
   height: 100%;
+  position: relative;
+}
+
+.switch-layout-gender .account-navigation a {
+  color: #0b5893;
+  height: 100%;
+  line-height: 70px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.switch-layout-gender .account-navigation a.active {
+  color: #f7f7f7; /* Ensure text turns white when selected */
+  background-color: #0b5893;
+  border-radius: 36px;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+  -ms-border-radius: 36px;
+  -o-border-radius: 36px;
+}
+
+.switch-layout .switch-animation {
+  width: 47.5%;
+  display: block;
+  height: 48px;
   position: absolute;
   left: 0;
   top: 0;
-  background: #a19f9d;
-  border-radius: 40px;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  -ms-border-radius: 40px;
-  -o-border-radius: 40px;
+  margin: 8px;
+  background: #0b5893 !important;
+  border-radius: 28px;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  -ms-border-radius: 28px;
+  -o-border-radius: 28px;
   transition: left 0.3s linear;
   -webkit-transition: left 0.3s linear;
   -moz-transition: left 0.3s linear;
@@ -2003,15 +2050,28 @@ hr {
   -o-transition: left 0.3s linear;
 }
 .switch-layout .switch-animation.slide {
-  left: 115px;
+  left: 46.5%;
 }
 .switch-layout .account-navigation a {
-  color: #a19f9d;
+  color: #0b5893;
   height: 40px;
-  padding: 10px 20px;
+  padding: 19px;
+  text-align: center;
+  font-size: 20px;
 }
+
 .switch-layout .account-navigation a.active {
-  color: #f7f7f7;
+  color: #ffffff;
+  font-family: "Surt-Bold";
+  font-size: 18px;
+}
+
+.switch-layout .account-navigation .login {
+  margin-left: 5px;
+}
+
+.switch-layout .account-navigation .sign-up {
+  padding-left: 2px;
 }
 
 .account-content {

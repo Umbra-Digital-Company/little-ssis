@@ -152,7 +152,7 @@ if ( !isset($_SESSION['customer_id']) ) {
        				 <input type="submit" id="guest-submit" class="btn btn-primary" value="<?= $arrTranslate['Proceed'] ?>" disabled>
     			</div>
 				<div class="text-center mt-4">
-		            <a>
+		            <a href="/sis/studios/v1.0/?page=contact-tracing-form&type=log-in">
 		                <div  style="color: #919191; font-size: 18px; font-weight: 400">Log in with your Sunnies Club account to earn points</div>
 		            </a>
 		        </div>
@@ -160,39 +160,48 @@ if ( !isset($_SESSION['customer_id']) ) {
 	    </div>
 <?php }else{ ?>
 	<?php if ( !isset($_SESSION['customer_id']) ) : ?>
-		<div class="switch-layout">
+		<div class="switch-layout mt-2	">
 			<span class="switch-animation <?= ( isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) ? 'slide' : '' ?>"></span>
 			<div class="account-navigation d-flex no-gutters">
-					
-					<a href="#create-content" class="col-6 text-center account-option <?= ( !isset($_SESSION['customer_id']) && !isset($_SESSION['temp_data']) ) ? 'active' : '' ?>"><?= $arrTranslate['Register'] ?></a>
-					<a href="#use-content" class="col-6 text-center account-option <?= ( isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) ? 'active' : '' ?>"><?= $arrTranslate['Log In'] ?></a>
+					<a href="#use-content" class="col-6 text-center account-option <?= ( isset($_SESSION['customer_id']) || isset($_SESSION['temp_data']) ) ? '' : 'active' ?>">Log in</a>
+					<a href="#create-content" class="col-6 text-center account-option <?= ( !isset($_SESSION['customer_id']) && !isset($_SESSION['temp_data']) ) ? '' : '' ?>">Sign up</a>
 			</div>
 		</div>
 	<?php endif ?>
 
-	<div class="account-content mt-4" id="use-content">
+	<div class="account-content active mt-4" id="use-content">
 		<!-- <p class="font-bold text-uppercase text-primary">log in account</p> -->
 		<div class = "account-login">
-			<form method="post" id="use_account" name="use_account" autocomplete="off" class="mt-0">
+			<form method="post" id="use_account" name="use_account" autocomplete="off" class="form-login" id="loginForm">
 				
-				<p class="font-bold text-uppercase text-primary"><?= $arrTranslate['Personal Details'] ?> Xavier</p>
+				<!-- <p class="font-bold text-uppercase text-primary"><?= $arrTranslate['Personal Details'] ?> </p> -->
 
 				<div class="d-flex form-row form-group justify-content-center mt-3">
+
+					
+
 					<div class="form-group col-md-2 col-sm-2" id="div_area_codes" style='padding-left: 0px; padding-right: 0px; margin: 0px; display: none'>
 						<select class="text-left select mh-40 form-control" name="country_codes_login" id="country_codes_login" style="margin: 0px; padding-top:0px; padding-bottom:0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">
 							<option></option>
 						</select>
 						<label class="placeholder" for="country_codes_login">Area Code</label>
 					</div>
+
+
 					<div class="form-group col-md-12 col-sm-12" id="div_mobile_number" >
-						<input type="text" name="username" class="form-control text-lowercase" id="username" required="required"  autocomplete="nope" />
-						<label class="placeholder" for="username" ><?= $arrTranslate['Email or Mobile Number'] ?></label>
-						<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>
+						<input type="text" name="username" class="form-control text-lowercase" id="username"  required="required" autocomplete="nope"/>
+						<label class="placeholder email" display="none" for="username" ><?= $arrTranslate['Email or Mobile Number'] ?></label>
+						
+						<p class="text-danger" id="msg" style="font-size: 14px;"></p>
+						<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>						
 					</div>
-					<div class="form-group col-md-12 col-sm-12 mt-4" id="div_mobile_number" >
-						<input type="text" name="username" class="form-control text-lowercase" id="username" required="required"  autocomplete="nope" />
-						<label class="placeholder" for="username" "><?= $arrTranslate['Birthdate'] ?></label>
-						<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>
+					
+					<div class="form-group col-md-12 col-sm-12 mt-2" id="div_birthdate" data-provide="datepicker">
+						<input  name="birthdate" class="form-control" id="birthdate" required="required" type="text"   />
+						<label class="placeholder" for="Birthdate"><?= $arrTranslate['Birthdate'] ?></label>
+						<input name="month" id="month" hidden value="">
+						<input name="day" id="day" hidden value="">
+						<input name="year"  id="year" hidden value="">
 					</div>
 				</div>
 
@@ -234,14 +243,13 @@ if ( !isset($_SESSION['customer_id']) ) {
 						</select>
 					</div>
 				</div> -->
-				
 				<div class="text-center mt-2">
-					<div class="form-row">
-						<div class="col-md-12 form-group">
-							<input type="button" name="btnsubmit" id="btnsubmit" value="<?= $arrTranslate['Continue'] ?>" class="btn btn-primary" />
-						</div>
-					</div>
-				</div>
+                    <div class="form-row">
+                        <div class="col-md-12 form-group">
+                            <input type="button" name="login-submit" id="btnsubmit" value="<?= $arrTranslate['Continue'] ?>" class="btn btn-primary" disabled />
+                        </div>
+                    </div>
+                </div>
 				<div class="text-center ">
 					<div class="form-row">
 						<div class="col-md-12 form-group">
@@ -251,10 +259,68 @@ if ( !isset($_SESSION['customer_id']) ) {
 						</div>
 					</div>
 				</div>
-				<div class="text-center mt-3">
-					<p class="text-danger" id="msg"></p>
-				</div>
+				
 			</form>
+
+			<!-- ------------LOGIN FORM SCRIPTS-------------- -->
+			<script>
+				$(document).ready(function(){
+					$('#birthdate').datepicker({
+						dateFormat : 'MM dd yy',  
+						autoclose: true,
+						changeMonth : true,
+						changeYear : true,
+						yearRange: '-100y:c+nn',
+						maxDate: '-1d'
+					})
+				});
+
+				$('#birthdate').on('keydown keypress keyup', function(event) {
+					event.preventDefault(); // Prevents typing
+				});
+				$("#birthdate").change(function(){
+					var date = $(this).datepicker('getDate'); 
+					if (date) {
+						var month = $.datepicker.formatDate('M', date); 
+						var day = $.datepicker.formatDate('dd', date);   
+						var year = $.datepicker.formatDate('yy', date);  
+
+						// Set the hidden input values
+						$("#month").val(month);
+						$("#day").val(day);
+						$("#year").val( year);
+						
+						//remove errors
+						$("#msg").text("");
+						$("#username").css("border-bottom", " 1px " + "solid" + " #dcdcdc");
+						$(".placeholder.email").removeClass("text-danger");
+						
+						//enable button
+						if($('#username').val() != "" && $("#birthdate").val() != ""){
+							$('#btnsubmit').prop('disabled', false);
+						}else{
+							$('#btnsubmit').prop('disabled', true);
+						}
+
+					}
+				});
+
+				$("#username").on('keydown keypress keyup', function(event) {
+					$("#msg").text("");
+					$(".placeholder.email").removeClass("text-danger");
+
+
+					//enable button
+					if($('#username').val() != "" && $("#birthdate").val() != ""){
+					$('#btnsubmit').prop('disabled', false);
+					}else{
+						$('#btnsubmit').prop('disabled', true);
+					}
+				});
+			</script>	
+
+			<!-- END OF LOGIN FORM SCRIPTS -->
+			
 		</div>
 		<script type="text/javascript">
 			$('#username').on('keydown', function () {
@@ -308,7 +374,7 @@ if ( !isset($_SESSION['customer_id']) ) {
 		</form> -->
 	</div>
 
-	<div class="account-content active mt-4 mb-4" id="create-content">
+	<div class="account-content  mt-4 mb-4" id="create-content">
 		<form name="create_account" id="create_account" action="/sis/studios/func/process/store-register-v2.php" method="POST" autocomplete="off">
 			<input type="hidden" value="v1.0" name="path_loc">
 			<input type="hidden" value="<?php echo $password; ?>" name="password2">

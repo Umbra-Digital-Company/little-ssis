@@ -459,10 +459,13 @@ $(document).ready(function () {
 			var target 		= $(this).attr('href');
 			e.preventDefault();
 
-			if ( target == '#create-content' ) {
+			if ( target == '#use-content' ) {
 				$('.switch-animation').removeClass('slide');
+				
+				
 			} else {
 				$('.switch-animation').addClass('slide');
+			
 			}
 			
 			$(this).addClass('active').siblings().removeClass('active');
@@ -1662,10 +1665,12 @@ $(document).ready(function () {
 		$(this).find('.lang-opt').toggle('fade');
 	});
 
+
+	// ========================== GUEST Login
 	document.getElementById('guestForm').addEventListener('input', function() {
         var isFormValid = true;
         
-        // Check each input field for validity
+        
         var lastname = document.getElementById('lastname').value.trim();
         var firstname = document.getElementById('firstname').value.trim();
         var gender = document.getElementById('gender').value;
@@ -1675,8 +1680,30 @@ $(document).ready(function () {
             isFormValid = false;
         }
 
-        // Enable or disable the submit button based on form validity
+        
         document.getElementById('guest-submit').disabled = !isFormValid;
     });
+
+
+	document.getElementById('guestForm').addEventListener('input', function() {
+        var isFormValid = true;
+        
+        
+        var lastname = document.getElementById('lastname').value.trim();
+        var firstname = document.getElementById('firstname').value.trim();
+        var gender = document.getElementById('gender').value;
+        var ageRange = document.getElementById('age_range').value;
+
+        if (!lastname || !firstname || !gender || !ageRange) {
+            isFormValid = false;
+        }
+
+        
+        document.getElementById('guest-submit').disabled = !isFormValid;
+    });
+
+
+	
+  
 
 });

@@ -15,6 +15,7 @@ $valid = true;
 if ( $_POST['username'] == '' ) {
 	$valid = false;
 }
+
 if ( trim($_POST['month']) == '' || trim($_POST['day']) == '' || trim($_POST['year']) == '' ) {
 	$valid=false;
 }
@@ -97,12 +98,16 @@ if ( $valid ) {
 		echo '<script>window.location="./?page=select-store"</script>';
 		
 	} else {
-		echo 'Invalid email or password.';
+		echo 'Account does not exist.';
+		echo '<script>
+			$(".placeholder.email").addClass("text-danger");
+			$("#username").css("border-bottom", " 2px solid red");
+			</script>';
 	}
 	
 } else {
 
-	echo 'Invalid email or password.';
+	echo 'Account does not exist.';
 
 }
 
