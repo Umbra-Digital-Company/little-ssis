@@ -160,11 +160,13 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 		
 		<?php if ($arrTextImages[0]['image_2'] != ''  && $arrTextImages[0]['image_2_status'] == 1) { ?>
 
-			<div class="d-flex justify-content-center mb-4">
+			<div class="d-flex justify-content-center mb-4" style= "padding-bottom: 150px">
 				<div class="img-holder" style="background-image:url(/studios/studios-settings/images/<?= $arrTextImages[0]['image_2'] ?>);"></div>
 			</div>
 
 		<?php } ?>
+
+		
 		<div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
 			<div id="bottom-content-inner" style=" width: 527px; padding: 20px">
 		
@@ -172,7 +174,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 					<div class="col-12 ">
 						<div class="customer-account text-center">
 							<a href="./?page=contact-tracing-form&type=sign-up">
-								<button class="btn bg-blue-tile" style="padding: 16px 20px 16px 20px; font-size: 18px;height: 56px; border-radius: 28px; font-weight: 700;" >Log in or Sign up </button>
+								<button class="btn btn-primary"  >Log in or Sign up </button>
 							</a>
 						</div>
 					</div>
@@ -182,11 +184,13 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 					<div class="col-12 mt-3">
 						<div class="customer-account text-center">
 							<a href="./?page=contact-tracing-form&guest=true">
-								<button class="btn btn-not-cancel" style="padding: 16px 20px 16px 20px; font-size: 18px;height: 56px; border-radius: 28px; font-weight: 400;">Continue as guest</button>
+								<button class="btn btn-not-cancel" >Continue as guest</button>
 							</a>
 						</div>
 				</div>	
 			</div>
 		
 		</div>
+
+		
 <?php } ?>

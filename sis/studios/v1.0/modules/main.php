@@ -158,26 +158,32 @@ switch ( $page ) {
 	</nav>
 </div>
 
-<div id="admin-bar" class="d-flex align-items-center <?= ( $page == 'rate-us' ) ? 'justify-content-center' : 'justify-content-between' ?>" style="box-shadow: none;">
+<div id="admin-bar" class="d-flex align-items-center  <?= ( $page == 'rate-us' ) ? 'justify-content-center' : 'justify-content-between' ?>" style="box-shadow: none;">
 
 	<?php if ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress']) ) : ?>
 
 		<?php if ( $page != 'rate-us' ) : ?>
 			<div class="home">
-				<a href="#" class="prevent" id="exit_customer_page"><img src="<?= get_url('images/icons') ?>/icon-home-primary.png" alt="exit" class="img-fluid"></a>
+				<a href="#" class="prevent" id="exit_customer_page"><img src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
 		<div class="account-name">
-			<p class="small m-0"><?= $arrTranslate['Step '.$step] ?></p>
+			<p class="h3 mb-0" style= "color: #FFFFFF; font-weight: 700; font-size: 20px"><?=strtoupper("Account")?></p>
 		</div>
 		<?php if ( $page != 'rate-us' ) : ?>
-			<div class="language">
+			<!-- <div class="language">
 				<img src="<?= get_url('images/icons') ?>/icon-language-primary.png" alt="language" class="img-fluid">
 				<div class="lang-opt">
 					<a href="/sis/studios/func/process/switch_language.php?language_setting=us">English</a>
 					<a href="/sis/studios/func/process/switch_language.php?language_setting=vn">Vietnamese</a>
 				</div>
-			</div>
+			</div> -->
+
+
+			<div class="account">
+			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+		</div>
+
 		<?php endif ?>
 
 	<?php elseif ( isset($_SESSION['customer_page']) && isset($_SESSION['doctor_progress']) && $_SESSION['doctor_progress'] == 'YES' ) : ?>
@@ -372,7 +378,7 @@ switch ( $page ) {
 
 			?>
 
-			<div class="step-progress">
+			<!-- <div class="step-progress">
 				<div class="d-flex justify-content-center">
 					<?php if(!isset($_SESSION['login_set'])){ ?>
 						<a href="./?page=contact-tracing-form" class="<?= ( isset($_SESSION['customer_id']) || $page == 'contact-tracing-form' ) ? 'bg-success-lighten' : '' ?>">
@@ -387,9 +393,9 @@ switch ( $page ) {
 					</a>
 					<span class="progress-bar <?= $progress_class ?>"></span>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="wrapper">
+			<div class="wrapper-2">
 				<?php include("layout.php");?>
 			</div>
 
@@ -482,7 +488,7 @@ switch ( $page ) {
     }
 
 	.btn {
-		border-radius: 10px;
+		border-radius: 28px;
 		width: 100%;
 		height: 45px;
 	}
@@ -490,19 +496,23 @@ switch ( $page ) {
 		background: #000000;
 		color: #ffffff;
 	}
-    .modal-content{
+
+	
+	.modal-content{
+		max-width: 747px !important;
+		width: 100% !important;
 		border-radius: .5rem;
     }
     .modal-header{
-        /*background-color : #F9F3EC !important;*/
+		padding-top: 20px;
+		height: 72px;
+		align-items: center;
         border-radius: 5px;
     }
     .modal-title, .close{        
         opacity: 1;
     }
-    .modal-dialog{
-    	max-width: 60%;
-	}
+    
 	#modal-filter .modal-dialog, #modal-signup .modal-dialog{
     	max-width: 90%;
 	}
@@ -530,23 +540,7 @@ switch ( $page ) {
         padding-left: 30px;
         padding-right: 30px;
     }
-    @media only screen and (max-width: 992px) {
-
-    	body > .container {
-    		overflow-y: hidden;
-    		height: 100vh;
-    	}
-	}
-    @media only screen and (max-width: 600px) {
-
-    	.cart-item .mt-xs-0 {
-	    	margin-top: 0 !important;
-	    }
-         #modal-signup .modal-dialog, #modal-filter .modal-dialog, .modal-dialog{
-        	width: auto;
-        	max-width: 100%;
-        }
-    }
+    
 
     .color-list div{
     	cursor: pointer;

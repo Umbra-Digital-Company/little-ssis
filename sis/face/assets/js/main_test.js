@@ -430,7 +430,7 @@ $(document).ready(function () {
 			var target 		= $(this).attr('href');
 			e.preventDefault();
 
-			if ( target == '#create-content' ) {
+			if ( target == '#use-content' ) {
 				$('.switch-animation').removeClass('slide');
 			} else {
 				$('.switch-animation').addClass('slide');
