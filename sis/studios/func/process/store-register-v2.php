@@ -344,13 +344,13 @@ if ( isset($_POST['email_confirmation']) ) { // UPDATE DATA
 	// If email address already exists, send back
 
 	if ($pi_email=='n') {
-
+		
 		$_SESSION['temp_data'] = 'YES';
 		$_SESSION['last_name'] = $_POST['lname'];
 		$_SESSION['first_name'] = $_POST['fname'];
 		$_SESSION['middle_name'] = $_POST['mname'];
 		//$_SESSION['suffix_name'] = $_POST['sname'];
-		$_SESSION['birthday'] = $_POST['bdate'];
+		$_SESSION['birthday'] = $_POST['b_date'];
 		$_SESSION['age']   = $_POST['age'];
 		$_SESSION['gender'] = $_POST['gender'];
 		$_SESSION['address'] = $_POST['home_address'];
@@ -366,6 +366,7 @@ if ( isset($_POST['email_confirmation']) ) { // UPDATE DATA
 	} else {
 
 		// BIRTHDATE
+		
 		if($_POST['b_day'] != '' && $_POST['b_month'] != '' && $_POST['b_year'] != '') {
 		// Convert date
 			$bDate = $_POST['b_year'].'-'.$_POST['b_month'].'-'.$_POST['b_day'];
