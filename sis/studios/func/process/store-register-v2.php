@@ -237,15 +237,15 @@ function InsertHdf($profileIDF){
 		$arrQuestion['email_address'] = mysqli_real_escape_string($conn,$_POST['email']);
 		$arrQuestion['mobile_number'] = mysqli_real_escape_string($conn,$_POST['mnum']);
 		$arrQuestion['present_address'] = mysqli_real_escape_string($conn,$_POST['home_address']);
-		$arrQuestion['travel_countries'] = ($_POST['question_1'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_countries']) : 'n';
-		$arrQuestion['travel_ph'] = ($_POST['question_2'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_ph']) : 'n';
-		$arrQuestion['sick'] = ($_POST['question_3'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['sick']) : 'n';
-		$arrQuestion['symptoms'] = ($_POST['question_4'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['symptoms']) : 'n';
-		$arrQuestion['close_contact'] = ($_POST['question_5'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact']) : 'n';
-		$arrQuestion['close_contact_animals'] = ($_POST['question_6'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact_animals']) : 'n';
+		// $arrQuestion['travel_countries'] = ($_POST['question_1'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_countries']) : 'n';
+		// $arrQuestion['travel_ph'] = ($_POST['question_2'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_ph']) : 'n';
+		// $arrQuestion['sick'] = ($_POST['question_3'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['sick']) : 'n';
+		// $arrQuestion['symptoms'] = ($_POST['question_4'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['symptoms']) : 'n';
+		// $arrQuestion['close_contact'] = ($_POST['question_5'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact']) : 'n';
+		// $arrQuestion['close_contact_animals'] = ($_POST['question_6'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact_animals']) : 'n';
 		$arrQuestion['agreement'] = "y";
 		
-
+		
 		$query3 = 'INSERT IGNORE INTO lil_health_declaration('.implode(",", array_keys($arrQuestion)).')
 					VALUES("'.implode('","',$arrQuestion).'")
 					ON DUPLICATE KEY UPDATE ';
