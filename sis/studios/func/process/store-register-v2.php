@@ -237,15 +237,15 @@ function InsertHdf($profileIDF){
 		$arrQuestion['email_address'] = mysqli_real_escape_string($conn,$_POST['email']);
 		$arrQuestion['mobile_number'] = mysqli_real_escape_string($conn,$_POST['mnum']);
 		$arrQuestion['present_address'] = mysqli_real_escape_string($conn,$_POST['home_address']);
-		$arrQuestion['travel_countries'] = ($_POST['question_1'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_countries']) : 'n';
-		$arrQuestion['travel_ph'] = ($_POST['question_2'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_ph']) : 'n';
-		$arrQuestion['sick'] = ($_POST['question_3'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['sick']) : 'n';
-		$arrQuestion['symptoms'] = ($_POST['question_4'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['symptoms']) : 'n';
-		$arrQuestion['close_contact'] = ($_POST['question_5'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact']) : 'n';
-		$arrQuestion['close_contact_animals'] = ($_POST['question_6'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact_animals']) : 'n';
+		// $arrQuestion['travel_countries'] = ($_POST['question_1'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_countries']) : 'n';
+		// $arrQuestion['travel_ph'] = ($_POST['question_2'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['travel_ph']) : 'n';
+		// $arrQuestion['sick'] = ($_POST['question_3'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['sick']) : 'n';
+		// $arrQuestion['symptoms'] = ($_POST['question_4'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['symptoms']) : 'n';
+		// $arrQuestion['close_contact'] = ($_POST['question_5'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact']) : 'n';
+		// $arrQuestion['close_contact_animals'] = ($_POST['question_6'] == 'yes')?  mysqli_real_escape_string($conn,$_POST['close_contact_animals']) : 'n';
 		$arrQuestion['agreement'] = "y";
 		
-
+		
 		$query3 = 'INSERT IGNORE INTO lil_health_declaration('.implode(",", array_keys($arrQuestion)).')
 					VALUES("'.implode('","',$arrQuestion).'")
 					ON DUPLICATE KEY UPDATE ';
@@ -344,13 +344,13 @@ if ( isset($_POST['email_confirmation']) ) { // UPDATE DATA
 	// If email address already exists, send back
 
 	if ($pi_email=='n') {
-
+		
 		$_SESSION['temp_data'] = 'YES';
 		$_SESSION['last_name'] = $_POST['lname'];
 		$_SESSION['first_name'] = $_POST['fname'];
 		$_SESSION['middle_name'] = $_POST['mname'];
 		//$_SESSION['suffix_name'] = $_POST['sname'];
-		$_SESSION['birthday'] = $_POST['bdate'];
+		$_SESSION['birthday'] = $_POST['b_date'];
 		$_SESSION['age']   = $_POST['age'];
 		$_SESSION['gender'] = $_POST['gender'];
 		$_SESSION['address'] = $_POST['home_address'];
@@ -366,6 +366,7 @@ if ( isset($_POST['email_confirmation']) ) { // UPDATE DATA
 	} else {
 
 		// BIRTHDATE
+		
 		if($_POST['b_day'] != '' && $_POST['b_month'] != '' && $_POST['b_year'] != '') {
 		// Convert date
 			$bDate = $_POST['b_year'].'-'.$_POST['b_month'].'-'.$_POST['b_day'];
