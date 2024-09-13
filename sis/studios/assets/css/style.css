@@ -496,7 +496,9 @@ body.customer-page {
 
 .form-row>.col,
 .form-row>[class*="col-"] {
-  padding: 0 7px;
+  padding: 0 ;
+
+  margin: 0;
 }
 
 .form-row .form-group {
@@ -1610,12 +1612,14 @@ body.customer-page {
   width: 100%;
   max-height: 305px;
   overflow: auto;
-  background-color: #f7f7f7;
+  background-color: #FFFFFF;
   border-radius: 20px;
+  
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  
   -webkit-box-shadow: 0 5px 15px 0 rgba(42, 35, 35, 0.25) !important;
   -moz-box-shadow: 0 5px 15px 0 rgba(42, 35, 35, 0.25) !important;
   box-shadow: 0 5px 15px 0 rgba(42, 35, 35, 0.25) !important;
@@ -1623,23 +1627,25 @@ body.customer-page {
 
 .table-default table {
   width: 100%;
+  border-bottom: #0b5893 solid 5px;
 }
 
-.table-default thead {
-  background-color: #36482e;
-}
 
 .table-default thead th {
-  text-transform: uppercase;
-  color: #f7f7f7;
+  color: #919191;
   font-family: "Surt-Medium";
-  font-weight: 700;
-  padding: 20px 15px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 15px;
+
 }
 
+
+
+
 .table-default td {
-  padding: 15px;
-  border-bottom: 1px solid #e6e6e6;
+
+  
   font-size: 12px;
 }
 
@@ -1742,8 +1748,10 @@ body.customer-page {
   -o-border-radius: 8px;
   -webkit-box-shadow: 0 2px 3px 0 rgba(42, 35, 35, 0.25) !important;
   -moz-box-shadow: 0 2px 3px 0 rgba(42, 35, 35, 0.25) !important;
-  box-shadow: 0 2px 3px 0 rgba(42, 35, 35, 0.25) !important;
-}
+  box-shadow: 0 2px 3px 0 rgba(42, 35, 35, 0.25) !important; }
+  .custom-card.prescription p {
+    font-size: 12px;
+    white-space: nowrap; }
 
 .custom-card.prescription p {
   font-size: 12px;
@@ -2375,6 +2383,8 @@ hr {
   font-size: 20px;
 }
 
+
+
 .switch-layout .account-navigation a.active {
   color: #ffffff;
   font-family: "Surt-Bold";
@@ -2701,6 +2711,12 @@ hr {
 
 /*# sourceMappingURL=style.css.map */
 
+
+
+#ssis_header{
+  display: none;
+}
+
 /* Login/Signup */
 .page-contact-tracing-form #ssis_sidebar {
   max-width: 100%;
@@ -2777,4 +2793,113 @@ main.customer-layout .wrapper {
 
 .page-select-merch .frame-list {
   height: 73vh !important;
+}
+
+/* Transactions */
+
+.switch-layout-transactions .switch-animation {
+  width: 47.5%;
+  display: block;
+  height: 48px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 8px;
+  background: #0b5893 !important;
+  border-radius: 28px;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  -ms-border-radius: 28px;
+  -o-border-radius: 28px;
+  transition: left 0.3s linear;
+  -webkit-transition: left 0.3s linear;
+  -moz-transition: left 0.3s linear;
+  -ms-transition: left 0.3s linear;
+  -o-transition: left 0.3s linear;
+}
+
+
+.switch-layout-transactions .switch-animation {
+  width: 47.5%;
+  display: block;
+  height: 48px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 8px;
+  background: #0b5893 !important;
+  border-radius: 28px;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
+  -ms-border-radius: 28px;
+  -o-border-radius: 28px;
+  transition: left 0.3s linear;
+  -webkit-transition: left 0.3s linear;
+  -moz-transition: left 0.3s linear;
+  -ms-transition: left 0.3s linear;
+  -o-transition: left 0.3s linear;
+}
+
+.switch-layout-transactions .switch-animation.slide {
+  left: 46.5%;
+}
+
+.switch-layout-transactions .switch-animation.slide {
+  left: 46.5%;
+}
+
+
+
+.switch-layout-transactions .account-navigation a {
+  color: #0b5893;
+  height: 40px;
+  padding: 19px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.switch-layout-transactions {
+  background: #fff;
+  position: relative;
+  width: 100%;
+  max-width: 370px;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 64px;
+  border-radius: 36px;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+  -ms-border-radius: 36px;
+  -o-border-radius: 36px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.08),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.04);
+}
+
+.switch-layout-transactions .transaction-navigation a.active {
+  color: #ffffff;
+  font-family: "Surt-Bold";
+  font-size: 18px;
+}
+
+.switch-layout-transactions .transaction-navigation .login {
+  margin-left: 5px;
+}
+
+.switch-layout-transactions .transaction-navigation .sign-up {
+  padding-left: 2px;
+}
+
+.switch-layout-transactions  .transaction-navigation a {
+  color: #0b5893;
+  height: 40px;
+  padding: 19px;
+  text-align: center;
+  font-size: 20px;
+}
+.date-bar .row .form-group {
+  margin-bottom: 0;
+}
+
+.page-transactions main {
+  margin-top: 90px;
 }

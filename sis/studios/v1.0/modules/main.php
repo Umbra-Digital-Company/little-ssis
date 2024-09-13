@@ -119,25 +119,25 @@ switch ( $page ) {
 					<span class="h3 ml-3"><?= $arrTranslate['Home'] ?></span>
 				</a>
 			</li>
-			<?php if(isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
+			<!-- <?php if(isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
 				<li>
 					<a class="d-flex align-items-center" href="/studios/dispatch-studios">
 						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-dispatch.png);"></canvas>
 						<span class="h3 ml-3"><?= $arrTranslate['Dispatch'] ?></span>
 					</a>
 				</li>
-			<?php } ?>
-			<?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
+			<?php } ?> -->
+			<!-- <?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
 					<a class="d-flex align-items-center" href="./?page=for-payments">
 						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
 						<span class="h3 ml-3">For Payments</span>
 					</a>
 				</li>
-			<?php } ?>
+			<?php } ?> -->
 			<?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
-					<a class="d-flex align-items-center" href="#">
+					<a class="d-flex align-items-center" href="./?page=transactions">
 						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
 						<span class="h3 ml-3">Transactions</span>
 					</a>
@@ -167,9 +167,19 @@ switch ( $page ) {
 				<a href="#" class="prevent" id="exit_customer_page"><img src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
+
+		<?php if ( $page == 'contact-tracing-form' ) : ?>
 		<div class="account-name">
 			<p class="h3 mb-0" style= "color: #FFFFFF; font-weight: 700; font-size: 20px"><?=strtoupper("Account")?></p>
 		</div>
+
+		<?php if ( $page == 'transactions' ) : ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style= "color: #FFFFFF; font-weight: 700; font-size: 20px"><?=strtoupper("Transactions")?></p>
+			</div>
+		<?php endif ?>
+		
+		<?php endif ?>
 		<?php if ( $page != 'rate-us' ) : ?>
 			<!-- <div class="language">
 				<img src="<?= get_url('images/icons') ?>/icon-language-primary.png" alt="language" class="img-fluid">
@@ -240,6 +250,7 @@ switch ( $page ) {
 				case 'add-paper-bag' 		   : $custom_title = 'Add Paper Bag'; break;
 				case "order-dispatched" 	   : $custom_title = $arrTranslate['Order Confirmation']; break;
 				case "for-payments" 	   	   : $custom_title = 'For Payments'; break;
+				case 'transactions'			   : $custom_title = 'Transactions'; break;	
 				case 'updatedb' 			   : $custom_title = 'Maintenance'; break;			
 				// Default
 				default 					   : $custom_title = $page;
@@ -339,7 +350,7 @@ switch ( $page ) {
 </header>
 
 <main class="<?= ( isset($_SESSION['customer_page']) ) ? 'customer-layout ' . $page : '' ?>">
-
+	
 	<?php if ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress']) ) : ?>
 
 		<?php
@@ -448,7 +459,7 @@ switch ( $page ) {
 		</div>
 
 	<?php else : ?>
-
+	
 		<?php include("layout.php"); ?>
 		
 	<?php endif ?>
@@ -485,6 +496,7 @@ switch ( $page ) {
 	}
 	#ssis_header {
         background-color: #0B5893;
+		
     }
 
 	.btn {

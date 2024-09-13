@@ -10,7 +10,7 @@ if (isset($_GET['col'])){
 	$col = $_GET['col'];
 }
 
-$arrPage = ['home', 'store-home', 'health-declaration-form', 'contact-tracing-form', 'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser' , 'return-confirm', 'logout2', 'select-store', 'select-store-studios','select-merch','select-readers','select-free-item','order-confirmation','add-paper-bag', 'updatedb','order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad','for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test'];
+$arrPage = ['home', 'store-home', 'health-declaration-form', 'contact-tracing-form', 'transactions',  'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser' , 'return-confirm', 'logout2', 'select-store', 'select-store-studios','select-merch','select-readers','select-free-item','order-confirmation','add-paper-bag', 'updatedb','order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad','for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test'];
 
 if (in_array($page, $arrPage)){
 	switch($page){
@@ -33,7 +33,8 @@ if (in_array($page, $arrPage)){
 		case "add-paper-bag": include("store/add-paper-bag.php"); break;
 		case "order-dispatched": include("store/order-dispatched.php"); break;
 		case "for-payments": include("store/for-payments.php"); break;
-
+		//transactions
+		case "transactions": include("store/transactions.php"); break;
 		case "health-declaration-form": include("store/health-declaration-form.php"); break;
 		case "contact-tracing-form": include("store/contact-tracing-form.php"); break;
 
@@ -59,6 +60,8 @@ if (in_array($page, $arrPage)){
 		case "store-home-test": include("store/store-home-test.php"); break;
 		case "contact-tracing-form-test": include("store/contact-tracing-form-test.php"); break;
 		case "order-confirmation-test": include("store/order-confirmation-test.php"); break;
+
+		
 
 	}
 
