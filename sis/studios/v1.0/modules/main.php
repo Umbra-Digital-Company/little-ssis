@@ -110,8 +110,8 @@ switch ( $page ) {
 	</div>
 	<nav id="ssis_menu"  >
 
-		<ul class="nav-list nav flex-column mb-4">
-			<li class="text-secondary text-uppercase mb-3 font-bold"></li>
+		<ul class="nav-list nav flex-column mb-2">
+			<li class="text-secondary text-uppercase mb-2 font-bold"></li>
 			<li >
 				<a class="d-flex align-items-center" href="./?page=store-home">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-home.png);"></canvas>
@@ -119,22 +119,22 @@ switch ( $page ) {
 					<span class="h3 ml-3"><?= $arrTranslate['Home'] ?></span>
 				</a>
 			</li>
-			<!-- <?php if(isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
+			<?php if(isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
 				<li>
 					<a class="d-flex align-items-center" href="/studios/dispatch-studios">
 						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-dispatch.png);"></canvas>
 						<span class="h3 ml-3"><?= $arrTranslate['Dispatch'] ?></span>
 					</a>
 				</li>
-			<?php } ?> -->
-			<!-- <?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
+			<?php } ?>
+			<?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
 					<a class="d-flex align-items-center" href="./?page=for-payments">
 						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
 						<span class="h3 ml-3">For Payments</span>
 					</a>
 				</li>
-			<?php } ?> -->
+			<?php } ?>
 			<?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
 					<a class="d-flex align-items-center" href="./?page=transactions">
@@ -181,14 +181,11 @@ switch ( $page ) {
 		
 		<?php endif ?>
 		<?php if ( $page != 'rate-us' ) : ?>
-			<!-- <div class="language">
-				<img src="<?= get_url('images/icons') ?>/icon-language-primary.png" alt="language" class="img-fluid">
-				<div class="lang-opt">
-					<a href="/sis/studios/func/process/switch_language.php?language_setting=us">English</a>
-					<a href="/sis/studios/func/process/switch_language.php?language_setting=vn">Vietnamese</a>
-				</div>
-			</div> -->
 
+			<div class="account-name">
+			<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
+			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-studios-logo-white.png?v=1614047286" style=" max-width: 200px;">
+		</div>
 
 			<div class="account">
 			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
