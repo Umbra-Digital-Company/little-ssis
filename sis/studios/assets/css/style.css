@@ -674,9 +674,9 @@ body.customer-page {
 }
 
 .form-control.search {
-  font-size: 16px;
+  font-size: 18px;
   background-color: transparent;
-  
+  height: 40px;
   margin-right: 20px;
   background-repeat: no-repeat;
   background-position: right 15px center;
@@ -1004,42 +1004,45 @@ body.customer-page {
 }
 
 .btn-bag {
-  display: flex !important;
-  align-items: center !important;
-  /* Center text vertically */
-  justify-content: center !important;
-  /* Center text horizontally */
   max-width: 166px;
-  /* Optional: Set a max width if needed */
+  width: 100%;
   height: 48px;
+  min-height: 48px;
   color: #5478a0;
-  /* Button text color */
+
   border-radius: 28px;
-  /* Rounded corners */
+  
   border: 2px solid #5478a0;
-  /* Border color and thickness */
+ 
   font-size: 16px;
-  /* Font size */
+  
   cursor: pointer;
-  /* Pointer cursor on hover */
+ 
   font-family: "Surt-Regular" !important;
-  white-space: nowrap;
-  /* Prevent text wrapping */
+ 
+
   background-color: #ffffff;
 }
 
 .btn-bag.extended {
-  max-width: 172px !important;
+  max-width: 166px !important;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  
 }
 
 .btn-bag:disabled {
   color: #b7b7b7;
   /* Button text color */
-  border: 1px solid #b7b7b7;
+  border: 2px solid #b7b7b7;
   /* Border color and thickness */
+  border-radius: 28px;
   cursor: not-allowed;
-  /* Pointer cursor on hover */
+  font-size: 16px;
   background-color: #f0f0f0;
+  width: 146px;
+  height: 48px;
 }
 
 .filter-icon {
@@ -1078,6 +1081,8 @@ body.customer-page {
   align-items: center; /* Center text vertically */
   box-sizing: border-box; /* Include padding in width */
 }
+
+
 
 .btn-primary:not([disabled]):hover,
 .btn-primary:not([disabled]):focus,
