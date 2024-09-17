@@ -3,7 +3,7 @@ if ( !isset($_SESSION) ) { session_start(); }
 
 // Included files
 include("../connect.php");
-//include("../includes/grab_cart.php");
+include("../includes/grab_cart.php");
 
 function getpricePoll51($item_code){
 	global $conn;

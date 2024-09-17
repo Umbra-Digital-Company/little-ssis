@@ -52,11 +52,14 @@
 
         .page-select-store .packages-list {
             overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
         #form-search {
             display: flex;
-            flex-direction: row;
+           
+            height: 43px;
             border: none;
             width: 100%;
         }
@@ -78,7 +81,7 @@
         .btn-search {
             width: 48px;
             /* Adjust width and height to make it circular */
-            height: 43px;
+            height: 48px;
             background-color: #0b5893;
             /* Button background color */
             border: none;
@@ -90,6 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 16px 20px 16px 20px;
           
             /* Remove default padding */
         }
@@ -156,27 +160,13 @@
 
         <div class="flex-container mb-3">
 
-            <button class="btn btn-bag" id="exit_add_more" <?php if (empty($arrCart))
-                echo 'disabled'; ?>>
-                <?php if (empty($arrCart)): ?>
-
-                    <img src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+            <button class="btn btn-bag " id="bag-button" disabled>
+                    <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
                         style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
-                <?php else: ?>
-
-                    <img src="<?= get_url('images/icons') ?>/icon-shopping-bag-active.png" alt="Bag Active" class="img-fluid"
-                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;"> View Bag
-                    (<?= (isset($order_count)) ? $order_count : '' ?>)
-
-
-
-                <?php endif; ?>
             </button>
-
-
         </div>
 
-
+<!-- 
 
 
         <div class="d-flex align-items-center mb-3">
@@ -189,14 +179,15 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
 
 
         <div class="packages-list">
-            <div class="form-row mt-1 mt-5 mb-5 section-frames">
-                <span class="type-header  mb-3">SUN</span>
+        
+            <div class="form-row  mb-5 section-frames">
+            <span class="type-header  mb-3">SUN</span>
                 <div class="col-12 text-start ">
 
                     <img class="img-fluid img-header"
@@ -368,9 +359,9 @@
                 height: 20px;
                 border-radius: 20px;
                 display: block;
-                padding: 5px;
+                padding: 9px;
                 top: 2px;
-                left: 5px;
+               
 
                 margin: 10px;
 
@@ -393,13 +384,10 @@
             }
 
             .switch-color .more-item {
-                margin: 0 5px;
-                width: 50px;
-                height: 50px;
+                
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: #f0f0f0;
                 border-radius: 50%;
                 font-size: 16px;
                 color: #333;
@@ -417,17 +405,21 @@
                 top: -2px;
                 border-radius: 9px;
                 left: -2px;
+               
             }
 
             .switch-color li.active::before {
                 width: 24px;
                 height: 24px;
-                padding: 2px;
+                padding: 10px;
                 top: -2px;
                 left: -2px;
                 border-radius: 25px;
                 border: 2px solid #342C29;
+                
             }
+
+            
 
             /* #toggleLayout {
                 min-width: 25px;
@@ -459,28 +451,31 @@
             }
 
             .product-details h4 {
-                font-size: 12px;
-                text-transform: uppercase;
-                font-weight: 600;
+                font-size: 14px;
+                text-transform: capitalize;
+                font-weight: 700;
                 line-height: 12px;
+                
             }
 
             .product-details h4 span {
-                font-size: 10px;
-                color: #b3a89b;
+                font-size: 14px;
+                font-weight: 500;
+                color: #342C29;
             }
 
             .product-details p {
                 font-size: 12px;
                 line-height: 12px;
                 white-space: nowrap;
-                font-weight: 600;
+                font-weight: 500;
 
             }
 
             @media (max-width:480px) {
                 .product-details h4 span.blk {
                     margin-top: 5px;
+                    font: 14px;
                     display: block;
                 }
             }
@@ -496,8 +491,34 @@
             let arrReadersCount = <?= json_encode($arrReadersCount) ?>;
             let arrFreeItemCount = <?= json_encode($arrFreeItemCount) ?>;
             let arrMerchCount = <?= json_encode($arrMerchCount) ?>;
+
+            
+
             $(document).ready(function () {
 
+
+                const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+                const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+
+               
+                if(arrCart.length == 0){
+                    const button = document.getElementById('bag-button');
+                   
+                    button.disabled = true;
+                    button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                    
+                }else{
+                    const button = document.getElementById('bag-button');
+                    button.disabled = false;
+                    button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                    
+                }  
+               
+
+                 
+       
                 (arrFramesCount == 0) ? $('.section-frames').hide() : '';
                 (arrAntiRadCount == 0) ? $('.section-antirad').hide() : '';
                 (arrReadersCount == 0) ? $('.section-readers').hide() : '';
