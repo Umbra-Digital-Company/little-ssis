@@ -277,6 +277,8 @@ if (!isset($_SESSION['customer_id'])) {
             main.customer-layout .wrapper {
                 overflow-y: none;
             }
+
+            
         }
 
         .frame-list {
