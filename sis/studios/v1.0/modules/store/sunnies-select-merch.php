@@ -118,7 +118,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     </ul>
 
 
-                                    <div class="row d-flex justify-content-center mt-3">
+                                    <!-- <div class="row d-flex justify-content-center mt-3">
                                         <form class="col-12 form-quick-add-to-bag" item="merch" id="form-quick-add-to-bag<?= $i ?>"
                                             method="POST">
                                             <input type="hidden" name="studios_product_code"
@@ -128,7 +128,7 @@ if (!isset($_SESSION['customer_id'])) {
                                                 readonly>
                                             <button type="submit" class="btn btn-primary">add to bag</button>
                                         </form>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 

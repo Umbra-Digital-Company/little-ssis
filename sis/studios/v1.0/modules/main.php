@@ -211,9 +211,19 @@ switch ($page) {
 			</div>
 
 		<?php endif ?>
+		<?php if ($page == 'order-confirmation'): ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
+					<?= strtoupper("Order Confirmation") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
 
+		<?php endif ?>
 
-		<?php if ($page == 'select-store'): ?>
+		<?php if ($page == 'select-store' || strpos($page, 'select') !== false): ?>
 			<div class="account-name">
 				<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
 				<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-studios-logo-white.png?v=1614047286"
@@ -438,7 +448,7 @@ switch ($page) {
 	</div>
 </header>
 
-<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout ' . $page : '' ?>">
+<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer ' . $page : '' ?>">
 
 	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress'])): ?>
 
@@ -582,10 +592,7 @@ switch ($page) {
 	body #admin-bar {
 		background-color: #0B5893;
 		border-radius: 16px;
-		-webkit-border-radius: 16px;
-		-moz-border-radius: 0;
-		-ms-border-radius: 0;
-		-o-border-radius: 0;
+		
 	}
 
 	#ssis_header {
@@ -597,6 +604,7 @@ switch ($page) {
 		border-radius: 28px;
 		width: 100%;
 		height: 45px;
+		border-color: #0B5893;
 	}
 
 	.btn-black {
@@ -623,14 +631,6 @@ switch ($page) {
 		opacity: 1;
 	}
 
-	#modal-filter .modal-dialog,
-	#modal-signup .modal-dialog {
-		max-width: 90%;
-	}
-
-	.modal-body {
-		/*background-color : #F3E9DD !important;*/
-	}
 
 	.modal-body .details {
 		/* 100% = dialog height, 120px = header + footer */
@@ -680,124 +680,42 @@ switch ($page) {
 	</div>
 </div>
 
-<style type="text/css">
-	.my-collection,
-	.my-shapes,
-	.my-color {
-		text-align: center;
-		white-space: break-spaces;
-		font-size: 8px;
-	}
 
-	.btn-no-filter {
-		border: 1px solid #ccc;
-	}
-
-	.btn-filter-selected {
-		border: 2px solid #000;
-	}
-
-	.btn-brown {
-		background-color: #8c674c;
-		color: #fff;
-	}
-
-	.btn-tort {
-		background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/tort_color_group_48x.png?v=1599802863);
-		background-repeat: no-repeat;
-		background-size: cover;
-		color: #fff;
-	}
-
-	.btn-white {
-		border: 2px solid #000;
-	}
-
-	.btn-pink {
-		background-color: #e8a29c;
-		color: #fff;
-	}
-
-	.btn-blue {
-		background-color: #4479b1;
-		color: #fff;
-	}
-
-	.btn-green {
-		background-color: #698a49;
-		color: #fff;
-	}
-
-	.btn-yellow {
-		background-color: #eacf63;
-		color: #fff;
-	}
-
-	.btn-gold {
-		background-color: gold;
-		color: #000;
-	}
-
-	.btn-silver {
-		background-color: silver;
-		color: #fff;
-	}
-
-	.btn-clear {
-		border: 2px solid #000;
-	}
-
-	.btn-red {
-		background-color: #bf3e3e;
-		color: #fff;
-	}
-
-	.btn-grey {
-		background-color: #b2b2b5;
-		color: #fff;
-	}
-
-	.btn-rose_gold {
-		background-color: #ff9a78;
-		color: #fff;
-	}
-
-	.btn-purple {
-		background-color: #be92c4;
-		color: #fff;
-	}
-
-	.btn-nude {
-		background-color: #e2ceae;
-		color: #fff;
-	}
-</style>
 <div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
-	<div class="modal-dialog" role="document" style="max-width: 100%; margin: 0;">
-		<div class="modal-content" style="height: 100vh; border-radius: 0; padding: 15px;">
+	<div class="modal-dialog" role="document" style="max-width: 100%; width: 590px; ">
+		<div class="modal-content filter" style="height: 95vh; border-radius: 16px; margin: 15px auto ; ">
 			<div class="modal-header">
-				<h5 class="modal-title">Filter</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<div class="left-section">
+					<div id="filter-arrow" class="filter-arrow" data-dismiss="modal" aria-label="Close"
+						style="cursor: pointer;">
+
+					</div>
+				</div>
+				<p class="title">Filter</p>
+				<div class="right-section">
+					<button type="button" class="close-button" id="close-button" data-dismiss="modal"
+						aria-label="Close">
+						<img src="<?= get_url('images/icons') ?>/icon-close.png" alt="close" class="img-fluid"
+							style="height: 30px; width: 30px;">
+					</button>
+				</div>
 			</div>
 			<div class="modal-body" style="overflow-y:auto;">
 
 				<?php if (isset($arrCollectionsData)) { ?>
 
-					<p class="h2 font-bold">Collections</p>
+					<p class="h2 font-bold label mt-2">Collections</p>
 					<div class="row collections-list mb-5">
 
 						<?php foreach ($arrCollectionsData as $value) {
 
-							$selected = (in_array($value['code'], $getCollections)) ? 'btn-filter-selected' : 'btn-no-filter';
+							$selected = (in_array($value, $getCollections)) ? 'btn-filter-selected' : 'btn-no-filter';
 
 							?>
-							<div class="col-6 mt-3">
-								<div class="my-collection btn <?= $selected ?>" collectionsData="<?= $value['code'] ?>">
-									<?= $value['name'] ?>
-								</div>
+							<div class="col-3 mt-3">
+								<div class="my-collection filter-buttons btn <?= $selected ?>" collectionsData="<?= $value ?>">
+									<?= ucwords(strtolower($value)) ?></div>
 							</div>
 
 						<?php } ?>
@@ -808,19 +726,18 @@ switch ($page) {
 
 				<?php if (isset($arrShapesData)) { ?>
 
-					<p class="h2 font-bold mt-3">Shapes</p>
+					<p class="h2 font-bold label">Sizing</p>
 					<div class="row shapes-list mb-5">
 
 						<?php foreach ($arrShapesData as $value) {
 
-							$selected = (in_array($value['code'], $getShapes)) ? 'btn-filter-selected' : 'btn-no-filter';
+							$selected = (in_array($value, $getShapes)) ? 'btn-filter-selected' : 'btn-no-filter';
 
 							?>
 
-							<div class="col-6 mt-3">
-								<div class="my-shapes btn <?= $selected ?>" shapesData="<?= $value['code'] ?>">
-									<?= $value['name'] ?>
-								</div>
+							<div class="col-3 mt-3">
+								<div class="my-shapes filter-buttons btn <?= $selected ?>" shapesData="<?= $value ?>">
+									<?= ucwords(strtolower($value)) ?></div>
 							</div>
 
 						<?php } ?>
@@ -831,19 +748,17 @@ switch ($page) {
 
 				<?php if (isset($arrFilterColors)) { ?>
 
-					<p class="h2 font-bold mt-3">Colors</p>
+					<p class="h2 font-bold label">Colors</p>
 					<div class="row color-list mb-5">
 
 						<?php foreach ($arrFilterColors as $value) {
 
-							$selected = (in_array($value['color'], $getColors)) ? 'btn-' . $value['color'] : 'btn-no-filter';
+							$selected = (in_array($value['color'], $getColors)) ? 'btn-filter-selected' : 'btn-no-filter';
 
 							?>
-
-							<div class="col-6 mt-3">
-								<div class="my-color btn <?= $selected ?>" colorData="<?= $value['color'] ?>">
-									<?= ucwords(str_replace("_", " ", $value['color'])) ?>
-								</div>
+							<div class="col-3 mt-3">
+								<div class="my-color filter-buttons btn <?= $selected ?>" colorData="<?= $value['color'] ?>">
+									<?= ucwords(str_replace("_", " ", $value['color'])) ?></div>
 							</div>
 
 						<?php } ?>
@@ -853,13 +768,14 @@ switch ($page) {
 				<?php } ?>
 
 				<div class="d-flex justify-content-center">
-					<input type="submit" class="btn btn-primary" id="filter-search-data" value="Filter">
+					<input type="submit" class="btn btn-primary" id="filter-search-data" value="Apply Filter">
 				</div>
 
-				<?php if (isset($_GET['filter']) && $_GET['filter']) { ?>
-
+				<?php if (isset($_GET['filter']) && $_GET['filter']) {
+					$url_page = explode('&filter', $_SERVER['REQUEST_URI']);
+					?>
 					<div class="d-flex justify-content-center mt-4">
-						<a href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>">
+						<a href="<?= $url_page[0] ?>">
 							<div class="btn btn-link"
 								style="color: #000 !important; text-decoration: underline !important;">Reset Filter</div>
 						</a>
@@ -868,6 +784,27 @@ switch ($page) {
 				<?php } ?>
 
 			</div>
+
+			<script>
+				$(document).ready(function () {
+					// Function to enable/disable the Apply Filter button
+					function toggleFilterButton() {
+						const hasSelected = $('.modal-body').find('.btn-filter-selected').length > 0;
+						const filterButton = $('#filter-search-data');
+						
+						filterButton.prop('disabled', !hasSelected);
+					}
+
+					toggleFilterButton();
+
+					// Event listener for filter buttons
+					$('.modal-body').on('click', '.filter-buttons', function () {
+						// Update the Apply Filter button's state
+						toggleFilterButton();
+					});
+				});
+			</script>
+
 		</div>
 	</div>
 </div>

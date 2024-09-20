@@ -73,10 +73,10 @@ if(!isset($_SESSION['customer_id'])) {
         font-weight: bold;
     }
     .frame-style {
-        padding: 0 10px;
+        padding: 0 0px;
     }
     .frame-style .frame-style__slider {
-        border-radius: 10px 10px 0 0;
+        border-radius: 16px 16px 0 0;
         overflow: hidden;
     }
     .frame-style .product-option{
