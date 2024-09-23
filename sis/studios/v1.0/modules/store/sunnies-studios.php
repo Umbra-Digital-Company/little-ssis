@@ -114,8 +114,8 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         /*.list-item.frame-grid {
-                                                                                padding-bottom: 0 !important;
-                                                                            }*/
+                                                                                                                                    padding-bottom: 0 !important;
+                                                                                                                                }*/
         #btn-filter {
             max-width: 111px;
             height: 40px;
@@ -476,9 +476,9 @@ if (!isset($_SESSION['customer_id'])) {
                                 const filterClose = " <?= get_url('images/icons') ?>/icon-close-white.png";
                                 const filterButton = document.getElementById('btn-filter')
                                 filterButton.innerHTML = `<img id="filter-active" src="${filterActive}" alt="Filter-active"
-                                                                                            style="margin-left: 3px; margin-right: 6px; height: 24px; width: 24px;">Filter 
-                                                                                            <a id="close-icon" href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>"><img id="btn-icon-close" src="${filterClose}" alt="close"
-                                                                                            style="margin-left: 8px; margin-right: 3px; height: 24px; width: 24px;"> </a>`
+                                                                                                                                                                                                                                                        style="margin-left: 3px; margin-right: 6px; height: 24px; width: 24px;">Filter 
+                                                                                                                                                                                                                                                        <a id="close-icon" href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>"><img id="btn-icon-close" src="${filterClose}" alt="close"
+                                                                                                                                                                                                                                                        style="margin-left: 8px; margin-right: 3px; height: 24px; width: 24px;"> </a>`
                                 filterButton.classList.add('filter-active')
                             })
                             const closeIcon = document.getElementById('close-icon');
@@ -547,10 +547,7 @@ if (!isset($_SESSION['customer_id'])) {
                                                     style="width: 100%; padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center  ;">
                                                 </div>
 
-                                                <!-- <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;">
-                                                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>
-                                                    <?= $curColors[$a]['price'] ?>
-                                                </p> -->
+
 
                                             </label>
                                         </div>
@@ -558,7 +555,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     <?php } ?>
 
                                 </div>
-                                <div style="background: #fff; padding: 15px; border-radius: 0 0 10px 10px;">
+                                <div style="background: #fff; border-radius: 0 0 10px 10px; padding: 15px;">
                                     <div class="d-flex justify-content-between">
                                         <section
                                             class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
@@ -583,7 +580,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     <ul class="row switch-color col-12">
                                         <?php
                                         $totalColors = sizeof($curColors);
-                                        $maxVisibleColors = 4; // Limit the number of visible colors to 4
+                                        $maxVisibleColors = 4; // Limit the number of visible colors
                             
                                         for ($a = 0; $a < $totalColors; $a++) {
                                             if ($a < $maxVisibleColors) {
@@ -604,34 +601,29 @@ if (!isset($_SESSION['customer_id'])) {
                                         if ($totalColors > $maxVisibleColors) {
                                             $remainingColors = $totalColors - $maxVisibleColors;
                                             ?>
-                                            <!-- <li class="more-item">+<?= $remainingColors ?></li> -->
-                                            <li class="more-item">
-                                                +<?= $remainingColors ?>
+                                            <li class="more-item" data-index="<?= $a ?>">
+
+                                                <img id="down-arrow" src="<?= get_url('images/icons') ?>/icon-color-down.png" alt="down"
+                                                    style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">
                                             </li>
-                                        <?php } ?>
+
+                                            <?php
+                                            // Loop to display hidden colors
+                                            for ($a = $maxVisibleColors; $a < $totalColors; $a++) {
+                                                ?>
+                                                <li class="hidden hidden-colors"
+                                                    id="<?= trim($arrProductsSorted[$i]['item_description']) ?>" data-index="<?= $a ?>"
+                                                    data-style-name="<?= trim($arrProductsSorted[$i]['item_description']) ?>"
+                                                    data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
+                                                    data-color-code="<?= trim($curColors[$a]['product_code']) ?>"
+                                                    data-color-price="P<?= $curColors[$a]['price'] ?>"
+                                                    style="<?= ($curColors[$a]['color_swatch'] != '') ? 'background-color: ' . $curColors[$a]['color_swatch'] . ';' : 'background-color: #000;' ?>">
+                                                </li>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
                                     </ul>
-
-                                    <script>
-                                        document.addEventListener('DOMContentLoaded', function () {
-                                            // Get the "more-item" element
-                                            var moreItem = document.querySelector('.more-item');
-
-                                            // Get all the hidden color items
-                                            var hiddenColors = document.querySelectorAll('.hidden');
-
-                                            // Add click event listener to the "more-item" button
-                                            moreItem.addEventListener('click', function () {
-                                                // Loop through all hidden colors and make them visible
-                                                hiddenColors.forEach(function (item) {
-                                                    item.classList.remove('hidden');
-                                                    item.classList.add('visible');
-                                                });
-
-                                                // Optionally, hide the "more-item" button after click
-                                                moreItem.style.display = 'none';
-                                            });
-                                        });
-                                    </script>
 
 
 
@@ -649,8 +641,11 @@ if (!isset($_SESSION['customer_id'])) {
                                         </form>
                                     </div>
                                 </div>
+
+
                             </div>
                         <?php } ?>
+
                     </div>
                 </div>
 
@@ -660,6 +655,8 @@ if (!isset($_SESSION['customer_id'])) {
 
 
     </div>
+
+
     <style>
         .btn-black {
             background: #000000;
@@ -697,32 +694,7 @@ if (!isset($_SESSION['customer_id'])) {
             text-align: center;
         }
 
-        .switch-color li {
-            width: 14px;
-            height: 14px;
-            border-radius: 7px;
-            display: block;
-            padding: 0;
-            margin: 0 3px 5px;
-            position: relative;
-        }
 
-        .switch-color li::before {
-            content: '';
-            display: block;
-            position: absolute;
-            border-color: transparent;
-            width: 18px;
-            height: 18px;
-            display: block;
-            top: -2px;
-            border-radius: 9px;
-            left: -2px;
-        }
-
-        .switch-color li.active::before {
-            border: 1px solid #2a2323;
-        }
 
         #toggleLayout {
             min-width: 25px;
@@ -764,7 +736,6 @@ if (!isset($_SESSION['customer_id'])) {
             line-height: 12px;
             white-space: nowrap;
             font-weight: 500;
-
         }
     </style>
 
@@ -778,6 +749,12 @@ if (!isset($_SESSION['customer_id'])) {
     ?>
 
     <script>
+
+
+
+       
+
+
         let arrProduct = JSON.parse(JSON.stringify(<?= json_encode($arrProduct); ?>));
         let arrCart = JSON.parse(JSON.stringify(<?= json_encode($arrCart); ?>));
         let arrColors = <?= json_encode($getColors) ?>;
@@ -1193,32 +1170,79 @@ if (!isset($_SESSION['customer_id'])) {
         }
         // let timeoutProduct = null;
         const appendProduct = (toShowCount) => {
-            let arrProd = [];
-            arrProd.push(queryProduct[toShowCount]);
+    let arrProd = [];
+    arrProd.push(queryProduct[toShowCount]);
 
-            $.post('modules/store/append-products.php', { arrProd: arrProd }, function (result) {
-                // $('.product-show').append(result.show_product);
-                $(result.show_product).appendTo(".product-show").hide().fadeIn(2000);
-                $(document).find('#slider-product-' + result.item_description).slick({
-                    dots: false,
-                    arrows: false,
-                    swipeToSlide: false,
-                    touchMove: false,
-                    swipe: false
-                }).on('swipe', function (event, slick, direction) {
-                    var newActive = slick.currentSlide;
-                    var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
+    $.post('modules/store/append-products.php', { arrProd: arrProd }, function (result) {
+        // Append the new product and fade it in
+        $(result.show_product).appendTo(".product-show").hide().fadeIn(2000);
 
-                    colorPicker.each(function () {
-                        if ($(this).data('index') == newActive) {
-                            $(this).addClass('active').siblings().removeClass('active')
-                            $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
-                            $(this).parents('.frame-style').find('.product-details h5 span').text($(this).data("color-price"));
+        // Reinitialize slick slider for the new product
+        $(document).find('#slider-product-' + result.item_description).slick({
+            dots: false,
+            arrows: false,
+            swipeToSlide: false,
+            touchMove: false,
+            swipe: false
+        }).on('swipe', function (event, slick, direction) {
+            var newActive = slick.currentSlide;
+            var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
+
+            colorPicker.each(function () {
+                if ($(this).data('index') == newActive) {
+                    $(this).addClass('active').siblings().removeClass('active');
+                    $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
+                    $(this).parents('.frame-style').find('.product-details h5 span').text($(this).data("color-price"));
+                }
+            });
+        });
+
+        // Reattach event listeners for .more-item after appending new content
+        rebindMoreItemEvents();
+    }, 'JSON');
+};
+
+// Function to rebind event listeners for showing hidden colors
+const rebindMoreItemEvents = () => {
+    $(document).find('.more-item').off('click').on('click', function () {
+        const parentCard = $(this).closest('.frame-style');  // Find the parent card
+        const hiddenColors = parentCard.find('.hidden-colors');  // Find hidden color elements in this card
+
+        hiddenColors.each(function () {
+            if ($(this).hasClass('hidden')) {
+                $(this).removeClass('hidden');
+            } else {
+                $(this).addClass('hidden');
+            }
+        });
+    });
+};
+
+// Initial call to attach event listeners on page load
+$(document).ready(function() {
+    rebindMoreItemEvents();
+});
+
+         //switch-colors
+         document.addEventListener('DOMContentLoaded', function () {
+            const moreItems = document.querySelectorAll('.more-item');
+
+            moreItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const parentCard = this.closest('.frame-style');  // Find the parent card
+                    const hiddenColors = parentCard.querySelectorAll('.hidden-colors');  // Find hidden color elements in this card
+
+                    hiddenColors.forEach(function (hiddenItem) {
+                        if (hiddenItem.classList.contains('hidden')) {
+                            hiddenItem.classList.remove('hidden');
+                        } else {
+                            hiddenItem.classList.add('hidden');
                         }
-                    })
-                })
-            }, 'JSON');
-        }
+                    });
+                });
+            });
+        });
+
     </script>
 
 

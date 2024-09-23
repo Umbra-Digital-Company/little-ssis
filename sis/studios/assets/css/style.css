@@ -3176,3 +3176,71 @@ main.customer-layout .wrapper {
   background: #0B5893 !important;
   color: #fff;
 }
+
+.switch-color {
+  display: flex;
+  /* Ensure items are displayed in a row */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  /* Hide overflowing items */
+}
+
+
+/* card switch */
+.switch-color li {
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  display: block;
+  padding: 0;
+  border-radius: 100%;
+  margin: 19px 13px;
+  position: relative;
+}
+
+.switch-color li::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Center the inner circle */
+  border-radius: 100%;
+  border: 2px solid transparent;
+  /* Invisible by default */
+}
+
+.switch-color li.active::before {
+  border: 2px solid #2a2323;
+  /* Border color for the outer circle when active */
+  width: 25px;
+  /* Adjust size for the outer circle */
+  height: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Center the outer circle */
+  border-radius: 100%;
+  /* Keep it circular */
+}
+
+
+.switch-color .hidden {
+  display: none;
+  /* Hide items that are not visible */
+}
+
+.switch-color .more-item {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 16px;
+  color: #333;
+}

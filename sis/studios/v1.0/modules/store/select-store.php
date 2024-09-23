@@ -373,7 +373,7 @@
             top: 2px;
 
 
-            margin: 10px;
+            margin: 19px 14px;
 
             position: relative;
         }
@@ -404,30 +404,6 @@
         }
 
 
-        .switch-color li::before {
-            content: '';
-            display: block;
-            position: absolute;
-            border-color: transparent;
-            width: 20px;
-            height: 20px;
-            display: block;
-            top: -2px;
-            border-radius: 9px;
-            left: -2px;
-
-        }
-
-        .switch-color li.active::before {
-            width: 24px;
-            height: 24px;
-            padding: 10px;
-            top: -2px;
-            left: -2px;
-            border-radius: 25px;
-            border: 2px solid #342C29;
-
-        }
 
 
 

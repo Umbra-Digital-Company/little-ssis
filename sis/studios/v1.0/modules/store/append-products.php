@@ -103,13 +103,13 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
                                         <section
                                             class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
                                             <h5>
-                                                <span class=' . trim($curColors[$i]['price'] ) . '</span>
+                                                <span class=' . trim($curColors[$i]['price']) . '</span>
                                             </h5>
                                         </section>
                                     </div>
 
 	            <ul class="row switch-color col-12">';
-				
+
 
 	$totalColors = sizeof($curColors);
 	$maxVisibleColors = 4; // Limit the number of visible colors to 4
@@ -122,8 +122,25 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 
 	if ($totalColors > $maxVisibleColors) {
 		$remainingColors = $totalColors - $maxVisibleColors;
-		$showProduct .= '<li class="more-item">+' . $remainingColors . ' </li>'; // down arrow
+
+		// Show the remaining colors with a "more" button
+		$showProduct .= '<li class="more-item" data-index="' . $a . '">+' . $remainingColors . '  </li>';
+
+		// Loop to display hidden colors
+		for ($a = $maxVisibleColors; $a < $totalColors; $a++) {
+			$showProduct .= '
+				<li class="hidden hidden-colors" 
+					id="' . trim($arrProductsSorted[$i]['item_description']) . '" 
+					data-index="' . $a . '" 
+					data-style-name="' . trim($arrProductsSorted[$i]['item_description']) . '" 
+					data-color-name="' . trimColor($curColors[$a]['color']) . '" 
+					data-color-code="' . trim($curColors[$a]['product_code']) . '" 
+					data-color-price="P' . $curColors[$a]['price'] . '" 
+					style="' . (($curColors[$a]['color_swatch'] != '') ? 'background-color: ' . $curColors[$a]['color_swatch'] : 'background-color: #000;') . ';">
+				</li>';
+		}
 	}
+
 
 	$showProduct .= '</ul>    
 	            <div class="row d-flex justify-content-center mt-3">
@@ -134,7 +151,8 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 	                </form>
 	            </div>                                
 	        </div>
-	    </div>';
+	    </div>	
+		';
 }
 
 echo json_encode(['show_product' => $showProduct, 'item_description' => str_replace(' ', '_', trim($arrProductsSorted[0]['item_description']))]);
