@@ -1703,7 +1703,47 @@ $(document).ready(function () {
     });
 
 
-	
+	// ========================== More Colors Shop pages
+	document.addEventListener('DOMContentLoaded', function () {
+		const moreItems = document.querySelectorAll('.more-item');
+
+		moreItems.forEach(function (item) {
+			item.addEventListener('click', function () {
+				const parentCard = this.closest('.frame-style');  // Find the parent card
+				const hiddenColors = parentCard.querySelectorAll('.hidden-colors');  // Find hidden color elements in this card
+
+				hiddenColors.forEach(function (hiddenItem) {
+					if (hiddenItem.classList.contains('hidden')) {
+						hiddenItem.classList.remove('hidden');
+					} else {
+						hiddenItem.classList.add('hidden');
+					}
+				});
+			});
+		});
+	});
   
+
+	// ============================= Filters
+
+	$(document).ready(function () {
+		const filterActive = " <?= get_url('images/icons') ?>/icon-filter-active.png";
+		const filterClose = " <?= get_url('images/icons') ?>/icon-close-white.png";
+		const filterButton = document.getElementById('btn-filter')
+		filterButton.innerHTML = `<img id="filter-active" src="${filterActive}" alt="Filter-active"
+																																																								style="margin-left: 3px; margin-right: 6px; height: 24px; width: 24px;">Filter 
+																																																								<a id="close-icon" href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>"><img id="btn-icon-close" src="${filterClose}" alt="close"
+																																																								style="margin-left: 8px; margin-right: 3px; height: 24px; width: 24px;"> </a>`
+		filterButton.classList.add('filter-active')
+	})
+	const closeIcon = document.getElementById('close-icon');
+	closeIcon.addEventListener('click', function (event) {
+		filterButton.removeAttribute('id');
+		event.preventDefault(); // Prevent the default link behavior
+		// Your custom close action, e.g., remove the 'filter-active' class
+		filterButton.classList.remove('filter-active');
+
+		filterButton.innerHTML = 'Filter'; // Reset the button content or perform other actions
+	});
 
 });
