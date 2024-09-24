@@ -79,58 +79,54 @@ switch ( $page ) {
 
 ?>
 
-<style type="text/css">
+<style>
 	
-	main {
-		top: 100px;
-		border-radius: 0;
-    	background: #fff;
+	.sidebar-top .container {
+		max-width: 100% !important;
 	}
-	body header {
-		position: relative;		
-    	padding: 60px 10px !important;
-	}
-	#ssis_sidebar {
-		background-color: #ffffff;
-	}
-	.form-control:focus ~ label.placeholder, .form-control:valid ~ label.placeholder {
-		background-color: #ffffff;
-	}	
-	p {
-		font-family: SharpGroteskSemiBold,serif;
+
+	/* .doctor-hover:hover {
+		
+	} */
+	#ssis_sidebar #ssis_menu li .doctor-hover:hover {
+		background-color: #E2E9F3;
 	}
 
 </style>
 
 <div id="ssis_sidebar">
-	<div class="sidebar-top d-flex align-items-center no-gutters">
+	<div class="sidebar-top d-flex align-items-center justify-content-end no-gutters pb-3">
 		<div class="col">
-			<div class="d-flex align-items-center">
-				<a href="#" id="hide_sidebar">
-					<img src="<?= get_url('images/icons') ?>/icon-left-arrow.png" alt="left arrow" class="img-fluid">
-				</a>
+
+			<div class="d-flex align-items-center justify-content-between">
+				<p style="font-size: 14px; color: #B7B7B7;"> SSIS v 4.0.0 </p>
+
 				<p class="h2 mb-0 ml-4"><?= (isset($_SESSION['name'])) ? ucwords( $_SESSION['name'] ) : '' ?></p>
+				<a href="#" id="hide_sidebar">
+					<img src="<?= get_url('images/icons') ?>/icon-close.png" alt="left arrow" class="img-fluid">
+				</a>
 			</div>
 		</div>
-		<img src="<?= get_url('images/logo') ?>/logo-full-dark.png" alt="left arrow" class="img-fluid logo">
 	</div>
-	<nav id="ssis_menu" class="mt-4">
 
-		<ul class="nav-list nav flex-column mb-4">
-			<li class="text-secondary text-uppercase mb-3 font-bold"><?= $arrTranslate['Pages'] ?></li>
+	<nav id="ssis_menu">
+
+		<ul class="nav-list nav flex-column mb-2">
+			<li class="text-secondary text-uppercase mb-3 font-bold"></li>
 			<li>
 				<a class="d-flex align-items-center" href="./?page=store-home">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-home.png);"></canvas>
+
 					<span class="h3 ml-3"><?= $arrTranslate['Home'] ?></span>
 				</a>
 			</li>
-			
-				<li>
-					<a class="d-flex align-items-center" href="/face/dispatch-face">
-						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
-						<span class="h3 ml-3"><?= $arrTranslate['Dispatch'] ?></span>
-					</a>
-				</li>
+
+			<li>
+				<a class="d-flex align-items-center" href="/face/dispatch-face">
+					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-dispatch.png);"></canvas>
+					<span class="h3 ml-3"><?= $arrTranslate['Dispatch'] ?></span>
+				</a>
+			</li>
 			
 			<?php if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
@@ -143,10 +139,10 @@ switch ( $page ) {
 		</ul>
 
 		<ul class="nav-list nav flex-column">
-			<li class="text-secondary text-uppercase mb-3 font-bold"><?= $arrTranslate['Account'] ?></li>
+			<li class="text-secondary text-uppercase mb-2 font-bold"></li>
 			<li>
-				<a class="d-flex align-items-center" href="/sis/face/func/logout.php?path_loc=v1.0">
-					<canvas class="bg-danger" style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
+				<a class="d-flex align-items-center mb-4" href="/sis/face/func/logout.php?path_loc=v1.0">
+					<canvas style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
 					<span class="h3 ml-3"><?= $arrTranslate['Logout'] ?></span>
 				</a>
 			</li>
@@ -155,44 +151,74 @@ switch ( $page ) {
 	</nav>
 </div>
 
-<div id="admin-bar" class="d-flex align-items-center <?= ( $page == 'rate-us' ) ? 'justify-content-center' : 'justify-content-between' ?>" style="box-shadow: none;">
+<div id="admin-bar" 
+	class="d-flex align-items-center <?= ( $page == 'rate-us' ) ? 'justify-content-center' : 'justify-content-between' ?>" 
+	style="box-shadow: none;">
 
-	<?php if ( isset($_SESSION['customer_id']) ) : ?>
+	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES') : ?>
 
-		<?php if ( $page != 'rate-us' ) : ?>
+		<?php if ($page != 'rate-us'): ?>
 			<div class="home">
-				<a href="#" class="prevent" id="exit_customer_page"><img src="<?= get_url('images/icons') ?>/icon-home-primary.png" alt="exit" class="img-fluid"></a>
+				<a href="#" class="prevent" id="exit_customer_page"><img
+						src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
-		<div class="account-name">
-			<p class="small m-0"><?= $arrTranslate['Step '.$step] ?></p>
-		</div>
-		<?php if ( $page != 'rate-us' ) : ?>
-			<div class="language">
-				<img src="<?= get_url('images/icons') ?>/icon-language-primary.png" alt="language" class="img-fluid">
-				<div class="lang-opt">
-					<a href="/sis/face/func/process/switch_language.php?language_setting=us">English</a>
-					<a href="/sis/face/func/process/switch_language.php?language_setting=vn">Vietnamese</a>
-				</div>
-			</div>
-		<?php endif ?>
-	<?php else : ?>
 
-		<div class="account">
-			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-account-assistant.png" alt="account" class="img-fluid"></a>
+		<?php if ($page == 'contact-tracing-form'): ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Account") ?></p>
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
+		<?php endif ?>
+
+		<?php if ($page == 'transactions'): ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Transactions") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
+		<?php endif ?>
+
+		<?php if ($page == 'order-confirmation'): ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
+					<?= strtoupper("Order Confirmation") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
+		<?php endif ?>
+
+		<?php if ($page == 'select-store' || strpos($page, 'select') !== false): ?>
+			<div class="account-name">
+				<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
+				<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286"
+					style=" max-width: 120px;">
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
+		<?php endif ?>
+
+	<?php else: ?>
+
+		<div class="">
+
 		</div>
+		
 		<div class="account-name">
 			<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
-			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" style=" max-width: 120px;">
+			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" 
+				style=" max-width: 120px;">	
 		</div>
-		<div class="language">
-			<img src="<?= get_url('images/icons') ?>/icon-language-primary.png" alt="language" class="img-fluid">
-			<div class="lang-opt">
-				<a href="/sis/face/func/process/switch_language.php?language_setting=us">English</a>
-				<a href="/sis/face/func/process/switch_language.php?language_setting=vn">Vietnamese</a>
-			</div>
+		<div class="account">
+			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
 		</div>
-
 	<?php endif ?>
 
 </div>
@@ -258,18 +284,23 @@ switch ( $page ) {
 					
 					<?php if(strtolower($custom_title) == 'sunnies studios') { ?>
 
-						<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" style=" max-width: 120px;">						
+						<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" 
+							style=" max-width: 120px;">						
 
 					<?php } else { ?>						
 
-						<h1 class="h1 mt-2"><?= $custom_title ?></strong></h1>
+						<h1 class="h1 mt-2">
+							<?= isset($arrTranslate[$custom_title]) ? $arrTranslate[$custom_title] : $custom_title ?></strong>
+						</h1>
 
 					<?php } ?>
 
 				<?php } else { ?>
 
 					<p class="text-uppercase font-bold">thank you</p>
-					<h1 class="h1 mt-2"><?= $custom_title ?></h1>
+					<h1 class="h1 mt-2">
+						<?= isset($arrTranslate[$custom_title]) ? $arrTranslate[$custom_title] : $custom_title ?>
+					</h1>
 
 				<?php } ?>
 
@@ -283,13 +314,15 @@ switch ( $page ) {
 				<?php if ( $_SESSION['userlvl'] == '2' ) : ?>
 
 					<a href="./?page=store-home" class="<?= ( $page == 'store-home' ) ? 'active' : '' ?>">
-						<img src="<?= get_url('images/icons') ?>/icon-home<?= ( $page == 'store-home' ) ? '-primary' : '' ?>.png" alt="Dashboard" class="img-fluid">
+						<img src="<?= get_url('images/icons') ?>/icon-home<?= ( $page == 'store-home' ) ? '-primary' : '' ?>.png" 
+							alt="Dashboard" class="img-fluid">
 					</a>
 					<a href="./?page=doctorque" class="<?= ( $page == 'doctorque' ) ? 'active' : '' ?>">
 						<img src="<?= get_url('images/icons') ?>/icon-pending-list<?= ( $page == 'doctorque' ) ? '-primary' : '' ?>.png" alt="Doctor's Queue" class="img-fluid">
 					</a>
 					<a href="./?page=ordermanagement" class="<?= ( $page == 'ordermanagement' || $page == 'overview_details' ) ? 'active' : '' ?>">
-						<img src="<?= get_url('images/icons') ?>/icon-order-management<?= ( $page == 'ordermanagement' || $page == 'overview_details' ) ? '-primary' : '' ?>.png" alt="Order Management" class="img-fluid">
+						<img src="<?= get_url('images/icons') ?>/icon-order-management<?= ( $page == 'ordermanagement' || $page == 'overview_details' ) ? '-primary' : '' ?>.png" 
+							alt="Order Management" class="img-fluid">
 					</a>
 
 				<?php elseif ( $_SESSION['userlvl'] == '1' ) : ?>
@@ -322,23 +355,23 @@ switch ( $page ) {
 	</div>
 </header>
 
-<main class="<?= ( isset($_SESSION['customer_page']) ) ? 'customer-layout ' . $page : '' ?>">
+<main class="<?= ( isset($_SESSION['customer_page']) ) ? 'customer-layout main-customer' . $page : '' ?>">
 
 	<?php if ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress']) ) : ?>
 
 		<?php
 
-			$progress_class = "";
+		$progress_class = "";
 
-			if ( isset($_SESSION['customer_id']) ) {
-				$progress_class = 'step-1';
-			}
-			if ( ( $page == 'pickup-location' && isset($_SESSION['prescription']) ) OR ( isset($_SESSION['order_confirmation']) && isset($_SESSION['prescription']) ) ) {
-				$progress_class = 'step-2';
-			}
-			if ( $page == 'order-confirmation' && isset($_SESSION['order_confirmation']) ) {
-				$progress_class = 'step-3';
-			}
+		if (isset($_SESSION['customer_id']) ) {
+			$progress_class = 'step-1';
+		}
+		if (($page == 'pickup-location' && isset($_SESSION['prescription']) ) or ( isset($_SESSION['order_confirmation']) && isset($_SESSION['prescription']))) {
+			$progress_class = 'step-2';
+		}
+		if ($page == 'order-confirmation' && isset($_SESSION['order_confirmation'])) {
+			$progress_class = 'step-3';
+		}
 
 		?>
 		
@@ -362,7 +395,7 @@ switch ( $page ) {
 
 			?>
 
-			<div class="step-progress">
+			<!-- <div class="step-progress">
 				<div class="d-flex justify-content-center">
 					<?php if(!isset($_SESSION['login_set'])){ ?>
 						<a href="./?page=contact-tracing-form" class="<?= ( isset($_SESSION['customer_id']) || $page == 'contact-tracing-form' ) ? 'bg-success-lighten' : '' ?>">
@@ -377,9 +410,9 @@ switch ( $page ) {
 					</a>
 					<span class="progress-bar <?= $progress_class ?>"></span>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="wrapper">
+			<div class="wrapper-2">
 				<?php include("layout.php");?>
 			</div>
 
@@ -421,7 +454,8 @@ switch ( $page ) {
 					<img src="<?= get_url('images/icons') ?>/icon-lens-theme-doctor.png" alt="Lenses" class="img-fluid">
 				</a>
 				<a href="#" class="prevent <?= ( $page == 'select-upgrades' ) ? 'bg-doctor-lighten' : '' ?>">
-					<img src="<?= get_url('images/icons') ?>/icon-upgrade-theme-doctor.png" alt="Upgrades" class="img-fluid">
+					<img src="<?= get_url('images/icons') ?>/icon-upgrade-theme-doctor.png" alt="Upgrades" 
+						class="img-fluid">
 				</a>
 				<span class="progress-bar <?= $progress_class ?>"></span>
 			</div>
@@ -458,21 +492,20 @@ switch ( $page ) {
 	</div>
 </div>
 <style>
+	body {
+		background-color: #f0f0f0;
+	}
 
 	body #admin-bar {
-		background-color: #ffffff;
-		border-radius: 0;
-	    -webkit-border-radius: 0;
-	    -moz-border-radius: 0;
-	    -ms-border-radius: 0;
-	    -o-border-radius: 0;
+		background-color: #fff;
+		border-radius: 16px;
 	}
 	#ssis_header {
-        background-color: #e8e8e4;
-    }
+		background-color: #e8e8e4;
+	}
 
 	.btn {
-		border-radius: 10px;
+		border-radius: 28px;
 		width: 100%;
 		height: 45px;
 	}
@@ -480,77 +513,59 @@ switch ( $page ) {
 		background: #000000;
 		color: #ffffff;
 	}
-    .modal-content{
+	.modal-content {
+		max-width: 747px !important;
+		width: 100% !important;
 		border-radius: .5rem;
-    }
-    .modal-header{
-        /*background-color : #F9F3EC !important;*/
-        border-radius: 5px;
-    }
-    .modal-title, .close{        
-        opacity: 1;
-    }
-    .modal-dialog{
-    	max-width: 60%;
 	}
-	#modal-filter .modal-dialog, #modal-signup .modal-dialog{
-    	max-width: 90%;
-	}
-	.modal-body{
-		/*background-color : #F3E9DD !important;*/
-	}
-    .modal-body .details {
-        /* 100% = dialog height, 120px = header + footer */
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    .cart-item {
-    	background-color: #e8e8e4;
-    	border-radius: 15px;
-    }
-    .cart-item .product-title span {
-    	font-size: 12px; 
-    	color: #b3a89b !important;
-    }
-    .cart-item .cart-item-image {
-    	width: 100%;
-    }    
-    .submit{       
-        border-radius:30px;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    @media only screen and (max-width: 992px) {
 
-    	body > .container {
-    		overflow-y: hidden;
-    		height: 100vh;
-    	}
+	.modal-header {
+		padding-top: 20px;
+		height: 72px;
+		align-items: center;
+		border-radius: 5px;
 	}
-    @media only screen and (max-width: 600px) {
 
-    	.cart-item .mt-xs-0 {
-	    	margin-top: 0 !important;
-	    }
-         #modal-signup .modal-dialog, #modal-filter .modal-dialog, .modal-dialog{
-        	width: auto;
-        	max-width: 100%;
-        }
-    }
+	.modal-title,
+	.close {
+		opacity: 1;
+	}
 
-    .color-list div{
-    	cursor: pointer;
-    }
+	.modal-body .details {
+			/* 100% = dialog height, 120px = header + footer */
+			max-height: 300px;
+			overflow-y: auto;
+	}
+	.cart-item {
+		background-color: #e8e8e4;
+		border-radius: 15px;
+	}
+	.cart-item .product-title span {
+		font-size: 12px; 
+		color: #b3a89b !important;
+	}
+	.cart-item .cart-item-image {
+		width: 100%;
+	}    
+	.submit{       
+			border-radius:30px;
+			padding-left: 30px;
+			padding-right: 30px;
+	}
+
+	.color-list div{
+		cursor: pointer;
+	}
     
 </style>
 <div class="modal fade" id="modal-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="height: 94vh;">
 	        <div class="modal-header">
-	            <h5 class="modal-title">View Cart</h5>
-	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	            <span aria-hidden="true">&times;</span>
-	            </button>
+						<h5 class="modal-title"><?= $arrTranslate['View Cart'] ?></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 	        </div>
 	        <div class="modal-body" style="overflow-y:auto;">				
 				<div id="item_cart"></div>				
@@ -559,84 +574,10 @@ switch ( $page ) {
 	</div>
 </div>
 
-<style type="text/css">
-	.my-collection,
-	.my-shapes,
-	.my-color {
-		text-align: center;
-		white-space: break-spaces;
-		font-size: 8px;
-	}
-	.btn-no-filter {
-		border: 1px solid #ccc;
-	}
-	.btn-filter-selected {
-		border: 2px solid #000;
-	}
-	.btn-brown {
-		background-color: #8c674c;
-		color: #fff;
-	}
-	.btn-tort {
-		background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/tort_color_group_48x.png?v=1599802863);
-		background-repeat: no-repeat;
-		background-size: cover;
-		color: #fff;
-	}
-	.btn-white {
-		border: 2px solid #000;
-	}
-	.btn-pink {
-		background-color: #e8a29c;
-		color: #fff;
-	}
-	.btn-blue {
-		background-color: #4479b1;
-		color: #fff;
-	}
-	.btn-green {
-		background-color: #698a49;
-		color: #fff;
-	}
-	.btn-yellow {
-		background-color: #eacf63;
-		color: #fff;
-	}
-	.btn-gold {
-		background-color: gold;
-		color: #000;
-	}
-	.btn-silver {
-		background-color: silver;
-		color: #fff;
-	}
-	.btn-clear {
-		border: 2px solid #000;
-	}
-	.btn-red {
-		background-color: #bf3e3e;
-		color: #fff;
-	}
-	.btn-grey {
-		background-color: #b2b2b5;
-		color: #fff;
-	}
-	.btn-rose_gold {
-		background-color: #ff9a78;
-		color: #fff;
-	}
-	.btn-purple {
-		background-color: #be92c4;
-		color: #fff;
-	}
-	.btn-nude {
-		background-color: #e2ceae;
-		color: #fff;
-	}
 </style>
 <div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-width: 100%; margin: 0;">
-        <div class="modal-content" style="height: 100vh; border-radius: 0; padding: 15px;">
+	<div class="modal-dialog" role="document" style="max-width: 100%; width: 590px; ">
+		<div class="modal-content filter" style="height: 95vh; border-radius: 16px; margin: 15px auto ; ">
 	        <div class="modal-header">
 	            <h5 class="modal-title">Filter</h5>
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">

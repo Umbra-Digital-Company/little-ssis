@@ -158,11 +158,40 @@ $(document).ready(function () {
 				}
 			}
 
+			const toggleButtonState = () => {
+				const password = $("#password_confirmation").val();
+				$("#yes_button").prop("disabled", password.trim() === "");
+			  };
+
+
+			  // Initial call to set the correct state
+			toggleButtonState();
+
+			// Listen for changes in the password field
+			$("#password_confirmation").on("keyup", function (e) {
+				if (e.keyCode == 13) {
+				confirmAssistant("SSIS");
+				}
+				toggleButtonState(); // Update button state on input change
+			});
+				
+
 			$(".form-control").on('keyup', function (e) {
 				if (e.keyCode == 13) {
 					confirmAssistant('SSIS');
 				};
 			});
+
+			// Listen for "Yes" button click
+			$("#yes_button").on("click", function () {
+				confirmAssistant("SSIS");
+				});
+
+				$("#no_button").on("click", function () {
+					$(".ssis-overlay").hide();
+					$(".modal-backdrop").remove(); // Ensure the backdrop is removed
+					$(".home.doctor-home").show(); // Ensure the exit button is shown
+				});
 
 			$("#check_password").on('click', function () {
 				confirmAssistant('SSIS');
