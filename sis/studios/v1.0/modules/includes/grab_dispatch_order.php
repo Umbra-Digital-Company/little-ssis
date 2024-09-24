@@ -65,15 +65,43 @@ $arrCustomer = array();
 
 
 
+$itemsPerPage = isset($_GET['itemsPerPage']) && is_numeric($_GET['itemsPerPage']) ? (int)$_GET['itemsPerPage'] : 10;
+$pagination = isset($_GET['pagination']) && is_numeric($_GET['pagination']) ? (int)$_GET['pagination'] : 1;
+$offset = ($pagination - 1) * $itemsPerPage;
 
-
-
-
-
-
+// echo 'Current page: ' . $pagination;
+// echo 'Items per page: ' . $itemsPerPage;
 
 // ! Testing:: Get the search term from the request
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+$searchTerm = '%' . $searchTerm . '%';
+
+
+
+$countQuery = '
+    SELECT COUNT(*) AS total
+    FROM profiles_info p
+    INNER JOIN
+        orders_sunnies_studios os ON os.profile_id = p.profile_id
+    LEFT JOIN
+        poll_51_studios_new pr ON pr.product_code = os.product_code
+    WHERE
+        CONCAT(p.first_name, " ", p.last_name) LIKE ? OR pr.item_name LIKE ? OR os.order_id LIKE ?
+';
+
+
+$stmt = mysqli_stmt_init($conn);
+mysqli_stmt_prepare($stmt, $countQuery);
+mysqli_stmt_bind_param($stmt, 'sss', $searchTerm, $searchTerm, $searchTerm);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $totalResults);
+mysqli_stmt_fetch($stmt);
+mysqli_stmt_close($stmt);
+
+
+$totalPages = ceil($totalResults / $itemsPerPage);
+
+
 
 
 // ! Testing:: Query for Dispatch
@@ -92,6 +120,9 @@ $query = '
         poll_51_studios_new pr ON pr.product_code = os.product_code
     WHERE
         CONCAT(p.first_name, " ", p.last_name) LIKE ? OR pr.item_name LIKE ? OR os.order_id LIKE ?
+    ORDER BY
+        os.status_date ASC
+    LIMIT ? OFFSET ?
 ';
 
 // ! Testing:: Parameters for Customer Data Retrieval
@@ -104,16 +135,13 @@ $grabParams = array(
 );
 
 
-// ! Testing:: Prepare the search term for SQL
-$searchTerm = '%' . $searchTerm . '%';
-
-
 $stmt = mysqli_stmt_init($conn);
+
 if (mysqli_stmt_prepare($stmt, $query)) {
-    mysqli_stmt_bind_param($stmt, 'sss', $searchTerm, $searchTerm, $searchTerm);
+
+    mysqli_stmt_bind_param($stmt, 'sssii', $searchTerm, $searchTerm, $searchTerm, $itemsPerPage, $offset);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5);
-
     while (mysqli_stmt_fetch($stmt)) {
 
         $tempArray = array();

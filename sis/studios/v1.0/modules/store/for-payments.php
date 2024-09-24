@@ -205,6 +205,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			font-size: 18px;
 			font-weight: 700;
 			color: #342C29;
+			text-decoration: underline;
 		}
 
 		.table-date {
@@ -238,8 +239,6 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			font-weight: 400;
 			color: #919191;
 		}
-
-
 	</style>
 
 	<div class="orders-management">
@@ -265,24 +264,30 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 				<div class="d-flex justify-content-between mb-4 mt-4" style="color: #342C29; font-size: 18px; font-weight: 400;">
 
-				<span style="color: #342C29; font-size: 18px; font-weight: 400;">Total Orders 
-					<span style="margin-left: 5px; color: #342C29; font-size: 18px; font-weight: 700;">
-					<?= count($arrForPayments)?>
-				</span> </span>
-				<div  style="color: #342C29; font-size: 18px; font-weight: 400;">
-					Page 1 of 32
-				</div>
+					<span style="color: #342C29; font-size: 18px; font-weight: 400;">Total Orders
+						<span style="margin-left: 5px; color: #342C29; font-size: 18px; font-weight: 700;">
+							<?= count($arrForPayments) ?>
+						</span> </span>
+					<div style="color: #342C29; font-size: 18px; font-weight: 400;">
+						Page 1 of 32
+					</div>
+
+					<?php if (!empty($arrCustomer)): ?>
+						<select class="pagination-select" onchange="location = this.value;">
+							<?php for ($i = 1; $i <= $totalPages; $i++): ?>
+								<option value="?page=transactions&pagination=<?= $i ?>" <?= $i == $pagination ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
+							<?php endfor; ?>
+						</select>
+					<?php endif; ?>
 				</div>
 
 				<div class="table-responsive ">
 					<table class="table-default">
 						<thead>
 							<tr>
-
 								<th nowrap style="width: 45%; ">Customer Name & Order ID</th>
 								<th nowrap style="width: 42%;">Item & PO Number</th>
 								<th>Price</th>
-
 							</tr>
 						</thead>
 
@@ -293,10 +298,10 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 
 						<tbody>
-						
+
 							<?php for ($i = 0; $i < count($arrForPayments); $i++) { ?>
 
-								<tr nowrap >
+								<tr nowrap>
 
 									<!-- <td><?= $i + 1 ?></td> -->
 									<td>
@@ -309,9 +314,10 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 													<?= ucwords(strtolower($arrForPayments[$i]['first_name'] . ' ' . $arrForPayments[$i]['last_name'])) ?>
 
 												</span>
-												<span
-													class="table-order-id"><?= $arrForPayments[$i]['orders_specs_id'] ?></span>
+
 											</div>
+											<span
+												class="table-order-id col-12"><?= $arrForPayments[$i]['orders_specs_id'] ?></span>
 
 
 
@@ -323,40 +329,42 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 											<div class="col-12" style="padding-bottom: 30px"></div>
 											<div class="col-12 ">
 												<span class="table-item-name"><?= $arrForPayments[$i]['item_description'] ?> <?= $arrForPayments[$i]['product_code'] ?>
-													
+
 												</span>
 
 											</div>
-												<span class=" col-12 table-po-number"><?= $arrForPayments[$i]['po_number'] ?>
+											<span class=" col-12 table-po-number"><?= $arrForPayments[$i]['po_number'] ?>
 											</span>
 										</div>
 									</td>
 
-									<td> 
+									<td>
+										<div class="col-12"></div>
 										<span class="table-price"><?= number_format($arrForPayments[$i]['price'], 2) ?> </span>
 									</td>
 
 								</tr>
-								
-					</div>
-					
-				<?php } ?>
 
-				
-				</tbody>
-				</table>
+				</div>
+
+			<?php } ?>
+
+
+			</tbody>
+			</table>
 			</div>
 		</div>
 	</div>
 
 	</div>
 	<script>
-		$('#date-from').change(function () {
+		$('#date-from').change(function() {
 			searchDate();
 		});
-		$('#date-to').change(function () {
+		$('#date-to').change(function() {
 			searchDate();
 		});
+
 		function searchDate() {
 			window.location = '?page=transactions&date=' + $('#date-from').val() + '|' + $('#date-to').val();
 		}
