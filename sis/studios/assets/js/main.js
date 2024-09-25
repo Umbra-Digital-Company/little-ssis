@@ -1703,26 +1703,7 @@ $(document).ready(function () {
     });
 
 
-	// ========================== More Colors Shop pages
-	document.addEventListener('DOMContentLoaded', function () {
-		const moreItems = document.querySelectorAll('.more-item');
-
-		moreItems.forEach(function (item) {
-			item.addEventListener('click', function () {
-				const parentCard = this.closest('.frame-style');  // Find the parent card
-				const hiddenColors = parentCard.querySelectorAll('.hidden-colors');  // Find hidden color elements in this card
-
-				hiddenColors.forEach(function (hiddenItem) {
-					if (hiddenItem.classList.contains('hidden')) {
-						hiddenItem.classList.remove('hidden');
-					} else {
-						hiddenItem.classList.add('hidden');
-					}
-				});
-			});
-		});
-	});
-  
+	
 
 	// ============================= Filters
 

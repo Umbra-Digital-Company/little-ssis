@@ -124,7 +124,7 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 		$remainingColors = $totalColors - $maxVisibleColors;
 
 		// Show the remaining colors with a "more" button
-		$showProduct .= '<li class="more-item" data-index="' . $a . '">+' . $remainingColors . '  </li>';
+		$showProduct .= '<li class="more-item" data-index="' . $a . '"></li>';
 
 		// Loop to display hidden colors
 		for ($a = $maxVisibleColors; $a < $totalColors; $a++) {
