@@ -535,7 +535,7 @@ if (!isset($_SESSION['customer_id'])) {
                                 foreach ($curColors as $key => $value) {
                                     $a = $key;
                                     ?>
-                                    <li class="visible color-swatch" data-index="<?= $a ?>"
+                                    <li class="visible color-swatch " data-index="<?= $a ?>"
                                         data-style-name="<?= trim($arrProductDetails[0]['item_description']) ?>"
                                         data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
                                         data-color-code="<?= trim($curColors[$a]['product_code']) ?>"
@@ -583,7 +583,7 @@ if (!isset($_SESSION['customer_id'])) {
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center mr-4">
                                     <div class="d-flex justify-content-center" style="width: 50px;">
-                                        <button id="btn-decrement" class="btn btn-counts minus_count_decrement"
+                                        <button type="button" id="btn-decrement" class="btn btn-counts minus_count_decrement"
                                             style="height: 40px; width: 48px;">
                                             <img src="<?= get_url('images/icons') ?>/icon-decrement.png" alt="minus"
                                                 style="height: 20px; width: 20px;">
@@ -595,7 +595,7 @@ if (!isset($_SESSION['customer_id'])) {
                                         readonly>
 
                                     <div class="d-flex justify-content-center" style="width: 50px;">
-                                        <button id="btn-increment" class="btn btn-counts add_count_increment"
+                                        <button type="button" id="btn-increment" class="btn btn-counts add_count_increment"
                                             style="height: 40px; width: 48px;">
                                             <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="add"
                                                 style="height: 20px; width: 20px;">
@@ -886,10 +886,10 @@ if (!isset($_SESSION['customer_id'])) {
                                                         background-size: 25px;
                                                         background-position: center;
                                                     } */
-
+/* 
         #toggleLayout.false {
             background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-        }
+        } */
 
 
         .product-details {
@@ -917,8 +917,6 @@ if (!isset($_SESSION['customer_id'])) {
             font-weight: 400;
             color: #919191;
         }
-
-
 
         .product-details p {
             font-size: 12px;
@@ -1174,7 +1172,7 @@ if (!isset($_SESSION['customer_id'])) {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 $(this).parent().parent().find('.count_num').val(parseInt(current_value) + 1);
             });
-            $(this).on('click', '.minus_count_decrement', function () {
+            $(this).on('click', '.minus_count_decrement', function () {  
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 1) {
                     $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);

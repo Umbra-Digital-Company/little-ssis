@@ -235,7 +235,7 @@ body * {
 
 body {
   background: #f0f0f0;
-  min-width: 610px;
+
 }
 
 #ssis_sidebar {
@@ -389,7 +389,7 @@ body {
 
 body #admin-bar {
   margin: 0 auto;
-  width: 100%;
+  
   background-color: #0b5893;
   position: fixed;
   max-width: 575px;

@@ -78,7 +78,7 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 
 		$showProduct .= '<div class="image-wrapper" style="width: 100%; padding-bottom: 75%; background-color: #f1f1f1; background-image: url(' . $curImageURL . '); background-repeat: no-repeat; background-size: 80%; background-position: center;"></div>
 
-	                    <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;">₱' . $curColors[$a]['price'] . '</p>
+	                    
 
 	                </label>
 	            </div>';
@@ -103,7 +103,7 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
                                         <section
                                             class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
                                             <h5>
-                                                <span class=' . trim($curColors[$i]['price']) . '</span>
+                                                <span >P '  . trim($curColors[0]['price']) . '</span>
                                             </h5>
                                         </section>
                                     </div>
