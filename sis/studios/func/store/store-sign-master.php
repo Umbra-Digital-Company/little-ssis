@@ -23,7 +23,7 @@ if ($valid) {
 	$username = $_POST['username'];
 	$password = $_POST['month'] . $_POST['day'] . $_POST['year'];
 
-	// Clean up phone number
+	// Clean up phone number mke it 1 line
 	$phone_number = str_replace(['+', '-', ' '], '', trim($username));
 	$phone_number = ltrim($phone_number, "0");
 	$phone_number = trim($_POST['country_codes_login']) . $phone_number;
