@@ -175,7 +175,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 							<a href="modules/store/auto_guest.php">
 							<button class="btn btn-primary d-flex align-items-center justify-content-center">
 								Start
-								<img src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid ml-2" style="max-height: 20px;">
+								<img src="<?= get_url('images/icons') ?>/icon-arrow-right.png" alt="exit" class="img-fluid ml-2" style="max-height: 20px;">
 							</button>
 							</a>
 						</div>

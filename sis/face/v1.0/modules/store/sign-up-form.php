@@ -453,7 +453,7 @@ if ( !isset($_SESSION['customer_id']) ) {
 	</div>
 <script>
 	let arrVietnam = <?= json_encode($arrVietnam); ?>;
-	let user_type = <?= $_SESSION['store_code']; ?>;
+	let user_type = <?= isset($_SESSION['store_code']); ?>;
 $(document).ready(function(){
 	$("input[type=radio]").click(function(){
 		if($(this).attr('value') == 'yes'){

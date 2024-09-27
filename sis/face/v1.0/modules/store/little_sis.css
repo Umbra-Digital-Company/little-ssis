@@ -37,8 +37,9 @@
   /** SELECT STORE **/
 
   .page-select-store .packages-list {
-    overflow-x: hidden;
-    height: auto !important;
+    overflow: hidden;
+    overflow-y: scroll;
+  
   }
 
   .page-select-store .packages-list .section-frames,

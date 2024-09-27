@@ -156,7 +156,6 @@ switch ( $page ) {
 	style="box-shadow: none;">
 
 	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES') : ?>
-
 		<?php if ($page != 'rate-us'): ?>
 			<div class="home">
 				<a href="#" class="prevent" id="exit_customer_page"><img
@@ -194,16 +193,7 @@ switch ( $page ) {
 			</div>
 		<?php endif ?>
 
-		<?php if ($page == 'select-store' || strpos($page, 'select') !== false): ?>
-			<div class="account-name">
-				<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
-				<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286"
-					style=" max-width: 120px;">
-			</div>
-			<div class="account">
-				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
-			</div>
-		<?php endif ?>
+
 
 	<?php else: ?>
 
@@ -338,8 +328,6 @@ switch ( $page ) {
 
 					<?php else : ?>
 
-						
-
 					<?php endif ?>				
 
 				<?php else : ?>
@@ -360,7 +348,6 @@ switch ( $page ) {
 	<?php if ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress']) ) : ?>
 
 		<?php
-
 		$progress_class = "";
 
 		if (isset($_SESSION['customer_id']) ) {

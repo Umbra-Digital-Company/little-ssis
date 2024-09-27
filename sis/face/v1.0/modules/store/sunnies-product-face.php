@@ -15,7 +15,7 @@ if(!isset($_SESSION['customer_id'])) {
 </div>
 <?php
 }else{
-
+     
     $subProduct = (isset($_GET['sub-product'])) ? ' AND p.item_name LIKE "%'.mysqli_real_escape_String($conn,$_GET['sub-product']).'%"' : '';
 
     switch($_GET['page']){
@@ -110,8 +110,8 @@ if(!isset($_SESSION['customer_id'])) {
         padding-bottom: 0 !important;
     }*/
     #btn-filter {
-        max-width: 100px;
-        color: #fff;
+        max-width: 111px;
+        color: #956E46;
         height: 40px;
     }
     #cart{
@@ -271,17 +271,50 @@ if(!isset($_SESSION['customer_id'])) {
         main.customer-layout .wrapper {
             overflow-y: none;
         }
+        #form-search {
+                display: flex;
+
+                height: 43px;
+                border: none;
+                width: 100%;
+        }
+
+        #search_frame_filter {
+            flex: 1;
+            /* Take up remaining space */
+            border: none;
+            /* Remove any existing border */
+            border-bottom: 1px solid #ccc;
+            /* Add a bottom border */
+            margin-right: 20px;
+        }
+
+        #search_frame_filter:focus {
+            outline: none;
+        }
+
+
+
+        .search-icon {
+            width: 25px;
+            /* Adjust image size */
+            height: 25px;
+
+            /* Ensure image is block-level */
+        }
     }
   
 </style>
 <div class="packages-list hiding">
     <?php if(isset($_GET['product-detail']) && trim($_GET['product-detail']) != "") { ?>
-        <section class="product-view" id="product-panel" style="height:65vh; overflow: auto;">
+
+        <section class="product-view" id="product-panel">
             <a href="./?page=<?= $_GET['page']?>" class="exit-frame-selection">
                 <div class="d-flex align-items-start mb-3">
                     <img src="/assets/images/icons/icon-left-arrow.png" alt="back" class="img-fluid" title="back to shopping" style="padding-left: 20px;"><p class="mt-2" style="margin-left: 5px;">Back</p>
                 </div>
             </a>
+            
             <form href="#" id="form-add-to-bag">
                 <div class="card">
                     <div class="card-body">
@@ -373,7 +406,7 @@ if(!isset($_SESSION['customer_id'])) {
 
         <section class="product-panel" id="product-panel">
             
-                <div class="d-flex align-items-center mb-3">
+                <!-- <div class="d-flex align-items-center mb-3 mt-5">
                     <a href="./?page=select-store" class="exit-frame-selection"><img src="/assets/images/icons/icon-left-arrow.png" alt="exit" class="img-fluid" style="width: 50px;"></a>
                     <input type="search" name="search_frame" id="search_frame" class="form-control filled search" placeholder="Search" style="margin-left: 20px;" value="<?= (isset($_GET['search']) && $_GET['search'] !='') ? $_GET['search'] : '' ?>">
                     <div id="btn-filter" class="btn btn-secondary mr-4 ml-4">Filter</div>
@@ -383,8 +416,36 @@ if(!isset($_SESSION['customer_id'])) {
                             <span><div class="count" count="<?= $order_count ?>"></div></span>    
                         </div>
                     </div>
+                </div> -->
+
+                <div class="search-container-store d-flex align-items-center mb-4">
+                    <div id="btn-filter" class="btn btn-not-cancel"> <img id="bag-icon"
+                            src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
+                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
+                    <div id="form-search" class="d-flex align-items-center"></div>
+                    <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
+                        style="margin-left: 20px;"
+                        value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
+                    <div id="toggleLayout" style="display: none;"></div>
+
+                    <div class="">
+                        <button id="btn-search" class="btn btn-primary" style="height: 48px; width: 48px">
+                            <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search"
+                                style=" height: 24px; width: 24px;">
+                        </button>
+                    </div>
                 </div>
-                <div class="frame-list" style="height:62vh; overflow: auto;">
+
+                
+                <div class="flex-container mb-3">
+
+                    <button class="btn btn-bag " id="bag-button" disabled>
+                        <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                    </button>
+                </div>
+
+                <div class="frame-list">
 
                     <?php if(isset($_GET['filter']) && $_GET['filter']) { ?>
 
@@ -414,7 +475,7 @@ if(!isset($_SESSION['customer_id'])) {
                                     for($a = 0; $a < sizeOf($curColors); $a++) { 
 
                                 ?> 
-                                <div class="frame-style col-6 mb-3 hide-lazy" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
+                                <div class="frame-style col-6 mb-3" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
                                 
                                     <div class="frame-style__slider">
 
