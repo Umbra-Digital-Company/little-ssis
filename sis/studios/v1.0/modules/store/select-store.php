@@ -408,18 +408,18 @@
 
 
         /* #toggleLayout {
-                                    min-width: 25px;
-                                    min-height: 25px;
-                                    margin: 0 10px 0 15px;
-                                    background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
-                                    background-repeat: no-repeat;
-                                    background-size: 25px;
-                                    background-position: center;
-                                } */
+                                            min-width: 25px;
+                                            min-height: 25px;
+                                            margin: 0 10px 0 15px;
+                                            background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
+                                            background-repeat: no-repeat;
+                                            background-size: 25px;
+                                            background-position: center;
+                                        } */
 
         /* #toggleLayout.false {
-                                    background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-                                } */
+                                            background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
+                                        } */
 
 
         .item-price {
@@ -457,9 +457,6 @@
             font-weight: 500;
 
         }
-
-
-        
     </style>
     <script>
         let arrProduct = JSON.parse(JSON.stringify(<?= json_encode($arrProductMerge); ?>));
@@ -472,7 +469,7 @@
         let arrReadersCount = <?= json_encode($arrReadersCount) ?>;
         let arrFreeItemCount = <?= json_encode($arrFreeItemCount) ?>;
         let arrMerchCount = <?= json_encode($arrMerchCount) ?>;
-
+        let arrMerchSorted = <?= json_encode($arrMerchSorted) ?>;
 
 
         $(document).ready(function () {
@@ -487,13 +484,13 @@
 
                 button.disabled = true;
                 button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
 
             } else {
                 const button = document.getElementById('bag-button');
                 button.disabled = false;
                 button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
 
             }
 
@@ -519,8 +516,26 @@
             $(this).on('click', '.product-option', function () {
                 let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
                 let linkProd = $(this).attr('prod-item-link');
+
                 linkProd = (linkProd != 'frame') ? linkProd : 'store-studios';
-                window.location = "?page=select-" + linkProd + "&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+
+                if (linkProd == 'merch') {
+                    const findItemByProductCode = (productCode) => {
+                        return arrMerchSorted.find(item =>
+                            item.colors.some(color => color.product_code === productCode)
+                        );
+                    }
+
+                    let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
+                    let tempProduct2 = findItemByProductCode($(this).attr('product-code'));
+
+
+                    window.location = "?page=select-merch&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct2.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+
+                } else {
+                    window.location = "?page=select-" + linkProd + "&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+                }
+
             });
 
             $("#cart").click(function () {

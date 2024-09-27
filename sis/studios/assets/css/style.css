@@ -389,7 +389,7 @@ body {
 
 body #admin-bar {
   margin: 0 auto;
-  
+
   background-color: #0b5893;
   position: fixed;
   max-width: 575px;
@@ -3005,7 +3005,7 @@ main.customer-layout .wrapper {
 .page-select-store-studios .container,
 .page-select-antirad .container,
 .page-select-merch .container,
-.page-select-readers  .container,
+.page-select-readers .container,
 .page-select-free-item .container,
 .page-order-confirmation .container {
   height: calc(90vh - 90%);
@@ -3016,36 +3016,40 @@ main.customer-layout .wrapper {
 
 /* filter-modal */
 
-.modal-content{
+.modal-content {
   width: 575px !important;
   max-width: 575px !important;
   width: 100% !important;
   border-radius: 16px;
-  
-  }
-  .modal-header{
+
+}
+
+.modal-header {
   padding-top: 20px;
   height: 72px;
   align-items: center;
-      border-radius: 5px;
-  }
-.left-section{
-      flex: 1;
-  display: flex;
-  }
+  border-radius: 5px;
+}
 
-.right-section{
-      flex: 1;
+.left-section {
+  flex: 1;
+  display: flex;
+}
+
+.right-section {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   height: 16px;
   width: 100%;
-  }
+}
 
-.modal-title, .close {
+.modal-title,
+.close {
   opacity: 1;
 }
+
 .title {
   flex: 3;
   display: flex;
@@ -3056,88 +3060,108 @@ main.customer-layout .wrapper {
   font-family: 'Surt-Bold';
   margin: 0 auto;
 }
-  .close-button{    
+
+.close-button {
   outline: none;
-  background: none; /* Remove default background */
-    border: none; /* Remove default border */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-    cursor: pointer; /* Pointer cursor on hover */    
-      flex: 1;
+  background: none;
+  /* Remove default background */
+  border: none;
+  /* Remove default border */
+  padding: 0;
+  /* Remove default padding */
+  margin: 0;
+  /* Remove default margin */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  flex: 1;
   display: flex;
   align-items: center;
- 
+
   justify-content: flex-end;
-  }
+}
 
 .arrow-visible {
-  display: block; /* Show arrow when class is added */
+  display: block;
+  /* Show arrow when class is added */
   height: 16px;
   width: 16px;
 }
 
 .close-button.hidden {
-  display: none; /* Hide the close button */
+  display: none;
+  /* Hide the close button */
 }
 
-.close-button:focus{    
+.close-button:focus {
   outline: none;
   box-shadow: none;
-  }
+}
 
-.modal-body{
+.modal-body {
   padding: 24px;
   padding-top: 32px;
   scrollbar-width: none;
 }
-  .modal-body .details {
-      /* 100% = dialog height, 120px = header + footer */
-      max-height: 300px;
-      overflow-y: auto;
-  }
-  .cart-item {
-    background-color: #e8e8e4;
-    border-radius: 15px;
-  }
-  .cart-item .product-title span {
-    font-size: 12px; 
-    color: #b3a89b !important;
-  }
-  .cart-item .cart-item-image {
-    width: 100%;
-  }    
-  .submit{       
-      border-radius:30px;
-      padding-left: 30px;
-      padding-right: 30px;
-  }
-  @media only screen and (max-width: 992px) {
 
-    body > .container {
-      /*overflow-y: hidden;*/
-      height: 100vh;
-    }
+.modal-body .details {
+  /* 100% = dialog height, 120px = header + footer */
+  max-height: 300px;
+  overflow-y: auto;
 }
-  @media only screen and (max-width: 600px) {
 
-    .cart-item .mt-xs-0 {
-      margin-top: 0 !important;
-    }
-       #modal-signup .modal-dialog, #modal-filter .modal-dialog, .modal-dialog{
-        width: auto;
-        max-width: 100%;
-      }
+.cart-item {
+  background-color: #e8e8e4;
+  border-radius: 15px;
+}
+
+.cart-item .product-title span {
+  font-size: 12px;
+  color: #b3a89b !important;
+}
+
+.cart-item .cart-item-image {
+  width: 100%;
+}
+
+.submit {
+  border-radius: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media only screen and (max-width: 992px) {
+
+  body>.container {
+    /*overflow-y: hidden;*/
+    height: 100vh;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .cart-item .mt-xs-0 {
+    margin-top: 0 !important;
   }
 
-  .color-list div{
-    cursor: pointer;
+  #modal-signup .modal-dialog,
+  #modal-filter .modal-dialog,
+  .modal-dialog {
+    width: auto;
+    max-width: 100%;
   }
+}
+
+.color-list div {
+  cursor: pointer;
+}
 
 
 
-.my-collection, .my-shapes {
+.my-collection,
+.my-shapes {
   text-transform: capitalize;
 }
+
 .my-collection,
 .my-shapes,
 
@@ -3159,6 +3183,7 @@ main.customer-layout .wrapper {
   height: 48px;
   color: #342C29;
 }
+
 .btn-filter-selected {
   border: 2px solid #DCDCDC;
   background-color: #E2E9F3;
@@ -3249,5 +3274,96 @@ main.customer-layout .wrapper {
 }
 
 .switch-color .more-item.active::before {
-  border: none; /* Remove the border when .more-item is active */
+  border: none;
+  /* Remove the border when .more-item is active */
 }
+
+/* notification toast */
+
+.notification {
+  background-color: #9DE356;
+  height: 48px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  max-width: 575px;
+  width: 100%;
+  margin: 0 auto;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.notification-icon {
+
+  height: 24px;
+  width: 24px;
+}
+
+.notification-message {
+  text-align: center;
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  /* Ensures block-level centering */
+  width: 100%;
+  /* Make it occupy the entire width of the container */
+}
+
+.notification-close {
+  background: transparent;
+  max-width: 30px;
+  max-height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  height: 24px;
+  width: 24px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
+
+.notification.hidden  {
+  animation-name: fadeout;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  
+}
+
+.notification.show  {
+  display: block;
+  /* animation */
+
+  animation-name: slidein;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes slidein {
+  from {
+    transform: translate(-50% , 20px); /* Start from below */
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    transform: translate(-50%, 0); /* End at original position */
+    opacity: 1; /* End fully visible */
+  }
+}
+/* Fade out animation */
+@keyframes fadeout {
+  from {
+    opacity: 1; /* Start fully visible */
+  }
+  to {
+    opacity: 0; /* End invisible */
+  }
+}
+
+/* end notification toast */

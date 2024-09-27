@@ -118,8 +118,8 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         /*.list-item.frame-grid {
-                                                                                                                                                                                                                                            padding-bottom: 0 !important;
-                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                padding-bottom: 0 !important;
+                                                                                                                                                                                                                                                            }*/
         #btn-filter {
             max-width: 111px;
             height: 40px;
@@ -346,108 +346,12 @@ if (!isset($_SESSION['customer_id'])) {
 
 
             $arrProductDetails = array_values(array_filter($arrProduct, function ($item) {
-                return $item['item_description'] === (trim($_GET['style']));
+                return (trim($item['item_description'])) === (trim($_GET['style']));
             }));
 
 
             ?>
             <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;">
-                <!-- <a href="./?page=<?= $_GET['page'] ?>" class="exit-frame-selection">
-                    <div class="d-flex align-items-start mb-3">
-                        <img src="/assets/images/icons/icon-left-arrow.png" alt="back" class="img-fluid"
-                            title="back to shopping" style="padding-left: 20px;">
-                        <p class="mt-2" style="margin-left: 5px;">Back</p>
-                    </div>
-                </a> -->
-
-                <!-- <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex d-flex-m justify-content-between">
-                                <div class="product-top" style="text-align:center;">
-                                   
-                                    <?php
-
-                                    $curStyle = trim($_GET['style']);
-                                    $curColor = str_replace("-gdt", "-g", str_replace("-m", "-mirror", str_replace("-f", "-full", str_replace(" ", "-", trim($_GET['color'])))));
-                                    $curImageURL = $_GET["image"];
-
-                                    if ($curImageURL == '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png') {
-
-                                        $curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/' . $curStyle . '/' . $curColor . '/front.png';
-
-                                    }
-                                    ;
-                                    $curImageURL = (@getimagesize($curImageURL)) ? $curImageURL : '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png';
-
-                                    ?>
-                                    <img src="<?= $curImageURL ?> " class="img-responsive"
-                                        style="width: 100%; max-width: 300px;">
-
-                                    
-
-                                </div>
-
-
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div style="width: 100%;">
-                                  
-                                    <div class="d-flex justify-content-between">
-                                        <section
-                                            class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
-                                            <h4 style="text-transform: capitalize;"><?= $curStyle ?>
-                                            </h4>
-                                            <h4><span class="blk"><?= trimColor($_GET['color']); ?></span> </h4>
-
-                                        </section>
-                                        <section
-                                            class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
-
-                                           
-                                            <h5>
-                                                <span class="item-price">P<?= trim($_GET['price']); ?></span>
-                                            </h5>
-                                        </section>
-                                    </div>
-
-                                    <div class="mt-4">
-                                        <p><?= ($_GET['descr'] != null) ? $_GET["descr"] : 'No description' ?></p>
-                                    </div>
-                                    <div>
-                                        <ul class="row tags-list">
-                                            <?php
-
-                                            // Create array of tags
-                                            $arrTags = explode(',', $_GET['tags']);
-
-                                            // Loop through array
-                                            for ($i = 0; $i < sizeOf($arrTags); $i++) {
-
-                                                // Set current data
-                                                $curTag = $arrTags[$i];
-                                                $curTagClass = str_replace("'", "-", str_replace(" ", "-", trim(strtolower(str_replace("desc::", "", $curTag)))));
-                                                $curTagEdited = trim(strtolower(str_replace("desc::", "", $curTag)));
-
-                                                // Check if "desc" tag
-                                                if (strpos($curTag, 'desc::') !== false) {
-
-                                                    echo '<li class="col-6 tag-icon tag-icon__' . $curTagClass . '">' . $curTagEdited . '</li>';
-
-                                                }
-                                                ;
-
-                                            }
-                                            ;
-
-                                            ?>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
 
                 <form href="#" id="form-add-to-bag">
 
@@ -672,7 +576,7 @@ if (!isset($_SESSION['customer_id'])) {
                             style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
                     </button>
                 </div>
-                <div class="frame-list" style="height:62vh; overflow: auto;">
+                <div class="frame-list" style="height:90vh; overflow: auto;">
 
                     <?php if (isset($_GET['filter']) && $_GET['filter']) { ?>
                         <div class="d-flex justify-content-center mt-2 mb-2">
@@ -835,6 +739,21 @@ if (!isset($_SESSION['customer_id'])) {
         <?php } ?>
 
 
+        <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden "
+            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+
+            <div id="notification" class="notification d-flex align-items-center justify-content-between "
+                style="width: 100%; padding: 0px 10px;">
+
+                <span class="notification-message text-align-center">Item successfully added to bag</span>
+                <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">
+                    <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
+                </button>
+            </div>
+        </div>
+
+
+
     </div>
 
 
@@ -878,18 +797,18 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         /* #toggleLayout {
-                                                        min-width: 25px;
-                                                        min-height: 25px;
-                                                        margin: 0 10px 0 15px;
-                                                        background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
-                                                        background-repeat: no-repeat;
-                                                        background-size: 25px;
-                                                        background-position: center;
-                                                    } */
-/* 
-        #toggleLayout.false {
-            background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-        } */
+                                                                            min-width: 25px;
+                                                                            min-height: 25px;
+                                                                            margin: 0 10px 0 15px;
+                                                                            background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
+                                                                            background-repeat: no-repeat;
+                                                                            background-size: 25px;
+                                                                            background-position: center;
+                                                                        } */
+        /* 
+                            #toggleLayout.false {
+                                background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
+                            } */
 
 
         .product-details {
@@ -1085,6 +1004,11 @@ if (!isset($_SESSION['customer_id'])) {
                     }
                 });//END :: AJAX
             });
+
+
+
+
+
             $(document).on('submit', ".form-quick-add-to-bag", function (e) {
                 e.preventDefault();
                 $.ajax({
@@ -1093,7 +1017,11 @@ if (!isset($_SESSION['customer_id'])) {
                     data: $(this).serialize(),
                     dataType: 'html',
                     success: function (response) {
-
+                        openNotification();
+                        // auto-hide the notification after a few seconds
+                        setTimeout(function () {
+                            closeNotification();
+                        }, 3000); // 3 seconds
                         //location.reload(true);
                     },
                     error: function () {
@@ -1172,7 +1100,7 @@ if (!isset($_SESSION['customer_id'])) {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 $(this).parent().parent().find('.count_num').val(parseInt(current_value) + 1);
             });
-            $(this).on('click', '.minus_count_decrement', function () {  
+            $(this).on('click', '.minus_count_decrement', function () {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 1) {
                     $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);
@@ -1182,15 +1110,26 @@ if (!isset($_SESSION['customer_id'])) {
             var typingTimer;
             var doneTypingInterval = 500;
 
-            $('#search_frame').on('keyup', function () {
-                // clearTimeout(typingTimer);
-                // typingTimer = setTimeout(showAvailableFrame, doneTypingInterval);
-                filter = '';
-                filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $(this).val().trim() != '') ? '&filter=true' : '';
-                setTimeout(() => {
-                    window.location = '?page=select-store-studios' + filter + '&colors=' + arrColors + '&shapes=' + arrShapes + '&collections=' + arrCollections + '&search=' + $(this).val();
-                }, 3000);
+            $('#search_frame').on('keyup', function (e) {
+                if (e.keyCode === 13) {  // Check if Enter key is pressed
+                    performSearch();
+                }
             });
+
+            // Click event for search button
+            $('#btn-search').on('click', function () {
+                performSearch();
+            });
+
+            // Common search function for both events
+            function performSearch() {
+                let filter = '';
+                filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $('#search_frame').val().trim() !== '') ? '&filter=true' : '';
+
+                // Redirect the user to the specified page with filter and search parameters
+                window.location = '?page=select-store-studios' + filter + '&colors=' + arrColors + '&shapes=' + arrShapes + '&collections=' + arrCollections + '&search=' + $('#search_frame').val();
+            }
+
 
             // $('#search_frame').on('keydown', function () {
             //     clearTimeout(typingTimer);
@@ -1299,6 +1238,17 @@ if (!isset($_SESSION['customer_id'])) {
             })
         })
 
+        function closeNotification() {
+            document.getElementById('notification').classList.remove('show');
+            document.getElementById('notification').classList.add('hidden');
+            console.log('closeNotification');
+        }
+
+        function openNotification() {
+            document.getElementById('notification').classList.remove('hidden');
+            document.getElementById('notification').classList.add('show');
+            console.log('closeNotification');
+        }
 
 
         function checkImage(src) {
@@ -1476,13 +1426,13 @@ if (!isset($_SESSION['customer_id'])) {
 
             button.disabled = true;
             button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                                                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                                                                                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
 
         } else {
             const button = document.getElementById('cart');
             button.disabled = false;
             button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                                                                                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
 
         }
 
