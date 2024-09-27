@@ -79,7 +79,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     <div class="d-flex justify-content-between">
                                         <section
                                             class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
-                                            <h4><?= $arrProductsSorted[$i]['item_description'] ?>
+                                            <h4><?= $arrMerchSorted[$i]['item_description'] ?>
                                             </h4>
                                             <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span></h4>
                                         </section>
@@ -91,29 +91,32 @@ if (!isset($_SESSION['customer_id'])) {
                                             </h5>
                                         </section>
                                     </div>
-                                    <ul class="row switch-color p-0" style="margin: 0 -3px;">
+                                  
+                                    <ul class="row switch-color">
                                         <?php
                                         $totalColors = sizeof($curColors);
                                         $maxVisibleColors = 4; // Limit the number of visible colors to 4
+                            
                                         for ($a = 0; $a < $totalColors; $a++) {
                                             if ($a < $maxVisibleColors) {
                                                 // Display the first 4 items
                                                 ?>
-                                                <li class="visible" data-index="<?= $a ?>"
+                                                <li class="<?= $a === 0 ? 'active' : '' ?>  visible" data-index="<?= $a ?>"
                                                     data-style-name="<?= trim(str_replace(" ", "-", strtolower($arrProductsSorted[$i]['item_description']))) ?>"
                                                     data-color-name="<?= trim($curColors[$a]['color']) ?>"
                                                     data-color-code="<?= trim($curColors[$a]['product_code']) ?>"
+                                                    data-color-price="P<?= $curColors[$a]['price'] ?>"
                                                     style="<?= ($curColors[$a]['color_picker'] != '') ? $curColors[$a]['color_picker'] : 'background-color: #000;' ?>">
                                                 </li>
                                                 <?php
                                             }
                                         }
+
                                         // If there are more than 4 colors, add a "+n" button
                                         if ($totalColors > $maxVisibleColors) {
                                             $remainingColors = $totalColors - $maxVisibleColors;
                                             ?>
                                             <li class="more-item">+<?= $remainingColors ?></li>
-
                                         <?php } ?>
                                     </ul>
 
