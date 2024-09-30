@@ -85,6 +85,9 @@ if (!isset($_SESSION['customer_id'])) { ?>
         </div>
     </div>
 
+<?php } elseif (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] !== 'YES') { ?>
+    <?php include "./modules/store/access-denied.php"; ?>
+
 <?php } else { ?>
 
 
@@ -108,6 +111,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
         return $arrExist;
     }
     ?>
+
 
 
 
