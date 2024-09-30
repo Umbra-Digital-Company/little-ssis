@@ -1,114 +1,136 @@
 <?php include "./modules/includes/products/orders_confirmed.php"; ?>
 
-<style type="text/css">
-	body > .container {overflow-y: auto !important;}
-	.card {border: none;}
-</style>
+<div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
 
-<div class="frame-style" data-style="">
-	<div class="row">
-		<p class="col-12 text-uppercase font-bold mb-3 mt-3">Order Details</p>
-		<p class="col-12 text-secondary mt-3"><b>Name</b>: <?= $_GET['name'] ?></p>
-		<p class="col-12 text-secondary mb-3"><b>Order ID</b>: <?= $_GET['order_id'] ?></p>
-	</div>
-    <?php $total_price = 0 ?>
-	<?php for($i = 0; $i < count($arrOrdersConfirmed); $i++){ ?>
+    <div class="customized-card mt-4 w-100 p-4 ">
+        <div>
+            <div class="d-flex justify-content-between align-content-center">
+                <p class="custom-title">Order Details</p>
+                <svg style="width: 24px; height: 24px" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 15l-6-6l-6 6" />
+                </svg>
+            </div>
 
-			<?php
-				$dataMid = '';
-				$arrOrdersConfirmed[$i]['type'] = '';
-				$item_name =strtoupper($arrOrdersConfirmed[$i]['item_description']);
-				$product_code =strtoupper($arrOrdersConfirmed[$i]['product_code']);
-				if(strstr($item_name, 'PAPER BAG')){
-					 $arrOrdersConfirmed[$i]['type'] = 'Merch';
-					 $dataMid = 'Merch';
-				}elseif(strstr($item_name, 'HARDCASE') || strstr($item_name, 'ANTI FOG') || strstr($item_name, 'DAILY SHIELD') || strstr($item_name, 'DAILY MASK') || strstr($item_name, 'DAILY DUO')){
-						 $arrOrdersConfirmed[$i]['type'] = 'Merch';
-						 $dataMid = 'Merch';
-				}
-				elseif(!strstr($product_code, 'C') && !strstr($product_code, 'PL') && !strstr($product_code, 'P') && !strstr($product_code, 'H') && !strstr($product_code, 'SC') && !strstr($product_code, 'SGC') && !strstr($product_code, 'SCL') && !strstr($product_code, 'SW') && !strstr($product_code, 'SS') && !strstr($product_code, 'ST') && !strstr($item_name, 'AGENDA')){
-						 $arrOrdersConfirmed[$i]['type'] = 'Frame Style';
+            <?php
+            foreach ($arrOrdersConfirmed as $order):
+                $dataMid = '';
+                $order['type'] = '';
+                $item_name = strtoupper($order['item_description']);
+                $product_code = strtoupper($order['product_code']);
 
-						 $dataMid = 'Frame';
-				}
-                if($arrOrdersConfirmed[$i]['price'] > 0){}
-                elseif(strstr(strtolower($arrOrdersConfirmed[$i]['item_description']),'paper bag') || strstr(strtolower($arrOrdersConfirmed[$i]['item_description']),'sac') || strstr(strtolower($arrOrdersConfirmed[$i]['item_description']),'receipt')){
+                // Define the types based on item names
+                $merch_keywords = ['PAPER BAG', 'HARDCASE', 'ANTI FOG', 'DAILY SHIELD', 'DAILY MASK', 'DAILY DUO'];
+                $merch_found = false;
 
-                    continue;
-
+                // Check if the item is of type 'Merch'
+                foreach ($merch_keywords as $keyword) {
+                    if (strstr($item_name, $keyword)) {
+                        $order['type'] = 'Merch';
+                        $dataMid = 'Merch';
+                        $merch_found = true;
+                        break;
+                    }
                 }
 
-                if($arrOrdersConfirmed[$i]['dispatch_type'] == 'packaging'){
+                // Check if the item is of type 'Frame Style'
+                if (!$merch_found && !preg_match('/^[C|PL|P|H|SC|SGC|SCL|SW|SS|ST]/', $product_code) && !strstr($item_name, 'AGENDA')) {
+                    $order['type'] = 'Frame Style';
+                    $dataMid = 'Frame';
+                }
+
+                // Skip to the next iteration if price is 0 or item description indicates a non-sellable item
+                if ($order['price'] <= 0 && (
+                    strstr(strtolower($item_name), 'paper bag') ||
+                    strstr(strtolower($item_name), 'sac') ||
+                    strstr(strtolower($item_name), 'receipt')
+                )) {
                     continue;
                 }
-			?>
 
+                // Skip if dispatch type is 'packaging'
+                if ($order['dispatch_type'] === 'packaging') {
+                    continue;
+                }
 
-
-		<div class="card mt-4">
-                <div class="card-body cart-item">
-                    <div class="d-flex justify-content-between">
-                        <div class="col-6">
-                            <div class="justify-content-center">
-                                 <div class="image-wrapper" style="height: 100px; width: 100%; background-image: url(<?= $arrOrdersConfirmed[$i]['image_url'] ?>); background-repeat: no-repeat; background-size: 80%; background-position: center;"></div>                                
-                            </div>
+            ?>
+                <div class="my-4">
+                    <div class="row no-gutters">
+                        <div>
+                            <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image">
                         </div>
-                        <div class="col-6">
-                            <div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">
-                                <h2 style="text-transform: uppercase; font-size: 14px;" class="mt-2 product-title">
-                                    <?= $arrOrdersConfirmed[$i]['item_description'] ?> 
-                                    <br>
-                                    <span style="font-size: 12px;"><?= $product_code ?></span>
-                                    <br>
-                                    <span  class="mt-1" style="color: #000 !Important;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($arrOrdersConfirmed[$i]['price'], 2) ?> X <?= $arrOrdersConfirmed[$i]['count'] ?></span>    
-                                </h2>                                
-                            </div>                            
-                            <div class="row no-gutters d-flex justify-content-start mt-3">
-                                
-                            </div>
-
-                            <?php
-
-                                $total = $arrOrdersConfirmed[$i]['count'] * $arrOrdersConfirmed[$i]['price'];
-                                $total_price += $total;
-
-                            ?>
-
-                            <div class="row no-gutters d-flex justify-content-start mt-3">
-                                <p class="mt-1"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format( $total, 2) ?></p>
+                        <div class="col-md-8 d-flex align-items-center">
+                            <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
+                                <p class="custom-title"><?= $order['item_description'] ?></p>
+                                <p class="custom-subtitle"><?= $order['product_code'] ?></p>
+                                <p class="custom-subtitle" style="color: #919191;">
+                                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>
+                                    <?= number_format($order['price'], 2) ?>
+                                    <?php if ($order['count'] > 1): ?>
+                                        x <?= $order['count'] ?>
+                                    <?php endif; ?>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-	<?php } ?>
-</div>
-<hr class="spacing">
-<div class="col-12 mt-4">
-    <div class="card order-total">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-4 text-center">
-                    <p style="font-size: 16px;"><b>Total:</b></p>
-                </div>
-                <div class="col-8 text-center">
-                    <?php $voucher_amount = ($arrOrdersConfirmed[0]['promo_code_amount'] > 0) ? $arrOrdersConfirmed[0]['promo_code_amount'] : 0; ?>
-                    <p><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price - $voucher_amount, 2) ?> </p>
-                </div>
+            <?php
+            endforeach;
+            ?>
+
+
+
+            <hr>
+
+            <?php
+            $total_price = 0;
+            $voucher_amount = 0;
+
+            if (!empty($arrOrdersConfirmed) && isset($arrOrdersConfirmed[0]['promo_code_amount'])) {
+                $voucher_amount = $arrOrdersConfirmed[0]['promo_code_amount'];
+            }
+
+            foreach ($arrOrdersConfirmed as $item):
+                if ($item['price'] > 0):
+                    $total_price += $item['price'] * $item['count'];
+                endif;
+            endforeach;
+
+            ?>
+            <div class="d-flex justify-content-between">
+                <p class="custom-title">Total amount</p>
+                <p class="custom-title" style="color: #0B5893;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price - $voucher_amount, 2) ?></p>
             </div>
         </div>
+
     </div>
-</div>
-<hr class="spacing">
-<div class="col-12">
-	<div class="card">		
-	  <div class="card-body">	  	
-	  	<div class="d-flex justify-content-center">
-	  		<?php if(isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
-		  		<a href="/studios/dispatch-studios" style="color: #fff; margin-right: 30px;"><button type="button" class="btn btn-black">Go to Dispatch</button></a>
-		  	<?php } ?>	
-		  	<a href="/sis/studios/v1.0/?page=store-home" style="color: #fff"><button type="button" class="btn btn-primary">Go to Home Page</button></a>
-		  </div>
-	  </div>
-	</div>
+
+    <div class="customized-card my-4 w-100 p-4 d-flex align-items-center" style="gap: 1rem">
+        <img style="height: 30px; width: auto" src="/sis/studios/assets/images/icons/user.svg" alt="user" class="btn-custom-svg">
+        <div>
+            <p class="custom-title"><?= $profile['full_name'] ?></p>
+            <p style="font-size: 14px; font-weight: 500;"><?= $profile['age'] ?> years old</p>
+        </div>
+    </div>
+
+    <div class="mb-5">
+
+        <?php if (isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']): ?>
+            <a href="/sis/studios/v1.0/?page=transactions" class="btn-custom-white w-100 mt-3 d-flex align-items-center justify-content-center">
+                Open Dispatch
+            </a>
+        <?php endif; ?>
+
+        <a href="/sis/studios/v1.0/?page=store-home" class="btn-custom-blue w-100 mt-3 d-flex align-items-center justify-content-center">
+            Make new order
+        </a>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show text-center border-0 mb-0" role="alert" style="background-color: #9DE356; color: #342C29; font-size: 18px; border-radius: 16px 16px 0 0; margin-top: 6rem;">
+        Order has successfully been sent to Cashier
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <svg style="height: 24px; width: 24px" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="none" stroke="#342C29" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
 </div>
