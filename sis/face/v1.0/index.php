@@ -102,7 +102,6 @@ $arrTranslate = grabLanguageTags();
 	//     return false;
 	// };
 </script>
-
 <body class="page-<?= $page ?> <?= ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' ) ? 'customer-page' : '' ?>">
 
 	<?php if ( !isset($_SESSION['login']) == 'YES' ) : ?>

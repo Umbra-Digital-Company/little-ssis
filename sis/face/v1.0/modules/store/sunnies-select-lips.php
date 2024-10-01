@@ -9,6 +9,7 @@ if (!isset($_SESSION['customer_id'])) {
     </div>
     <?php
 } else {
+    $prodCategory = 'lips';
     include "./modules/includes/products/grab_select_sun_frames.php";
 
     ?>
@@ -28,6 +29,11 @@ if (!isset($_SESSION['customer_id'])) {
 
         main.customer-layout .wrapper {
             padding: 0 20px 100px;
+        }
+
+        .page-select-store-lips main {
+            top: 90px !important;
+            margin-top: auto;
         }
 
         [type="checkbox"]:not(:checked)+label,
@@ -292,7 +298,6 @@ if (!isset($_SESSION['customer_id'])) {
 <div class="packages-list hiding">
 
         <section class="product-panel" id="product-panel">
-
                 <div class="frame-list">
                   
                     <div class="row align-items-start align-items-stretch" style="margin: 0 -10px;">     

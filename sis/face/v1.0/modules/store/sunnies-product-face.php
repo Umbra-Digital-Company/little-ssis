@@ -253,6 +253,11 @@ if(!isset($_SESSION['customer_id'])) {
         background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Mixed_Material.png?v=1611803243)
     }
 
+    .type-header {
+        font-size: 18px !important; 
+        padding: 10px 0 !important;
+    }
+
     @media only screen and (max-width: 600px) {
 
         ul.tags-list li {
@@ -302,18 +307,28 @@ if(!isset($_SESSION['customer_id'])) {
 
             /* Ensure image is block-level */
         }
+
+
     }
   
 </style>
 <div class="packages-list hiding">
-    <?php if(isset($_GET['product-detail']) && trim($_GET['product-detail']) != "") { ?>
+    <?php if (isset($_GET['product-detail']) && trim($_GET['product-detail']) != "") {
+        $arrProductDetails = [];
 
-        <section class="product-view" id="product-panel">
-            <a href="./?page=<?= $_GET['page']?>" class="exit-frame-selection">
+
+        $arrProductDetails = array_values(array_filter($arrProduct, function ($item) {
+            return (trim($item['item_description'])) === (trim($_GET['style']));
+            // return $item['item_description'] ;
+        }));
+
+        ?>
+        <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;">
+            <!-- <a href="./?page=<?= $_GET['page']?>" class="exit-frame-selection">
                 <div class="d-flex align-items-start mb-3">
                     <img src="/assets/images/icons/icon-left-arrow.png" alt="back" class="img-fluid" title="back to shopping" style="padding-left: 20px;"><p class="mt-2" style="margin-left: 5px;">Back</p>
                 </div>
-            </a>
+            </a> -->
             
             <form href="#" id="form-add-to-bag">
                 <div class="card">
@@ -445,13 +460,12 @@ if(!isset($_SESSION['customer_id'])) {
                     </button>
                 </div>
 
-                <div class="frame-list">
-
+                <div class="frame-list" style="height:62vh; overflow: auto;">
                     <?php if(isset($_GET['filter']) && $_GET['filter']) { ?>
-
                         <div class="d-flex justify-content-center mt-2 mb-2">
                             <a href="/sis/face/v1.0/?page=<?= $_GET['page'] ?>&filter=true&sub-product=<?= $_GET['sub-product'] ?>&data_cgc=<?= $_GET['data_cgc'] ?>&sub_category=<?= $_GET['sub_category'] ?>&category=<?= $_GET['category'] ?>">
-                                <div class="btn btn-link" style="color: #000 !important; text-decoration: underline !important;">Reset Filter</div>
+                                <div class="btn btn-link" style="color: #000 !important; text-decoration: underline !important;">
+                                    Reset Filter</div>
                             </a>
                         </div>
 
@@ -466,51 +480,75 @@ if(!isset($_SESSION['customer_id'])) {
                     ?>  
 
                         <?php for($i = 0; $i < $showDataCount; $i++) { ?>                       
+                            <div class="frame-style col-6 mb-3" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
+                                <div class="frame-style__slider">
 
-                            
                                 <?php        
                                     // Set current colors array
                                     $curColors = $arrProductsSorted[$i]["colors"];
 
-                                    for($a = 0; $a < sizeOf($curColors); $a++) { 
+                                    for($a = 0; $a < 1; $a++) { 
 
                                 ?> 
-                                <div class="frame-style col-6 mb-3" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
-                                
-                                    <div class="frame-style__slider">
 
-                                        <div  data-color-name="<?= $curColors[$a]['color'] ?>" data-color-code="<?= $curColors[$a]['product_code'] ?>" product-code="<?= $curColors[$a]['product_code'] ?>">
+                                        <div class="product-option"  
+                                            data-color-name="<?= $curColors[$a]['color'] ?>" 
+                                            data-color-code="<?= $curColors[$a]['product_code'] ?>" 
+                                            product-code="<?= $curColors[$a]['product_code'] ?>">
                                             <input type="radio" name="frame_style" class="sr-only" >
-                                            <label class="list-item frame-grid d-flex flex-column align-items-center justify-content-center" style="background-color: #e8e8e4;">
+                                            <label 
+                                                class="list-item frame-grid d-flex flex-column align-items-center justify-content-center" 
+                                                style="background-color: #fff;">
 
                                             <?php
                                                 $curImageURL = $curColors[$a]["image"];
                                             ?>
 
-                                            <div class="image-wrapper" style="width: 40%; padding-bottom: 30%; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 80%; background-position: center;"></div>
-
-                                            <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?><?= $curColors[$a]['price'] ?></p>
-
+                                            <div class="image-wrapper" 
+                                                style="width: 100%; padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center  ;">
+                                            </div>
+                                            <!-- <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?><?= $curColors[$a]['price'] ?></p> -->
                                             </label>
                                         </div>
 
-                                        <div style="background: #e8e8e4; padding: 15px; border-radius: 0 0 10px 10px;">
-                                            <section class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
-                                                <h4><?= $arrProductsSorted[$i]['item_description'] ?>&nbsp;<span class="blk"><?= trimColor($curColors[$a]['color']).' ('.$curColors[$a]['product_code'].')'; ?></span></h4>
-                                            </section>
-                                            <div class="row d-flex justify-content-center mt-3">
-                                                <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST">
-                                                    <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[$a]['product_code']) ?>">
-                                                    <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
-                                                    <button type="submit" class="btn btn-primary" id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">add to bag</button>
-                                                </form>
-                                            </div>                                
-                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div 
+                                    style="background: #fff; border-radius: 0 0 10px 10px; padding: 15px;">
+                                    <div class="d-flex justify-content-between">
+                                        <section 
+                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                                            <div>
+                                                <h4><?= $arrProductsSorted[$i]['item_description'] ?>
+                                                </h4>
+                                                <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span> </h4>
+                                            </div>
+                                        </section>
 
+                                        <section 
+                                            class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
+                                            <h5>
+                                                <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>
+                                            </h5>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row d-flex justify-content-center mt-3">
+                                        <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>"
+                                            method="POST">
+                                            <input type="hidden" name="studios_product_code"
+                                                id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>"
+                                                value="<?= trim($curColors[0]['product_code']) ?>">
+                                            <input type="hidden" class="form-control count_num" name="count_num_value" value="1"
+                                                readonly>
+                                            <button type="submit" class="btn btn-not-cancel"
+                                                id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">Add to
+                                                bag</button>
+                                        </form>
                                     </div>
                                 </div>
-                                                
-                                <?php } ?>
+
+                            </div>
 
                         <?php } ?>
                     </div>
@@ -520,96 +558,101 @@ if(!isset($_SESSION['customer_id'])) {
            
         </section>
     <?php } ?>
+
 </div>
+
 <style>
-    .btn-black {
-        background: #000000;
-        color: #ffffff;
-    }
-    /*.packages-list {
-        opacity: 0;
-        transition: opacity .3s ease;
-    }
-    .packages-list.show {
-        opacity: 1;
-    }*/
-    .count_item .form-control{
-        padding: 1px 10px;
-        height: 25px;
-        border-radius: 0px;
-        cursor: pointer;
-    }
-    .count_item .form-control:hover{
-        background-color: #E4DBDB;
-    }
-    .count_item .form-control:active{
-        background-color: #C1C1C1;
-    }
-    .count_num{
-        width: 50px;
-        border-left: none;
-        border-right: none;
-        text-align: center;
-    }
-    .switch-color li {
-        width:14px;
-        height:14px;
-        border-radius:7px;
-        display:block;
-        padding: 0;
-        margin: 0 3px 5px;
-        position: relative;
-    }
-    .switch-color li::before {
-        content: '';
-        display: block;
-        position: absolute;
-        border-color: transparent;
-        width: 18px;
-        height: 18px;
-        display: block;
-        top: -2px;
-        border-radius:9px;
-        left: -2px;
-    }
-    .switch-color li.active::before {
-        border: 1px solid #2a2323;
-    }
-    #toggleLayout {
-        min-width: 25px;
-        min-height: 25px;
-        margin: 0 10px 0 15px;
-        background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
-        background-repeat: no-repeat;
-        background-size: 25px;
-        background-position: center;
-    }
-    #toggleLayout.false {
-        background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-    }
-    .product-details h4 {
-        font-size: 12px;
-        text-transform: uppercase;
-        font-weight: 600;
-        line-height: 12px;
-    }
-    .product-details h4 span {
-        font-size: 10px;
-        color: #b3a89b;
-    }
-    .product-details p {
-        font-size: 12px;
-        line-height: 12px;
-        white-space: nowrap;
-        font-weight: 600;
-    }
-    @media (max-width:480px) {
-        .product-details h4 span.blk {
-            margin-top: 5px;
-            display: block;
+        .btn-black {
+            background: #000000;
+            color: #ffffff;
         }
-    }
-</style>
+
+        .packages-list {
+            opacity: 0;
+            transition: opacity .3s ease;
+            overflow-y: hidden !important;
+        }
+
+        .packages-list.show {
+            opacity: 1;
+        }
+
+        .count_item .form-control {
+            padding: 1px 10px;
+            height: 25px;
+            border-radius: 0px;
+            cursor: pointer;
+        }
+
+        .count_item .form-control:hover {
+            background-color: #E4DBDB;
+        }
+
+        .count_item .form-control:active {
+            background-color: #C1C1C1;
+        }
+
+        .count_num {
+            width: 50px;
+            border-left: none;
+            border-right: none;
+            text-align: center;
+        }
+
+
+
+        /* #toggleLayout {
+                                                                    min-width: 25px;
+                                                                    min-height: 25px;
+                                                                    margin: 0 10px 0 15px;
+                                                                    background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
+                                                                    background-repeat: no-repeat;
+                                                                    background-size: 25px;
+                                                                    background-position: center;
+                                                                } */
+        /* 
+                    #toggleLayout.false {
+                        background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
+                    } */
+
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            /* Align children in a column */
+        }
+
+        .product-details h4 {
+            font-size: 14px;
+            text-transform: capitalize;
+            font-weight: 700;
+            line-height: 12px;
+
+        }
+
+        .product-details h4 span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #342C29;
+        }
+
+        .product-details h5 span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #919191;
+        }
+
+        .product-details p {
+            font-size: 12px;
+            line-height: 12px;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .frame-list {
+            overflow-x: hidden !important;
+        }
+    </style>
 
 <?php
     $arrProductsSortedToShow = [];
@@ -621,6 +664,19 @@ if(!isset($_SESSION['customer_id'])) {
 ?>
 
 <script>
+
+    // function closeNotification() {
+    //     document.getElementById('notification').classList.remove('show');
+    //     document.getElementById('notification').classList.add('hidden');
+    // }
+
+    // function openNotification() {
+    //     document.getElementById('notification').classList.remove('hidden');
+    //     document.getElementById('notification').classList.add('show');
+    // }
+
+    // closeNotification();
+    
     let arrProduct = JSON.parse(JSON.stringify(<?= json_encode($arrProduct); ?>));
     let arrCart = JSON.parse(JSON.stringify(<?= json_encode($arrCart); ?>));
     let arrColors = <?= json_encode($getColors) ?>;
@@ -666,7 +722,7 @@ if(!isset($_SESSION['customer_id'])) {
                 // curColor = curColor.replace(/-m/g, "-mirror");
                 // curColor = curColor.replace(/-gdt/, "-g");
                 // curImageURL = "images/face/"+curStyle+"/"+curColor+"/front.png";
-                width = 'width:50%;';
+                width = '';
                 curImageURL =  arrCart[i].image_url;
                 if(curImageURL == null) {
 
@@ -677,43 +733,43 @@ if(!isset($_SESSION['customer_id'])) {
                 
                 item_cart+='<div class="card cart_view mt-4">'
                     +'<div class="card-body cart-item">'
-                        +'<div class="row">'
-                            +'<img src="/sis/face/assets/images/icons/icon-delete.png" class="img-responsive remove_item" orders-specs-id="'+arrCart[i].group_orders_specs_id+'" style="cursor: pointer; position: absolute; top: 10px; right: 10px;" width="25" height="25" title="Remove this item">'
-                        +'</div>'
-                        +'<div class="row mt-4">'
-                            +'<div class="col-6" style="text-align:left">'
-                                +'<div class="row justify-content-center">'
-                                    +'<div style="height: 30vh; '+width+' background-image:url('+curImageURL+'); background-repeat: no-repeat; background-size: 80%; background-position: center;" class="img-responsive cart-item-image"></div>'
-                                +'</div>'                                
-                            +'</div>'
-                            +'<div class="col-6 count_item">'
-                                +'<div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">'
-                                    +'<h2 style="text-transform: uppercase; font-size: 18px;" class="mt-2 product-title">'+curStyle+' <br><span style="font-size: 12px;">'+curColor.replace("-", " ")+'</span></h2>'                                    
-                                +'</div>'
-                                +'<div class="row no-gutters d-flex justify-content-start mt-3">'
-                                    +'<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?>'+parseFloat(arrCart[i].price).toFixed(2)+'</p>'
-                                +'</div>'
-                                +'<div class="row no-gutters d-flex justify-content-start mt-1">'
-                                    +'<span><input type="button" class="form-control count_decrement"  price="'+arrCart[i].price+'" group-orders-specs-id="'+arrCart[i].group_orders_specs_id+'" value="-"></span>'
-                                    +'<input type="text" class="form-control count_num" value="'+arrCart[i].count+'" readonly>'
-                                    +'<span><input type="button" class="form-control count_increment" '+merchItem+' price="'+arrCart[i].price+'" group-orders-specs-id="'+arrCart[i].group_orders_specs_id+'" product-code="'+arrCart[i].product_code+'" value="+"></span>'
-                                +'</div>'
-                            +'</div>'
-                        +'</div>'                        
+                    +'<div class="row">'
+                    +'<img src="/sis/face/assets/images/icons/icon-delete.png" class="img-responsive remove_item" orders-specs-id="'+arrCart[i].group_orders_specs_id+'" style="cursor: pointer; position: absolute; top: 10px; right: 10px;" width="25" height="25" title="Remove this item">'
                     +'</div>'
-                +'</div>';
+                    +'<div class="row mt-4">'
+                    +'<div class="col-6" style="text-align:left">'
+                    +'<div class="row justify-content-center">'
+                    +'<div style="height: 100px; '+width+' background-image:url('+curImageURL+'); background-repeat: no-repeat; background-size: 80%; background-position: center;" class="img-responsive cart-item-image"></div>'
+                    +'</div>'                                
+                    +'</div>'
+                    +'<div class="col-6 count_item">'
+                    +'<div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">'
+                    +'<h2 style="text-transform: uppercase; font-size: 18px;" class="mt-2 product-title">'+curStyle+' <br><span style="font-size: 12px;">'+curColor.replace("-", " ")+'</span></h2>'                                    
+                    +'</div>'
+                    +'<div class="row no-gutters d-flex justify-content-start mt-3">'
+                    +'<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?>'+parseFloat(arrCart[i].price).toFixed(2)+'</p>'
+                    +'</div>'
+                    +'<div class="row no-gutters d-flex justify-content-start mt-1">'
+                    +'<span><input type="button" class="form-control count_decrement"  price="'+arrCart[i].price+'" group-orders-specs-id="'+arrCart[i].group_orders_specs_id+'" value="-"></span>'
+                    +'<input type="text" class="form-control count_num" value="'+arrCart[i].count+'" readonly>'
+                    +'<span><input type="button" class="form-control count_increment" '+merchItem+' price="'+arrCart[i].price+'" group-orders-specs-id="'+arrCart[i].group_orders_specs_id+'" product-code="'+arrCart[i].product_code+'" value="+"></span>'
+                    +'</div>'
+                    +'</div>'
+                    +'</div>'                        
+                    +'</div>'
+                    +'</div>';
             }
             if(item_cart == ''){
                 item_cart +=itemCart();
             }else{
-           item_cart    +='<div class="d-flex justify-content-center mt-4" id="btn-sect" style="text-align: center;">'
-                            +'<div class="col-6">'
-                                +'<input type="button" class="btn btn-primary" data-dismiss="modal" value="Shop More">'
-                            +'</div>'
-                            +'<div class="col-6">'
-                                +'<a href="?page=order-confirmation&bpage='+'<?= $_GET['page'] ?>'+'"><input type="button" class="btn btn-black" value="Proceed"></a>'
-                            +'</div>'
-                        +'</div>';
+           item_cart +='<div class="d-flex justify-content-center mt-4" id="btn-sect" style="text-align: center;">'
+                +'<div class="col-6">'
+                +'<input type="button" class="btn btn-primary" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
+                +'</div>'
+                +'<div class="col-6">'
+                +'<a href="?page=order-confirmation&bpage='+'<?= $_GET['page'] ?>'+'"><input type="button" class="btn btn-black" value="Proceed"></a>'
+                +'</div>'
+                +'</div>';
             }
             $("#item_cart").html(item_cart);
             $("#modal-item").modal("show");

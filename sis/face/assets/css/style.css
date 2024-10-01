@@ -2809,8 +2809,8 @@ main.customer-layout .wrapper {
 
 /** SELECT STORE **/
 
-.page-select-store .packages-list {
-  overflow: hidden;
+.page-select-store-lips .packages-list {
+  overflow-x: hidden;
   overflow-y: scroll;
 
 }
@@ -2857,11 +2857,14 @@ main.customer-layout .wrapper {
   justify-content: flex-end;
 }
 
-.page-select-store main {
-  top: 90px;
+.page-select-store main,
+.page-select-store-all main,
+.page-select-store-lips main,
+.page-select-store-nails main,
+[class^="page-select-store-"] main {
+  top: 90px !important;
   margin-top: auto;
 }
-
 
 
 .page-select-store .packages-list .section-frames,

@@ -469,48 +469,40 @@
         <div class="packages-list">
 
             <div class="form-row mb-5 section-frames">
+            <span class="type-header  mb-3">LIPS</span>
+                <a href="./?page=select-store-lips">
+                    <div class="col-12 text-center ">
 
-                    <span class="type-header  mb-3">LIPS</span>
-                    <a href="./?page=select-store-all&categoryAll=lips">
-                        <div class="col-12 text-center ">
-
-                            <img class="img-fluid img-header" 
-                                src="/sis/face/assets/images/sections/sunnies-face.png?v=1614047286">
-                                
-                            <div class="select-link">
-                                <a href="./?page=select-store-studios">
-                                    <button class="btn btn-shop-header"> Shop All Lips</button>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                    
-
-                <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'lips')){ ?>
-                    <div class="col-sm-12 mt-4 product-container">
-                        <div class="">
-                            <?php 
-                            include "./modules/includes/products/grab_select_sun_frames.php";
-                            $prodCategory = 'lips';
-                                include './modules/store/sunnies-select-lips.php';
-                            ?>
+                        <img class="img-fluid img-header" 
+                            src="/sis/face/assets/images/sections/sunnies-face.png?v=1614047286">
+                            
+                        <div class="select-link">
+                            <a href="./?page=select-store-lips">
+                                <button class="btn btn-shop-header"> Shop All Lips</button>
+                            </a>
                         </div>
                     </div>
-                <?php } ?>
-
+                </a>
+                <div class="col-sm-12 mt-4 product-container">
+                    <div class="">
+                        <?php
+                            $prodCategory = 'lips';
+                        ?>
+                        <?php include './modules/store/sunnies-select-lips.php'; ?>
+                    </div>
+                </div>
             </div>
         <?php
 
             $arrFramesCount = count($arrProduct);
             $arrProductMerge = $arrProduct;
 
-            // print_r($arrProduct); exit;
         ?>
         
         <div class="form-row mb-5 section-face">
 
             <span class="type-header mb-3">FACE</span>
-            <a href="./?page=select-store-all&categoryAll=face">
+            <a href="./?page=select-store-face">
                 <div class="col-12 text-center">
                     
                     <img class="img-fluid img-header " 
@@ -525,11 +517,10 @@
             </a>
 
 
-            <div class="col-12 <?= (!isset($_GET['categoryAll'])) ?> col-lg-12  mt-4 product-container">
+            <div class="col-sm-12  mt-4 product-container">
                 <?php
-                include "./modules/includes/products/grab_select_face.php";
-                $prodCategory = 'face';
-                    include './modules/store/sunnies-select-lips.php';
+                    $prodCategory = 'face';
+                    include './modules/store/sunnies-select-face.php';
                 ?>
             </div>
 
@@ -544,31 +535,26 @@
 
         <div class="form-row mb-5 section-brows">
 
-             <?php if(!isset($_GET['categoryAll'])){ ?>
+            <span class="type-header mb-3">BROWS</span>
+            <a href="./?page=select-store-brows">
+                <div class="col-12 text-center">
+                    <img class="img-fluid  img-header" 
+                        src="/sis/face/assets/images/sections/brows.webp?v=1614047286">
 
-                <span class="type-header mb-3">BROWS</span>
-                <a href="./?page=select-store-all&categoryAll=brows">
-                    <div class="col-12 text-center">
-                        <img class="img-fluid  img-header" 
-                            src="/sis/face/assets/images/sections/brows.webp?v=1614047286">
-
-                        <div class="select-link">
-                            <a href="./?page=select-brows">
-                                <button class="btn btn-shop-header"> Shop All Brows</button>
-                            </a>
-                        </div>
+                    <div class="select-link">
+                        <a href="./?page=select-brows">
+                            <button class="btn btn-shop-header"> Shop All Brows</button>
+                        </a>
                     </div>
-                </a>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'brows')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll']))?> col-lg-12 mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_brows.php";
-                       $prodCategory = 'brows';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
                 </div>
-            <?php } ?>
+            </a>
+
+            <div class="col-sm-12 mt-4 product-container">
+                <?php
+                    $prodCategory = 'brows';
+                    include './modules/store/sunnies-select-brows.php';
+                ?>
+            </div>
         </div>
         <?php 
             $arrBrowsCount = count($arrProduct);
@@ -579,12 +565,12 @@
 
         <div class="form-row mb-5 section-eyes">
             <span class="type-header mb-3">EYES</span>
-            <a href="./?page=select-store-all&categoryAll=eyes">
+            <a href="./?page=select-store-eyes">
                 <div class="col-12 text-center ">
                     <img class="img-fluid img-header" 
                         src="/sis/face/assets/images/sections/eyes.webp?v=1614047286">
                     <div class="select-link">
-                        <a href="./?page=select-eyes">
+                        <a href="./?page=select-store-eyes">
                             <button class="btn btn-shop-header"> Shop All Eyes</button>
                         </a>
                     </div>
@@ -594,8 +580,8 @@
             <div class="col-12 col-lg-12 mt-4">
                 <?php
                     include "./modules/includes/products/grab_select_eyes.php";
-                    $prodCategory = 'brows';
-                    include './modules/store/sunnies-select-lips.php';
+                    $prodCategory = 'eyes';
+                    include './modules/store/sunnies-select-eyes.php';
                 ?>
             </div>
         </div>
@@ -609,12 +595,12 @@
         <div class="form-row mb-5 section-skin">
 
             <span class="type-header mb-3">SKIN</span>
-            <a href="./?page=select-store-all&categoryAll=skin">
+            <a href="./?page=select-store-skin">
                 <div class="col-12 text-center">
                     <img class="img-fluid img-header" src="/sis/face/assets/images/sections/skin.webp?v=1614047286">
                     
                     <div class="select-link">
-                        <a href="./?page=select-skin">
+                        <a href="./?page=select-store-skin">
                             <button class="btn btn-shop-header"> Shop All Skin</button>
                         </a>
                     </div>
@@ -625,7 +611,7 @@
                 <?php
                     include "./modules/includes/products/grab_select_skin.php";
                     $prodCategory = 'skin';
-                    include './modules/store/sunnies-select-lips.php';
+                    include './modules/store/sunnies-select-skin.php';
                 ?>
             </div>
         </div>
@@ -638,12 +624,12 @@
         <div class="form-row mb-5 section-cheeks">
 
             <span class="type-header mb-3">CHEEKS</span>
-            <a href="./?page=select-store-all&categoryAll=cheeks">
+            <a href="./?page=select-store-cheeks">
                 <div class="col-12 text-center">
                     <img class="img-fluid img-header" src="/sis/face/assets/images/sections/cheeks.jpg?v=1614047286">
 
                     <div class="select-link">
-                        <a href="./?page=select-cheeks">
+                        <a href="./?page=select-store-cheeks">
                             <button class="btn btn-shop-header"> Shop All Cheeks</button>
                         </a>
                     </div>
@@ -654,7 +640,7 @@
                 <?php
                     include "./modules/includes/products/grab_select_cheeks.php";
                     $prodCategory = 'cheeks';
-                    include './modules/store/sunnies-select-lips.php';
+                    include './modules/store/sunnies-select-cheeks.php';
                 ?>
             </div>
         </div>
@@ -667,11 +653,11 @@
 
         <div class="form-row mb-5 section-nails">
             <span class="type-header mb-3">NAILS</span>
-            <a href="./?page=select-store-all&categoryAll=nails">
+            <a href="./?page=select-store-nails">
                 <div class="col-12 text-center ">
                     <img class="img-fluid img-header" src="/sis/face/assets/images/sections/nails.jpg?v=1614047286">
                     <div class="select-link">
-                        <a href="./?page=select-nails">
+                        <a href="./?page=select-store-nails">
                             <button class="btn btn-shop-header"> Shop All Nails</button>
                         </a>
                     </div>
@@ -681,7 +667,7 @@
                 <?php
                     include "./modules/includes/products/grab_select_nails.php";
                     $prodCategory = 'nails';
-                    include './modules/store/sunnies-select-lips.php';
+                    include './modules/store/sunnies-select-nails.php';
                 ?>
             </div>
         </div>
@@ -694,13 +680,13 @@
 
         <div class="form-row mb-5 section-sets">
                 <span class="type-header mb-3">SETS</span>
-                <a href="./?page=select-store-all&categoryAll=sets">
+                <a href="./?page=select-store-sets">
                 <div class="col-12 text-center ">
 
                     <img class="img-fluid img-header" src="/sis/face/assets/images/sections/sets.jpg?v=1614047286">
                     
                     <div class="select-link">
-                        <a href="./?page=select-sets">
+                        <a href="./?page=select-store-sets">
                             <button class="btn btn-shop-header"> Shop All Sets</button>
                         </a>
                     </div>
@@ -711,7 +697,7 @@
                     <?php
                        include "./modules/includes/products/grab_select_sets.php";
                        $prodCategory = 'sets';
-                        include './modules/store/sunnies-select-lips.php';
+                        include './modules/store/sunnies-select-sets.php';
                     ?>
                 </div>
         </div>
@@ -725,12 +711,12 @@
         <div class="form-row mb-5 section-merch">
 
             <span class="type-header mb-3">MERCH</span>
-            <a href="./?page=select-store-all&categoryAll=merch">
+            <a href="./?page=select-store-merch">
                 <div class="col-12 text-center ">
                     <img class="img-fluid img-header" src="/sis/face/assets/images/sections/Travel_Kit_Merch_Category_Banner_-_Desktop.webp?v=1614047286">    
 
                 <div class="select-link">
-                    <a href="./?page=select-merch">
+                    <a href="./?page=select-store-merch">
                         <button class="btn btn-shop-header"> Shop All Merch</button>
                     </a>
                 </div>

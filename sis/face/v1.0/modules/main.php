@@ -92,6 +92,10 @@ switch ( $page ) {
 		background-color: #E2E9F3;
 	}
 
+	.page-select-store main {
+		top: 90px !important;
+	}
+
 </style>
 
 <div id="ssis_sidebar">
@@ -192,8 +196,6 @@ switch ( $page ) {
 				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
-
-
 
 	<?php else: ?>
 
@@ -386,7 +388,7 @@ switch ( $page ) {
 				<div class="d-flex justify-content-center">
 					<?php if(!isset($_SESSION['login_set'])){ ?>
 						<a href="./?page=contact-tracing-form" class="<?= ( isset($_SESSION['customer_id']) || $page == 'contact-tracing-form' ) ? 'bg-success-lighten' : '' ?>">
-							<img src="<?= get_url('images/icons') ?>/icon-edit-primary.png" alt="Account" class="img-fluid">
+							<img src="<?= get_url('images/icons') ?>/icon-edibt-primary.png" alt="Account" class="img-fluid">
 						</a>
 					<?php } ?>
 					<a href="./?page=select-store" class="<?= ( (isset($_SESSION['customer_id']) && $page == 'order-confirmation' ) || $page == 'select-store'  || $page == 'select-store-studios' || $page == 'select-merch' || $page == 'add-paper-bag') ? 'bg-success-lighten' : '' ?>">

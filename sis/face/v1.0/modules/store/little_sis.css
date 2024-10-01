@@ -37,9 +37,8 @@
   /** SELECT STORE **/
 
   .page-select-store .packages-list {
-    overflow: hidden;
-    overflow-y: scroll;
-  
+    overflow-x: hidden !important;
+    height: auto !important;
   }
 
   .page-select-store .packages-list .section-frames,
@@ -49,7 +48,7 @@
 
   /** SELECT STORE - SUN **/
 
-  .page-select-store-studios .frame-list {
+  .page-select-store-nails .frame-list {
     height: 73vh !important;
   }
 

@@ -104,8 +104,8 @@ if(!isset($_SESSION['customer_id'])) {
         padding-bottom: 0 !important;
     }*/
     #btn-filter {
-        max-width: 100px;
-        color: #fff;
+        max-width: 111px;
+        color: #956E46;
         height: 40px;
     }
     #cart{
@@ -265,17 +265,51 @@ if(!isset($_SESSION['customer_id'])) {
         main.customer-layout .wrapper {
             overflow-y: none;
         }
+
+        #form-search {
+                display: flex;
+
+                height: 43px;
+                border: none;
+                width: 100%;
+        }
+
+        #search_frame_filter {
+            flex: 1;
+            /* Take up remaining space */
+            border: none;
+            /* Remove any existing border */
+            border-bottom: 1px solid #ccc;
+            /* Add a bottom border */
+            margin-right: 20px;
+        }
+
+        #search_frame_filter:focus {
+            outline: none;
+        }
+
+
+
+        .search-icon {
+            width: 25px;
+            /* Adjust image size */
+            height: 25px;
+
+            /* Ensure image is block-level */
+        }
     }
   
 </style>
 <div class="packages-list hiding">
     <?php if(isset($_GET['product-detail']) && trim($_GET['product-detail']) != "") { ?>
-        <section class="product-view" id="product-panel" style="height:65vh; overflow: auto;">
-            <a href="./?page=<?= $_GET['page']?>" class="exit-frame-selection">
+
+        <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;">
+            <!-- <a href="./?page=<?= $_GET['page']?>" class="exit-frame-selection">
                 <div class="d-flex align-items-start mb-3">
                     <img src="/assets/images/icons/icon-left-arrow.png" alt="back" class="img-fluid" title="back to shopping" style="padding-left: 20px;"><p class="mt-2" style="margin-left: 5px;">Back</p>
                 </div>
-            </a>
+            </a> -->
+
             <form href="#" id="form-add-to-bag">
                 <div class="card">
                     <div class="card-body">
@@ -367,7 +401,7 @@ if(!isset($_SESSION['customer_id'])) {
 
         <section class="product-panel" id="product-panel">
             
-                <div class="d-flex align-items-center mb-3">
+                <!-- <div class="d-flex align-items-center mb-3">
                     <a href="./?page=select-store" class="exit-frame-selection"><img src="/assets/images/icons/icon-left-arrow.png" alt="exit" class="img-fluid" style="width: 50px;"></a>
                     <input type="search" name="search_frame" id="search_frame" class="form-control filled search" placeholder="Search" style="margin-left: 20px;" value="<?= (isset($_GET['search']) && $_GET['search'] !='') ? $_GET['search'] : '' ?>">
                     <div id="btn-filter" class="btn btn-secondary mr-4 ml-4">Filter</div>
@@ -377,7 +411,35 @@ if(!isset($_SESSION['customer_id'])) {
                             <span><div class="count" count="<?= $order_count ?>"></div></span>    
                         </div>
                     </div>
+                </div> -->
+
+                <div class="search-container-store d-flex align-items-center mb-4">
+                    <div id="btn-filter" class="btn btn-not-cancel"> <img id="bag-icon"
+                            src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
+                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
+                    <div id="form-search" class="d-flex align-items-center"></div>
+                    <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
+                        style="margin-left: 20px;"
+                        value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
+                    <div id="toggleLayout" style="display: none;"></div>
+
+                    <div class="">
+                        <button id="btn-search" class="btn btn-primary" style="height: 48px; width: 48px">
+                            <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search"
+                                style=" height: 24px; width: 24px;">
+                        </button>
+                    </div>
                 </div>
+
+                
+                <div class="flex-container mb-3">
+
+                    <button class="btn btn-bag " id="bag-button" disabled>
+                        <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                    </button>
+                </div>
+
                 <div class="frame-list" style="height:62vh; overflow: auto;">
 
                     <?php if(isset($_GET['filter']) && $_GET['filter']) { ?>
@@ -391,64 +453,103 @@ if(!isset($_SESSION['customer_id'])) {
                     <?php } ?>
                   
                     <div class="row align-items-start align-items-stretch product-show" style="margin: 0 -10px;">
-                        <?php
-                            $countData = count($arrProductsSorted);
-                            $showDataCount = ($countData < 10) ? $countData : 10; 
-                        ?>  
+                    <?php
+                        $countData = count($arrProductsSorted);
+                        $showDataCount = ($countData < 10) ? $countData : 10; 
+                    ?>  
 
-                            <?php for($i = 0; $i < $showDataCount; $i++) { ?>                       
+                        <?php for($i = 0; $i < $showDataCount; $i++) { ?>                       
+                            <div class="frame-style col-6 mb-3" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
+                                <div class="frame-style__slider">
+                        
+                            <?php        
+                                // Set current colors array
+                                $curColors = $arrProductsSorted[$i]["colors"];
 
-                            
-                                <?php        
-                                    // Set current colors array
-                                    $curColors = $arrProductsSorted[$i]["colors"];
+                                for($a = 0; $a < 1; $a++) { 
 
-                                    for($a = 0; $a < sizeOf($curColors); $a++) { 
+                            ?> 
 
-                                ?> 
-                                <div class="frame-style col-6 mb-3 hide-lazy" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
-                                
-                                    <div class="frame-style__slider">
+                                <div class="product-option"
+                                    data-color-name="<?= $curColors[$a]['color'] ?>" 
+                                    data-color-code="<?= $curColors[$a]['product_code'] ?>" 
+                                    product-code="<?= $curColors[$a]['product_code'] ?>">
+                                    <input type="radio" name="frame_style" class="sr-only" >
+                                    <label 
+                                        class="list-item frame-grid d-flex flex-column align-items-center justify-content-center" style="background-color: #e8e8e4;">
 
-                                        <div  data-color-name="<?= $curColors[$a]['color'] ?>" data-color-code="<?= $curColors[$a]['product_code'] ?>" product-code="<?= $curColors[$a]['product_code'] ?>">
-                                            <input type="radio" name="frame_style" class="sr-only" >
-                                            <label class="list-item frame-grid d-flex flex-column align-items-center justify-content-center" style="background-color: #e8e8e4;">
+                                    <?php
+                                        $curImageURL = $curColors[$a]["image"];
+                                    ?>
 
-                                            <?php
-                                                $curImageURL = $curColors[$a]["image"];
-                                            ?>
+                                    <div class="image-wrapper" 
+                                        style="width: 100%; padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center  ;">
+                                    </div>
 
-                                            <div class="image-wrapper" style="width: 40%; padding-bottom: 30%; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 80%; background-position: center;"></div>
+                                    <!-- <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?><?= $curColors[$a]['price'] ?></p> -->
 
-                                            <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?><?= $curColors[$a]['price'] ?></p>
+                                    </label>
+                                </div>
+                                <?php } ?>
+                            </div>
+                            <div 
+                                    style="background: #fff; border-radius: 0 0 10px 10px; padding: 15px;">
+                                    <div class="d-flex justify-content-between">
+                                        <section 
+                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                                            <div>
+                                                <h4><?= $arrProductsSorted[$i]['item_description'] ?>
+                                                </h4>
+                                                <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span> </h4>
+                                            </div>
+                                        </section>
 
-                                            </label>
-                                        </div>
-
-                                        <div style="background: #e8e8e4; padding: 15px; border-radius: 0 0 10px 10px;">
-                                            <section class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
-                                                <h4><?= $arrProductsSorted[$i]['item_description'] ?>&nbsp;<span class="blk"><?= trimColor($curColors[$a]['color']).' ('.$curColors[$a]['product_code'].')'; ?></span></h4>
-                                            </section>
-                                            <div class="row d-flex justify-content-center mt-3">
-                                                <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST">
-                                                    <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[$a]['product_code']) ?>">
-                                                    <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
-                                                    <button type="submit" class="btn btn-primary" id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">add to bag</button>
-                                                </form>
-                                            </div>                                
-                                        </div>
-
+                                        <section 
+                                            class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
+                                            <h5>
+                                                <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>
+                                            </h5>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row d-flex justify-content-center mt-3">
+                                        <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>"
+                                            method="POST">
+                                            <input type="hidden" name="studios_product_code"
+                                                id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>"
+                                                value="<?= trim($curColors[0]['product_code']) ?>">
+                                            <input type="hidden" class="form-control count_num" name="count_num_value" value="1"
+                                                readonly>
+                                            <button type="submit" class="btn btn-not-cancel"
+                                                id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">Add to
+                                                bag</button>
+                                        </form>
                                     </div>
                                 </div>
-                                                
-                            <?php } ?>
+
+                            </div>
 
                         <?php } ?>
                     </div>
+                                
                 </div>
+                    
            
         </section>
     <?php } ?>
+
+    <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden "
+            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+
+        <div id="notification" class="notification d-flex align-items-center justify-content-between "
+            style="width: 100%; padding: 0px 10px;">
+
+            <span class="notification-message text-align-center">Item successfully added to bag</span>
+            <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">
+                <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
+            </button>
+        </div>
+    </div>
 </div>
 <style>
     .btn-black {
