@@ -66,7 +66,7 @@ $arrCustomer = array();
 
 
 $itemsPerPage = isset($_GET['itemsPerPage']) && is_numeric($_GET['itemsPerPage']) ? (int)$_GET['itemsPerPage'] : 10;
-$pagination = isset($_GET['pagination']) && is_numeric($_GET['pagination']) ? (int)$_GET['pagination'] : 1;
+$pagination = isset($_GET['dpage']) && is_numeric($_GET['dpage']) ? (int)$_GET['dpage'] : 1;
 $offset = ($pagination - 1) * $itemsPerPage;
 
 // echo 'Current page: ' . $pagination;
@@ -107,11 +107,16 @@ $totalPages = ceil($totalResults / $itemsPerPage);
 // ! Testing:: Query for Dispatch
 $query = '
     SELECT 
+        os.id,
         CONCAT(p.first_name, " ", p.last_name) AS fullname,
         os.status,
         os.status_date,
         os.order_id,
-        pr.item_name
+        pr.item_name,
+        pr.data_cgc,
+        os.po_number,
+        os.profile_id,
+        os.orders_specs_id
     FROM
         profiles_info p
     INNER JOIN
@@ -119,19 +124,26 @@ $query = '
     LEFT JOIN
         poll_51_studios_new pr ON pr.product_code = os.product_code
     WHERE
-        CONCAT(p.first_name, " ", p.last_name) LIKE ? OR pr.item_name LIKE ? OR os.order_id LIKE ?
+        (CONCAT(p.first_name, " ", p.last_name) LIKE ? 
+        OR pr.item_name LIKE ? 
+        OR os.order_id LIKE ?)
+        AND os.status IN ("for payment", "paid", "cancelled", "returned")
     ORDER BY
-        os.status_date ASC
+        os.status_date DESC
     LIMIT ? OFFSET ?
 ';
 
-// ! Testing:: Parameters for Customer Data Retrieval
 $grabParams = array(
+    'id',
     'fullname',
     'status',
     'status_date',
     'order_id',
-    'item_name'
+    'item_name',
+    'store_type',
+    'po_number',
+    'profile_id',
+    'orders_specs_id'
 );
 
 
@@ -141,7 +153,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
     mysqli_stmt_bind_param($stmt, 'sssii', $searchTerm, $searchTerm, $searchTerm, $itemsPerPage, $offset);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5);
+    mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10);
     while (mysqli_stmt_fetch($stmt)) {
 
         $tempArray = array();
