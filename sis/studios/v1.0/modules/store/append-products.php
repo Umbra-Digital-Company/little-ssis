@@ -78,7 +78,7 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 
 		$showProduct .= '<div class="image-wrapper" style="width: 100%; padding-bottom: 75%; background-color: #f1f1f1; background-image: url(' . $curImageURL . '); background-repeat: no-repeat; background-size: 80%; background-position: center;"></div>
 
-	                    <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;">₱' . $curColors[$a]['price'] . '</p>
+	                    
 
 	                </label>
 	            </div>';
@@ -103,13 +103,13 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
                                         <section
                                             class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
                                             <h5>
-                                                <span class=' . trim($curColors[$i]['price'] ) . '</span>
+                                                <span >P '  . trim($curColors[0]['price']) . '</span>
                                             </h5>
                                         </section>
                                     </div>
 
 	            <ul class="row switch-color col-12">';
-				
+
 
 	$totalColors = sizeof($curColors);
 	$maxVisibleColors = 4; // Limit the number of visible colors to 4
@@ -122,8 +122,25 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 
 	if ($totalColors > $maxVisibleColors) {
 		$remainingColors = $totalColors - $maxVisibleColors;
-		$showProduct .= '<li class="more-item">+' . $remainingColors . ' </li>'; // down arrow
+
+		// Show the remaining colors with a "more" button
+		$showProduct .= '<li class="more-item" data-index="' . $a . '"></li>';
+
+		// Loop to display hidden colors
+		for ($a = $maxVisibleColors; $a < $totalColors; $a++) {
+			$showProduct .= '
+				<li class="hidden hidden-colors" 
+					id="' . trim($arrProductsSorted[$i]['item_description']) . '" 
+					data-index="' . $a . '" 
+					data-style-name="' . trim($arrProductsSorted[$i]['item_description']) . '" 
+					data-color-name="' . trimColor($curColors[$a]['color']) . '" 
+					data-color-code="' . trim($curColors[$a]['product_code']) . '" 
+					data-color-price="P' . $curColors[$a]['price'] . '" 
+					style="' . (($curColors[$a]['color_swatch'] != '') ? 'background-color: ' . $curColors[$a]['color_swatch'] : 'background-color: #000;') . ';">
+				</li>';
+		}
 	}
+
 
 	$showProduct .= '</ul>    
 	            <div class="row d-flex justify-content-center mt-3">
@@ -134,7 +151,8 @@ for ($i = 0; $i < count($arrProductsSorted); $i++) {
 	                </form>
 	            </div>                                
 	        </div>
-	    </div>';
+	    </div>	
+		';
 }
 
 echo json_encode(['show_product' => $showProduct, 'item_description' => str_replace(' ', '_', trim($arrProductsSorted[0]['item_description']))]);

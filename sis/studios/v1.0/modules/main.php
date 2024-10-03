@@ -608,7 +608,8 @@ switch ($page) {
 	body #admin-bar {
 		background-color: #0B5893;
 		border-radius: 16px;
-
+		
+		
 	}
 
 	#ssis_header {

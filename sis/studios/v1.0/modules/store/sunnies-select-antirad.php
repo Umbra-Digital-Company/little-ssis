@@ -35,7 +35,7 @@
 
                                         ?>
 
-                                        <div class="product-option" prod-item-link="readers"
+                                        <div class="product-option" prod-item-link="antirad"
                                             data-color-name="<?= $curColors[$a]['color'] ?>"
                                             data-color-code="<?= $curColors[$a]['product_code'] ?>"
                                             product-code="<?= $curColors[$a]['product_code'] ?>">
@@ -99,7 +99,7 @@
                                             if ($a < $maxVisibleColors) {
                                                 // Display the first 4 items
                                                 ?>
-                                                <li class="visible" data-index="<?= $a ?>"
+                                                <li class="<?= $a === 0 ? 'active' : '' ?> visible" data-index="<?= $a ?>"
                                                     data-style-name="<?= trim($arrProductsSorted[$i]['item_description']) ?>"
                                                     data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
                                                     data-color-code="<?= trim($curColors[$a]['product_code']) ?>"

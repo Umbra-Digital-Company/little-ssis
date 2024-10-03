@@ -235,6 +235,7 @@ body * {
 
 body {
   background: #f0f0f0;
+
 }
 
 #ssis_sidebar {
@@ -388,7 +389,7 @@ body {
 
 body #admin-bar {
   margin: 0 auto;
-  width: 100%;
+
   background-color: #0b5893;
   position: fixed;
   max-width: 575px;
@@ -413,7 +414,9 @@ body #admin-bar {
     0px 1px 2px 0px rgba(0, 0, 0, 0.04);
 }
 
-body #admin-bar > div {
+
+
+body #admin-bar>div {
   padding: 10px;
 }
 
@@ -2987,13 +2990,16 @@ main.customer-layout .wrapper {
   max-width: 575px !important;
   width: 100% !important;
   border-radius: 16px;
+
 }
+
 .modal-header {
   padding-top: 20px;
   height: 72px;
   align-items: center;
   border-radius: 5px;
 }
+
 .left-section {
   flex: 1;
   display: flex;
@@ -3012,6 +3018,7 @@ main.customer-layout .wrapper {
 .close {
   opacity: 1;
 }
+
 .title {
   flex: 3;
   display: flex;
@@ -3022,13 +3029,19 @@ main.customer-layout .wrapper {
   font-family: "Surt-Bold";
   margin: 0 auto;
 }
+
 .close-button {
   outline: none;
-  background: none; /* Remove default background */
-  border: none; /* Remove default border */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-  cursor: pointer; /* Pointer cursor on hover */
+  background: none;
+  /* Remove default background */
+  border: none;
+  /* Remove default border */
+  padding: 0;
+  /* Remove default padding */
+  margin: 0;
+  /* Remove default margin */
+  cursor: pointer;
+  /* Pointer cursor on hover */
   flex: 1;
   display: flex;
   align-items: center;
@@ -3037,13 +3050,15 @@ main.customer-layout .wrapper {
 }
 
 .arrow-visible {
-  display: block; /* Show arrow when class is added */
+  display: block;
+  /* Show arrow when class is added */
   height: 16px;
   width: 16px;
 }
 
 .close-button.hidden {
-  display: none; /* Hide the close button */
+  display: none;
+  /* Hide the close button */
 }
 
 .close-button:focus {
@@ -3069,24 +3084,31 @@ main.customer-layout .wrapper {
   font-size: 12px;
   color: #b3a89b !important;
 }
+
 .cart-item .cart-item-image {
   width: 100%;
 }
+
 .submit {
   border-radius: 30px;
   padding-left: 30px;
   padding-right: 30px;
 }
+
 @media only screen and (max-width: 992px) {
-  body > .container {
+
+  body>.container {
     /*overflow-y: hidden;*/
     height: 100vh;
   }
 }
+
 @media only screen and (max-width: 600px) {
+
   .cart-item .mt-xs-0 {
     margin-top: 0 !important;
   }
+
   #modal-signup .modal-dialog,
   #modal-filter .modal-dialog,
   .modal-dialog {
@@ -3099,10 +3121,15 @@ main.customer-layout .wrapper {
   cursor: pointer;
 }
 
+.color-list div {
+  cursor: pointer;
+}
+
 .my-collection,
 .my-shapes {
   text-transform: capitalize;
 }
+
 .my-collection,
 .my-shapes,
 .my-color {
@@ -3123,6 +3150,7 @@ main.customer-layout .wrapper {
   height: 48px;
   color: #342c29;
 }
+
 .btn-filter-selected {
   border: 2px solid #dcdcdc;
   background-color: #e2e9f3;
