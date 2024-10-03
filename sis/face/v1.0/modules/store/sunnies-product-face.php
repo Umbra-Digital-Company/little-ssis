@@ -35,6 +35,9 @@ if(!isset($_SESSION['customer_id'])) {
 <link rel="stylesheet" type="text/css" href="/sis/face/assets/css/color_pickers.css">
 <style>
 
+    .item-price {
+        color: #f1f1f1;
+    }
     /* Remove Progress Bar */
     .step-progress {
         display: none !important;
@@ -308,6 +311,9 @@ if(!isset($_SESSION['customer_id'])) {
             /* Ensure image is block-level */
         }
 
+        .product-view {
+            overflow-x: hidden !important;
+        }
 
     }
   
@@ -323,99 +329,182 @@ if(!isset($_SESSION['customer_id'])) {
         }));
 
         ?>
-        <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;">
-            <!-- <a href="./?page=<?= $_GET['page']?>" class="exit-frame-selection">
-                <div class="d-flex align-items-start mb-3">
-                    <img src="/assets/images/icons/icon-left-arrow.png" alt="back" class="img-fluid" title="back to shopping" style="padding-left: 20px;"><p class="mt-2" style="margin-left: 5px;">Back</p>
+        <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;  margin-bottom: 120px;">
+            
+            <div class="search-container-store d-flex align-items-center mb-4">
+                    <!-- <div id="btn-filter" class="btn btn-not-cancel"> <img id="bag-icon"
+                            src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
+                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
+                    <div id="form-search" class="d-flex align-items-center"></div> -->
+                <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
+                    value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
+                <div id="toggleLayout" style="display: none;"></div>
+
+                <div class="">
+                    <button id="btn-search" class="btn btn-primary" style="height: 48px; width: 48px">
+                        <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search"
+                            style=" height: 24px; width: 24px;">
+                    </button>
                 </div>
-            </a> -->
+            </div>
+
+                
+            <div class="flex-container mb-3">
+
+                <button class="btn btn-bag " id="bag-button" disabled>
+                    <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                </button>
+            </div>
             
             <form href="#" id="form-add-to-bag">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex d-flex-m justify-content-between">
-                            <div class="product-top" style="text-align:center;">
-                                <input type="hidden" name="studios_product_code" value="<?= $_GET['product-code']?>">
-                                <?php
-                                
-                                    $curStyle = trim($_GET['style']);
-                                    $curColor = str_replace("-gdt", "-g", str_replace("-m", "-mirror", str_replace("-f", "-full", str_replace(" ", "-", trim($_GET['color'])))));                                    
-                                    $curImageURL = $_GET["image"];
+            <div class="d-flex flex-row" style="width: 100%; height: 50vh;">
+                <div class="frame-style card mb-3 hide-lazy d-flex align-items-stretch" data-style="<?= $arrProductDetails[0]['item_description'] ?>" style="width: 50%; height: 100%;">
+                    <div class="frame-style__slider">
+                        <?php
+                        // Set current colors array
+                        $curColors = $arrProductDetails;
 
-                                    if($curImageURL == '/sis/face/assets/images/defaults/no_specs_frame_available_b.png') {
+                        for ($a = 0; $a < sizeOf($curColors); $a++) {
+                            ?>
+                            <div class="specific-product" data-color-name="<?= $curColors[$a]['color'] ?>"
+                                data-color-code="<?= $curColors[$a]['product_code'] ?>"
+                                product-code="<?= $curColors[$a]['product_code'] ?>">
 
-                                        $curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/'.$curStyle.'/'.$curColor.'/front.png';
+                                <input type="radio" name="frame_style" class="sr-only">
+                                <label class="list-item frame-grid d-flex flex-column align-items-center justify-content-center"
+                                    style="background-color: #fff;">
 
-                                    };
-                                    $curImageURL = (@getimagesize($curImageURL)) ?  $curImageURL : '/sis/face/assets/images/defaults/no_specs_frame_available_b.png';
+                                    <?php
+                                    $curImageURL = '';
+                                    $ImageURL = $curColors[$a]["image_url"];
 
-                                ?>
-                                <img src="<?=  $curImageURL ?> " class="img-responsive" style="width: 100%; max-width: 300px;">                                
-                                <div class="mt-3">
-                                    <h2 style="text-transform: uppercase;"><?= $curStyle ?> <span style="font-size: 14px; color: #b3a89b !important;"><?= trimColor($_GET['color']) ?></span></h2>
-                                </div>                                
-                            </div>
-                           
-                            <div class="product-top" style="text-align:center">
-                                <div class="d-flex justify-content-start count_item">
-                                    <div class="d-flex justify-content-start mt-2">
-                                        <span><input type="button" class="form-control minus_count_decrement" value="-"></span>
-                                        <input type="text" class="form-control count_num" name="count_num_value" value="1" readonly>
-                                        <span><input type="button" class="form-control add_count_increment" value="+"></span>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-center mt-2">
-                                    <p style="font-size: 18px;"><strong><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱'?></strong><?= $_GET['price'] ?></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div style="width: 100%;">
-                                <!-- <p>Description</p> -->
-                                <hr class="spacing">
-                                <div class="mt-4">
-                                    <p><?=($_GET['descr'] != null) ? $_GET["descr"] : 'No description' ?></p>
-                                </div>
-                                <div>
-                                    <ul class="row tags-list">
-
-                                    <?php 
-
-                                        // Create array of tags
-                                        $arrTags = explode(',', $_GET['tags']); 
-
-                                        // Loop through array
-                                        for ($i=0; $i < sizeOf($arrTags); $i++) { 
-
-                                            // Set current data
-                                            $curTag = $arrTags[$i];
-                                            $curTagClass = str_replace("'", "-", str_replace(" ", "-", trim(strtolower(str_replace("desc::", "", $curTag)))));
-                                            $curTagEdited = trim(strtolower(str_replace("desc::", "", $curTag)));
-
-                                            // Check if "desc" tag
-                                            if(strpos($curTag, 'desc::') !== false) {
-
-                                                echo '<li class="col-6 tag-icon tag-icon__'.$curTagClass.'">'.$curTagEdited.'</li>';
-
-                                            };
-
-                                        };
-
+                                    if ($ImageURL == null || $ImageURL == '') {
+                                        $curImageURL = '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png';
+                                    } else {
+                                        $curImageURL = $ImageURL;
+                                    }
                                     ?>
 
-                                    </ul>
-                                </div>
+                                    <div class="image-wrapper"
+                                        style="width: 100%;  padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center;">
+                                    </div>
+                                </label>
                             </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
-                <hr class="spacing">
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">add to bag</button>
+
+                <div style="background: #fff; width: 50%; height: 100%;" class="card p-3 pt-4 d-flex align-items-stretch ml-3">
+                    <input type="hidden" id="studios-product-code" name="studios_product_code"
+                        value="<?= trim($curColors[0]['product_code']) ?>">
+
+                    <div class="d-flex justify-content-between">
+                        <section class="product-details align-items-start justify-content-between">
+                            <div>
+                                <h4><?= $arrProductDetails[0]['item_description'] ?></h4>
+                                <h4 ><span class="item-price" style="color:#919191 !important;"><?= trimColor($curColors[0]['color']); ?></span></h4>
+                            </div>
+                        </section>
+                    </div>
+                    <section class="product-details align-items-start justify-content-between">
+                        <h5>
+                            <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>
+                        </h5>
+                    </section>
+
+                    <ul class="switch-color d-flex align-items-center justify-content-between" style="overflow-y: auto;">
+                        <?php
+                        $totalColors = sizeof($curColors);
+
+                        foreach ($curColors as $key => $value) {
+                            $a = $key;
+                            ?>
+                            <li class="visible color-swatch " data-index="<?= $a ?>"
+                                data-style-name="<?= trim($arrProductDetails[0]['item_description']) ?>"
+                                data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
+                                data-color-code="<?= trim($curColors[$a]['product_code']) ?>"
+                                data-color-price="P<?= $curColors[$a]['price'] ?>"
+                                style="<?= ($curColors[$a]['color_swatch'] != '') ? 'background-color: ' . $curColors[$a]['color_swatch'] . ';' : 'background-color: #000;' ?>">
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+
+
+                <div class="d-flex justify-content-between mt-3 card p-3" style="height: 20vh;">
+                    <div class="description">
+                        <?php
+                        $product_description = ($arrProductDetails[0]['main_description'] != null && $arrProductDetails[0]['main_description'] != '')
+                            ? $arrProductDetails[0]['main_description']
+                            : 'No description available';
+                        ?>
+                        <span style="font-size: 16px; font-weight: 400; color: #342C29;"><?= $product_description ?></span>
+                    </div>
                 </div>
 
-            </form>
-        </section>
+
+
+                    <div id="bottom-content" class=" d-flex p-2 text-center align-items-center justify-content-center"
+                        style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1; background: #fff;">
+                        <div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center mr-4">
+                                    <div class="d-flex justify-content-center" style="width: 50px; background: #fff;">
+                                        <button type="button" id="btn-decrement" class="btn btn-counts minus_count_decrement"
+                                            style="height: 40px; width: 48px; background: #fff;">
+                                            <img src="<?= get_url('images/icons') ?>/icon-decrement.png" alt="minus"
+                                                style="height: 20px; width: 20px;">
+                                        </button>
+                                    </div>
+
+                                    <input type="text" class="form-control count_num" name="count_num_value" value="1"
+                                        style="background-color: transparent; border: 0; font-size: 16px; text-align: center; width: 50px;"
+                                        readonly>
+
+                                    <div class="d-flex justify-content-center" style="width: 50px; background: #fff;">
+                                        <button type="button" id="btn-increment" class="btn btn-counts add_count_increment"
+                                            style="height: 40px; width: 48px; background: #fff;">
+                                            <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="add"
+                                                style="height: 20px; width: 20px;">
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" style="width: 359px; height: 56px;">Add to
+                                    bag</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+            </section>
+
+            <script>
+                $(document).ready(function () {
+                    // Event listener for color swatch clicks
+                    $('.color-swatch').on('click', function () {
+                        // Get the product code of the selected color
+                        let newProductCode = $(this).data('color-code');
+                        let newColorName = $(this).data('color-name');
+                        let newColorPrice = $(this).data('color-price');
+
+                        // Update the hidden input field with the new product code
+                        $('#studios-product-code').val(newProductCode);
+
+                        // Optionally update other elements (like color name or price) if needed
+                        $('.blk').text(newColorName);
+                        $('.item-price').text(newColorPrice);
+
+                        // Add active class to the selected color and remove it from siblings
+                        $(this).addClass('active').siblings().removeClass('active');
+                    });
+                });
+            </script>
 
     <?php }else{ ?>
 
@@ -486,7 +575,7 @@ if(!isset($_SESSION['customer_id'])) {
                                 <?php        
                                     // Set current colors array
                                     $curColors = $arrProductsSorted[$i]["colors"];
-
+                                    
                                     for($a = 0; $a < 1; $a++) { 
 
                                 ?> 
@@ -534,16 +623,10 @@ if(!isset($_SESSION['customer_id'])) {
                                     </div>
                                     
                                     <div class="row d-flex justify-content-center mt-3">
-                                        <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>"
-                                            method="POST">
-                                            <input type="hidden" name="studios_product_code"
-                                                id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>"
-                                                value="<?= trim($curColors[0]['product_code']) ?>">
-                                            <input type="hidden" class="form-control count_num" name="count_num_value" value="1"
-                                                readonly>
-                                            <button type="submit" class="btn btn-not-cancel"
-                                                id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">Add to
-                                                bag</button>
+                                        <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST">
+                                            <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[0]['product_code']) ?>">
+                                            <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
+                                            <button type="submit" class="btn btn-primary">Shop</button>
                                         </form>
                                     </div>
                                 </div>
@@ -648,7 +731,6 @@ if(!isset($_SESSION['customer_id'])) {
             white-space: nowrap;
             font-weight: 500;
         }
-
         .frame-list {
             overflow-x: hidden !important;
         }
@@ -977,16 +1059,16 @@ if(!isset($_SESSION['customer_id'])) {
 
     $(document).on('click', '.switch-color li', function() {
         var slideIndex = $(this).data('index');
-        var slider     = $(this).parents('.frame-style').find('.frame-style__slider');    
-        var curStyle   = $(this).data('style-name');
-        var curSKU     = $(this).data('color-code');
-        
+        var slider = $(this).parent().parent().siblings('.frame-style').find('.frame-style__slider');
+        console.log(slider);
+        var curStyle = $(this).data('style-name');
+        var curSKU = $(this).data('color-code');
+
         $(this).addClass('active').siblings().removeClass('active');
-        slider.slick('slickGoTo', parseInt(slideIndex))
-        $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));   
-        // $('#input-sku-' + curStyle).val(curSKU);
-        $(this).parents('.frame-style').find('.form-quick-add-to-bag').find('input').eq(0).val(curSKU);
-    })
+        slider.slick('slickGoTo', parseInt(slideIndex));
+        $(this).closest('.card').find('.product-details h4 span').text($(this).data("color-name"));
+        $(this).closest('.card').find('input[name="studios_product_code"]').val(curSKU);
+    });
 
     $('.image-wrapper').each(function() {
         var image = $(this).data('src');
@@ -994,16 +1076,14 @@ if(!isset($_SESSION['customer_id'])) {
         var elem = $(this);
 
         checkImage(image).on('error', function() {
-            elem.css('background-image', 'url('+no_image+')')
+            elem.css('background-image', 'url(' + no_image + ')');
         }).on('load', function() {
-            elem.css('background-image', 'url('+image+')')
-        })
-    })
+            elem.css('background-image', 'url(' + image + ')');
+        });
+    });
 
-    
-
-    function checkImage(src) {
-        return $("<img>").attr('src', src);
+    function checkImage(url) {
+        return $('<img>').attr('src', url);
     }
 
     const totalCount = () =>{   
@@ -1053,7 +1133,7 @@ if(!isset($_SESSION['customer_id'])) {
                 $('.ssis-overlay').removeClass('show').fadeOut().html("");
             }
 
-            if ( $(this).data('sidebar') == 'yes' ) {
+            if ($(this).data('sidebar') == 'yes') {
                 toggleSidebar('show');
             }
         });
@@ -1086,7 +1166,42 @@ if(!isset($_SESSION['customer_id'])) {
             firstload = true;
         },10);
 
+    $('.frame-style__slider').slick({
+        dots: false,
+        arrows: false,
+        swipeToSlide: false,
+        touchMove: false,
+        swipe: false
+    }).on('swipe', function (event, slick, direction) {
+        var newActive = slick.currentSlide;
+        var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
+
+        colorPicker.each(function () {
+            if ($(this).data('index') == newActive) {
+                $(this).addClass('active').siblings().removeClass('active')
+                $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
+                $(this).parents('.frame-style').find('.product-details h5 span').text($(this).data("color-price"));
+            }
+        })
+    })
+
+    $(document).on('click', '.switch-color li', function () {
+            var slideIndex = $(this).data('index');
+            var slider = $(this).parents('.frame-style').find('.frame-style__slider');
+            var curStyle = $(this).data('style-name');
+            var curSKU = $(this).data('color-code');
+
+            $(this).addClass('active').siblings().removeClass('active');
+            slider.slick('slickGoTo', parseInt(slideIndex))
+            $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
+            $(this).parents('.frame-style').find('.product-details h5 span').text($(this).data("color-price"));
+            // $('#input-sku-' + curStyle).val(curSKU);
+            $(this).parents('.frame-style').find('.form-quick-add-to-bag').find('input').eq(0).val(curSKU);
+        })
     }
+
+    
+
     // let timeoutProduct = null;
     const appendProduct = (toShowCount) =>{
         let arrProd = [];

@@ -861,12 +861,31 @@
             });
         });
         
-        $(this).on('click','.product-option',function(){
-            let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
-            let linkProd = $(this).attr('prod-item-link');
-            linkProd = (linkProd != 'frame') ? linkProd : 'store-studios';
-            window.location  ="?page=select-"+linkProd+"&product-detail=true&product-code="+tempProduct.product_code+"&desc="+tempProduct.description+"&style="+tempProduct.item_description+"&color="+tempProduct.color+"&price="+tempProduct.price+"&image="+tempProduct.image_url+"&descr="+tempProduct.product_description+"&tags="+tempProduct.tags;
-        });
+        $(this).on('click', '.product-option', function () {
+                let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
+                let linkProd = $(this).attr('prod-item-link');
+
+                linkProd = (linkProd != 'frame') ? linkProd : 'store-studios';
+
+                if (linkProd == 'merch') {
+                    const findItemByProductCode = (productCode) => {
+                        return arrMerchSorted.find(item =>
+                            item.colors.some(color => color.product_code === productCode)
+                        );
+                    }
+
+                    let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
+                    let tempProduct2 = findItemByProductCode($(this).attr('product-code'));
+
+
+                    window.location = "?page=select-merch&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct2.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+
+                } else {
+                    window.location = "?page=select-store-" + linkProd + "&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+                }
+
+            });
+
 
         $("#cart").click(function(){
             let item_cart = '';

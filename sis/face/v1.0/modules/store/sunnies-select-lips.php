@@ -296,6 +296,9 @@ if (!isset($_SESSION['customer_id'])) {
         }
     </style>
 <div class="packages-list hiding">
+<?php if (isset($_GET['product-detail']) && trim($_GET['product-detail']) != "") { ?>
+    
+<?php } else { ?>
 
         <section class="product-panel" id="product-panel">
                 <div class="frame-list">
@@ -409,7 +412,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             
                                             ?>
 
-                                            <div class="product-option" prod-item-link="readers"
+                                            <div class="product-option" prod-item-link="lips"
                                                 product-code="<?= $curColors[$a]['product_code'] ?>">
                                                 <input type="radio" name="frame_style" class="sr-only">
                                                 <label
@@ -484,6 +487,7 @@ if (!isset($_SESSION['customer_id'])) {
                 </div>
 
             </section>
+            <?php } ?>
 
     </div>
 <?php } ?>

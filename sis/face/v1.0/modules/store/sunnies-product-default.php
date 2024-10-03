@@ -521,8 +521,7 @@ if(!isset($_SESSION['customer_id'])) {
                                             <input type="hidden" class="form-control count_num" name="count_num_value" value="1"
                                                 readonly>
                                             <button type="submit" class="btn btn-not-cancel"
-                                                id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">Add to
-                                                bag</button>
+                                                id="btn-add-<?= strtolower($arrProductsSorted[$i]['item_description']) ?>">Shop</button>
                                         </form>
                                     </div>
                                 </div>

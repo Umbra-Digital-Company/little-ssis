@@ -309,7 +309,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             
                                             ?>
 
-                                            <div class="product-option" prod-item-link="readers"
+                                            <div class="product-option" prod-item-link="eyes"
                                                 product-code="<?= $curColors[$a]['product_code'] ?>">
                                                 <input type="radio" name="frame_style" class="sr-only">
                                                 <label
@@ -352,7 +352,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             ?>
                                         </section>
 
-                                        <section
+                                        <section 
                                             class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
                                             <h5>
                                                 <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>

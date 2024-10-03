@@ -165,6 +165,14 @@ switch ( $page ) {
 				<a href="#" class="prevent" id="exit_customer_page"><img
 						src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
 			</div>
+			<div class="account-name">
+			<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
+			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" 
+				style=" max-width: 120px;">	
+		</div>
+		<div class="account">
+			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+		</div>
 		<?php endif ?>
 
 		<?php if ($page == 'contact-tracing-form'): ?>

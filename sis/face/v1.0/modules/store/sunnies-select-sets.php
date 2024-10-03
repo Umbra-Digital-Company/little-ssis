@@ -309,7 +309,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             
                                             ?>
 
-                                            <div class="product-option" prod-item-link="readers"
+                                            <div class="product-option" prod-item-link="sets"
                                                 product-code="<?= $curColors[$a]['product_code'] ?>">
                                                 <input type="radio" name="frame_style" class="sr-only">
                                                 <label
