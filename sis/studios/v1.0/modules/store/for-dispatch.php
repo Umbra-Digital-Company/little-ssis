@@ -363,7 +363,7 @@ include("./modules/includes/grab_dispatch_order.php");
                                     <?= htmlspecialchars($customer['fullname']) ?>
                                 </span>
                                 <span class="order-id">
-                                    1000<?php echo htmlspecialchars($customer['order_id']) ?>
+                                    <?php echo htmlspecialchars($customer['order_id']) ?>
                                 </span>
                             </td>
 
