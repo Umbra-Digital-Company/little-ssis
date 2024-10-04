@@ -111,6 +111,11 @@
         cursor: pointer;
     }
 
+    .order-table {
+        overflow-x: auto;
+        margin-bottom: 2rem;
+    }
+
 
 
     th {
@@ -206,12 +211,13 @@
         font-weight: 500;
     }
 
-    .badge-payment {
+
+    .badge-unpaid {
         background-color: #D84E42;
         color: #ffffff;
     }
 
-    .badge-confirmation {
+    .badge-paid {
         background-color: #9DE356;
     }
 
@@ -231,13 +237,30 @@
     /* Item category badge style */
     .item-category {
         padding: 0.25rem 0.625rem;
-        font-size: 0.875rem;
+        font-size: 14px;
         font-weight: 500;
-        background-color: #46797A;
         color: #ffffff;
         border-radius: 9999px;
         display: inline-block;
     }
+
+    .badge-antirad {
+        background-color: #0B5894;
+    }
+
+    .badge-sunnies {
+        background-color: #46797A;
+    }
+
+    .badge-readers {
+        background-color: #D26F4B;
+    }
+
+    .badge-merch {
+        background-color: #CED880;
+    }
+
+
 
     .cancel-button {
         padding: 0.5rem 0.875rem;
@@ -304,7 +327,7 @@ include("./modules/includes/grab_dispatch_order.php");
         <?php if (!empty($arrCustomer)): ?>
             <select class="pagination-select" onchange="location = this.value;">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <option value="?page=transactions&pagination=<?= $i ?>" <?= $i == $pagination ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
+                    <option value="?page=transactions&active=dispatch&dpage=<?= $i ?>" <?= $i == $pagination ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
                 <?php endfor; ?>
             </select>
         <?php endif; ?>
@@ -315,14 +338,13 @@ include("./modules/includes/grab_dispatch_order.php");
 
     <?php if (empty($arrCustomer)): ?>
         <div class="no-orders-message" style="text-align: center; margin-top: 5rem">
-            <img class="img-fluid header-icon" src="/images/icons/white-dispatch-icon.png" style="filter: grayscale(0) brightness(0.5);" />
+            <img src="/sis/studios/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
             <h1 style="color: #B7B7B7;">No Pending Orders</h1>
         </div>
     <?php else: ?>
 
-
-        <div class="table-responsive ">
-            <table id="myTable" class="order-table">
+        <div class="order-table">
+            <table id="myTable" class="">
                 <thead>
                     <tr>
                         <th>Customer & Order ID</th>
@@ -333,13 +355,15 @@ include("./modules/includes/grab_dispatch_order.php");
                 </thead>
                 <tbody>
                     <?php foreach ($arrCustomer as $customer): ?>
+
                         <tr>
+
                             <td>
                                 <span class="customer-name">
                                     <?= htmlspecialchars($customer['fullname']) ?>
                                 </span>
                                 <span class="order-id">
-                                    1000<?php echo htmlspecialchars($customer['order_id']) ?>
+                                    <?php echo htmlspecialchars($customer['order_id']) ?>
                                 </span>
                             </td>
 
@@ -348,19 +372,68 @@ include("./modules/includes/grab_dispatch_order.php");
                                     <?= htmlspecialchars((new DateTime($customer['status_date']))->format('d M Y h:i A')); ?>
                                 </span>
 
-                                <span class="status-badge <?= htmlspecialchars($customer['status']) === 'cancelled' ? 'badge-cancelled' : (htmlspecialchars($customer['status']) === 'for payment' ? 'badge-payment' : 'badge-confirmation') ?>">
-                                    <?= htmlspecialchars($customer['status']); ?>
+                                <?php
+                                $customerStatus = htmlspecialchars($customer['status']);
+                                $badgeClass = 'badge-paid';
+                                $displayText = 'Paid';
+
+                                switch ($customerStatus) {
+                                    case 'cancelled':
+                                        $badgeClass = 'badge-cancelled';
+                                        $displayText = 'Cancelled';
+                                        break;
+                                    case 'for payment':
+                                        $badgeClass = 'badge-unpaid';
+                                        $displayText = 'Unpaid';
+                                        break;
+                                    case 'returned':
+                                        $badgeClass = 'badge-cancelled';
+                                        $displayText = 'Returned';
+                                        break;
+                                        // You can add more cases as needed
+                                }
+                                ?>
+                                <span class="status-badge <?= $badgeClass; ?>">
+                                    <?= $displayText; ?>
                                 </span>
                             </td>
 
                             <td>
-                                <span class="item-name"> <?= htmlspecialchars($customer['item_name']); ?></span>
-                                <span class="item-category">Sunnies Studios</span>
+                                <span class="item-name"><?= htmlspecialchars($customer['item_name']); ?></span>
+                                <?php
+
+                                $storeType = htmlspecialchars($customer['store_type']);
+                                $badgeClass = 'badge-merch';
+                                $displayText = 'Merch';
+
+
+                                switch ($storeType) {
+                                    case 'DCGC0028':
+                                        $badgeClass = 'badge-antirad';
+                                        $displayText = 'Anti-Rad';
+                                        break;
+                                    case 'DCGC0003':
+                                        $badgeClass = 'badge-sunnies';
+                                        $displayText = 'Sunnies Studios';
+                                        break;
+                                    case 'DCGC0034':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Readers';
+                                        break;
+                                }
+                                ?>
+                                <span class="item-category <?= $badgeClass; ?>">
+                                    <?= $displayText; ?>
+                                </span>
                             </td>
                             <td>
-                                <button type="button" class="cancel-button">
-                                    Cancel Order
+                                <input type="hidden" name="order_id" value="<?= htmlspecialchars($customer['order_id']) ?>">
+                                <input type="hidden" name="po_number" value="<?= htmlspecialchars($customer['po_number']) ?>">
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($customer['id']) ?>">
+                                <button type="submit" class="cancel-this-order cancel-button">
+                                    Cancel order
                                 </button>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -368,6 +441,16 @@ include("./modules/includes/grab_dispatch_order.php");
                 </tbody>
             </table>
         </div>
+
+        <!-- <div class="alert alert-warning alert-dismissible fade show text-center border-0 mb-0" role="alert" style="background-color: #9DE356; color: #342C29; font-size: 18px; border-radius: 16px 16px 0 0; margin-top: 6rem;">
+            Order has successfully been sent to Cashier
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <svg style="height: 24px; width: 24px" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="none" stroke="#342C29" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div> -->
+
 
 
 
@@ -389,14 +472,40 @@ include("./modules/includes/grab_dispatch_order.php");
         $searchForm.on('submit', function(e) {
             e.preventDefault();
             const searchTerm = $searchInput.val().trim();
-            window.location.href = `${baseUrl}?page=transactions${searchTerm ? `&search=${encodeURIComponent(searchTerm)}` : ''}`;
+            window.location.href = `${baseUrl}?page=transactions&active=dispatch${searchTerm ? `&search=${encodeURIComponent(searchTerm)}` : ''}`;
         });
 
         const toggleClearButton = () => $clearButton.toggle($searchInput.val().length > 0);
 
-        window.clearSearch = () => window.location.href = `${baseUrl}?page=transactions`;
+        window.clearSearch = () => window.location.href = `${baseUrl}?page=transactions&active=dispatch`;
 
         $searchInput.on('input', toggleClearButton);
         toggleClearButton();
+
+
+        $('.cancel-this-order').click(function(e) {
+            e.preventDefault();
+
+            var order_id = $(this).closest('tr').find('input[name="order_id"]').val();
+            var po_number = $(this).closest('tr').find('input[name="po_number"]').val();
+            var id = $(this).closest('tr').find('input[name="id"]').val();
+            console.log(order_id, po_number, id);
+
+            $.ajax({
+                data: {
+                    order_id: order_id,
+                    po_number: po_number,
+                    id: id
+                },
+                type: "POST",
+                url: "/sis/studios/v1.0/modules/includes/cancel_order.php",
+                success: function(data) {
+                    location.reload();
+                    // console.log(data);
+
+                }
+
+            });
+        });
     });
 </script>

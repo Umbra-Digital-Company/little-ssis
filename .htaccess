@@ -1,4 +1,3 @@
 RewriteEngine On
 Order Deny,Allow
 Deny from 23.26.201.31
-

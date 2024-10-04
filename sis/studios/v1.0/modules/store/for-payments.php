@@ -18,11 +18,22 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 	include("./modules/includes/products/grab_for_payments.php");
 	include("./modules/includes/date_convert.php");
-	// echo '<pre>';
-	// print_r(getForPayments());
-	// echo '</pre>';
 
-	$arrForPayments = getForPayments();
+
+	$itemsPerPage = 10; // Set how many items you want per page
+	$currentPage = isset($_GET['ppage']) ? (int)$_GET['ppage'] : 1; // Get current page or default to 1
+	$totalItems = getTotalItems(); // Get total number of items
+	$totalPages = ceil($totalItems / $itemsPerPage); // Calculate total pages
+
+	// print_r($totalItems);
+
+	// Fetch items for current page
+	$offset = ($currentPage - 1) * $itemsPerPage; // Calculate offset for query
+	$arrForPayments = getForPayments($offset, $itemsPerPage);
+
+	// echo '<pre>';
+	// print_r($arrForPayments);
+	// echo '</pre>';
 	?>
 
 	<style>
@@ -266,16 +277,14 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 					<span style="color: #342C29; font-size: 18px; font-weight: 400;">Total Orders
 						<span style="margin-left: 5px; color: #342C29; font-size: 18px; font-weight: 700;">
-							<?= count($arrForPayments) ?>
+							<?= $totalItems ?>
 						</span> </span>
-					<div style="color: #342C29; font-size: 18px; font-weight: 400;">
-						Page 1 of 32
-					</div>
 
-					<?php if (!empty($arrCustomer)): ?>
+
+					<?php if (!empty($arrForPayments)): ?>
 						<select class="pagination-select" onchange="location = this.value;">
 							<?php for ($i = 1; $i <= $totalPages; $i++): ?>
-								<option value="?page=transactions&pagination=<?= $i ?>" <?= $i == $pagination ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
+								<option value="?page=transactions&active=payment&date=<?= urlencode((isset($_GET['date']) ? $_GET['date'] : '')) ?>&ppage=<?= $i ?>" <?= $i == $currentPage ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
 							<?php endfor; ?>
 						</select>
 					<?php endif; ?>
@@ -366,7 +375,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 		});
 
 		function searchDate() {
-			window.location = '?page=transactions&date=' + $('#date-from').val() + '|' + $('#date-to').val();
+			window.location = '?page=transactions&active=payment&date=' + $('#date-from').val() + '|' + $('#date-to').val();
 		}
 	</script>
 

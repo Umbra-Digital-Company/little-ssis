@@ -15,12 +15,12 @@ if(!isset($_SESSION['user_login']['username'])) {
 
 		$order_no = $_SESSION["order_no"];
 		$profile_id = $_SESSION["customer_id"];
-		unset($_SESSION["customer_page"]);
-	    unset($_SESSION["login_customer"]);
-	    unset($_SESSION["customer_id"]);
-	    unset($_SESSION["cust_id"]);
-	    unset($_SESSION["priority"]);
-	    unset($_SESSION["order_no"]);
+		// unset($_SESSION["customer_page"]);
+	    // unset($_SESSION["login_customer"]);
+	    // unset($_SESSION["customer_id"]);
+	    // unset($_SESSION["cust_id"]);
+	    // unset($_SESSION["priority"]);
+	    // unset($_SESSION["order_no"]);
 
 	     $status = 'for payment';
 	     $payment = 'n';
@@ -217,9 +217,9 @@ if(!isset($_SESSION['user_login']['username'])) {
 		    if(isset($_SESSION['guest_customer'])){
 			    unset($_SESSION['guest_customer']);
 			}
-			if(isset($_SESSION['login_set'])){
-			    unset($_SESSION['login_set']);
-			}
+			// if(isset($_SESSION['login_set'])){
+			//     unset($_SESSION['login_set']);
+			// }
 		    $name = ucwords(strtolower($arrName[0]['first_name'].' '.$arrName[0]['last_name']));
 			echo "<script>  window.location = '/sis/studios/".$_GET['path_loc']."/?page=order-dispatched&order_id=".$order_no."&name=".$name."';</script>";
 		}else{

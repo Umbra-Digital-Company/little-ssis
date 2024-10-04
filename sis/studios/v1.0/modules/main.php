@@ -31,23 +31,16 @@ if (!isset($_SESSION['user_login']['warehouse_code'])) {
 			for ($i = 0; $i < 1; $i++) {
 
 				$tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
-
-			}
-			;
+			};
 
 			$_SESSION['user_login']['warehouse_code'] = $tempArray['warehouse_code'];
-
-		}
-		;
+		};
 
 		mysqli_stmt_close($stmt);
-
 	} else {
 
 		echo mysqli_error($conn);
-
-	}
-	;
+	};
 }
 
 
@@ -211,10 +204,36 @@ switch ($page) {
 			</div>
 
 		<?php endif ?>
+
+		<?php if ($page == 'cart'): ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
+					<?= strtoupper("Bag") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
+
+		<?php endif ?>
+
+
 		<?php if ($page == 'order-confirmation'): ?>
 			<div class="account-name">
 				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
 					<?= strtoupper("Order Confirmation") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
+
+		<?php endif ?>
+
+		<?php if ($page == 'order-dispatched'): ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
+					<?= strtoupper("Order Sent to Cashier") ?>
 				</p>
 			</div>
 			<div class="account">
@@ -279,11 +298,11 @@ switch ($page) {
 		<?php
 
 		switch ($page) {
-			// assistant
+				// assistant
 			case 'store-home':
 				$custom_title = $arrTranslate[greetings()];
 				break;
-			// customer
+				// customer
 			case 'health-declaration-form':
 				$custom_title = 'Health Declaration Form';
 				break;
@@ -326,7 +345,7 @@ switch ($page) {
 			case 'updatedb':
 				$custom_title = 'Maintenance';
 				break;
-			// Default
+				// Default
 			default:
 				$custom_title = $page;
 		}
@@ -362,7 +381,7 @@ switch ($page) {
 					$step = '';
 			}
 
-			?>
+		?>
 
 			<div class="text-center">
 
@@ -477,14 +496,11 @@ switch ($page) {
 
 				$guestParam = "&checkout=guest";
 				$guestVal = "guest";
-
 			} else {
 
 				$guestParam = "";
 				$guestVal = "regular";
-
-			}
-			;
+			};
 
 			?>
 
@@ -713,7 +729,7 @@ switch ($page) {
 
 							$selected = (in_array($value, $getCollections)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-							?>
+						?>
 							<div class="col-3 mt-3">
 								<div class="my-collection filter-buttons btn <?= $selected ?>" collectionsData="<?= $value ?>">
 									<?= ucwords(strtolower($value)) ?></div>
@@ -734,7 +750,7 @@ switch ($page) {
 
 							$selected = (in_array($value, $getShapes)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-							?>
+						?>
 
 							<div class="col-3 mt-3">
 								<div class="my-shapes filter-buttons btn <?= $selected ?>" shapesData="<?= $value ?>">
@@ -756,7 +772,7 @@ switch ($page) {
 
 							$selected = (in_array($value['color'], $getColors)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-							?>
+						?>
 							<div class="col-3 mt-3">
 								<div class="my-color filter-buttons btn <?= $selected ?>" colorData="<?= $value['color'] ?>">
 									<?= ucwords(str_replace("_", " ", $value['color'])) ?></div>
@@ -774,7 +790,7 @@ switch ($page) {
 
 				<?php if (isset($_GET['filter']) && $_GET['filter']) {
 					$url_page = explode('&filter', $_SERVER['REQUEST_URI']);
-					?>
+				?>
 					<div class="d-flex justify-content-center mt-4">
 						<a href="<?= $url_page[0] ?>">
 							<div class="btn btn-link"
@@ -787,19 +803,19 @@ switch ($page) {
 			</div>
 
 			<script>
-				$(document).ready(function () {
+				$(document).ready(function() {
 					// Function to enable/disable the Apply Filter button
 					function toggleFilterButton() {
 						const hasSelected = $('.modal-body').find('.btn-filter-selected').length > 0;
 						const filterButton = $('#filter-search-data');
-						
+
 						filterButton.prop('disabled', !hasSelected);
 					}
 
 					toggleFilterButton();
 
 					// Event listener for filter buttons
-					$('.modal-body').on('click', '.filter-buttons', function () {
+					$('.modal-body').on('click', '.filter-buttons', function() {
 						// Update the Apply Filter button's state
 						toggleFilterButton();
 					});
@@ -827,6 +843,7 @@ switch ($page) {
 		</div>
 	</div>
 </div>
+
 <div id="loading" class="modal" role="dialog" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
 

@@ -1,11 +1,12 @@
 <?php
-    function getOrdersConfirmed($order_no_Cart){
+function getOrdersConfirmed($order_no_Cart)
+{
 
-        global $conn;
+    global $conn;
 
-        $arrCartQF = array();
+    $arrCartQF = array();
 
-        $arrCartQuery = 'SELECT  
+    $arrCartQuery = 'SELECT  
                             COUNT(pr.product_code) as count,
                             GROUP_CONCAT( os.orders_specs_id)  as group_orders_specs_id,
                             IF(
@@ -31,15 +32,15 @@
                             pr.product_number,
                             pr.item_code,';
 
-                        if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr'){
-                            $arrCartQuery .=' pr.sr_price,'; 
-                        }elseif(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs'){
-                            $arrCartQuery .=' pr.vnd_srp,'; 
-                        }else{
-                            $arrCartQuery .='  pr.price,';
-                        }
+    if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr') {
+        $arrCartQuery .= ' pr.sr_price,';
+    } elseif (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') {
+        $arrCartQuery .= ' pr.vnd_srp,';
+    } else {
+        $arrCartQuery .= '  pr.price,';
+    }
 
-        $arrCartQuery .= '  pr.product_code,
+    $arrCartQuery .= '  pr.product_code,
                             os.product_upgrade,
                             IF(
                                 s.image_url IS NOT NULL,
@@ -65,57 +66,86 @@
                                 LEFT JOIN emp_table u 
                                     ON u.emp_id= o.doctor
                         WHERE 
-                            o.order_id = "'.$order_no_Cart.'"
+                            o.order_id = "' . $order_no_Cart . '"
                                 AND os.status != "cancelled"
                         GROUP BY os.product_code, os.product_upgrade
                         ORDER BY os.id ASC';
 
-        $grabParamsQF = array(
-            "count",
-            "group_orders_specs_id",
-            "color",
-            "style",
-            "orders_specs_id",
-            "item_description",
-            "product_number",
-            "item_code",
-            "price",
-            "product_code",
-            "product_upgrade",
-            "image_url",
-            "po_number",
-            "dispatch_type",
-            "promo_code",
-            "promo_code_amount"
-        );
-        
-        $stmt = mysqli_stmt_init($conn);
-        if (mysqli_stmt_prepare($stmt, $arrCartQuery)) {
+    $grabParamsQF = array(
+        "count",
+        "group_orders_specs_id",
+        "color",
+        "style",
+        "orders_specs_id",
+        "item_description",
+        "product_number",
+        "item_code",
+        "price",
+        "product_code",
+        "product_upgrade",
+        "image_url",
+        "po_number",
+        "dispatch_type",
+        "promo_code",
+        "promo_code_amount"
+    );
 
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15, $result16);
+    $stmt = mysqli_stmt_init($conn);
+    if (mysqli_stmt_prepare($stmt, $arrCartQuery)) {
 
-            while (mysqli_stmt_fetch($stmt)) {
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15, $result16);
 
-                $tempArray = array();
+        while (mysqli_stmt_fetch($stmt)) {
 
-                for ($i=0; $i < sizeOf($grabParamsQF); $i++) { 
+            $tempArray = array();
 
-                    $tempArray[$grabParamsQF[$i]] = ${'result' . ($i+1)};
+            for ($i = 0; $i < sizeOf($grabParamsQF); $i++) {
 
-                };
-                $tempArray['item_description'] = ucwords(strtolower($tempArray['item_description']));
-                $arrCartQF [] = $tempArray;
-
+                $tempArray[$grabParamsQF[$i]] = ${'result' . ($i + 1)};
             };
+            $tempArray['item_description'] = ucwords(strtolower($tempArray['item_description']));
+            $arrCartQF[] = $tempArray;
+        };
 
-            mysqli_stmt_close($stmt);    
-                                    
-        }
-
-        return $arrCartQF;
+        mysqli_stmt_close($stmt);
     }
 
-    $arrOrdersConfirmed = (getOrdersConfirmed($_GET['order_id']));
+    return $arrCartQF;
+}
 
-?>
+
+function getProfile($order_id)
+{
+    global $conn;
+
+    $profileQuery = 'SELECT 
+                    p.age,
+                    CONCAT(p.first_name, " ", p.last_name) AS fullname
+                 FROM orders_studios o
+                 LEFT JOIN profiles_info p ON p.profile_id = o.profile_id
+                 WHERE o.order_id = ?';
+
+    $age = null;
+    $fullname = null; 
+    $stmt = mysqli_stmt_init($conn);
+    if (mysqli_stmt_prepare($stmt, $profileQuery)) {
+        mysqli_stmt_bind_param($stmt, "s", $order_id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $ageResult, $fullnameResult);
+
+        if (mysqli_stmt_fetch($stmt)) {
+            $age = $ageResult;
+            $fullname = $fullnameResult;
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    // Return an array if you want both age and first name
+    return array('age' => $age, 'full_name' => $fullname);
+}
+
+
+$profile = (getProfile($_GET['order_id']));
+$arrOrdersConfirmed = (getOrdersConfirmed($_GET['order_id']));

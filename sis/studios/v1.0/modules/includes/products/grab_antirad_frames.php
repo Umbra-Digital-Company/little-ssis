@@ -1,40 +1,42 @@
-<?php 
+<?php
 
-if(!isset($_SESSION)){ session_start(); }
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 //////////////////////////////////////////////////// GRAB FRAMES
 
 // Set array
 $arrFrames = array();
 
-if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr'){
-    $priceWhere ='AND p.sr_price > 0'; 
-}elseif(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs'){
-    $priceWhere ='AND p.vnd_srp > 0'; 
-}else{
-    $priceWhere ='AND p.price > 0';
+if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr') {
+    $priceWhere = 'AND p.sr_price > 0';
+} elseif (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') {
+    $priceWhere = 'AND p.vnd_srp > 0';
+} else {
+    $priceWhere = 'AND p.price > 0';
 }
 
 // Set query
 $querypn =  'SELECT DISTINCT
                 LOWER(TRIM(LEFT(item_name , LOCATE(" ", item_name) - 1))) AS "grab_style",';
-            if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr'){
-                $querypn .=' p.sr_price'; 
-            }elseif(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs'){
-                $querypn .=' p.vnd_srp'; 
-            }else{
-                $querypn .=' p.price';
-            }
-$querypn .=' FROM 
+if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr') {
+    $querypn .= ' p.sr_price';
+} elseif (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') {
+    $querypn .= ' p.vnd_srp';
+} else {
+    $querypn .= ' p.price';
+}
+$querypn .= ' FROM 
                 poll_51_studios_new p
             WHERE
                 p.data_cgc IN("DCGC0028")
                   
             ORDER BY 
                 p.item_name ASC;';
-    
+
 $grabFrames = array(
-    "item_description", 
+    "item_description",
     "price"
 );
 
@@ -48,27 +50,22 @@ if (mysqli_stmt_prepare($stmt, $querypn)) {
 
         $tempArray = array();
 
-        for ($i=0; $i < 2; $i++) { 
+        for ($i = 0; $i < 2; $i++) {
 
-            $tempArray[$grabFrames[$i]] = ${'result' . ($i+1)};
-
+            $tempArray[$grabFrames[$i]] = ${'result' . ($i + 1)};
         };
 
         $arrFrames[] = $tempArray;
-
     };
 
-    mysqli_stmt_close($stmt);    
-                            
-}
-else {
+    mysqli_stmt_close($stmt);
+} else {
 
     echo mysqli_error($conn);
-
 };
 
 $arrColorData = [];
-    $queryAll = 'SELECT 
+$queryAll = 'SELECT 
                     pcs.color_picker,
                     LOWER(REPLACE(item_name,  TRIM(LEFT(item_name , LOCATE(" ", item_name) - 1)), "")) AS "grab_color"
                     FROM poll_51_studios_new ps
@@ -77,47 +74,43 @@ $arrColorData = [];
                                 ORDER BY grab_color ASC;
                     ';
 
-    $grabParams = array(
-        'color_picker',
-        'color'
-    );
+$grabParams = array(
+    'color_picker',
+    'color'
+);
 
-    $query = $queryAll;
-    // echo $query; exit;
-    $stmt = mysqli_stmt_init($conn);
-    if (mysqli_stmt_prepare($stmt, $query)) {
-        
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2);
+$query = $queryAll;
+// echo $query; exit;
+$stmt = mysqli_stmt_init($conn);
+if (mysqli_stmt_prepare($stmt, $query)) {
 
-        while (mysqli_stmt_fetch($stmt)) {
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $result1, $result2);
 
-            $tempArray = array();
+    while (mysqli_stmt_fetch($stmt)) {
 
-            for ($i=0; $i < sizeOf($grabParams); $i++) { 
+        $tempArray = array();
 
-                $tempArray[$grabParams[$i]] = ${'result' . ($i+1)};
+        for ($i = 0; $i < sizeOf($grabParams); $i++) {
 
-            };
-            if($tempArray['color_picker'] != '' && $tempArray['color_picker'] != null){
-                $tempColor = explode('#',$tempArray['color_picker']);
-                $tempColor = explode(';',$tempColor[1]);
-                $tempArray['color_picker'] = $tempColor[0];
-            }
-            $arrColorData[] = $tempArray;
-
+            $tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
         };
+        if ($tempArray['color_picker'] != '' && $tempArray['color_picker'] != null) {
+            $tempColor = explode('#', $tempArray['color_picker']);
+            $tempColor = explode(';', $tempColor[1]);
+            $tempArray['color_picker'] = $tempColor[0];
+        }
+        $arrColorData[] = $tempArray;
+    };
 
-        mysqli_stmt_close($stmt);    
-                                
-    }
-    else {
+    mysqli_stmt_close($stmt);
+} else {
 
-        echo mysqli_error($conn);
-    }
+    echo mysqli_error($conn);
+}
 
 $arrShapesData = [];
-    $queryAll = 'SELECT DISTINCT
+$queryAll = 'SELECT DISTINCT
                     pcs.code,
                     pcs.name
                     FROM poll_51_studios_new ps
@@ -125,42 +118,38 @@ $arrShapesData = [];
                             WHERE ps.data_cgc IN("DCGC0028")
                                 ORDER BY pcs.name ASC;';
 
-    $grabParams = array(
-        'code',
-        'name'
-    );
+$grabParams = array(
+    'code',
+    'name'
+);
 
-    $query = $queryAll;
+$query = $queryAll;
 
-    $stmt = mysqli_stmt_init($conn);
-    if (mysqli_stmt_prepare($stmt, $query)) {
-        
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2);
+$stmt = mysqli_stmt_init($conn);
+if (mysqli_stmt_prepare($stmt, $query)) {
 
-        while (mysqli_stmt_fetch($stmt)) {
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $result1, $result2);
 
-            $tempArray = array();
+    while (mysqli_stmt_fetch($stmt)) {
 
-            for ($i=0; $i < sizeOf($grabParams); $i++) { 
+        $tempArray = array();
 
-                $tempArray[$grabParams[$i]] = ${'result' . ($i+1)};
+        for ($i = 0; $i < sizeOf($grabParams); $i++) {
 
-            };
-            $arrShapesData[] = $tempArray;
-
+            $tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
         };
+        $arrShapesData[] = $tempArray;
+    };
 
-        mysqli_stmt_close($stmt);    
-                                
-    }
-    else {
+    mysqli_stmt_close($stmt);
+} else {
 
-        echo mysqli_error($conn);
-    }
+    echo mysqli_error($conn);
+}
 
 $arrCollectionsData = [];
-    $queryAll = 'SELECT DISTINCT
+$queryAll = 'SELECT DISTINCT
                     pcs.code,
                     pcs.name
                     FROM poll_51_studios_new ps
@@ -168,39 +157,35 @@ $arrCollectionsData = [];
                             WHERE ps.data_cgc IN("DCGC0028")
                                 ORDER BY pcs.name ASC;';
 
-    $grabParams = array(
-        'code',
-        'name'
-    );
+$grabParams = array(
+    'code',
+    'name'
+);
 
-    $query = $queryAll;
+$query = $queryAll;
 
-    $stmt = mysqli_stmt_init($conn);
-    if (mysqli_stmt_prepare($stmt, $query)) {
-        
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2);
+$stmt = mysqli_stmt_init($conn);
+if (mysqli_stmt_prepare($stmt, $query)) {
 
-        while (mysqli_stmt_fetch($stmt)) {
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $result1, $result2);
 
-            $tempArray = array();
+    while (mysqli_stmt_fetch($stmt)) {
 
-            for ($i=0; $i < sizeOf($grabParams); $i++) { 
+        $tempArray = array();
 
-                $tempArray[$grabParams[$i]] = ${'result' . ($i+1)};
+        for ($i = 0; $i < sizeOf($grabParams); $i++) {
 
-            };
-            $arrCollectionsData[] = $tempArray;
-
+            $tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
         };
+        $arrCollectionsData[] = $tempArray;
+    };
 
-        mysqli_stmt_close($stmt);    
-                                
-    }
-    else {
+    mysqli_stmt_close($stmt);
+} else {
 
-        echo mysqli_error($conn);
-    }
+    echo mysqli_error($conn);
+}
 
 //////////////////////////////////////////////////// HARD CODED COLOR FILTER ARRAY
 
@@ -273,11 +258,11 @@ $arrFilterColors = array(
 
 //////////////////////////////////////////////////// GRAB PRODUCTS
 //grab default priority products on first load
-$priority = (isset($_GET['search']) && $_GET['search'] !='') ? ' AND (p.item_name LIKE "%'.mysqli_real_escape_String($conn,$_GET['search']).'%" OR p.product_code LIKE "%'.mysqli_real_escape_String($conn,$_GET['search']).'%")' : '';
+$priority = (isset($_GET['search']) && $_GET['search'] != '') ? ' AND (p.item_name LIKE "%' . mysqli_real_escape_String($conn, $_GET['search']) . '%" OR p.product_code LIKE "%' . mysqli_real_escape_String($conn, $_GET['search']) . '%")' : '';
 $getColors = [];
 $getShapes = [];
 $getCollections = [];
-if(!isset($_GET['filter'])){
+if (!isset($_GET['filter'])) {
     // //get priority settings
     // $arrPriority = array();
 
@@ -300,7 +285,7 @@ if(!isset($_GET['filter'])){
 
     // $stmt = mysqli_stmt_init($conn);
     // if (mysqli_stmt_prepare($stmt, $query)) {
-        
+
     //     mysqli_stmt_execute($stmt);
     //     mysqli_stmt_bind_result($stmt, $result1, $result2);
 
@@ -319,7 +304,7 @@ if(!isset($_GET['filter'])){
     //     };
 
     //     mysqli_stmt_close($stmt);    
-                                
+
     // }
     // else {
 
@@ -328,31 +313,30 @@ if(!isset($_GET['filter'])){
 
     //     $priority = ' AND p.product_code IN ("'.implode('","', $arrPriority).'")';
 
-}else{
+} else {
 
-    if(isset($_GET['colors']) && $_GET['colors'] != ''){
+    if (isset($_GET['colors']) && $_GET['colors'] != '') {
         $arrPriority = array();
-        $getColors = explode(",",mysqli_real_escape_String($conn,$_GET['colors']));
+        $getColors = explode(",", mysqli_real_escape_String($conn, $_GET['colors']));
         $row = 0;
         $queryColor = '';
         foreach ($getColors as $value) {
             $or = ($row > 0) ? ' OR' : '';
-            $queryColor .= $or. ' pcs.'.$value.' = "y"';
+            $queryColor .= $or . ' pcs.' . $value . ' = "y"';
             $row++;
         }
 
-        $priority .= ' AND ('.$queryColor.')';
-        
+        $priority .= ' AND (' . $queryColor . ')';
     }
 
-    if(isset($_GET['shapes'])  && $_GET['shapes'] != ''){
-        $getShapes = explode(",",mysqli_real_escape_String($conn,$_GET['shapes']));  
-        $priority .= ' AND p.shape IN ("'.implode('","', $getShapes).'")';
+    if (isset($_GET['shapes'])  && $_GET['shapes'] != '') {
+        $getShapes = explode(",", mysqli_real_escape_String($conn, $_GET['shapes']));
+        $priority .= ' AND p.shape IN ("' . implode('","', $getShapes) . '")';
     }
 
-    if(isset($_GET['collections'])  && $_GET['collections'] != ''){
-        $getCollections = explode(",",mysqli_real_escape_String($conn,$_GET['collections']));   
-        $priority .= ' AND p.collection IN ("'.implode('","', $getCollections).'")';
+    if (isset($_GET['collections'])  && $_GET['collections'] != '') {
+        $getCollections = explode(",", mysqli_real_escape_String($conn, $_GET['collections']));
+        $priority .= ' AND p.collection IN ("' . implode('","', $getCollections) . '")';
     }
 }
 
@@ -365,13 +349,13 @@ $query =    'SELECT
                 RIGHT(REPLACE(REPLACE(p.item_name, "ANTI-RADIATION (", ""), ")", ""), LENGTH(REPLACE(REPLACE(p.item_name, "ANTI-RADIATION (", ""), ")", ""))-LOCATE(" ", REPLACE(REPLACE(p.item_name, "ANTI-RADIATION (", ""), ")", ""))),
                 p.product_code,
                 LEFT(REPLACE(REPLACE(p.item_name, "ANTI-RADIATION (", ""), ")", ""),LOCATE(" ", REPLACE(REPLACE(p.item_name, "ANTI-RADIATION (", ""), ")", ""))),';
-                if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr'){
-                    $query .=' p.sr_price,'; 
-                }elseif(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs'){
-                    $query .=' p.vnd_srp,'; 
-                }else{
-                    $query .=' p.price,';
-                }
+if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr') {
+    $query .= ' p.sr_price,';
+} elseif (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') {
+    $query .= ' p.vnd_srp,';
+} else {
+    $query .= ' p.price,';
+}
 
 $query .=       ' IF(
                     s.image_url IS NOT NULL,
@@ -409,10 +393,10 @@ $query .=       ' IF(
             WHERE
                 p.data_cgc IN("DCGC0028")
                   
-                    '.$priority.'
+                    ' . $priority . '
                 ORDER BY 
                     p.item_name ASC;';
-                    // AND p.product_code NOT LIKE "%i%"
+// AND p.product_code NOT LIKE "%i%"
 
 // echo '<pre>';
 // echo $query;
@@ -420,13 +404,13 @@ $query .=       ' IF(
 // exit;
 
 $grabParams = array(
-    "description", 
-    "color", 
-    "product_code", 
+    "description",
+    "color",
+    "product_code",
     "item_description",
-    "price", 
-    "image_url",     
-    "main_description", 
+    "price",
+    "image_url",
+    "main_description",
     "tags",
     "color_picker",
     "color_code",
@@ -444,23 +428,18 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
         $tempArray = array();
 
-        for ($i=0; $i < count($grabParams); $i++) { 
+        for ($i = 0; $i < count($grabParams); $i++) {
 
-            $tempArray[$grabParams[$i]] = ${'result' . ($i+1)};
-
+            $tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
         };
-        if($tempArray['price'] == '') continue;
+        if ($tempArray['price'] == '') continue;
         $arrProduct[] = $tempArray;
-
     };
 
-    mysqli_stmt_close($stmt);    
-                            
-}
-else {
+    mysqli_stmt_close($stmt);
+} else {
 
     echo mysqli_error($conn);
-
 };
 
 //check if the product have a stock
@@ -500,7 +479,7 @@ else {
 $arrProductsSorted = array();
 
 // Loop through initial product array
-for ($i=0; $i < sizeOf($arrProduct); $i++) { 
+for ($i = 0; $i < sizeOf($arrProduct); $i++) {
     // if($arrStockRunning[$arrProduct[$i]['product_code']] == 0){
     //     continue;
     // }
@@ -524,11 +503,10 @@ for ($i=0; $i < sizeOf($arrProduct); $i++) {
     $arrProductsSorted[$curStyle]["color_swatch"]        = $color_swatch;
     $arrProductsSorted[$curStyle]["product_description"] = $product_description;
     $arrProductsSorted[$curStyle]["colors"]              = array();
-
 };
 
 // Loop through initial product array to sort out colors
-for ($i=0; $i < sizeOf($arrProduct); $i++) { 
+for ($i = 0; $i < sizeOf($arrProduct); $i++) {
     // if($arrStockRunning[$arrProduct[$i]['product_code']] == 0){
     //     continue;
     // }
@@ -552,7 +530,6 @@ for ($i=0; $i < sizeOf($arrProduct); $i++) {
     $arrProductsSorted[$curStyle]["colors"][$curSKU]["color_code"]   = $color_code;
     $arrProductsSorted[$curStyle]["colors"][$curSKU]["color_swatch"] = $color_swatch;
     $arrProductsSorted[$curStyle]["colors"][$curSKU]["product_description"] = $product_description;
-
 };
 
 // Alphabetical
@@ -562,40 +539,75 @@ sort($arrProductsSorted);
 $arrProductsSorted = array_values($arrProductsSorted);
 
 // Loop through and reindex color arrays
-for ($i=0; $i < sizeOf($arrProductsSorted); $i++) { 
-  
+for ($i = 0; $i < sizeOf($arrProductsSorted); $i++) {
+
     // Reindex color array
     $arrProductsSorted[$i]["colors"] = array_values($arrProductsSorted[$i]["colors"]);
-
 };
 
 //////////////////////////////////////////////////// FUNCTIONS
 
-function trimColor($color_name) {
+function trimColor($color_name)
+{
 
 
     // Remove abbreviations and classes
-    $color_name =         
-        str_replace("/", " ",
-        str_replace("blk", "black",
-        str_replace("brown lns", "",
-        str_replace("brn", "brown",        
-        str_replace("mt", "m",
-        str_replace("matte", "m",
-        str_replace("flt", "f",
-        str_replace("lens", "",
-        str_replace("flat", "f",
-        str_replace("grn", "",
-        str_replace("gdt", "",
-        str_replace("/crml", "",
-            trim($color_name)
-        ))))))))))));
+    $color_name =
+        str_replace(
+            "/",
+            " ",
+            str_replace(
+                "blk",
+                "black",
+                str_replace(
+                    "brown lns",
+                    "",
+                    str_replace(
+                        "brn",
+                        "brown",
+                        str_replace(
+                            "mt",
+                            "m",
+                            str_replace(
+                                "matte",
+                                "m",
+                                str_replace(
+                                    "flt",
+                                    "f",
+                                    str_replace(
+                                        "lens",
+                                        "",
+                                        str_replace(
+                                            "flat",
+                                            "f",
+                                            str_replace(
+                                                "grn",
+                                                "",
+                                                str_replace(
+                                                    "gdt",
+                                                    "",
+                                                    str_replace(
+                                                        "/crml",
+                                                        "",
+                                                        trim($color_name)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
 
     return $color_name;
-
 };
 
-function setPoNumberAdd($order_no_Cart){
+function setPoNumberAdd($order_no_Cart)
+{
 
     global $conn;
 
@@ -628,15 +640,15 @@ function setPoNumberAdd($order_no_Cart){
                         pr.item_name,
                         pr.product_number,
                         pr.item_code,';
-                        if(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr'){
-                            $arrCartQuery .=' pr.sr_price,'; 
-                        }elseif(isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs'){
-                            $arrCartQuery .=' pr.vnd_srp,'; 
-                        }else{
-                            $arrCartQuery .='  pr.price,';
-                        }
+    if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'sr') {
+        $arrCartQuery .= ' pr.sr_price,';
+    } elseif (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') {
+        $arrCartQuery .= ' pr.vnd_srp,';
+    } else {
+        $arrCartQuery .= '  pr.price,';
+    }
 
-$arrCartQuery .=       ' pr.product_code,
+    $arrCartQuery .=       ' pr.product_code,
                         os.product_upgrade,
                         os.product_code AS product_code_order,
                         IF(
@@ -660,7 +672,7 @@ $arrCartQuery .=       ' pr.product_code,
                             LEFT JOIN emp_table u 
                                 ON u.emp_id= o.doctor
                     WHERE 
-                        o.order_id = "'.$order_no_Cart.'"
+                        o.order_id = "' . $order_no_Cart . '"
                             AND os.status != "cancelled"
                     GROUP BY 
                         pr.product_code, os.product_upgrade ORDER BY os.id ASC';
@@ -681,7 +693,7 @@ $arrCartQuery .=       ' pr.product_code,
         "image_url",
         "dispatch_type"
     );
-    
+
     $stmt = mysqli_stmt_init($conn);
     if (mysqli_stmt_prepare($stmt, $arrCartQuery)) {
 
@@ -692,18 +704,15 @@ $arrCartQuery .=       ' pr.product_code,
 
             $tempArray = array();
 
-            for ($i=0; $i < sizeOf($grabParamsQF); $i++) { 
+            for ($i = 0; $i < sizeOf($grabParamsQF); $i++) {
 
-                $tempArray[$grabParamsQF[$i]] = ${'result' . ($i+1)};
-
+                $tempArray[$grabParamsQF[$i]] = ${'result' . ($i + 1)};
             };
             $tempArray['item_description'] = ucwords(strtolower($tempArray['item_description']));
-            $arrCartQF [] = $tempArray;
-
+            $arrCartQF[] = $tempArray;
         };
 
-        mysqli_stmt_close($stmt);    
-                                
+        mysqli_stmt_close($stmt);
     }
 
     return $arrCartQF;
@@ -713,8 +722,5 @@ $order_count = (isset($_SESSION['order_no'])) ? setPoNumberAdd($_SESSION['order_
 $arrCart     = $order_count;
 $order_count = (isset($_SESSION['order_no'])) ? count($order_count) : 0;
 
-//print_r($arrCart); exit;
-
-?>
-
-
+// print_r($arrCart);
+// exit;
