@@ -156,10 +156,10 @@ switch ( $page ) {
 </div>
 
 <div id="admin-bar" 
-	class="d-flex align-items-center <?= ( $page == 'rate-us' ) ? 'justify-content-center' : 'justify-content-between' ?>" 
+	class="d-flex align-items-center <?= ( $page == 'rate-us' ) ? 'justify-content-center' : 'justify-content-between' ?> <?= ( $page == 'order-confirmation' ) ? 'order-confirmation' : '' ?>" 
 	style="box-shadow: none;">
 
-	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES') : ?>
+	<?php if ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress']) ) : ?>
 		<?php if ($page != 'rate-us'): ?>
 			<div class="home">
 				<a href="#" class="prevent" id="exit_customer_page"><img
@@ -196,13 +196,13 @@ switch ( $page ) {
 
 		<?php if ($page == 'order-confirmation'): ?>
 			<div class="account-name">
-				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
+				<p class="h3 mb-0" style="color: #FFF; font-weight: 700; font-size: 20px">
 					<?= strtoupper("Order Confirmation") ?>
 				</p>
 			</div>
-			<div class="account">
+			<!-- <div class="account">
 				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
-			</div>
+			</div> -->
 		<?php endif ?>
 
 	<?php else: ?>
@@ -210,15 +210,14 @@ switch ( $page ) {
 		<div class="">
 
 		</div>
-		
-		<div class="account-name">
-			<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
-			<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" 
-				style=" max-width: 120px;">	
-		</div>
-		<div class="account">
-			<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
-		</div>
+			<div class="account-name">
+				<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
+				<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286" 
+					style=" max-width: 120px;">	
+			</div>
+			<div class="account">
+				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+			</div>
 	<?php endif ?>
 
 </div>
@@ -497,6 +496,11 @@ switch ( $page ) {
 		background-color: #fff;
 		border-radius: 16px;
 	}
+
+	.order-confirmation {
+		background-color: #956E46 !important;
+	}
+
 	#ssis_header {
 		background-color: #e8e8e4;
 	}

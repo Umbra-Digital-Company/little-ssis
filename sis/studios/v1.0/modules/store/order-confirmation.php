@@ -93,23 +93,23 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
     <?php
 
-    function getExistingPaperBagSac($arrParams, $arrCart)
-    {
-        $arrExist = [];
-        foreach ($arrParams as $arrParam) {
-            foreach ($arrCart as $cartItem) {
-                if (trim($arrParam["product_code"]) == trim($cartItem["product_upgrade"])) {
-                    $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
-                    break;
+        function getExistingPaperBagSac($arrParams, $arrCart)
+        {
+            $arrExist = [];
+            foreach ($arrParams as $arrParam) {
+                foreach ($arrCart as $cartItem) {
+                    if (trim($arrParam["product_code"]) == trim($cartItem["product_upgrade"])) {
+                        $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
+                        break;
+                    }
+                    // if (trim($arrParam["product_code"]) == "P1009-34") {
+                    //     $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
+                    //     break;
+                    // }
                 }
-                // if (trim($arrParam["product_code"]) == "P1009-34") {
-                //     $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
-                //     break;
-                // }
             }
+            return $arrExist;
         }
-        return $arrExist;
-    }
     ?>
 
 
