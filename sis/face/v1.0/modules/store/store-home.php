@@ -42,14 +42,8 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 	<link rel="stylesheet" type="text/css" href="/sis/face/v1.0/modules/store/little_sis.css?v=12345">
 	<style type="text/css">
-		body>.container {
-			overflow-y: scroll !important;
-		}
 
-		.h-100 {
-			height: 100%;
-		}
-
+		
 		.row-tiles {
 			height: auto;
 		}
@@ -100,9 +94,15 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			background-size: cover;
 			background-position: center;
 		}
+		.video {
+			height: 300px;
+			width: 100%;
+			background-size: cover;
+			border-radius: 16px;
+		}
 	</style>
 
-	<div class="container ">
+	<!-- <div class="container "> -->
 		<div class="row align-items-stretch row-tiles mb-4" style="display: none;">
 			<div class="col-6 align-items-stretch" style="align-self: stretch;">
 				<div class="col-12 custom-card h-100 bg-orange-tile">
@@ -122,12 +122,26 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			<?php if ($arrTextImages[0]['video'] != '' && $arrTextImages[0]['video_status'] == 1) { ?>
 
 				<div class="d-flex justify-content-center mb-4">
-					<video autoplay muted loop playsinline style="width: 100%;height: auto;">
+					<video autoplay muted loop playsinline style="width: 100%;height: auto; border-radius: 16px;">
 						<source src="https://www.sunniessystems.com/face/face-settings/videos/<?= $arrTextImages[0]['video'] ?>" type="video/mp4">
 					</video>
 				</div>
 
 			<?php } ?>
+			
+			<!-- recommended -->
+			<div class="row">
+				<div class="col-12 mb-4">
+					<div class="col-md-12 custom-card bg-white-tile " style ="border-radius: 16px;">
+					<p class="mb-2 font font-weight-bold ml-3 mt-3" style="font-size: 18px"><?= $arrTranslate['Recommended'] ?></p>
+						<ol>
+							<?php foreach ($arrRecommended as $key => $value) { ?>
+								<li style="font-size: 16px"><?= strtoupper($value['item_name']) ?></li>
+							<?php } ?>
+						</ol>
+					</div>
+				</div>
+			</div>
 			<?php if ($arrTextImages[0]['image_1'] != '' && $arrTextImages[0]['image_1_status'] == 1) { ?>
 
 				<div class="d-flex justify-content-center mb-4">
@@ -143,34 +157,34 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 			<?php } ?>
 		<?php } ?>
-		<div class="row">
-			<div class="col-12 mb-4">
-				<div class="col-md-12 custom-card bg-pink-tile">
-					<p class="mb-4">Recommended:</p>
-					<ol>
-						<?php foreach ($arrRecommended as $key => $value) { ?>
-							<li style="font-size: 14px"><?= strtoupper($value['item_name']) ?></li>
-						<?php } ?>
-					</ol>
-				</div>
-			</div>
-		</div>
+
 		<?php if ($arrTextImages[0]['image_2'] != ''  && $arrTextImages[0]['image_2_status'] == 1) { ?>
 
-			<div class="d-flex justify-content-center mb-4">
+			<div class="d-flex justify-content-center mb-4" style= "padding-bottom: 150px"> 
 				<div class="img-holder" style="background-image:url(https://www.sunniessystems.com/face/face-settings/images/<?= $arrTextImages[0]['image_2'] ?>);"></div>
 			</div>
 
 		<?php } ?>
-		<div class="row">
-			<div class="col-12 mt-4">
-				<div class="customer-account text-center">
-					<a href="modules/store/auto_guest.php">
-						<button class="btn bg-tan-tile" style="padding-top: 30px;padding-bottom: 30px;font-size: 16px;height: auto;">Start</button>
-					</a>
+
+		<div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
+			<div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+		
+				<div class="row" >
+					<div class="col-12 ">
+						<div class="customer-account text-center">
+							<a href="modules/store/auto_guest.php">
+							<button class="btn btn-primary d-flex align-items-center justify-content-center">
+								Start
+								<img src="<?= get_url('images/icons') ?>/icon-arrow-right.png" alt="exit" class="img-fluid ml-2" style="max-height: 20px;">
+							</button>
+							</a>
+						</div>
+					</div>
+					
 				</div>
-			</div>			
+			</div>
+		
 		</div>
-	</div>
+	<!-- </div> -->
 
 <?php } ?>

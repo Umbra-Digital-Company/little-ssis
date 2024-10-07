@@ -25,7 +25,7 @@ if (in_array($page, $arrPage)){
 		//lil_ssis includes
 		case "select-store": 
 		case "select-store-all": include("store/select-store.php"); break;
-		case "select-store-lips":
+		case "select-store-lips": 
 		case "select-store-face":
 		case "select-store-brows":
 		case "select-store-eyes":

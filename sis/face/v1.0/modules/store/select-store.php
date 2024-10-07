@@ -12,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="/sis/face/v1.0/modules/store/little_sis.css">
     <style>
         .form-row{
-            margin-left: 5%;
-            margin-right: 5%;
+            margin-left: .5%;
+            margin-right: .5%;
         }
 
         .frame-style > div {
@@ -24,11 +24,18 @@
             border-radius: 0 !important;
         }
 
+        .type-header {
+            font-size: 18px;
+            font-weight: 650;
+            color: #342C29;
+        }
+
         .type-header h3 {
-            font-family: SharpGroteskSemiBold;
+            font-family: ATSurtMedium;
             font-size: 28px;
             margin-bottom: 15px;
         }
+
         .type-header p {
             font-family: ATSurtMedium;
             font-size: 15px;
@@ -39,23 +46,115 @@
             font-weight: bold;
             width: 200px;
         }
-        @media only screen and (max-width: 800px) {
 
-           .form-row{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-        }
         main.customer-layout .wrapper {
             padding-bottom: 0vh !important;
             overflow-y: hidden;
         }
+
         .page-select-store .packages-list {
             overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        #form-search {
+            display: flex;
+
+            height: 43px;
+            border: none;
+            width: 100%;
+        }
+
+        #search_frame_filter {
+            flex: 1;
+            /* Take up remaining space */
+            border: none;
+            /* Remove any existing border */
+            border-bottom: 1px solid #ccc;
+            /* Add a bottom border */
+            margin-right: 20px;
+        }
+
+        #search_frame_filter:focus {
+            outline: none;
+        }
+
+        .btn-search {
+            width: 48px;
+            /* Adjust width and height to make it circular */
+            height: 48px;
+            background-color: #956E46;
+            /* Button background color */
+            border: none;
+            /* Remove border */
+            border-radius: 100%;
+            /* Make it circular */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px 16px 20px;
+
+            /* Remove default padding */
+        }
+
+        .search-icon {
+            width: 25px;
+            /* Adjust image size */
+            height: 25px;
+            display: block;
+            /* Ensure image is block-level */
+        }
+
+
+
+        .type-header {
+            position: relative;
+            display: inline-block;
+            /* This helps keep the image and button properly aligned */
+            text-align: center;
+            /* Ensure the content is centered */
+        }
+
+        .img-header {
+            width: 100%;
+            /* Adjust this to fit the image */
+            height: 276px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .select-link {
+            position: absolute;
+            padding: 20px;
+            width: 100%;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%, -10%);
+
+        }
+
+        .select-link a {
+            display: block;
+            /* Makes the anchor take full width */
+            width: 100%;
+            /* Full width for the anchor */
+            text-align: center;
+
+            /* Center align the button inside the anchor */
         }
     </style>
     <link rel="stylesheet" type="text/css" href="/sis/face/assets/css/color_pickers.css">
     <style>
+
+        .item-price {
+            font-size: 14px;
+            font-weight: 400;
+            /* Color gray */
+            color: #919191;
+        }
 
     /* Remove Progress Bar */
         .step-progress {
@@ -346,76 +445,87 @@
         };
 
     ?>
-        <div class="d-flex align-items-center mb-3">
-            <?php if(isset($_GET['categoryAll'])){ ?>
-                <a href="./?page=select-store" class="exit-frame-selection">
-                    <div class="d-flex align-items-start">
-                        <img src="/assets/images/icons/icon-left-arrow.png" alt="back" class="img-fluid" title="back to shopping" style="padding-left: 20px;"><p class="mt-2" style="margin-left: 5px;"></p>
-                    </div>
-                </a>
-            <?php } ?>
-                      
-            <input type="search" name="search_frame" id="search_frame" class="form-control filled search" placeholder="Search product code / product name" style="margin-left: 20px; margin-right: 20px;" value="<?= (isset($_GET['search']) && $_GET['search'] !='') ? $_GET['search'] : '' ?>">
-            <div id="toggleLayout" style="display: none;"></div>
-            <div  class="d-flex justify-content-between" id="cart" title="Cart" style="padding: 0;">
-                <div class="bag-wrapper">
-                    <span><div class="count" count="<?= (isset($order_count)) ? $order_count : '' ?>"></div></span>    
-                </div>
+    <div id="select_frame">
+        <div class="search-container-store d-flex align-items-center mb-3">
+            <div id="form-search" class="d-flex align-items-center">
+                <input type="search" name="search_frame" id="search_frame" class="form-control search"
+                    placeholder="Search product code / product name"
+                    value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
+                <!-- <input type="search" name="search_frame_filter" id="search_frame_filter" class="form-control search" placeholder="Search Frame Style"  value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>"> -->
+                <button class="btn-search">
+                    <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search" class="search-icon">
+                </button>
             </div>
         </div>
-    <div class="packages-list" style="height:66vh; overflow: auto;">
-        <div class="form-row mt-1 mt-5 mb-5 section-frames">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>LIPS</h3>
-                    <a href="./?page=select-store-all&categoryAll=lips" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
-                </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/Final_Alond_Bianca.jpg?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'lips')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php 
-                       include "./modules/includes/products/grab_select_sun_frames.php";
-                       $prodCategory = 'lips';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+        
+        <div class="flex-container mb-3">
+
+            <button class="btn btn-bag " id="cart" disabled>
+                <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+            </button>
         </div>
+
+        <div class="packages-list">
+
+            <div class="form-row mb-5 section-frames">
+            <span class="type-header  mb-3">LIPS</span>
+                <a href="./?page=select-store-lips">
+                    <div class="col-12 text-center ">
+
+                        <img class="img-fluid img-header" 
+                            src="/sis/face/assets/images/sections/sunnies-face.png?v=1614047286">
+                            
+                        <div class="select-link">
+                            <a href="./?page=select-store-lips">
+                                <button class="btn btn-shop-header"> Shop All Lips</button>
+                            </a>
+                        </div>
+                    </div>
+                </a>
+                <div class="col-sm-12 mt-4 product-container">
+                    <div class="">
+                        <?php
+                            $prodCategory = 'lips';
+                        ?>
+                        <?php include './modules/store/sunnies-select-lips.php'; ?>
+                    </div>
+                </div>
+            </div>
         <?php
 
             $arrFramesCount = count($arrProduct);
             $arrProductMerge = $arrProduct;
 
-            // print_r($arrProduct); exit;
-        ?>        
+        ?>
         
-        <div class="form-row mt-1 mt-5 mb-5 section-face">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>FACE</h3>
-                    <a href="./?page=select-store-all&categoryAll=face" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
-                </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/face.webp?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'face')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_face.php";
-                       $prodCategory = 'face';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+        <div class="form-row mb-5 section-face">
+
+            <span class="type-header mb-3">FACE</span>
+            <a href="./?page=select-store-face">
+                <div class="col-12 text-center">
+                    
+                    <img class="img-fluid img-header " 
+                        src="/sis/face/assets/images/sections/face.webp?v=1614047286">
+
+                    <div class="select-link">
+                        <a href="./?page=select-store-face">
+                            <button class="btn btn-shop-header"> Shop All Face</button>
+                        </a>
+                    </div>
+                </div> 
+            </a>
+
+
+            <div class="col-sm-12  mt-4 product-container">
+                <?php
+                    $prodCategory = 'face';
+                    include './modules/store/sunnies-select-face.php';
+                ?>
+            </div>
+
         </div>
+
         <?php 
             $arrFaceCount = count($arrProduct);
             $arrProductMerge = array_merge($arrProductMerge,$arrProduct);
@@ -423,27 +533,28 @@
             // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-brows">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>BROWS</h3>
-                    <a href="./?page=select-store-all&categoryAll=brows" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
+        <div class="form-row mb-5 section-brows">
+
+            <span class="type-header mb-3">BROWS</span>
+            <a href="./?page=select-store-brows">
+                <div class="col-12 text-center">
+                    <img class="img-fluid  img-header" 
+                        src="/sis/face/assets/images/sections/brows.webp?v=1614047286">
+
+                    <div class="select-link">
+                        <a href="./?page=select-brows">
+                            <button class="btn btn-shop-header"> Shop All Brows</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/brows.webp?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'brows')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_brows.php";
-                       $prodCategory = 'brows';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+            </a>
+
+            <div class="col-sm-12 mt-4 product-container">
+                <?php
+                    $prodCategory = 'brows';
+                    include './modules/store/sunnies-select-brows.php';
+                ?>
+            </div>
         </div>
         <?php 
             $arrBrowsCount = count($arrProduct);
@@ -452,27 +563,27 @@
             // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-eyes">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>EYES</h3>
-                    <a href="./?page=select-store-all&categoryAll=eyes" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
+        <div class="form-row mb-5 section-eyes">
+            <span class="type-header mb-3">EYES</span>
+            <a href="./?page=select-store-eyes">
+                <div class="col-12 text-center ">
+                    <img class="img-fluid img-header" 
+                        src="/sis/face/assets/images/sections/eyes.webp?v=1614047286">
+                    <div class="select-link">
+                        <a href="./?page=select-store-eyes">
+                            <button class="btn btn-shop-header"> Shop All Eyes</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/eyes.webp?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'eyes')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_eyes.php";
-                       $prodCategory = 'brows';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+            </a>
+
+            <div class="col-12 col-lg-12 mt-4">
+                <?php
+                    include "./modules/includes/products/grab_select_eyes.php";
+                    $prodCategory = 'eyes';
+                    include './modules/store/sunnies-select-eyes.php';
+                ?>
+            </div>
         </div>
         <?php 
             $arrEyesCount = count($arrProduct);
@@ -481,56 +592,57 @@
             // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-skin">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>SKIN</h3>
-                    <a href="./?page=select-store-all&categoryAll=skin" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
+        <div class="form-row mb-5 section-skin">
+
+            <span class="type-header mb-3">SKIN</span>
+            <a href="./?page=select-store-skin">
+                <div class="col-12 text-center">
+                    <img class="img-fluid img-header" src="/sis/face/assets/images/sections/skin.webp?v=1614047286">
+                    
+                    <div class="select-link">
+                        <a href="./?page=select-store-skin">
+                            <button class="btn btn-shop-header"> Shop All Skin</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/skin.webp?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'skin')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_skin.php";
-                       $prodCategory = 'skin';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+            </a>
+
+            <div class="col-12 col-lg-12 mt-4">
+                <?php
+                    include "./modules/includes/products/grab_select_skin.php";
+                    $prodCategory = 'skin';
+                    include './modules/store/sunnies-select-skin.php';
+                ?>
+            </div>
         </div>
+
         <?php 
             $arrSkinCount = count($arrProduct);
             $arrProductMerge = array_merge($arrProductMerge,$arrProduct);
-
-            // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-cheeks">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>CHEEKS</h3>
-                    <a href="./?page=select-store-all&categoryAll=cheeks" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
+        <div class="form-row mb-5 section-cheeks">
+
+            <span class="type-header mb-3">CHEEKS</span>
+            <a href="./?page=select-store-cheeks">
+                <div class="col-12 text-center">
+                    <img class="img-fluid img-header" src="/sis/face/assets/images/sections/cheeks.jpg?v=1614047286">
+
+                    <div class="select-link">
+                        <a href="./?page=select-store-cheeks">
+                            <button class="btn btn-shop-header"> Shop All Cheeks</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/cheeks.jpg?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'cheeks')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_cheeks.php";
-                       $prodCategory = 'cheeks';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+            </a>
+
+            <div class="col-12 col-lg-12 mt-4">
+                <?php
+                    include "./modules/includes/products/grab_select_cheeks.php";
+                    $prodCategory = 'cheeks';
+                    include './modules/store/sunnies-select-cheeks.php';
+                ?>
+            </div>
         </div>
         <?php 
             $arrCheeksCount = count($arrProduct);
@@ -539,27 +651,25 @@
             // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-nails">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>NAILS</h3>
-                    <a href="./?page=select-store-all&categoryAll=nails" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
+        <div class="form-row mb-5 section-nails">
+            <span class="type-header mb-3">NAILS</span>
+            <a href="./?page=select-store-nails">
+                <div class="col-12 text-center ">
+                    <img class="img-fluid img-header" src="/sis/face/assets/images/sections/nails.jpg?v=1614047286">
+                    <div class="select-link">
+                        <a href="./?page=select-store-nails">
+                            <button class="btn btn-shop-header"> Shop All Nails</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/nails.jpg?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'nails')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                       include "./modules/includes/products/grab_select_nails.php";
-                       $prodCategory = 'nails';
-                        include './modules/store/sunnies-select-lips.php';
-                    ?>
-                </div>
-            <?php } ?>
+            </a>
+            <div class="col-12 col-lg-12 mt-4">
+                <?php
+                    include "./modules/includes/products/grab_select_nails.php";
+                    $prodCategory = 'nails';
+                    include './modules/store/sunnies-select-nails.php';
+                ?>
+            </div>
         </div>
         <?php 
             $arrNailsCount = count($arrProduct);
@@ -568,27 +678,28 @@
             // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-sets">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>SETS</h3>
-                    <a href="./?page=select-store-all&categoryAll=sets" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
-                </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                        <img class="img-fluid" src="/sis/face/assets/images/sections/sets.jpg?v=1614047286">
-                    <!-- </a> -->
-                </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'sets')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
+        <div class="form-row mb-5 section-sets">
+                <span class="type-header mb-3">SETS</span>
+                <a href="./?page=select-store-sets">
+                <div class="col-12 text-center ">
+
+                    <img class="img-fluid img-header" src="/sis/face/assets/images/sections/sets.jpg?v=1614047286">
+                    
+                    <div class="select-link">
+                        <a href="./?page=select-store-sets">
+                            <button class="btn btn-shop-header"> Shop All Sets</button>
+                        </a>
+                    </div>
+                    </div>
+                </a>
+
+                <div class="col-12 col-lg-12 mt-4">
                     <?php
                        include "./modules/includes/products/grab_select_sets.php";
                        $prodCategory = 'sets';
-                        include './modules/store/sunnies-select-lips.php';
+                        include './modules/store/sunnies-select-sets.php';
                     ?>
                 </div>
-            <?php } ?>
         </div>
         <?php 
             $arrSetsCount = count($arrProduct);
@@ -597,34 +708,36 @@
             // print_r($arrProduct); exit;
         ?>
 
-        <div class="form-row mt-1 mt-5 mb-5 section-merch">
-             <?php if(!isset($_GET['categoryAll'])){ ?>
-                <div class="col-12 text-center type-header">
-                    <h3>MERCH</h3>
-                    <a href="./?page=select-store-all&categoryAll=merch" class="select-link"><input type="button" class="btn btn-black" value="Shop All"></a>
+        <div class="form-row mb-5 section-merch">
+
+            <span class="type-header mb-3">MERCH</span>
+            <a href="./?page=select-store-merch">
+                <div class="col-12 text-center ">
+                    <img class="img-fluid img-header" src="/sis/face/assets/images/sections/Travel_Kit_Merch_Category_Banner_-_Desktop.webp?v=1614047286">    
+
+                <div class="select-link">
+                    <a href="./?page=select-store-merch">
+                        <button class="btn btn-shop-header"> Shop All Merch</button>
+                    </a>
                 </div>
-                <div class="col-12 col-lg-6 mt-4">
-                    <!-- <a href="./?page=select-store-lips" class="select-link" id="lips"> -->
-                    <div  class="card" style="height: 254px; padding: 14px; text-align: center; border-radius: 0; background-image: url(/sis/face/assets/images/sections/Travel_Kit_Merch_Category_Banner_-_Desktop.webp?v=1614047286); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                    </div>
-                    <!-- </a> -->
                 </div>
-            <?php } ?>
-            <?php if(!isset($_GET['categoryAll']) || (isset($_GET['categoryAll']) && $_GET['categoryAll'] == 'merch')){ ?>
-                <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
-                    <?php
-                        include "./modules/includes/products/grab_select_merch.php";
-                        $prodCategory = 'merch';
-                        include './modules/store/sunnies-select-merch.php';
-                    ?>
-                </div>
-            <?php } ?>
+            </a>
+            <div class="col-12 <?= (!isset($_GET['categoryAll'])) ? 'col-lg-6' : '' ?> mt-4">
+                <?php
+                    include "./modules/includes/products/grab_select_merch.php";
+                    $prodCategory = 'merch';
+                    include './modules/store/sunnies-select-merch.php';
+                ?>
+            </div>
         </div>
         <?php
             $arrMerchCount = count($arrProduct);
             $arrProductMerge = array_merge($arrProductMerge,$arrProduct);
         ?>
     </div>
+</div>
+
+
 
 <style>
     .btn-black {
@@ -680,7 +793,7 @@
     .switch-color li.active::before {
         border: 1px solid #2a2323;
     }
-    #toggleLayout {
+    /* #toggleLayout {
         min-width: 25px;
         min-height: 25px;
         margin: 0 10px 0 15px;
@@ -691,7 +804,7 @@
     }
     #toggleLayout.false {
         background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-    }
+    } */
     .product-details h4 {
         font-size: 12px;
         text-transform: uppercase;
@@ -707,12 +820,6 @@
         line-height: 12px;
         white-space: nowrap;
         font-weight: 600;
-    }
-    @media (max-width:480px) {
-        .product-details h4 span.blk {
-            margin-top: 5px;
-            display: block;
-        }
     }
 </style>
 <script>
@@ -732,17 +839,17 @@
     let arrMerchCount = <?= json_encode($arrMerchCount) ?>;
     $(document).ready(function(){
 
-        (arrFramesCount == 0) ? $('.section-frames').hide() : '';
-        (arrFaceCount == 0) ? $('.section-face').hide() : '';
-        (arrBrowsCount == 0) ? $('.section-brows').hide() : '';
+        // (arrFramesCount == 0) ? $('.section-frames').hide() : '';
+        // (arrFaceCount == 0) ? $('.section-face').hide() : '';
+        // (arrBrowsCount == 0) ? $('.section-brows').hide() : '';
 
-        (arrEyesCount == 0) ? $('.section-eyes').hide() : '';
-        (arrSkinCount == 0) ? $('.section-skin').hide() : '';
-        (arrCheeksCount == 0) ? $('.section-cheeks').hide() : '';
-        (arrNailsCount == 0) ? $('.section-nails').hide() : '';
-        (arrSetsCount == 0) ? $('.section-sets').hide() : '';
+        // (arrEyesCount == 0) ? $('.section-eyes').hide() : '';
+        // (arrSkinCount == 0) ? $('.section-skin').hide() : '';
+        // (arrCheeksCount == 0) ? $('.section-cheeks').hide() : '';
+        // (arrNailsCount == 0) ? $('.section-nails').hide() : '';
+        // (arrSetsCount == 0) ? $('.section-sets').hide() : '';
 
-        (arrMerchCount == 0) ? $('.section-merch').hide() : '';
+        // (arrMerchCount == 0) ? $('.section-merch').hide() : '';
         $('#search_frame').focus();
 
         $('.packages-list').addClass('show');
@@ -754,12 +861,31 @@
             });
         });
         
-        $(this).on('click','.product-option',function(){
-            let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
-            let linkProd = $(this).attr('prod-item-link');
-            linkProd = (linkProd != 'frame') ? linkProd : 'store-studios';
-            window.location  ="?page=select-"+linkProd+"&product-detail=true&product-code="+tempProduct.product_code+"&desc="+tempProduct.description+"&style="+tempProduct.item_description+"&color="+tempProduct.color+"&price="+tempProduct.price+"&image="+tempProduct.image_url+"&descr="+tempProduct.product_description+"&tags="+tempProduct.tags;
-        });
+        $(this).on('click', '.product-option', function () {
+                let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
+                let linkProd = $(this).attr('prod-item-link');
+
+                linkProd = (linkProd != 'frame') ? linkProd : 'store-studios';
+
+                if (linkProd == 'merch') {
+                    const findItemByProductCode = (productCode) => {
+                        return arrMerchSorted.find(item =>
+                            item.colors.some(color => color.product_code === productCode)
+                        );
+                    }
+
+                    let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
+                    let tempProduct2 = findItemByProductCode($(this).attr('product-code'));
+
+
+                    window.location = "?page=select-merch&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct2.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+
+                } else {
+                    window.location = "?page=select-store-" + linkProd + "&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+                }
+
+            });
+
 
         $("#cart").click(function(){
             let item_cart = '';
@@ -922,7 +1048,7 @@
                 index = arrCart.findIndex(item => item.group_orders_specs_id === _this.attr('group-orders-specs-id'));
                 arrCart[index].group_orders_specs_id = arrOrdersSpescId;
                 arrCart[index].orders_specs_id = arrOrdersSpescId;
-                arrCart[index].count =  parseInt(arrCart[index].count) + 1;
+                arrCart[index].count =  parseInt(arrCart[index].count) + 1
                 _this.attr('group-orders-specs-id', arrOrdersSpescId);
                 _this.parent().parent().find('span').eq(0).find('.count_decrement').attr('group-orders-specs-id', arrOrdersSpescId);
                 current_value = _this.parent().parent().find('.count_num').val();
@@ -1082,5 +1208,53 @@
         $('#loading').modal('show');
         window.location = $(this).attr('href');
     });
+
+    const rebindMoreItemEvents = () => {
+            const moreItems = document.querySelectorAll('.more-item');
+
+            // Unbind previous click events and bind a new one
+            $(document).find('.more-item').off('click').on('click', function () {
+                const parentCard = $(this).closest('.frame-style');  // Find the parent card
+                const hiddenColors = parentCard.find('.hidden-colors');  // Find hidden color elements in this card
+                const colorShowArrow = "<?= get_url('images/icons') ?>/icon-color-down.png";
+                const colorHideArrow = "<?= get_url('images/icons') ?>/icon-color-up.png";
+
+                let isHidden = true;
+
+                hiddenColors.each(function () {
+                    if ($(this).hasClass('hidden')) {
+                        $(this).removeClass('hidden');
+                        isHidden = false;
+                    } else {
+                        $(this).addClass('hidden');
+                        isHidden = true;
+                    }
+                });
+
+                // Update the icon in the clicked .more-item
+                if (isHidden) {
+                    $(this).html(`<img id="down-arrow" src="${colorShowArrow}" alt="down" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
+                } else {
+                    $(this).html(`<img id="up-arrow" src="${colorHideArrow}" alt="up" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
+                }
+            });
+        };
+
+    const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+        const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+        if (arrCart.length == 0) {
+            const button = document.getElementById('cart');
+
+            button.disabled = true;
+            button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+
+        } else {
+            const button = document.getElementById('cart');
+            button.disabled = false;
+            button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+
+        }
 </script>
 <?php } ?>  
