@@ -349,13 +349,19 @@ if(!isset($_SESSION['customer_id'])) {
             </div>
 
                 
-            <div class="flex-container mb-3">
 
-                <button class="btn btn-bag " id="bag-button" disabled>
-                    <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
-                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
-                </button>
-            </div>
+            <?php
+                if(!isset($_GET['search'])) {
+            ?>
+                <div class="flex-container mb-3">
+                    <button class="btn btn-bag " id="bag-button" disabled>
+                        <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                    </button>
+                </div>
+            <?php
+                }
+            ?>
             
             <form href="#" id="form-add-to-bag">
             <div class="d-flex flex-row" style="width: 100%; height: 50vh;">
@@ -523,17 +529,12 @@ if(!isset($_SESSION['customer_id'])) {
                 </div> -->
 
                 <div class="search-container-store d-flex align-items-center mb-4">
-                    <div id="btn-filter" class="btn btn-not-cancel"> <img id="bag-icon"
-                            src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
-                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
-                    <div id="form-search" class="d-flex align-items-center"></div>
                     <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
-                        style="margin-left: 20px;"
                         value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
                     <div id="toggleLayout" style="display: none;"></div>
 
                     <div class="">
-                        <button id="btn-search" class="btn btn-primary" style="height: 48px; width: 48px">
+                        <button id="btn-search" class="btn btn-primary"  style="height: 48px; width: 48px">
                             <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search"
                                 style=" height: 24px; width: 24px;">
                         </button>
@@ -541,22 +542,36 @@ if(!isset($_SESSION['customer_id'])) {
                 </div>
 
                 
-                <div class="flex-container mb-3">
 
-                    <button class="btn btn-bag " id="bag-button" disabled>
-                        <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
-                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
-                    </button>
+                <?php
+                    if(!isset($_GET['search']) || $_GET['search'] == '') {
+                ?>
+                    <div class="flex-container mb-3">
+                        <button class="btn btn-bag " id="cart" disabled>
+                            <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
+                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                        </button>
+                    </div>
+                <?php
+                    }
+                ?>
+                <div class="font-weight-bold">
+                    <h4 class="type-header font-weight-bold">
+                        <?php
+                        $parts = explode('-', $_GET['page']);
+                        echo strtoupper(end($parts));
+                        ?>
+                    </h4>
                 </div>
 
                 <div class="frame-list" style="height:62vh; overflow: auto;">
                     <?php if(isset($_GET['filter']) && $_GET['filter']) { ?>
-                        <div class="d-flex justify-content-center mt-2 mb-2">
+                        <!-- <div class="d-flex justify-content-center mt-2 mb-2">
                             <a href="/sis/face/v1.0/?page=<?= $_GET['page'] ?>&filter=true&sub-product=<?= $_GET['sub-product'] ?>&data_cgc=<?= $_GET['data_cgc'] ?>&sub_category=<?= $_GET['sub_category'] ?>&category=<?= $_GET['category'] ?>">
                                 <div class="btn btn-link" style="color: #000 !important; text-decoration: underline !important;">
                                     Reset Filter</div>
                             </a>
-                        </div>
+                        </div> -->
 
                     <?php } ?>
                   
@@ -611,6 +626,11 @@ if(!isset($_SESSION['customer_id'])) {
                                                 <h4><?= $arrProductsSorted[$i]['item_description'] ?>
                                                 </h4>
                                                 <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span> </h4>
+                                                <?php
+                                                    if(isset($_GET['search'])) {
+                                                ?>
+                                                    <h4><span class="blk" style="color:#919191 "><?= $arrProductsSorted[$i]['color_code'] !== '' ? $arrProductsSorted[$i]['color_code'] : '-' ?></span></h4>
+                                                <?php } ?>
                                             </div>
                                         </section>
 
@@ -621,7 +641,9 @@ if(!isset($_SESSION['customer_id'])) {
                                             </h5>
                                         </section>
                                     </div>
-                                    
+                                    <?php
+                                        if(!isset($_GET['search']) || $_GET['search'] == '') {
+                                    ?>
                                     <div class="row d-flex justify-content-center mt-3">
                                         <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST">
                                             <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[0]['product_code']) ?>">
@@ -629,6 +651,8 @@ if(!isset($_SESSION['customer_id'])) {
                                             <button type="submit" class="btn btn-primary">Shop</button>
                                         </form>
                                     </div>
+
+                                    <?php } ?>
                                 </div>
 
                             </div>
@@ -761,6 +785,7 @@ if(!isset($_SESSION['customer_id'])) {
     
     let arrProduct = JSON.parse(JSON.stringify(<?= json_encode($arrProduct); ?>));
     let arrCart = JSON.parse(JSON.stringify(<?= json_encode($arrCart); ?>));
+    console.log(arrCart);
     let arrColors = <?= json_encode($getColors) ?>;
     let arrShapes = <?= json_encode($getShapes) ?>;
     let arrCollections = <?= json_encode($getCollections) ?>;
@@ -966,19 +991,39 @@ if(!isset($_SESSION['customer_id'])) {
         var typingTimer;                
         var doneTypingInterval = 500;
 
-        $('#search_frame').on('keyup', function () {
-            // clearTimeout(typingTimer);
-            // typingTimer = setTimeout(showAvailableFrame, doneTypingInterval);
-            filter = '';
-            filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $(this).val().trim() != '') ? '&filter=true' : '';
+        $('#search_frame').on('keyup', function (e) {
+                if (e.keyCode === 13) {  // Check if Enter key is pressed
+                    let filter = '';
+                    filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $('#search_frame').val().trim() !== '') ? '&filter=true' : '';
 
-            setTimeout(()=>{
-                 window.location = '?page=<?=$_GET['page']?>'+filter+'&colors='+arrColors+'&shapes='+arrShapes+'&collections='+arrCollections+'&search='+$(this).val()+'&sub-product='+'<?= (isset($_GET['sub-product'])) ? $_GET['sub-product'] : '' ?>'+
-                                "<?= (isset($_GET['data_cgc'])) ? '&data_cgc='.$_GET['data_cgc'] : ''?>"+
-                                "<?= (isset($_GET['sub_category'])) ? '&sub_category='.$_GET['sub_category'] : ''?>"+
-                                "<?= (isset($_GET['sub-product'])) ? '&category='.$_GET['category'] : ''?>";
-             },3000);
+                    
+                    window.location = '?page=<?=$_GET['page']?>' + filter + '&search=' + $(this).val();
+                }
+            });
+
+        // Click event for search button
+        $('#btn-search').on('click', function () {
+            let filter = '';
+                filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $('#search_frame').val().trim() !== '') ? '&filter=true' : '';
+
+                
+                window.location = '?page=<?=$_GET['page']?>' + filter + '&search=' + $('#search_frame').val();
         });
+
+
+        // $('#search_frame').on('keyup', function () {
+        //     // clearTimeout(typingTimer);
+        //     // typingTimer = setTimeout(showAvailableFrame, doneTypingInterval);
+        //     filter = '';
+        //     filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $(this).val().trim() != '') ? '&filter=true' : '';
+
+        //     setTimeout(()=>{
+        //          window.location = '?page=<?=$_GET['page']?>'+filter+'&colors='+arrColors+'&shapes='+arrShapes+'&collections='+arrCollections+'&search='+$(this).val()+'&sub-product='+'<?= (isset($_GET['sub-product'])) ? $_GET['sub-product'] : '' ?>'+
+        //                         "<?= (isset($_GET['data_cgc'])) ? '&data_cgc='.$_GET['data_cgc'] : ''?>"+
+        //                         "<?= (isset($_GET['sub_category'])) ? '&sub_category='.$_GET['sub_category'] : ''?>"+
+        //                         "<?= (isset($_GET['sub-product'])) ? '&category='.$_GET['category'] : ''?>";
+        //      },3000);
+        // });
 
         // $('#search_frame').on('keydown', function () {
         //     clearTimeout(typingTimer);
@@ -1229,5 +1274,61 @@ if(!isset($_SESSION['customer_id'])) {
             })
         },'JSON');
     }
+
+    const rebindMoreItemEvents = () => {
+            const moreItems = document.querySelectorAll('.more-item');
+
+            // Unbind previous click events and bind a new one
+            $(document).find('.more-item').off('click').on('click', function () {
+                const parentCard = $(this).closest('.frame-style');  // Find the parent card
+                const hiddenColors = parentCard.find('.hidden-colors');  // Find hidden color elements in this card
+                const colorShowArrow = "<?= get_url('images/icons') ?>/icon-color-down.png";
+                const colorHideArrow = "<?= get_url('images/icons') ?>/icon-color-up.png";
+
+                let isHidden = true;
+
+                hiddenColors.each(function () {
+                    if ($(this).hasClass('hidden')) {
+                        $(this).removeClass('hidden');
+                        isHidden = false;
+                    } else {
+                        $(this).addClass('hidden');
+                        isHidden = true;
+                    }
+                });
+
+                // Update the icon in the clicked .more-item
+                if (isHidden) {
+                    $(this).html(`<img id="down-arrow" src="${colorShowArrow}" alt="down" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
+                } else {
+                    $(this).html(`<img id="up-arrow" src="${colorHideArrow}" alt="up" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
+                }
+            });
+        };
+
+        // Initial call to attach event listeners on page load
+        $(document).ready(function () {
+            rebindMoreItemEvents();
+        });
+
+
+
+        //-----------bag icon show when populated
+        const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+        const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+        if (arrCart.length == 0) {
+            const button = document.getElementById('cart');
+
+            button.disabled = true;
+            button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+
+        } else {
+            const button = document.getElementById('cart');
+            button.disabled = false;
+            button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+
+        }
 </script>
 <?php } ?>

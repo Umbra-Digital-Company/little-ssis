@@ -460,7 +460,7 @@
         
         <div class="flex-container mb-3">
 
-            <button class="btn btn-bag " id="bag-button" disabled>
+            <button class="btn btn-bag " id="cart" disabled>
                 <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
                     style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
             </button>
@@ -1208,5 +1208,53 @@
         $('#loading').modal('show');
         window.location = $(this).attr('href');
     });
+
+    const rebindMoreItemEvents = () => {
+            const moreItems = document.querySelectorAll('.more-item');
+
+            // Unbind previous click events and bind a new one
+            $(document).find('.more-item').off('click').on('click', function () {
+                const parentCard = $(this).closest('.frame-style');  // Find the parent card
+                const hiddenColors = parentCard.find('.hidden-colors');  // Find hidden color elements in this card
+                const colorShowArrow = "<?= get_url('images/icons') ?>/icon-color-down.png";
+                const colorHideArrow = "<?= get_url('images/icons') ?>/icon-color-up.png";
+
+                let isHidden = true;
+
+                hiddenColors.each(function () {
+                    if ($(this).hasClass('hidden')) {
+                        $(this).removeClass('hidden');
+                        isHidden = false;
+                    } else {
+                        $(this).addClass('hidden');
+                        isHidden = true;
+                    }
+                });
+
+                // Update the icon in the clicked .more-item
+                if (isHidden) {
+                    $(this).html(`<img id="down-arrow" src="${colorShowArrow}" alt="down" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
+                } else {
+                    $(this).html(`<img id="up-arrow" src="${colorHideArrow}" alt="up" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
+                }
+            });
+        };
+
+    const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+        const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+        if (arrCart.length == 0) {
+            const button = document.getElementById('cart');
+
+            button.disabled = true;
+            button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+
+        } else {
+            const button = document.getElementById('cart');
+            button.disabled = false;
+            button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+
+        }
 </script>
 <?php } ?>  

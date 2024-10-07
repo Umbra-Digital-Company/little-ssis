@@ -3247,3 +3247,115 @@ main.customer-layout .wrapper {
   font-size: 16px;
   color: #333;
 }
+
+.customized-card {
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  background-color: #ffffff;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.btn-custom-blue {
+  height: 3.625rem;
+  font-size: 1.125rem;
+  color: #ffffff;
+  font-weight: 700;
+  background-color: #956E46;
+  border: none;
+  border-radius: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  cursor: pointer;
+  gap: 3rem;
+}
+
+.btn-custom-blue:hover {
+  color: #ffffff;
+}
+
+.btn-custom-white:focus {
+  outline: #956E46;
+}
+
+.btn-custom-white {
+  height: 3.625rem;
+  font-size: 1.125rem;
+  color: #956E46;
+  font-weight: 400;
+  background-color: #ffffff;
+  border: 2px solid #956E46;
+  border-radius: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  cursor: pointer;
+  gap: 3rem;
+}
+
+.btn-custom-white:focus {
+  outline: #956E46;
+}
+
+.btn-custom-svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  border: 2px solid #956E46;
+  border-radius: 50%;
+}
+
+.custom-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  font-weight: 900;
+  background-color: transparent;
+  color: #956E46;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  margin: 0;
+}
+
+.count_num {
+  width: 50px;
+  border: none;
+  text-align: center;
+}
+
+#btn-filter {
+  max-width: 111px;
+  height: 40px;
+}
+
+#btn-filter.filter-active {
+  max-width: 151px;
+  background: #956E46 !important;
+  color: #fff;
+}
+
+.custom-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #342c29;
+}
+
+.custom-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #342c29;
+}
