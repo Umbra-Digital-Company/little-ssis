@@ -128,7 +128,7 @@ $arrTranslate = grabLanguageTags();
 			<?= print_r($_SESSION) ?>
 		</pre>
 		<script>
-			console.log($('#session pre').html());
+			// console.log($('#session pre').html());
 		</script>
 	</div>
 
