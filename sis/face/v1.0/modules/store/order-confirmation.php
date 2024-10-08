@@ -37,7 +37,7 @@
         font-size: 1.125rem;
     }
 
-    .form-check-input {
+    .checkbox~.custom_checkbox {
         margin: 0;
         width: 24px;
         height: 24px;
@@ -50,7 +50,7 @@
         background-image: none; /* No icon when unchecked */
     }
 
-    .form-check-input:checked {
+    .checkbox:checked~.custom_checkbox {
         margin: 0;
         width: 24px;
         height: 24px;
@@ -60,7 +60,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: 18px 18px; /* Adjust the size of the background image */
-        background-image: url("../../face/assets/images/icons/icon-checked-lucide.png"); /* Show check icon */
+        background-image: url("../../face/assets/images/icons/icon-check.png"); /* Show check icon */
         border: 2px solid #956E46;
     }
 
@@ -73,34 +73,8 @@
         text-align: center;
     }
 
-    .set_receipt_holder {
-        margin: 0;
-        width: 24px;
-        height: 24px;
-        background-color: #f7f7f7;
-        border: 2px solid #956E46; /* Add a border when unchecked */
-        border-radius: 5px;
-        background-size: 24px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-image: none; /* No icon when unchecked */
-    }
-
-    .set_receipt_holder:checked {
-        margin: 0;
-        width: 24px;
-        height: 24px;
-        background-color: #956E46;
-        border-radius: 5px;
-
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 18px 18px; /* Adjust the size of the background image */
-        background-image: url("../../face/assets/images/icons/icon-checked-lucide.png"); /* Show check icon */
-        border: 2px solid #956E46;
-    }
-
 </style>
+
 
 <?php include "./modules/includes/products/grab_cart.php"; ?>
 <?php 
@@ -114,6 +88,11 @@ if(!isset($_SESSION['customer_id'])) { ?>
         </div>    
     </div>
 
+    <script>
+            $(document).ready(function() {
+        alert('error');
+        });
+    </script>
 <?php }elseif(count($arrCart) == 0) { ?>
 
     <div class="wrapper">
@@ -146,214 +125,222 @@ if(!isset($_SESSION['customer_id'])) { ?>
 ?>
 
 
-<div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
 
 
 
-<div class="custom-subtitle my-4">
-    Total order
-    <span class="custom-title">
-        <?= count(array_filter($arrCart, function ($item) {
-            return $item['price'] > 0;
-        })) ?>
-    </span>
+        <div class="custom-subtitle my-4">
+            Total order
+            <span class="custom-title">
+                <?= count(array_filter($arrCart, function ($item) {
+                    return $item['price'] > 0;
+                })) ?>
+            </span>
 
-</div>
-
-
-
-<div>
-    <?php
+        </div>
 
 
-    $merchItem = false;
-    $paperBag = false;
 
-    foreach ($arrCart as $item) {
-        if (strstr(strtolower($item['item_description']), 'paper bag') && !$paperBag) {
-            $paperBag = true;
-        }
-    }
+        <div>
+            <?php
 
-    foreach ($arrCart as $item):
-        if ($item['price'] > 0) {
-            // Handle case where price is greater than 0
-        } elseif (
-            strstr(strtolower($item['item_description']), 'paper bag') ||
-            strstr(strtolower($item['item_description']), 'sac') ||
-            strstr(strtolower($item['item_description']), 'receipt')
-        ) {
-            continue;
-        }
 
-        if ($item['dispatch_type'] == 'packaging') {
-            continue;
-        }
+            $merchItem = false;
+            $paperBag = false;
 
-        if (
-            (strstr(strtolower($item['item_description']), 'hardcase') ||
-                strstr(strtolower($item['item_description']), 'agenda')) &&
-            !$merchItem
-        ) {
-            $merchItem = true;
-        }
+            foreach ($arrCart as $item) {
+                if (strstr(strtolower($item['item_description']), 'paper bag') && !$paperBag) {
+                    $paperBag = true;
+                }
+            }
 
-    ?>
+            foreach ($arrCart as $item):
+                if ($item['price'] > 0) {
+                    // Handle case where price is greater than 0
+                } elseif (
+                    strstr(strtolower($item['item_description']), 'paper bag') ||
+                    strstr(strtolower($item['item_description']), 'sac') ||
+                    strstr(strtolower($item['item_description']), 'receipt')
+                ) {
+                    continue;
+                }
 
-        <div class="customized-card my-4 w-100 p-4 ">
-            <div class="row no-gutters">
-                <div class="">
-                    <img src="<?= !empty($cart['image_url']) ? $cart['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image">
-                </div>
-                <div class="col-md-8 d-flex align-items-center">
-                    <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
-                        <p class="custom-title"><?= $item['style'] ?></p>
-                        <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= $item['color'] ?></p>
-                        <p class="custom-subtitle" style="color: #919191;">
-                            <?=
-                            (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs')
-                                ? 'VND '
-                                : '₱'
-                            ?>
-                            <?= number_format($item['price'], 2) ?>
-                            <?php if ($item['count'] > 1): ?>
-                                x <?= $item['count'] ?>
-                            <?php endif; ?>
-                        </p>
+                if ($item['dispatch_type'] == 'packaging') {
+                    continue;
+                }
 
+                if (
+                    (strstr(strtolower($item['item_description']), 'hardcase') ||
+                        strstr(strtolower($item['item_description']), 'agenda')) &&
+                    !$merchItem
+                ) {
+                    $merchItem = true;
+                }
+
+            ?>
+
+                <div class="customized-card my-4 w-100 p-4 ">
+                    <div class="row no-gutters">
+                        <div class="">
+                            <img src="<?= !empty($cart['image_url']) ? $cart['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image">
+                        </div>
+                        <div class="col-md-8 d-flex align-items-center">
+                            <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
+                                <p class="custom-title"><?= $item['style'] ?></p>
+                                <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= $item['color'] ?></p>
+                                <p class="custom-subtitle" style="color: #919191;">
+                                    <?=
+                                    (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs')
+                                        ? 'VND '
+                                        : '₱'
+                                    ?>
+                                    <?= number_format($item['price'], 2) ?>
+                                    <?php if ($item['count'] > 1): ?>
+                                        x <?= $item['count'] ?>
+                                    <?php endif; ?>
+                                </p>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+            <?php endforeach; ?>
+        </div>
+
+
+
+
+        <div class="custom-title mb-4" style="text-transform: uppercase;">
+            <?= $arrTranslate['Packaging'] ?>
+        </div>
+
+
+        <div class="card mt-3 card-paper-bag">
+            <?php
+            $arrPaperBagSelected = [];
+            $arrPaperBag = paperBagList();
+
+            $arrExistPBag = getExistingPaperBagSac($arrPaperBag, $arrCart)
+            ?>
+
+            <div class="card-body p-0">
+                <?php
+
+                if (count($arrExistPBag) == 0) {
+                ?>
+                    <div class="product-section d-flex align-items-center justify-content-between gap-3" style="gap: 16px;">
+                        <div class="d-flex justify-content-between">
+                            <div class="form-group">
+                                <select class="form-control add_paper " id="add_paper">
+                                    <option value="">Additional paper bag</option>
+                                    <?php for ($i = 0; $i < count($arrPaperBag); $i++) { ?>
+                                        <option value="<?= $arrPaperBag[$i]['product_code'] ?>"><?= $arrPaperBag[$i]['item_name'] ?></option>
+                                    <?php } ?>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex align-items-center justify-content-center count_item">
+                            <div class="button-container">
+                                <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="" value="-">
+                            </div>
+
+                            <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent" group-orders-specs-id="" value="0" readonly>
+
+
+                            <div class="button-container">
+                                <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="" value="+">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <?php    } else {
+
+                    foreach ($arrExistPBag as $key => $value) {
+                        $groupSelected = explode(',', $value);
+                        $countSelected = count($groupSelected);
+
+                        for ($i = 0; $i < count($arrPaperBag); $i++) {
+
+                            if ($key == $arrPaperBag[$i]['product_code']) {
+                                $product_name = $arrPaperBag[$i]['item_name'];
+                                break;
+                            }
+                        }
+                    ?>
+                        <div class="product-section d-flex align-items-center justify-content-between" style="gap: 16px;">
+                            <div class="d-flex justify-content-between">
+                                <div class="form-group ">
+                                    <select class="form-control add_paper" id="add_paper">
+                                        <option value="<?= $key ?>"><?= $product_name ?></option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex align-items-center justify-content-center count_item">
+                                <div class="button-container">
+                                    <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="-">
+                                </div>
+
+                                <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent" group-orders-specs-id="" value="<?= $countSelected ?>" readonly>
+
+                                <div class="button-container">
+                                    <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="+">
+                                </div>
+                            </div>
+
+                        </div>
+                <?php   }
+                }
+                ?>
             </div>
         </div>
 
-    <?php endforeach; ?>
-</div>
+        <div class="card card-others mt-4 w-100 p-4 d-flex align-items-left justify-content-center">
+            <?php
+            $arrPaperBagSelected = [];
+            $arrPaperBag = othersList();
 
+            $arrExistPBag = [];
+            $orders_specs_id_selected = '';
+            for ($i = 0; $i < count($arrPaperBag); $i++) {
+                $selected = '';
+                for ($b = 0; $b < count($arrCart); $b++) {
+                    if (trim($arrPaperBag[$i]["product_code"]) == trim($arrCart[$b]["product_upgrade"])) {
 
-
-
-<div class="custom-title mb-4" style="text-transform: uppercase;">
-    <?= $arrTranslate['Packaging'] ?>
-</div>
-
-
-<div class="card mt-3 card-paper-bag">
-    <?php
-    $arrPaperBagSelected = [];
-    $arrPaperBag = paperBagList();
-
-    $arrExistPBag = getExistingPaperBagSac($arrPaperBag, $arrCart)
-    ?>
-
-    <div class="card-body p-0">
-        <?php
-
-        if (count($arrExistPBag) == 0) {
-        ?>
-            <div class="product-section d-flex align-items-center justify-content-between gap-3" style="gap: 16px;">
-                <div class="d-flex justify-content-between">
-                    <div class="form-group">
-                        <select class="form-control add_paper " id="add_paper">
-                            <option value="">Additional paper bag</option>
-                            <?php for ($i = 0; $i < count($arrPaperBag); $i++) { ?>
-                                <option value="<?= $arrPaperBag[$i]['product_code'] ?>"><?= $arrPaperBag[$i]['item_name'] ?></option>
-                            <?php } ?>
-                        </select>
-
-                    </div>
-                </div>
-
-
-                <div class="d-flex align-items-center justify-content-center count_item">
-                    <div class="button-container">
-                        <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="" value="-">
-                    </div>
-
-                    <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent" group-orders-specs-id="" value="0" readonly>
-
-
-                    <div class="button-container">
-                        <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="" value="+">
-                    </div>
-                </div>
-
-
-            </div>
-            <?php    } else {
-
-            foreach ($arrExistPBag as $key => $value) {
-                $groupSelected = explode(',', $value);
-                $countSelected = count($groupSelected);
-
-                for ($i = 0; $i < count($arrPaperBag); $i++) {
-
-                    if ($key == $arrPaperBag[$i]['product_code']) {
-                        $product_name = $arrPaperBag[$i]['item_name'];
+                        $arrExistPBag[$arrPaperBag[$i]["product_code"]] = $arrCart[$b]["group_orders_specs_id"];
+                        $orders_specs_id_selected = $arrCart[$b]["group_orders_specs_id"];
                         break;
                     }
                 }
-            ?>
-                <div class="product-section d-flex align-items-center justify-content-between" style="gap: 16px;">
-                    <div class="d-flex justify-content-between">
-                        <div class="form-group ">
-                            <select class="form-control add_paper" id="add_paper">
-                                <option value="<?= $key ?>"><?= $product_name ?></option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="d-flex align-items-center justify-content-center count_item">
-                        <div class="button-container">
-                            <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="-">
-                        </div>
-
-                        <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent" group-orders-specs-id="" value="<?= $countSelected ?>" readonly>
-
-                        <div class="button-container">
-                            <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="+">
-                        </div>
-                    </div>
-
-                </div>
-        <?php   }
-        }
-        ?>
-    </div>
-</div>
-
-<div class="card card-others mt-4 w-100 p-4 d-flex align-items-left justify-content-center">
-    <?php
-    $arrPaperBagSelected = [];
-    $arrPaperBag = othersList();
-
-    $arrExistPBag = [];
-    $orders_specs_id_selected = '';
-    for ($i = 0; $i < count($arrPaperBag); $i++) {
-        $selected = '';
-        for ($b = 0; $b < count($arrCart); $b++) {
-            if (trim($arrPaperBag[$i]["product_code"]) == trim($arrCart[$b]["product_upgrade"])) {
-
-                $arrExistPBag[$arrPaperBag[$i]["product_code"]] = $arrCart[$b]["group_orders_specs_id"];
-                $orders_specs_id_selected = $arrCart[$b]["group_orders_specs_id"];
-                break;
             }
-        }
-    }
-    ?>
-    <div class="form-check d-flex align-items-center">
+            ?>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex pb-2">
+                        <div class="d-flex align-items-center radio">
+                            <input type="checkbox" name="receipt_holder" id="receipt_holder_checkbox"
+                                class="sr-only set_receipt_holder checkbox"
+                                orders-specs-id="<?= $orders_specs_id_selected ?>"
+                                product-code="<?= $arrPaperBag[0]['product_code'] ?>" value="yes"
+                                <?= $orders_specs_id_selected != '' ? 'checked' : '' ?>>
+                            <label for="receipt_holder_checkbox" class="custom_checkbox"></label>
+                        </div>
+                    </div>
 
+                    <div class="col align-items-center pb-2">
+                        <p style="font-size: 18px; font-weight: 400">Receipt Holder?</p>
+                    </div>
+                    
+                </div>
+        </div>
 
-        <input name="receipt_holder" class="set_receipt_holder form-check-input" type="checkbox" orders-specs-id="<?= $orders_specs_id_selected ?>" product-code="<?= $arrPaperBag[0]['product_code'] ?>" <?= $orders_specs_id_selected != '' ? 'checked' : '' ?>>
-        <label class="form-check-label ml-4 " for="flexCheckChecked">
-            Receipt holder?
-        </label>
-    </div>
-
-</div>
-
-<div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1.5rem">
-    <?php
+    <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1.5rem">
+        <?php
     // $total_price = 0;
     // $voucher_amount = 0;
     // $promo_code = '';
@@ -369,73 +356,58 @@ if(!isset($_SESSION['customer_id'])) { ?>
     //     endif;
     // endforeach;
 
-    $total_price = 0;
-    $voucher_amount = 0;
-    $promo_code = '';
-    $total_count = 0;
+        $total_price = 0;
+        $voucher_amount = 0;
+        $promo_code = '';
+        $total_count = 0;
 
-    if (!empty($arrCart) && isset($arrCart[0]['promo_code_amount'])) {
-        $voucher_amount = $arrOrdersConfirmed[0]['promo_code_amount'];
-        $promo_code = $item['promo_code'];
-    }
+        if (!empty($arrCart) && isset($arrCart[0]['promo_code_amount'])) {
+            $voucher_amount = $arrOrdersConfirmed[0]['promo_code_amount'];
+            $promo_code = $item['promo_code'];
+        }
 
-    foreach ($arrCart as $item):
-        if ($item['price'] > 0):
-            $total_price += $item['price'] * $item['count'];
-            $total_count += $item['count'];
-        endif;
-    endforeach;
+        foreach ($arrCart as $item):
+            if ($item['price'] > 0):
+                $total_price += $item['price'] * $item['count'];
+                $total_count += $item['count'];
+            endif;
+        endforeach;
 
-    ?>
+        ?>
 
-    <div class="d-flex justify-content-between">
-        <p class="custom-subtitle">Subtotal</p>
-        <p class="custom-subtitle"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price, 2) ?></p>
+        <div class="d-flex justify-content-between">
+            <p class="custom-subtitle">Subtotal</p>
+            <p class="custom-subtitle"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price, 2) ?></p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class="custom-subtitle">Discount</p>
+            <p class="custom-subtitle"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= $promo_code != '' ? $promo_code : number_format(0, 2) ?></p>
+        </div>
+
+        <hr>
+
+        <div class="d-flex justify-content-between" style="font-weight: 700">
+            <p class="custom-title">Total amount</p>
+            <p class="custom-title" style="color: #956E46;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price - $voucher_amount, 2) ?> </p>
+        </div>
+
     </div>
-    <div class="d-flex justify-content-between">
-        <p class="custom-subtitle">Discount</p>
-        <p class="custom-subtitle"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= $promo_code != '' ? $promo_code : number_format(0, 2) ?></p>
+
+    <div>
+        <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
+        <a href="/sis/face/func/process/order_payment.php?path_loc=v1.0" id="send-order">
+            <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center" value="<?= $textSend ?>">
+        </a>
     </div>
 
-    <hr>
-
-    <div class="d-flex justify-content-between" style="font-weight: 700">
-        <p class="custom-title">Total amount</p>
-        <p class="custom-title" style="color: #956E46;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price - $voucher_amount, 2) ?> </p>
-    </div>
 
 </div>
-
-
-<div>
-    <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
-    <a href="/sis/studios/func/process/order_payment.php?path_loc=v1.0" id="send-order">
-        <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center" value="<?= $textSend ?>">
-    </a>
-</div>
-
-
-</div>
-
 
 
 <script>
         let total_count = <?= $total_count ?>;
         $(document).ready(function() {
             $(".use_code").hide();
-            $('.check-promo-code').click(function() {
-
-
-                // var modal = document.getElementById("myModal");
-                // var modalData = document.getElementById("modal-data");
-                //     console.log(modalData); // Debugging statement
-
-                // modal.style.display = "block";
-                $("#myVoucher").modal("show");
-                $('input[name=email]').val('<?= $arrCart[0]['email_address'] ?>');
-                $('#email_address_text').text('<?= $arrCart[0]['email_address'] ?>');
-            });
-
             $(".check_code").click(function(e) {
                 e.preventDefault();
 
@@ -498,6 +470,8 @@ if(!isset($_SESSION['customer_id'])) { ?>
                 }); //END :: AJAX
 
             });
+
+
 
             $(this).on('click', '.add_count_increment_pbag', function() {
                 console.log("test")
