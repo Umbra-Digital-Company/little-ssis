@@ -199,7 +199,8 @@ function updateProfile() {
 	$_SESSION['priority'] = $priority;
 
 	unset($_SESSION['email_taken']);
-	echo "	<script>	window.location='/sis/face/".$_POST['path_loc']."/?page=select-store'</script>";
+	$bpage = isset($_GET['bpage']) ? htmlspecialchars($_GET['bpage']) : '';
+	echo "	<script>	window.location='/sis/face/".$_POST['path_loc']."/?page=order-confirmation&bpage={$bpage}'</script>";
 }
 
 function InsertHdf($profileIDF){
@@ -332,9 +333,18 @@ if ( isset($_POST['email_confirmation']) ) { // UPDATE DATA
 		if ( $pi_email=='n' ) {
 			// do not UPDATE. go back to form
 			$_SESSION['email_taken'] = "Your Email is already taken. Please try another Email";
-			echo "<script>window.history.back();</script>";
+			echo "Your Email is already taken. Please try another Email";
+			echo '
+			<script>
+			$(".placeholder.s_email").addClass("text-danger");
+			$("#s_email").css("border-bottom", "2px solid red");
+			</script>
+			';
+
+			
 		} else {
 			// good to UPDATE the profile
+			unset($_SESSION['autologin']);
 			unset($_SESSION['email_taken']);
 			updateProfile();
 		}
@@ -483,7 +493,8 @@ if ( isset($_POST['email_confirmation']) ) { // UPDATE DATA
 		$_SESSION['priority'] = $priority;
 
 		unset($_SESSION['email_taken']);
-		echo "	<script>	window.location='/sis/face/".$_POST['path_loc']."/?page=select-store'</script>";
+		$getBpage = $_GET['bpage'];
+		echo "	<script>	window.location='/sis/face/".$_POST['path_loc']."/?page=order-confirmation?>'</script>";
 
 	}
 }

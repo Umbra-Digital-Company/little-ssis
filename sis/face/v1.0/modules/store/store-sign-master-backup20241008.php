@@ -94,11 +94,10 @@ if ($valid) {
 
 		// Clear email taken session and set login session
 		unset($_SESSION['email_taken']);
-		unset($_SESSION['autologin']);
 		$_SESSION['login_set'] = true;
 
 		// Redirect to select store page
-		echo '<script>window.location="./?page=order-confirmation&bpage='.htmlspecialchars($_GET['bpage']).'"</script>';
+		echo '<script>window.location="./?page=select-store"</script>';
 	} else {
 		// Account does not exist message
 		echo 'Account does not exist.';
