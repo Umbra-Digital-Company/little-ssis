@@ -204,7 +204,8 @@ if(!isset($_SESSION['user_login']['username'])) {
 			    unset($_SESSION['login_set']);
 			}
 		    $name = ucwords(strtolower($arrName[0]['first_name'].' '.$arrName[0]['last_name']));
-			echo "<script>  window.location = '/sis/face/".$_GET['path_loc']."/?page=order-dispatched&order_id=".$order_no."&name=".$name."';</script>";
+			$bdate= $_GET['bdate'];
+			echo "<script>  window.location = '/sis/face/".$_GET['path_loc']."/?page=order-dispatched&order_id=".$order_no."&name=".$name."&age=".$bdate."';</script>";
 		}else{
 			echo "<script> alert('Error Dispatch.'); </script>";
 		}

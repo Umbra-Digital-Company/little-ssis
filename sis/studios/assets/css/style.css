@@ -3263,7 +3263,8 @@ main.customer-layout .wrapper {
   padding: 0;
   text-align: center;
   display: inline-block;
-  margin: 0;
+  margin-bottom: 2px;
+  margin-left: 2px;
 }
 
 .count_num {

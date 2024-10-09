@@ -438,6 +438,8 @@ $(document).ready(function () {
 	 * 
 	 */
 
+
+
 	const useAccountLogin = () => {
 		$.post("/sis/face/func/store/store-sign-master.php", $("form#use_account").serialize(), function (d) {
 			$('#msg').html("");
@@ -453,14 +455,16 @@ $(document).ready(function () {
 
 		// =============================== STEP 1 - Use or Create Account
 
+		// SWITCH ANIMATION
 	if ( $('.account-navigation').length ) {
 
 		$('.account-option').on('click', function (e) {
 			var target 		= $(this).attr('href');
 			e.preventDefault();
 
-			if ( target == '#create-content' ) {
+			if ( target == '#use-content' ) {
 				$('.switch-animation').removeClass('slide');
+			
 			} else {
 				$('.switch-animation').addClass('slide');
 			}
@@ -469,6 +473,8 @@ $(document).ready(function () {
 			$(target).fadeIn().addClass('active').siblings('.account-content').hide().removeClass('active');
 		});
 
+
+		
 		// =============================== USE ACCOUNT
 
 		$('#username').on('keydown', function () {
@@ -1661,5 +1667,42 @@ $(document).ready(function () {
 	$('.language').on('click', function() {
 		$(this).find('.lang-opt').toggle('fade');
 	});
+
+
+	// ========================== GUEST Login
+document.getElementById('guestForm').addEventListener('input', function() {
+	var isFormValid = true;
+	
+	
+	var lastname = document.getElementById('lastname').value.trim();
+	var firstname = document.getElementById('firstname').value.trim();
+	var gender = document.getElementById('gender').value;
+	var ageRange = document.getElementById('age_range').value;
+
+	if (!lastname || !firstname || !gender || !ageRange) {
+		isFormValid = false;
+	}
+
+	
+	document.getElementById('guest-submit').disabled = !isFormValid;
+});
+
+
+document.getElementById('guestForm').addEventListener('input', function() {
+	var isFormValid = true;
+	
+	
+	var lastname = document.getElementById('lastname').value.trim();
+	var firstname = document.getElementById('firstname').value.trim();
+	var gender = document.getElementById('gender').value;
+	var ageRange = document.getElementById('age_range').value;
+
+	if (!lastname || !firstname || !gender || !ageRange) {
+		isFormValid = false;
+	}
+
+	
+	document.getElementById('guest-submit').disabled = !isFormValid;
+});
 
 });

@@ -49,7 +49,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
-                                <p class="custom-title"><?= ucwords($order['item_description']) ?></p>
+                                <p class="custom-title"><?= ucwords($order['style']) ?></p>
                                 <p class="custom-subtitle"><?= ucwords($order['color']) ?></p>
                                 <p class="custom-subtitle" style="color: #919191;">
                                     <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $order['price'] ?>
