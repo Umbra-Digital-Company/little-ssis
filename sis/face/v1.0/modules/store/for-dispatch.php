@@ -47,13 +47,13 @@
         align-items: center;
         justify-content: center;
         color: #ffffff;
-        background-color: #0B5893;
+        background-color: #956e46;
         border-radius: 50%;
         border: none;
     }
 
     .search-button:hover {
-        background-color: #0B5893;
+        background-color: #956e46;
         cursor: pointer;
     }
 
@@ -62,12 +62,16 @@
         box-shadow: 0 0 0 2px #93c5fd;
     }
 
+
+
     .pagination-select {
         color: #342C29;
         border: none;
         background: transparent;
         cursor: pointer;
     }
+
+
 
 
     th {
@@ -126,6 +130,8 @@
     tr:last-child td:last-child {
         border-bottom-right-radius: 16px;
     }
+
+
 
 
 
@@ -219,7 +225,7 @@ include("./modules/includes/grab_dispatch_order.php");
 
 <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel mt-4">
     <!-- Search Bar -->
-    <form class="search-form mb-4" id="search-form" method="GET" action="">
+    <form class="search-form" id="search-form" method="GET" action="">
         <div class="search-input-container">
             <input type="search" id="simple-search" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" class="search-input" placeholder="Search" oninput="toggleClearButton();" />
             <button type="button" class="clearable__clear" onclick="clearSearch();" style="display: none;">
@@ -257,7 +263,7 @@ include("./modules/includes/grab_dispatch_order.php");
 
     <?php if (empty($arrCustomer)): ?>
         <div class="no-orders-message" style="text-align: center; margin-top: 5rem">
-            <img src="/sis/studios/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
+            <img src="/sis/face/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
             <h1 style="color: #B7B7B7;">No Pending Orders</h1>
         </div>
     <?php else: ?>
@@ -417,7 +423,7 @@ include("./modules/includes/grab_dispatch_order.php");
                     id: id
                 },
                 type: "POST",
-                url: "/sis/studios/v1.0/modules/includes/cancel_order.php",
+                url: "/sis/face/v1.0/modules/includes/cancel_order.php",
                 success: function(data) {
                     location.reload();
                     // console.log(data);

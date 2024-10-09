@@ -472,7 +472,7 @@
         let arrMerchSorted = <?= json_encode($arrMerchSorted) ?>;
 
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
             const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
@@ -497,23 +497,23 @@
 
 
 
-            (arrFramesCount == 0) ? $('.section-frames').hide() : '';
-            (arrAntiRadCount == 0) ? $('.section-antirad').hide() : '';
-            (arrReadersCount == 0) ? $('.section-readers').hide() : '';
-            (arrFreeItemCount == 0) ? $('.section-free-item').hide() : '';
-            (arrMerchCount == 0) ? $('.section-merch').hide() : '';
+            (arrFramesCount == 0) ? $('.section-frames').hide(): '';
+            (arrAntiRadCount == 0) ? $('.section-antirad').hide(): '';
+            (arrReadersCount == 0) ? $('.section-readers').hide(): '';
+            (arrFreeItemCount == 0) ? $('.section-free-item').hide(): '';
+            (arrMerchCount == 0) ? $('.section-merch').hide(): '';
             $('#search_frame').focus();
 
             $('.packages-list').addClass('show');
 
             totalCount();
-            $('#filter').on('click', function () {
-                $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function (d) {
+            $('#filter').on('click', function() {
+                $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function(d) {
                     overlayFilter(d);
                 });
             });
 
-            $(this).on('click', '.product-option', function () {
+            $(this).on('click', '.product-option', function() {
                 let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
                 let linkProd = $(this).attr('prod-item-link');
 
@@ -538,78 +538,79 @@
 
             });
 
-            $("#cart").click(function () {
-                let item_cart = '';
-                for (let i = 0; i < arrCart.length; i++) {
-                    if (parseFloat(arrCart[i].price) > 0) { }
-                    else if (arrCart[i].item_description.toLowerCase().indexOf('paper bag') > -1 || arrCart[i].item_description.toLowerCase().indexOf('sac') > -1 || arrCart[i].item_description.toLowerCase().indexOf('receipt') > -1) {
-                        continue;
-                    }
-                    if (arrCart[i].dispatch_type == 'packaging') {
-                        continue;
-                    }
-                    total_price = parseFloat(arrCart[i].price) * parseInt(arrCart[i].count);
-                    merchItem = (arrCart[i].product_code_order.indexOf('M100') > -1) ? 'prod-item="merch"' : 'prod-item="frame"';
-                    merchItem = (arrCart[i].product_upgrade.indexOf('G100') > -1) ? 'prod-item="antirad"' : merchItem;
+            $("#bag-button").click(function() {
+                window.location.href = "/sis/studios/v1.0/?page=cart";
+                // let item_cart = '';
+                // for (let i = 0; i < arrCart.length; i++) {
+                //     if (parseFloat(arrCart[i].price) > 0) { }
+                //     else if (arrCart[i].item_description.toLowerCase().indexOf('paper bag') > -1 || arrCart[i].item_description.toLowerCase().indexOf('sac') > -1 || arrCart[i].item_description.toLowerCase().indexOf('receipt') > -1) {
+                //         continue;
+                //     }
+                //     if (arrCart[i].dispatch_type == 'packaging') {
+                //         continue;
+                //     }
+                //     total_price = parseFloat(arrCart[i].price) * parseInt(arrCart[i].count);
+                //     merchItem = (arrCart[i].product_code_order.indexOf('M100') > -1) ? 'prod-item="merch"' : 'prod-item="frame"';
+                //     merchItem = (arrCart[i].product_upgrade.indexOf('G100') > -1) ? 'prod-item="antirad"' : merchItem;
 
-                    curStyle = arrCart[i].style;
-                    curColor = arrCart[i].color.trim();
-                    // curColor = arrCart[i].color.trim().replace(/ /g, "-");
-                    // curColor = curColor.replace(/-f/g, "-full");
-                    // curColor = curColor.replace(/-m/g, "-mirror");
-                    // curColor = curColor.replace(/-gdt/, "-g");
-                    // curImageURL = "images/studios/"+curStyle+"/"+curColor+"/front.png";
-                    width = '';
-                    curImageURL = arrCart[i].image_url;
-                    if (curImageURL == null) {
+                //     curStyle = arrCart[i].style;
+                //     curColor = arrCart[i].color.trim();
+                //     // curColor = arrCart[i].color.trim().replace(/ /g, "-");
+                //     // curColor = curColor.replace(/-f/g, "-full");
+                //     // curColor = curColor.replace(/-m/g, "-mirror");
+                //     // curColor = curColor.replace(/-gdt/, "-g");
+                //     // curImageURL = "images/studios/"+curStyle+"/"+curColor+"/front.png";
+                //     width = '';
+                //     curImageURL = arrCart[i].image_url;
+                //     if (curImageURL == null) {
 
-                        curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/' + curStyle + '/' + curColor + '/front.png';
-                        width = 'width:100px;';
+                //         curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/' + curStyle + '/' + curColor + '/front.png';
+                //         width = 'width:100px;';
 
-                    }
+                //     }
 
-                    item_cart += '<div class="card cart_view mt-4">'
-                        + '<div class="card-body cart-item">'
-                        + '<div class="row">'
-                        + '<img src="/sis/studios/assets/images/icons/icon-delete.png" class="img-responsive remove_item" orders-specs-id="' + arrCart[i].group_orders_specs_id + '" style="cursor: pointer; position: absolute; top: 10px; right: 10px;" width="25" height="25" title="Remove this item">'
-                        + '</div>'
-                        + '<div class="row mt-4">'
-                        + '<div class="col-6" style="text-align:left">'
-                        + '<div class="row justify-content-center">'
-                        + '<div style="height: 100px; ' + width + ' background-image:url(' + curImageURL + '); background-repeat: no-repeat; background-size: 80%; background-position: center;" class="img-responsive cart-item-image"></div>'
-                        + '</div>'
-                        + '</div>'
-                        + '<div class="col-6 count_item">'
-                        + '<div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">'
-                        + '<h2 style="text-transform: uppercase; font-size: 18px;" class="mt-2 product-title">' + curStyle + ' <br><span style="font-size: 12px;">' + curColor.replace("-", " ") + '</span></h2>'
-                        + '</div>'
-                        + '<div class="row no-gutters d-flex justify-content-start mt-3">'
-                        + '<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>' + parseFloat(arrCart[i].price).toFixed(2) + '</p>'
-                        + '</div>'
-                        + '<div class="row no-gutters d-flex justify-content-start mt-1">'
-                        + '<span><input type="button" class="form-control count_decrement"  price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" value="-"></span>'
-                        + '<input type="text" class="form-control count_num" value="' + arrCart[i].count + '" readonly>'
-                        + '<span><input type="button" class="form-control count_increment" ' + merchItem + ' price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" product-code="' + arrCart[i].product_code + '" value="+"></span>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>';
-                }
-                if (item_cart == '') {
-                    item_cart += itemCart();
-                } else {
-                    item_cart += '<div class="d-flex justify-content-center mt-4" id="btn-sect" style="text-align: center;">'
-                        + '<div class="col-6">'
-                        + '<input type="button" class="btn btn-primary" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
-                        + '</div>'
-                        + '<div class="col-6">'
-                        + '<a href="?page=order-confirmation&bpage=' + '<?= $_GET['page'] ?>' + '"><input type="button" class="btn btn-black" value="<?= $arrTranslate['Proceed'] ?>"></a>'
-                        + '</div>'
-                        + '</div>';
-                }
-                $("#item_cart").html(item_cart);
-                $("#modal-item").modal("show");
+                //     item_cart += '<div class="card cart_view mt-4">'
+                //         + '<div class="card-body cart-item">'
+                //         + '<div class="row">'
+                //         + '<img src="/sis/studios/assets/images/icons/icon-delete.png" class="img-responsive remove_item" orders-specs-id="' + arrCart[i].group_orders_specs_id + '" style="cursor: pointer; position: absolute; top: 10px; right: 10px;" width="25" height="25" title="Remove this item">'
+                //         + '</div>'
+                //         + '<div class="row mt-4">'
+                //         + '<div class="col-6" style="text-align:left">'
+                //         + '<div class="row justify-content-center">'
+                //         + '<div style="height: 100px; ' + width + ' background-image:url(' + curImageURL + '); background-repeat: no-repeat; background-size: 80%; background-position: center;" class="img-responsive cart-item-image"></div>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '<div class="col-6 count_item">'
+                //         + '<div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">'
+                //         + '<h2 style="text-transform: uppercase; font-size: 18px;" class="mt-2 product-title">' + curStyle + ' <br><span style="font-size: 12px;">' + curColor.replace("-", " ") + '</span></h2>'
+                //         + '</div>'
+                //         + '<div class="row no-gutters d-flex justify-content-start mt-3">'
+                //         + '<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>' + parseFloat(arrCart[i].price).toFixed(2) + '</p>'
+                //         + '</div>'
+                //         + '<div class="row no-gutters d-flex justify-content-start mt-1">'
+                //         + '<span><input type="button" class="form-control count_decrement"  price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" value="-"></span>'
+                //         + '<input type="text" class="form-control count_num" value="' + arrCart[i].count + '" readonly>'
+                //         + '<span><input type="button" class="form-control count_increment" ' + merchItem + ' price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" product-code="' + arrCart[i].product_code + '" value="+"></span>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '</div>';
+                // }
+                // if (item_cart == '') {
+                //     item_cart += itemCart();
+                // } else {
+                //     item_cart += '<div class="d-flex justify-content-center mt-4" id="btn-sect" style="text-align: center;">'
+                //         + '<div class="col-6">'
+                //         + '<input type="button" class="btn btn-primary" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
+                //         + '</div>'
+                //         + '<div class="col-6">'
+                //         + '<a href="?page=order-confirmation&bpage=' + '<?= $_GET['page'] ?>' + '"><input type="button" class="btn btn-black" value="<?= $arrTranslate['Proceed'] ?>"></a>'
+                //         + '</div>'
+                //         + '</div>';
+                // }
+                // $("#item_cart").html(item_cart);
+                // $("#modal-item").modal("show");
             });
             // $("#form-add-to-bag").submit(function(e){
             //     e.preventDefault();
@@ -625,7 +626,7 @@
             //         }
             //     });//END :: AJAX
             // });
-            $(".form-quick-add-to-bag").submit(function (e) {
+            $(".form-quick-add-to-bag").submit(function(e) {
                 e.preventDefault();
                 process_file = '';
                 if ($(this).attr('item') != 'frame') {
@@ -636,18 +637,18 @@
                     type: "POST",
                     data: $(this).serialize(),
                     dataType: 'html',
-                    success: function (response) {
+                    success: function(response) {
                         location.reload();
                     },
-                    error: function () {
-                    }
-                });//END :: AJAX
+                    error: function() {}
+                }); //END :: AJAX
             });
-            $(this).on('click', '.remove_item', function () {
+            $(this).on('click', '.remove_item', function() {
                 let this_div = $(this);
-                let remove = $.post("/sis/studios/func/process/remove_item.php", { orders_specs_id: this_div.attr('orders-specs-id') }, function () {
-                });
-                $.when(remove).done(function () {
+                let remove = $.post("/sis/studios/func/process/remove_item.php", {
+                    orders_specs_id: this_div.attr('orders-specs-id')
+                }, function() {});
+                $.when(remove).done(function() {
                     arrCart = arrCart.filter(item => item.group_orders_specs_id !== this_div.attr('orders-specs-id'));
                     //console.log(arrCart);
                     totalCount();
@@ -657,7 +658,7 @@
                     }
                 });
             });
-            $(this).on('click', '.count_decrement ', function () {
+            $(this).on('click', '.count_decrement ', function() {
                 _this = $(this);
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 0) {
@@ -665,7 +666,9 @@
                     arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
                     arrOrdersSpescIdRemove = arrOrdersSpescId[arrOrdersSpescId.length - 1];
 
-                    $.post("/sis/studios/func/process/remove_item.php", { orders_specs_id: arrOrdersSpescIdRemove }, function () {
+                    $.post("/sis/studios/func/process/remove_item.php", {
+                        orders_specs_id: arrOrdersSpescIdRemove
+                    }, function() {
 
                         arrOrdersSpescId.pop();
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -683,7 +686,7 @@
 
                 }
             });
-            $(this).on('click', '.count_increment', function () {
+            $(this).on('click', '.count_increment', function() {
                 _this = $(this);
                 arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
 
@@ -692,7 +695,9 @@
 
                 // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
                 itemProd = (attrProdItem != 'frame') ? '_' + attrProdItem : '';
-                $.post("/sis/studios/func/process/add_to_bag" + itemProd + ".php", { studios_product_code: _this.attr('product-code') }, function (result) {
+                $.post("/sis/studios/func/process/add_to_bag" + itemProd + ".php", {
+                    studios_product_code: _this.attr('product-code')
+                }, function(result) {
                     //console.log(result);
                     arrOrdersSpescId.push(result);
                     arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -711,11 +716,11 @@
                 });
             });
 
-            $(this).on('click', '.add_count_increment', function () {
+            $(this).on('click', '.add_count_increment', function() {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 $(this).parent().parent().find('.count_num').val(parseInt(current_value) + 1);
             });
-            $(this).on('click', '.minus_count_decrement', function () {
+            $(this).on('click', '.minus_count_decrement', function() {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 1) {
                     $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);
@@ -723,7 +728,7 @@
             });
 
             let timeout = null;
-            $('#search_frame').on('keyup', function () {
+            $('#search_frame').on('keyup', function() {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
                     if ($(this).val() == '') {
@@ -737,7 +742,7 @@
         });
 
         var twoColumn = true;
-        $('#toggleLayout').on('click', function () {
+        $('#toggleLayout').on('click', function() {
             twoColumn = !twoColumn;
 
             $('.frame-style__slider')
@@ -758,11 +763,11 @@
             swipeToSlide: false,
             touchMove: false,
             swipe: false
-        }).on('swipe', function (event, slick, direction) {
+        }).on('swipe', function(event, slick, direction) {
             var newActive = slick.currentSlide;
             var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
 
-            colorPicker.each(function () {
+            colorPicker.each(function() {
                 if ($(this).data('index') == newActive) {
                     $(this).addClass('active').siblings().removeClass('active')
                     $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
@@ -771,7 +776,7 @@
             })
         })
 
-        $('.switch-color li').on('click', function () {
+        $('.switch-color li').on('click', function() {
             var slideIndex = $(this).data('index');
             var slider = $(this).parents('.frame-style').find('.frame-style__slider');
             var curStyle = $(this).data('style-name');
@@ -785,14 +790,14 @@
             $(this).parents('.frame-style').find('.form-quick-add-to-bag').find('input').eq(0).val(curSKU);
         })
 
-        $('.image-wrapper').each(function () {
+        $('.image-wrapper').each(function() {
             var image = $(this).data('src');
             var no_image = $(this).data('no-image');
             var elem = $(this);
 
-            checkImage(image).on('error', function () {
+            checkImage(image).on('error', function() {
                 elem.css('background-image', 'url(' + no_image + ')')
-            }).on('load', function () {
+            }).on('load', function() {
                 elem.css('background-image', 'url(' + image + ')')
             })
         })
@@ -819,7 +824,7 @@
                 var s = $("#search_frame").val().toLowerCase();
                 $('.ssis-searching').fadeIn();
 
-                $('.frame-style').each(function () {
+                $('.frame-style').each(function() {
                     if ($(this).data('style').match(s.toLowerCase())) {
                         $(this).fadeIn();
                     } else {
@@ -832,18 +837,18 @@
             }
         }
         const itemCart = () => {
-            return '<div class="row mt-4" style="text-align: center;">'
-                + '<div class="col-12">'
-                + '<p style="font-weight: bold; font-size: 20px">Your cart is empty</p>'
-                + '</div>'
-                + '<div class="col-12 mt-4">'
-                + '<input type="button" class="btn btn-black" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
-                + '</div>'
-                + '</div>';
+            return '<div class="row mt-4" style="text-align: center;">' +
+                '<div class="col-12">' +
+                '<p style="font-weight: bold; font-size: 20px">Your cart is empty</p>' +
+                '</div>' +
+                '<div class="col-12 mt-4">' +
+                '<input type="button" class="btn btn-black" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">' +
+                '</div>' +
+                '</div>';
         }
         const overlayFilter = body => {
             $('.ssis-overlay').fadeIn(200).addClass('show').html(body);
-            $('.close-overlay').click(function () {
+            $('.close-overlay').click(function() {
                 if ($(this).data('reload') == 'yes') {
                     window.location.reload(true);
                 } else {

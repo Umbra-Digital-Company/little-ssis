@@ -235,7 +235,6 @@ body * {
 
 body {
   background: #f0f0f0;
-
 }
 
 #ssis_sidebar {
@@ -414,9 +413,7 @@ body #admin-bar {
     0px 1px 2px 0px rgba(0, 0, 0, 0.04);
 }
 
-
-
-body #admin-bar>div {
+body #admin-bar > div {
   padding: 10px;
 }
 
@@ -2990,7 +2987,6 @@ main.customer-layout .wrapper {
   max-width: 575px !important;
   width: 100% !important;
   border-radius: 16px;
-
 }
 
 .modal-header {
@@ -3096,15 +3092,13 @@ main.customer-layout .wrapper {
 }
 
 @media only screen and (max-width: 992px) {
-
-  body>.container {
+  body > .container {
     /*overflow-y: hidden;*/
     height: 100vh;
   }
 }
 
 @media only screen and (max-width: 600px) {
-
   .cart-item .mt-xs-0 {
     margin-top: 0 !important;
   }
@@ -3180,6 +3174,12 @@ main.customer-layout .wrapper {
 .custom-subtitle {
   font-size: 18px;
   font-weight: 400;
+  color: #342c29;
+}
+
+.custom-sub-subtitle {
+  font-size: 14px;
+  font-weight: 500;
   color: #342c29;
 }
 

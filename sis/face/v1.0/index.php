@@ -1,25 +1,25 @@
-<?php 
+<?php
 
 ////////////////////////////////////////////////////////////////
 
-session_save_path($_SERVER["DOCUMENT_ROOT"]."/cgi-bin/tmp");
+session_save_path($_SERVER["DOCUMENT_ROOT"] . "/cgi-bin/tmp");
 session_start();
 date_default_timezone_set('Asia/Manila');
 
 $sDocRoot = $_SERVER["DOCUMENT_ROOT"];
 
 // Included files
-require $sDocRoot."/includes/connect.php";
-include($sDocRoot."/sis/face/func/functions.php");
+require $sDocRoot . "/includes/connect.php";
+include($sDocRoot . "/sis/face/func/functions.php");
 
 ////////////////////////////////////////////////////////////////
 
 $page = '';
-if (isset($_GET['page'])){
+if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 }
 
-if ( !isset($_SESSION) ) {
+if (!isset($_SESSION)) {
 	session_start();
 }
 
@@ -32,6 +32,7 @@ $arrTranslate = grabLanguageTags();
 ?>
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +47,7 @@ $arrTranslate = grabLanguageTags();
 	<link rel="stylesheet" type="text/css" href="<?= get_url('css') ?>/slick.css" />
 	<link rel="stylesheet" type="text/css" href="<?= get_url('css') ?>/style.css?v=<?= date('YmdHis') ?>" />
 
-	<?php if ( isset($_SESSION['userlvl']) && $_SESSION['userlvl'] == '1' ) { ?>
+	<?php if (isset($_SESSION['userlvl']) && $_SESSION['userlvl'] == '1') { ?>
 		<link rel="stylesheet" type="text/css" href="<?= get_url('css') ?>/doctor.css?v=<?= date('YmdHis') ?>" />
 	<?php } ?>
 
@@ -73,11 +74,13 @@ $arrTranslate = grabLanguageTags();
 			border-radius: 8px;
 			display: none;
 		}
+
 		.lang-opt a {
 			display: block;
 			padding: 5px 10px;
 		}
-		.language{
+
+		.language {
 			cursor: pointer;
 		}
 	</style>
@@ -102,18 +105,18 @@ $arrTranslate = grabLanguageTags();
 	//     return false;
 	// };
 </script>
-<body class="page-<?= $page ?> <?= ( isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' ) ? 'customer-page' : '' ?>">
 
-	<?php if ( !isset($_SESSION['login']) == 'YES' ) : ?>
+<body class="page-<?= $page ?> <?= (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES') ? 'customer-page' : '' ?>">
+
+	<?php if (!isset($_SESSION['login']) == 'YES') : ?>
 
 		<?php include("modules/login.php"); ?>
-	
+
 	<?php else : ?>
 
 		<div class="container">
+			<?php include("modules/main.php"); ?>
 
-			<?php include("modules/main.php");?>
-				
 		</div>
 
 	<?php endif; ?>
@@ -128,4 +131,5 @@ $arrTranslate = grabLanguageTags();
 	</div>
 
 </body>
+
 </html>

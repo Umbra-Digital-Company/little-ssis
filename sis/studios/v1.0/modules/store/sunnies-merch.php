@@ -6,14 +6,14 @@ error_reporting(E_ALL);
 
 
 if (!isset($_SESSION['customer_id'])) {
-    ?>
+?>
     <div class="wrapper">
         <p class="text-center font-bold h2 pt-3 pb-3">Complete step 1 to proceed</p>
         <div class="text-center mt-4">
             <a href="/sis/studios/v1.0/?page=store-home"><button class="btn btn-primary">go to step 1</button></a>
         </div>
     </div>
-    <?php
+<?php
 } else {
     include "./modules/includes/products/grab_merch.php";
     function trimColor($color_name)
@@ -73,10 +73,8 @@ if (!isset($_SESSION['customer_id'])) {
             );
 
         return $color_name;
-
-    }
-    ;
-    ?>
+    };
+?>
 
     <link rel="stylesheet" type="text/css" href="/sis/studios/v1.0/modules/store/little_sis.css">
     <link rel="stylesheet" type="text/css" href="/sis/studios/assets/css/color_pickers.css">
@@ -411,7 +409,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-            ?>
+        ?>
 
 
             <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;">
@@ -432,14 +430,14 @@ if (!isset($_SESSION['customer_id'])) {
                             <?php
 
                             // Set current colors array
-                    
+
                             $curColors = $arrProductDetails[0]['colors'];
 
 
 
                             for ($a = 0; $a < sizeOf($curColors); $a++) {
 
-                                ?>
+                            ?>
 
 
                                 <div class="specific-product" data-color-name="<?= $curColors[$a]['color'] ?>"
@@ -461,9 +459,9 @@ if (!isset($_SESSION['customer_id'])) {
                                         }
                                         // $curStyle        = $arrMerchSorted[$i]['item_description'];
                                         // $curColor        = str_replace("-g", "-gradient", str_replace("-m", "-mirror", str_replace("-f", "-full", str_replace(" ", "-", trim($curColors[$a]['color'])))));
-                            
+
                                         // $curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/'.$curStyle.'/'.$curColor.'/front.png';
-                            
+
                                         ?>
 
 
@@ -508,10 +506,10 @@ if (!isset($_SESSION['customer_id'])) {
                                 <?php
                                 $totalColors = sizeof($curColors);
                                 $maxVisibleColors = 4; // Limit the number of visible colors
-                        
+
                                 foreach ($curColors as $key => $value) {
                                     $a = $key;
-                                    ?>
+                                ?>
                                     <li class="<?= $a === 0 ? 'active' : '' ?> visible color-swatch " data-index="<?= $a ?>"
                                         data-style-name="<?= trim(str_replace(" ", "-", strtolower($arrProductsSorted[$i]['item_description']))) ?>"
                                         data-color-name="<?= trim($curColors[$a]['color']) ?>"
@@ -594,9 +592,9 @@ if (!isset($_SESSION['customer_id'])) {
             </section>
 
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     // Event listener for color swatch clicks
-                    $('.color-swatch').on('click', function () {
+                    $('.color-swatch').on('click', function() {
                         // Get the product code of the selected color
                         let newProductCode = $(this).data('color-code');
 
@@ -683,7 +681,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                                     for ($a = 0; $a < sizeOf($curColors); $a++) {
 
-                                        ?>
+                                    ?>
 
                                         <div class="product-option" data-color-name="<?= $curColors[$a]['color'] ?>"
                                             data-color-code="<?= $curColors[$a]['product_code'] ?>"
@@ -699,9 +697,9 @@ if (!isset($_SESSION['customer_id'])) {
                                                 $curImageURL = $curColors[$a]["image"];
                                                 // $curStyle        = $arrMerchSorted[$i]['item_description'];
                                                 // $curColor        = str_replace("-g", "-gradient", str_replace("-m", "-mirror", str_replace("-f", "-full", str_replace(" ", "-", trim($curColors[$a]['color'])))));
-                                
+
                                                 // $curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/'.$curStyle.'/'.$curColor.'/front.png';
-                                
+
                                                 ?>
 
                                                 <div class="image-wrapper"
@@ -742,11 +740,11 @@ if (!isset($_SESSION['customer_id'])) {
                                         <?php
                                         $totalColors = sizeof($curColors);
                                         $maxVisibleColors = 4; // Limit the number of visible colors
-                            
+
                                         for ($a = 0; $a < $totalColors; $a++) {
                                             if ($a < $maxVisibleColors) {
                                                 // Display the first 4 items
-                                                ?>
+                                        ?>
                                                 <li class="<?= $a === 0 ? 'active' : '' ?> visible " data-index="<?= $a ?>"
                                                     data-style-name="<?= trim(str_replace(" ", "-", strtolower($arrProductsSorted[$i]['item_description']))) ?>"
                                                     data-color-name="<?= trim($curColors[$a]['color']) ?>"
@@ -754,7 +752,7 @@ if (!isset($_SESSION['customer_id'])) {
                                                     data-color-price="P<?= $curColors[$a]['price'] ?>"
                                                     style="<?= ($curColors[$a]['color_picker'] != '') ? $curColors[$a]['color_picker'] : 'background-color: #000;' ?>">
                                                 </li>
-                                                <?php
+                                            <?php
                                             }
                                         }
 
@@ -771,7 +769,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             <?php
                                             // Loop to display hidden colors
                                             for ($a = $maxVisibleColors; $a < $totalColors; $a++) {
-                                                ?>
+                                            ?>
                                                 <li class="hidden hidden-colors" id="<?= trim($arrMerchSorted[$i]['item_description']) ?>"
                                                     data-index="<?= $a ?>"
                                                     data-style-name="<?= trim(str_replace(" ", "-", strtolower($arrProductsSorted[$i]['item_description']))) ?>"
@@ -780,7 +778,7 @@ if (!isset($_SESSION['customer_id'])) {
                                                     data-color-price="P<?= $curColors[$a]['price'] ?>"
                                                     style="<?= ($curColors[$a]['color_picker'] != '') ? $curColors[$a]['color_picker'] : 'background-color: #000;' ?>">
                                                 </li>
-                                                <?php
+                                        <?php
                                             }
                                         }
                                         ?>
@@ -933,8 +931,6 @@ if (!isset($_SESSION['customer_id'])) {
 
 
     <script>
-
-
         function closeNotification() {
             document.getElementById('notification').classList.remove('show');
             document.getElementById('notification').classList.add('hidden');
@@ -958,20 +954,20 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
 
             $('.packages-list').addClass('show');
 
             totalCount();
-            $('#filter').on('click', function () {
-                $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function (d) {
+            $('#filter').on('click', function() {
+                $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function(d) {
                     overlayFilter(d);
                 });
             });
 
-            $(this).on('click', '.product-option', function () {
+            $(this).on('click', '.product-option', function() {
 
                 let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
                 let tempProduct2 = findItemByProductCode($(this).attr('product-code'));
@@ -981,119 +977,119 @@ if (!isset($_SESSION['customer_id'])) {
             });
 
 
-            $("#cart").click(function () {
-                let item_cart = '';
-                for (let i = 0; i < arrCart.length; i++) {
-                    if (parseFloat(arrCart[i].price) > 0) { }
-                    else if (arrCart[i].item_description.toLowerCase().indexOf('paper a') > -1 || arrCart[i].item_description.toLowerCase().indexOf('sac') > -1 || arrCart[i].item_description.toLowerCase().indexOf('receipt') > -1) {
-                        continue;
-                    }
+            $("#cart").click(function() {
+                window.location.href = "/sis/studios/v1.0/?page=cart";
+                // let item_cart = '';
+                // for (let i = 0; i < arrCart.length; i++) {
+                //     if (parseFloat(arrCart[i].price) > 0) { }
+                //     else if (arrCart[i].item_description.toLowerCase().indexOf('paper a') > -1 || arrCart[i].item_description.toLowerCase().indexOf('sac') > -1 || arrCart[i].item_description.toLowerCase().indexOf('receipt') > -1) {
+                //         continue;
+                //     }
 
-                    if (arrCart[i].dispatch_type == 'packaging') {
-                        continue;
-                    }
-                    total_price = parseFloat(arrCart[i].price) * parseInt(arrCart[i].count);
-                    merchItem = (arrCart[i].product_code_order.indexOf('M100') > -1) ? 'prod-item="merch"' : 'prod-item="frame"';
-                    merchItem = (arrCart[i].product_upgrade.indexOf('G100') > -1) ? 'prod-item="antirad"' : merchItem;
+                //     if (arrCart[i].dispatch_type == 'packaging') {
+                //         continue;
+                //     }
+                //     total_price = parseFloat(arrCart[i].price) * parseInt(arrCart[i].count);
+                //     merchItem = (arrCart[i].product_code_order.indexOf('M100') > -1) ? 'prod-item="merch"' : 'prod-item="frame"';
+                //     merchItem = (arrCart[i].product_upgrade.indexOf('G100') > -1) ? 'prod-item="antirad"' : merchItem;
 
-                    curStyle = arrCart[i].style;
-                    curColor = arrCart[i].color.trim();
-                    // curColor = arrCart[i].color.trim().replace(/ /g, "-");
-                    // curColor = curColor.replace(/-f/g, "-full");
-                    // curColor = curColor.replace(/-m/g, "-mirror");
-                    // curColor = curColor.replace(/-gdt/, "-g");
-                    // curImageURL = "images/studios/"+curStyle+"/"+curColor+"/front.png";
-                    width = '';
-                    curImageURL = arrCart[i].image_url;
-                    if (curImageURL == null) {
+                //     curStyle = arrCart[i].style;
+                //     curColor = arrCart[i].color.trim();
+                //     // curColor = arrCart[i].color.trim().replace(/ /g, "-");
+                //     // curColor = curColor.replace(/-f/g, "-full");
+                //     // curColor = curColor.replace(/-m/g, "-mirror");
+                //     // curColor = curColor.replace(/-gdt/, "-g");
+                //     // curImageURL = "images/studios/"+curStyle+"/"+curColor+"/front.png";
+                //     width = '';
+                //     curImageURL = arrCart[i].image_url;
+                //     if (curImageURL == null) {
 
-                        curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/' + curStyle + '/' + curColor + '/front.png';
-                        width = 'width:100px;';
+                //         curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/' + curStyle + '/' + curColor + '/front.png';
+                //         width = 'width:100px;';
 
-                    }
+                //     }
 
-                    item_cart += '<div class="card cart_view mt-4">'
-                        + '<div class="card-body cart-item">'
-                        + '<div class="row">'
-                        + '<img src="/sis/studios/assets/images/icons/icon-delete.png" class="img-responsive remove_item" orders-specs-id="' + arrCart[i].group_orders_specs_id + '" style="cursor: pointer; position: absolute; top: 10px; right: 10px;" width="25" height="25" title="Remove this item">'
-                        + '</div>'
-                        + '<div class="row mt-4">'
-                        + '<div class="col-6" style="text-align:left">'
-                        + '<div class="row justify-content-center">'
-                        + '<div style="height: 100px; ' + width + ' background-image:url(' + curImageURL + '); background-repeat: no-repeat; background-size: 80%; background-position: center;" class="img-responsive cart-item-image"></div>'
-                        + '</div>'
-                        + '</div>'
-                        + '<div class="col-6 count_item">'
-                        + '<div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">'
-                        + '<h2 style="text-transform: uppercase; font-size: 18px;" class="mt-2 product-title">' + curStyle + ' <br><span style="font-size: 12px;">' + curColor.replace("-", " ") + '</span></h2>'
-                        + '</div>'
-                        + '<div class="row no-gutters d-flex justify-content-start mt-3">'
-                        + '<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>' + parseFloat(arrCart[i].price).toFixed(2) + '</p>'
-                        + '</div>'
-                        + '<div class="row no-gutters d-flex justify-content-start mt-1">'
-                        + '<span><input type="button" class="form-control count_decrement"  price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" value="-"></span>'
-                        + '<input type="text" class="form-control count_num" value="' + arrCart[i].count + '" readonly>'
-                        + '<span><input type="button" class="form-control count_increment" ' + merchItem + ' price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" product-code="' + arrCart[i].product_code + '" value="+"></span>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>';
-                }
-                if (item_cart == '') {
-                    item_cart += itemCart();
-                } else {
-                    item_cart += '<div class="d-flex justify-content-center mt-4" id="btn-sect" style="text-align: center;">'
-                        + '<div class="col-6">'
-                        + '<input type="button" class="btn btn-primary" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
-                        + '</div>'
-                        + '<div class="col-6">'
-                        + '<a href="?page=order-confirmation&bpage=' + '<?= $_GET['page'] ?>' + '"><input type="button" class="btn btn-black" value="<?= $arrTranslate['Proceed'] ?>"></a>'
-                        + '</div>'
-                        + '</div>';
-                }
-                $("#item_cart").html(item_cart);
-                $("#modal-item").modal("show");
+                //     item_cart += '<div class="card cart_view mt-4">'
+                //         + '<div class="card-body cart-item">'
+                //         + '<div class="row">'
+                //         + '<img src="/sis/studios/assets/images/icons/icon-delete.png" class="img-responsive remove_item" orders-specs-id="' + arrCart[i].group_orders_specs_id + '" style="cursor: pointer; position: absolute; top: 10px; right: 10px;" width="25" height="25" title="Remove this item">'
+                //         + '</div>'
+                //         + '<div class="row mt-4">'
+                //         + '<div class="col-6" style="text-align:left">'
+                //         + '<div class="row justify-content-center">'
+                //         + '<div style="height: 100px; ' + width + ' background-image:url(' + curImageURL + '); background-repeat: no-repeat; background-size: 80%; background-position: center;" class="img-responsive cart-item-image"></div>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '<div class="col-6 count_item">'
+                //         + '<div class="row no-gutters d-flex justify-content-start mt-5 mt-xs-0">'
+                //         + '<h2 style="text-transform: uppercase; font-size: 18px;" class="mt-2 product-title">' + curStyle + ' <br><span style="font-size: 12px;">' + curColor.replace("-", " ") + '</span></h2>'
+                //         + '</div>'
+                //         + '<div class="row no-gutters d-flex justify-content-start mt-3">'
+                //         + '<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>' + parseFloat(arrCart[i].price).toFixed(2) + '</p>'
+                //         + '</div>'
+                //         + '<div class="row no-gutters d-flex justify-content-start mt-1">'
+                //         + '<span><input type="button" class="form-control count_decrement"  price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" value="-"></span>'
+                //         + '<input type="text" class="form-control count_num" value="' + arrCart[i].count + '" readonly>'
+                //         + '<span><input type="button" class="form-control count_increment" ' + merchItem + ' price="' + arrCart[i].price + '" group-orders-specs-id="' + arrCart[i].group_orders_specs_id + '" product-code="' + arrCart[i].product_code + '" value="+"></span>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '</div>'
+                //         + '</div>';
+                // }
+                // if (item_cart == '') {
+                //     item_cart += itemCart();
+                // } else {
+                //     item_cart += '<div class="d-flex justify-content-center mt-4" id="btn-sect" style="text-align: center;">'
+                //         + '<div class="col-6">'
+                //         + '<input type="button" class="btn btn-primary" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
+                //         + '</div>'
+                //         + '<div class="col-6">'
+                //         + '<a href="?page=order-confirmation&bpage=' + '<?= $_GET['page'] ?>' + '"><input type="button" class="btn btn-black" value="<?= $arrTranslate['Proceed'] ?>"></a>'
+                //         + '</div>'
+                //         + '</div>';
+                // }
+                // $("#item_cart").html(item_cart);
+                // $("#modal-item").modal("show");
             });
-            $(document).on('submit', "#form-add-to-bag", function (e) {
+            $(document).on('submit', "#form-add-to-bag", function(e) {
                 e.preventDefault();
                 $.ajax({
                     url: "/sis/studios/func/process/add_to_bag_merch.php",
                     type: "POST",
                     data: $(this).serialize(),
                     dataType: 'html',
-                    success: function (response) {
+                    success: function(response) {
 
                         window.location = "?page=select-merch";
                     },
-                    error: function () {
-                    }
-                });//END :: AJAX
+                    error: function() {}
+                }); //END :: AJAX
             });
-            $(document).on('submit', ".form-quick-add-to-bag", function (e) {
+            $(document).on('submit', ".form-quick-add-to-bag", function(e) {
                 e.preventDefault();
                 $.ajax({
                     url: "/sis/studios/func/process/add_to_bag_merch.php",
                     type: "POST",
                     data: $(this).serialize(),
                     dataType: 'html',
-                    success: function (response) {
+                    success: function(response) {
                         openNotification();
                         // auto-hide the notification after a few seconds
-                        setTimeout(function () {
+                        setTimeout(function() {
                             closeNotification();
                         }, 3000); // 3 seconds
                         //location.reload(true);
                     },
-                    error: function () {
-                    }
-                });//END :: AJAX
+                    error: function() {}
+                }); //END :: AJAX
             });
-            $(this).on('click', '.remove_item', function () {
+            $(this).on('click', '.remove_item', function() {
                 let this_div = $(this);
-                let remove = $.post("/sis/studios/func/process/remove_item.php", { orders_specs_id: this_div.attr('orders-specs-id') }, function () {
-                });
-                $.when(remove).done(function () {
+                let remove = $.post("/sis/studios/func/process/remove_item.php", {
+                    orders_specs_id: this_div.attr('orders-specs-id')
+                }, function() {});
+                $.when(remove).done(function() {
                     arrCart = arrCart.filter(item => item.group_orders_specs_id !== this_div.attr('orders-specs-id'));
                     //console.log(arrCart);
                     totalCount();
@@ -1103,7 +1099,7 @@ if (!isset($_SESSION['customer_id'])) {
                     }
                 });
             });
-            $(this).on('click', '.count_decrement ', function () {
+            $(this).on('click', '.count_decrement ', function() {
                 _this = $(this);
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 0) {
@@ -1111,7 +1107,9 @@ if (!isset($_SESSION['customer_id'])) {
                     arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
                     arrOrdersSpescIdRemove = arrOrdersSpescId[arrOrdersSpescId.length - 1];
 
-                    $.post("/sis/studios/func/process/remove_item.php", { orders_specs_id: arrOrdersSpescIdRemove }, function () {
+                    $.post("/sis/studios/func/process/remove_item.php", {
+                        orders_specs_id: arrOrdersSpescIdRemove
+                    }, function() {
 
                         arrOrdersSpescId.pop();
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -1129,7 +1127,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                 }
             });
-            $(this).on('click', '.count_increment', function () {
+            $(this).on('click', '.count_increment', function() {
                 _this = $(this);
                 arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
 
@@ -1138,7 +1136,9 @@ if (!isset($_SESSION['customer_id'])) {
 
                 // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
                 itemProd = (attrProdItem != 'frame') ? '_' + attrProdItem : '';
-                $.post("/sis/studios/func/process/add_to_bag" + itemProd + ".php", { studios_product_code: _this.attr('product-code') }, function (result) {
+                $.post("/sis/studios/func/process/add_to_bag" + itemProd + ".php", {
+                    studios_product_code: _this.attr('product-code')
+                }, function(result) {
                     //console.log(result);
                     arrOrdersSpescId.push(result);
                     arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -1157,11 +1157,11 @@ if (!isset($_SESSION['customer_id'])) {
                 });
             });
 
-            $(this).on('click', '.add_count_increment', function () {
+            $(this).on('click', '.add_count_increment', function() {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 $(this).parent().parent().find('.count_num').val(parseInt(current_value) + 1);
             });
-            $(this).on('click', '.minus_count_decrement', function () {
+            $(this).on('click', '.minus_count_decrement', function() {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 1) {
                     $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);
@@ -1171,8 +1171,8 @@ if (!isset($_SESSION['customer_id'])) {
             var typingTimer;
             var doneTypingInterval = 500;
 
-            $('#search_frame').on('keyup', function (e) {
-                if (e.keyCode === 13) {  // Check if Enter key is pressed
+            $('#search_frame').on('keyup', function(e) {
+                if (e.keyCode === 13) { // Check if Enter key is pressed
                     let filter = '';
                     filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $('#search_frame').val().trim() !== '') ? '&filter=true' : '';
                     window.location = '?page=select-merch' + filter + '&search=' + $(this).val();
@@ -1180,20 +1180,20 @@ if (!isset($_SESSION['customer_id'])) {
             });
 
             // Click event for search button
-            $('#btn-search').on('click', function () {
+            $('#btn-search').on('click', function() {
                 let filter = '';
-                    filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $('#search_frame').val().trim() !== '') ? '&filter=true' : '';
-                    window.location = '?page=select-merch' + filter + '&search=' + $('#search_frame').val();
+                filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0 || $('#search_frame').val().trim() !== '') ? '&filter=true' : '';
+                window.location = '?page=select-merch' + filter + '&search=' + $('#search_frame').val();
             });
 
-            $('#btn-filter').click(function () {
+            $('#btn-filter').click(function() {
                 if ($(event.target).is('#btn-icon-close')) {
                     return;
                 }
                 $('#modal-filter').modal('show');
             });
 
-            $('.my-color').click(function () {
+            $('.my-color').click(function() {
                 if (arrColors.includes($(this).attr('colorData'))) {
                     arrColors = arrColors.filter(e => e !== $(this).attr('colorData'));
                     $(this).addClass('btn-no-filter').removeClass('btn-filter-selected');
@@ -1202,7 +1202,7 @@ if (!isset($_SESSION['customer_id'])) {
                     $(this).addClass('btn-filter-selected').removeClass('btn-no-filter');
                 }
             });
-            $('.my-shapes').click(function () {
+            $('.my-shapes').click(function() {
                 if (arrShapes.includes($(this).attr('shapesData'))) {
                     arrShapes = arrShapes.filter(e => e !== $(this).attr('shapesData'));
                     $(this).addClass('btn-no-filter').removeClass('btn-filter-selected');
@@ -1211,7 +1211,7 @@ if (!isset($_SESSION['customer_id'])) {
                     $(this).addClass('btn-filter-selected').removeClass('btn-no-filter');
                 }
             });
-            $('.my-collection').click(function () {
+            $('.my-collection').click(function() {
                 if (arrCollections.includes($(this).attr('collectionsData'))) {
                     arrCollections = arrCollections.filter(e => e !== $(this).attr('collectionsData'));
                     $(this).addClass('btn-no-filter').removeClass('btn-filter-selected');
@@ -1220,7 +1220,7 @@ if (!isset($_SESSION['customer_id'])) {
                     $(this).addClass('btn-filter-selected').removeClass('btn-no-filter');
                 }
             });
-            $('#filter-search-data').click(function () {
+            $('#filter-search-data').click(function() {
                 filter = '';
                 filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0) ? '&filter=true' : '';
                 window.location = '?page=select-antirad' + filter + '&colors=' + arrColors + '&shapes=' + arrShapes + '&collections=' + arrCollections;
@@ -1229,7 +1229,7 @@ if (!isset($_SESSION['customer_id'])) {
         });
 
         var twoColumn = true;
-        $('#toggleLayout').on('click', function () {
+        $('#toggleLayout').on('click', function() {
             twoColumn = !twoColumn;
 
             $('.frame-style__slider')
@@ -1250,11 +1250,11 @@ if (!isset($_SESSION['customer_id'])) {
             swipeToSlide: false,
             touchMove: false,
             swipe: false
-        }).on('swipe', function (event, slick, direction) {
+        }).on('swipe', function(event, slick, direction) {
             var newActive = slick.currentSlide;
             var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
 
-            colorPicker.each(function () {
+            colorPicker.each(function() {
                 if ($(this).data('index') == newActive) {
                     $(this).addClass('active').siblings().removeClass('active')
                     $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
@@ -1263,7 +1263,7 @@ if (!isset($_SESSION['customer_id'])) {
             })
         })
 
-        $(document).on('click', '.switch-color li', function () {
+        $(document).on('click', '.switch-color li', function() {
             var slideIndex = $(this).data('index');
             var slider = $(this).parents('.frame-style').find('.frame-style__slider');
             var curStyle = $(this).data('style-name');
@@ -1277,14 +1277,14 @@ if (!isset($_SESSION['customer_id'])) {
             $(this).parents('.frame-style').find('.form-quick-add-to-bag').find('input').eq(0).val(curSKU);
         })
 
-        $('.image-wrapper').each(function () {
+        $('.image-wrapper').each(function() {
             var image = $(this).data('src');
             var no_image = $(this).data('no-image');
             var elem = $(this);
 
-            checkImage(image).on('error', function () {
+            checkImage(image).on('error', function() {
                 elem.css('background-image', 'url(' + no_image + ')')
-            }).on('load', function () {
+            }).on('load', function() {
                 elem.css('background-image', 'url(' + image + ')')
             })
         })
@@ -1315,7 +1315,7 @@ if (!isset($_SESSION['customer_id'])) {
                 var s = $("#search_frame").val().toLowerCase();
                 $('.ssis-searching').fadeIn();
 
-                $('.frame-style').each(function () {
+                $('.frame-style').each(function() {
                     if ($(this).data('style').match(s.toLowerCase())) {
                         $(this).fadeIn();
                     } else {
@@ -1328,18 +1328,18 @@ if (!isset($_SESSION['customer_id'])) {
             }
         }
         const itemCart = () => {
-            return '<div class="row mt-4" style="text-align: center;">'
-                + '<div class="col-12">'
-                + '<p style="font-weight: bold; font-size: 20px">Your cart is empty</p>'
-                + '</div>'
-                + '<div class="col-12 mt-4">'
-                + '<input type="button" class="btn btn-black" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">'
-                + '</div>'
-                + '</div>';
+            return '<div class="row mt-4" style="text-align: center;">' +
+                '<div class="col-12">' +
+                '<p style="font-weight: bold; font-size: 20px">Your cart is empty</p>' +
+                '</div>' +
+                '<div class="col-12 mt-4">' +
+                '<input type="button" class="btn btn-black" data-dismiss="modal" value="<?= $arrTranslate['Shop More'] ?>">' +
+                '</div>' +
+                '</div>';
         }
         const overlayFilter = body => {
             $('.ssis-overlay').fadeIn(200).addClass('show').html(body);
-            $('.close-overlay').click(function () {
+            $('.close-overlay').click(function() {
                 if ($(this).data('reload') == 'yes') {
                     window.location.reload(true);
                 } else {
@@ -1351,21 +1351,22 @@ if (!isset($_SESSION['customer_id'])) {
                 }
             });
         }
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('.frame-list').scroll(lazyload);
             lazyload();
         });
         let timeout = null;
         let firstload = false;
         let toShowCount = 0;
+
         function lazyload() {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
-                var wt = $(window).scrollTop();    //* top of the window
-                var wb = wt + $(window).height();  //* bottom of the window
+                var wt = $(window).scrollTop(); //* top of the window
+                var wb = wt + $(window).height(); //* bottom of the window
 
-                $(".hide-lazy").each(function () {
-                    var ot = $(this).offset().top;  //* top of object (i.e. advertising div)
+                $(".hide-lazy").each(function() {
+                    var ot = $(this).offset().top; //* top of object (i.e. advertising div)
                     var ob = ot + $(this).height(); //* bottom of object
 
                     if ((wt <= ob && wb >= ot) || ob <= 0) {
@@ -1385,7 +1386,9 @@ if (!isset($_SESSION['customer_id'])) {
             let arrProd = [];
             arrProd.push(queryProduct[toShowCount]);
 
-            $.post('modules/store/append-products.php', { arrProd: arrProd }, function (result) {
+            $.post('modules/store/append-products.php', {
+                arrProd: arrProd
+            }, function(result) {
                 // Append the new product and fade it in
                 $(result.show_product).appendTo(".product-show").hide().fadeIn(2000);
 
@@ -1396,10 +1399,10 @@ if (!isset($_SESSION['customer_id'])) {
                     swipeToSlide: false,
                     touchMove: false,
                     swipe: false
-                }).on('swipe', function (event, slick, direction) {
+                }).on('swipe', function(event, slick, direction) {
                     var newActive = slick.currentSlide;
                     var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
-                    colorPicker.each(function () {
+                    colorPicker.each(function() {
                         if ($(this).data('index') == newActive) {
                             $(this).addClass('active').siblings().removeClass('active');
                             $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
@@ -1411,7 +1414,7 @@ if (!isset($_SESSION['customer_id'])) {
                 // Reattach event listeners for .more-item after appending new content
                 rebindMoreItemEvents();
 
-                $(document).find('.more-item').each(function () {
+                $(document).find('.more-item').each(function() {
                     $(this).html(`<img id="down-arrow" src="${getIconUrl('icon-color-down.png')}" alt="down" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
                 });
             }, 'JSON');
@@ -1427,15 +1430,15 @@ if (!isset($_SESSION['customer_id'])) {
             const moreItems = document.querySelectorAll('.more-item');
 
             // Unbind previous click events and bind a new one
-            $(document).find('.more-item').off('click').on('click', function () {
-                const parentCard = $(this).closest('.frame-style');  // Find the parent card
-                const hiddenColors = parentCard.find('.hidden-colors');  // Find hidden color elements in this card
+            $(document).find('.more-item').off('click').on('click', function() {
+                const parentCard = $(this).closest('.frame-style'); // Find the parent card
+                const hiddenColors = parentCard.find('.hidden-colors'); // Find hidden color elements in this card
                 const colorShowArrow = "<?= get_url('images/icons') ?>/icon-color-down.png";
                 const colorHideArrow = "<?= get_url('images/icons') ?>/icon-color-up.png";
 
                 let isHidden = true;
 
-                hiddenColors.each(function () {
+                hiddenColors.each(function() {
                     if ($(this).hasClass('hidden')) {
                         $(this).removeClass('hidden');
                         isHidden = false;
@@ -1456,7 +1459,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         // Initial call to attach event listeners on page load
-        $(document).ready(function () {
+        $(document).ready(function() {
             rebindMoreItemEvents();
         });
 
@@ -1479,9 +1482,6 @@ if (!isset($_SESSION['customer_id'])) {
                                                                                                             style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
 
         }
-
-
-
     </script>
 
 

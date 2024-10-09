@@ -1,14 +1,15 @@
 <?php
 $arrDate = [];
-function getForPayments(){
+function getForPayments($offset = 0, $limit = 5)
+{
 
     global $conn;
     global $arrDate;
-    $filterDate = ' AND DATE(ADDTIME(os.date_created,"13:00:00")) = "'.date('Y-m-d').'"';
+    $filterDate = ' AND DATE(ADDTIME(os.date_created,"13:00:00")) = "' . date('Y-m-d') . '"';
 
-    if(isset($_GET['date']) && trim($_GET['date']) != ''){
+    if (isset($_GET['date']) && trim($_GET['date']) != '') {
         $arrDate = explode('|', $_GET['date']);
-        $filterDate = ' AND DATE(ADDTIME(os.date_created,"13:00:00")) BETWEEN "'.$arrDate[0].'" AND "'.$arrDate[1].'"';
+        $filterDate = ' AND DATE(ADDTIME(os.date_created,"13:00:00")) BETWEEN "' . $arrDate[0] . '" AND "' . $arrDate[1] . '"';
     }
 
     $arrCartQF = array();
@@ -49,10 +50,12 @@ function getForPayments(){
                                 ON u.emp_id= o.doctor
                     WHERE 
                             os.status = "for payment"
-                            '.$filterDate.'
-                            AND o.origin_branch = "'.$_SESSION['user_login']['store_code'].'"
-                    ORDER BY os.id ASC';
-                    // echo $arrCartQuery; exit;
+                            ' . $filterDate . '
+                            AND o.origin_branch = "' . $_SESSION['user_login']['store_code'] . '"
+                    ORDER BY os.id ASC
+                    LIMIT ? OFFSET ?
+                    ';
+    // echo $arrCartQuery; exit;
     $grabParamsQF = array(
         "first_name",
         "last_name",
@@ -70,10 +73,10 @@ function getForPayments(){
         "po_number",
         "date_created"
     );
-    
+
     $stmt = mysqli_stmt_init($conn);
     if (mysqli_stmt_prepare($stmt, $arrCartQuery)) {
-
+        mysqli_stmt_bind_param($stmt, 'ii', $limit, $offset);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15);
 
@@ -81,20 +84,48 @@ function getForPayments(){
 
             $tempArray = array();
 
-            for ($i=0; $i < sizeOf($grabParamsQF); $i++) { 
+            for ($i = 0; $i < sizeOf($grabParamsQF); $i++) {
 
-                $tempArray[$grabParamsQF[$i]] = ${'result' . ($i+1)};
-
+                $tempArray[$grabParamsQF[$i]] = ${'result' . ($i + 1)};
             };
             $tempArray['item_description'] = ucwords(strtolower($tempArray['item_description']));
-            $arrCartQF [] = $tempArray;
-
+            $arrCartQF[] = $tempArray;
         };
 
-        mysqli_stmt_close($stmt);    
-                                
+        mysqli_stmt_close($stmt);
     }
 
     return $arrCartQF;
 }
-?>
+
+
+function getTotalItems()
+{
+    global $conn;
+    $filterDate = ' AND DATE(ADDTIME(os.date_created,"13:00:00")) = "' . date('Y-m-d') . '"';
+
+    if (isset($_GET['date']) && trim($_GET['date']) != '') {
+        $arrDate = explode('|', $_GET['date']);
+        $filterDate = ' AND DATE(ADDTIME(os.date_created,"13:00:00")) BETWEEN "' . $arrDate[0] . '" AND "' . $arrDate[1] . '"';
+    }
+
+    $totalItemsQuery = 'SELECT COUNT(*) 
+                        FROM orders_sunnies_studios os 
+                        LEFT JOIN orders_studios o ON o.order_id = os.order_id 
+                        WHERE 
+                            os.status IN ("for payment","downloaded")
+                            ' . $filterDate . '
+                            AND o.origin_branch = "' . $_SESSION['user_login']['store_code'] . '"
+                        ';
+
+    $stmt = mysqli_stmt_init($conn);
+    if (mysqli_stmt_prepare($stmt, $totalItemsQuery)) {
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $totalItems);
+        mysqli_stmt_fetch($stmt);
+        mysqli_stmt_close($stmt);
+        return $totalItems;
+    }
+
+    return 0; // Return 0 if the query fails
+}
