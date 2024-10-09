@@ -2864,6 +2864,7 @@ main.customer-layout .wrapper {
 .page-select-store-lips main,
 .page-select-store-nails main,
 .page-account-form main,
+.page-order-dispatched main,
 [class^="page-select-store-"] main {
   top: 90px !important;
   margin-top: auto;
@@ -3010,12 +3011,16 @@ main.customer-layout .wrapper {
 .page-select-merch .container,
 .page-select-readers  .container,
 .page-select-free-item .container,
-.page-order-confirmation .container {
+.page-order-confirmation .container{
   height: calc(90vh - 90%);
   margin-top: 70px;
 
 }
 
+.page-order-dispatched .container {
+  height: calc(90vh - 90%);
+  margin-top: 20px;
+}
 
 /* filter-modal */
 
@@ -3099,7 +3104,7 @@ main.customer-layout .wrapper {
       overflow-y: auto;
   }
   .cart-item {
-    background-color: #e8e8e4;
+    background-color: #fff;
     border-radius: 15px;
   }
   .cart-item .product-title span {
