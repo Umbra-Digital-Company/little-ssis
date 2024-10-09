@@ -496,9 +496,11 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
             <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
-            <a href="/sis/face/func/process/order_payment.php?path_loc=v1.0" id="send-order">
-                <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center"
-                    value="<?= $textSend ?>">
+            <a href="/sis/face/func/process/order_payment.php?path_loc=v1.0&bdate=<?= get_customer_data('age') ?>" id="send-order">
+                <!-- <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center"
+                    value="<?= $textSend ?>"> -->
+
+                    <button class="btn btn-primary mt-4 mb-5"><?php echo $textSend; ?></button>
             </a>
 
             <?php } ?>
