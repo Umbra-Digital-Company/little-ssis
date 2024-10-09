@@ -1,82 +1,120 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+///////////////////////////////////////////////////// CREDENTIALS
 
-if ( !isset($_SESSION) ) {
-	session_start();
-}
+// PayMongo
 
+// $paymongo_public_key = "pk_test_cneb24u2RWHDbXPUakK4FzYd"; // Sandbox
+// $paymongo_secret_key = "sk_test_r8cV6GMv4WjXSBFG5cRWnf87"; // Sandbox
 
+$paymongo_public_key = "pk_test_GdFTR4f26WAvVfZNQZMGzVDh"; // Sandbox
+$paymongo_secret_key = "sk_test_8ziuyrY1wTexijUqQWCh9qCj"; // Sandbox
 
-define('DB_SERVER', "localhost");
+// $paymongo_public_key = ""; // Production
+// $paymongo_secret_key = ""; // Production
+
+//////////////////////////////////////////////////// Ninja Van
+
+// Test
+$ninja_van_client_id     = "af0c009b338f4ed1b40fc9257395f32a";
+$ninja_van_client_secret = "175055c2cf924afe89bfd1207e14acf4";
+$endpoint                = "https://api-sandbox.ninjavan.co" ;
+
+// Production
+// $ninja_van_client_id     = "";
+// $ninja_van_client_secret = "";
+// $endpoint                = "" ;
+
+///////////////////////////////////////////////////// DATABASE
+
+define('DB_SERVER', "165.232.164.207");
 define('DB_USER', "root");
-define('DB_PASSWORD', "872131sfsF34fsKNYi1MLFJGQGFYNHGJFD872");
-define('DB_TABLE', "ssolutio_ssis");
+define('DB_PASSWORD', 'QU$I^Vty$3Jh5s8ZhVMYCABy%@YeKNAvx3GfXbaNYsNDtFf3zr1v$^');
+define('DB_TABLE', "sunniess_specs");
+//QU$I^Vty$3Jh5s8ZhVMYCABy%@YeKNAvx3GfXbaNYsNDtFf3zr1v$^
+$conn = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_TABLE);
+if (mysqli_ping($conn)){} else{}
 
-$conn 	= new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_TABLE);
+///////////////////////////////////////////////////// CHECK FOR LOCKED USERS
 
-// add another way of connect
-$conn2 	= mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_TABLE);
-mysqli_set_charset($conn2, 'utf8');
+$locked = false;
 
-//define('DB_SERVER', "198.1.99.223:2083");
-//
-//define('DB_USER', "sunniesstudios");
-//
-//define('DB_PASSWORD', "58XDD7OPY5G3TWQSRXO");
-//
-//define('DB_TABLE', "sunniess_specs");
-//
-//$conn = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_TABLE);
+if(isset($_SESSION['id'])) {
 
-if (mysqli_ping($conn)){
-}
-else{
-	
-//	
-//define('DB_SERVER', "localhost");
-//
-//define('DB_USER', "root");
-//
-//define('DB_PASSWORD', "");
-//
-//define('DB_TABLE', "sunniess_specs");
-//
-//$conn = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_TABLE);
+	$query = 	'SELECT
+					locked,
+					online
+				FROM
+					users
+				WHERE
+					id = "'.$_SESSION['id'].'"';
 
-}
+	$stmt = mysqli_stmt_init($conn);
+	if (mysqli_stmt_prepare($stmt, 	$query)) {
 
+		// mysqli_stmt_bind_param($stmt, 's', $locked);
+		mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $result1, $result2);
+        mysqli_stmt_fetch($stmt);
+		mysqli_stmt_store_result($stmt);
 
-// $storeSetup =array();
+		$lock_check = $result1;
+		$online = $result2;
 
-// $querysetupstore="SELECT store_code,lab_id FROM store_setup";
+		mysqli_stmt_close($stmt);
 
+	}
 
-// $grabParams = array(
-// 	'store_code','lab_id' );
-	
-// $stmtstoresetup = mysqli_stmt_init($conn);
-// if (mysqli_stmt_prepare($stmtstoresetup, $querysetupstore)) {
-//     mysqli_stmt_execute($stmtstoresetup);
-//     mysqli_stmt_bind_result($stmtstoresetup, $result1, $result2);
+	if($lock_check == 'y') {
 
-//     while (mysqli_stmt_fetch($stmtstoresetup)) {
+		$locked = true;
 
-//         $tempArray = array();
+	};
 
-//         for ($i=0; $i < 2; $i++) { 
+};
 
-//             $tempArray[$grabParams[$i]] = ${'result' . ($i+1)};
+if($locked) {
 
-//         };
+	header('location: /process/logout.php');
+	exit;
 
-//         $storeSetup[] = $tempArray;
-
-//     };
-
-//     mysqli_stmt_close($stmtstoresetup);    
-                            
-// }
+};
 
 
-// $_SESSION["store_code"]	= $storeSetup[0]["store_code"];
-// $_SESSION["lab_code_pos"] = $storeSetup[0]["lab_id"];
-// ?>
+if(isset($_SESSION['id'])) {
+
+	$query = 	'SELECT
+					locked,
+					online
+				FROM
+					users
+				WHERE
+					id = "'.$_SESSION['id'].'"';
+
+	$stmt = mysqli_stmt_init($conn);
+	if (mysqli_stmt_prepare($stmt, 	$query)) {
+
+		// mysqli_stmt_bind_param($stmt, 's', $locked);
+		mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $result1, $result2);
+        mysqli_stmt_fetch($stmt);
+		mysqli_stmt_store_result($stmt);
+
+		$lock_check = $result1;
+		$online = $result2;
+
+		mysqli_stmt_close($stmt);
+
+	}
+
+if($online=='0') {
+
+	header('location: /process/logout.php');
+	exit;
+
+};
+
+};
+?>	

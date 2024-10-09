@@ -155,7 +155,16 @@ function checkProfileID($profile_id){
 			$_SESSION['priority'] = 0;
 			$_SESSION['guest_customer'] = true;
 			$_SESSION['login_set'] = true;
+			$_SESSION['autologin'] = true;
 			unset($_SESSION['email_taken']);
 			echo "	<script>	window.location='/sis/face/".$_GET['path_loc']."/?page=select-store'</script>";
+
+			// $path_loc = isset($_GET['path_loc']) ? htmlspecialchars($_GET['path_loc']) : '';
+			// $bpage = isset($_GET['bpage']) ? htmlspecialchars($_GET['bpage']) : '';
+
+			// echo "<script>
+			// 		window.location = '/sis/face/{$path_loc}/?page=order-confirmation&bpage={$bpage}';
+			// 	</script>";
+
 
 ?>

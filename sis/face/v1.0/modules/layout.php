@@ -10,7 +10,7 @@ if (isset($_GET['col'])){
 	$col = $_GET['col'];
 }
 
-$arrPage = ['home', 'store-home', 'health-declaration-form', 'contact-tracing-form', 'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser' , 'return-confirm', 'logout2', 'select-store', 'select-store-studios','select-merch','select-readers','order-confirmation','add-paper-bag', 'updatedb','order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad','for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test',"select-store-lips","select-store-face","select-store-brows","select-store-eyes","select-store-skin","select-store-cheeks","select-store-nails","select-store-sets","select-store-all"];
+$arrPage = ['home', 'store-home', 'health-declaration-form','account-form', 'contact-tracing-form', 'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser' , 'return-confirm', 'logout2', 'select-store', 'select-store-studios','select-merch','select-readers','order-confirmation','add-paper-bag', 'updatedb','order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad','for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test',"select-store-lips","select-store-face","select-store-brows","select-store-eyes","select-store-skin","select-store-cheeks","select-store-nails","select-store-sets","select-store-all"];
 
 if (in_array($page, $arrPage)){
 	switch($page){
@@ -22,6 +22,7 @@ if (in_array($page, $arrPage)){
 		case "store-home": include("store/store-home.php"); break;
 		case "store-signup": include("store/store-signup.php"); break;
 		case "store-signin": include("store/store-signin.php"); break;
+		case "account-form": include("store/accounts-form.php"); break;
 		//lil_ssis includes
 		case "select-store": 
 		case "select-store-all": include("store/select-store.php"); break;

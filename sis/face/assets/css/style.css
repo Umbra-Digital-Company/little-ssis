@@ -2764,6 +2764,8 @@ hr {
   max-width: 100%;
 }
 
+
+
 .page-contact-tracing-form #ssis_header {
   display: none;
 }
@@ -2861,6 +2863,7 @@ main.customer-layout .wrapper {
 .page-select-store-all main,
 .page-select-store-lips main,
 .page-select-store-nails main,
+.page-account-form main,
 [class^="page-select-store-"] main {
   top: 90px !important;
   margin-top: auto;
