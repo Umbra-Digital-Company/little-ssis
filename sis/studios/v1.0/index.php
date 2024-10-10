@@ -86,7 +86,7 @@ $arrTranslate = grabLanguageTags();
 	</style>
 
 </head>
-<script>
+<!-- <script>
 	document.addEventListener('contextmenu', (e) => e.preventDefault());
 
 	function ctrlShiftKey(e, keyCode) {
@@ -104,7 +104,7 @@ $arrTranslate = grabLanguageTags();
 		)
 			return false;
 	};
-</script>
+</script> -->
 
 <body class="page-<?= $page ?> <?= (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES') ? 'customer-page' : '' ?>">
 
