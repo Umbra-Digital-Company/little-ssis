@@ -110,7 +110,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-	<div class="wrapper-guest customer-guest">
+	<div class="wrapper-guest customer-guest mt-2">
 		<h1 class="text-start mb-4 font-weight-bold text-uppercase" style="font-size: 18px;">GUEST ACCOUNT</h1>
 		<form action="/sis/face/func/process/guest_register_manual.php?path_loc=v1.0&bpage=<?= $_GET['bpage'] ?>" method="post" class="form-guest"
 			id="guestForm" id="guestForm">
@@ -161,7 +161,7 @@ if (!isset($_SESSION['customer_id'])) {
 					disabled>
 			</div>
 			<div class="text-center mt-4">
-				<a href="/sis/face/v1.0/?page=account-form&type=log-in">
+				<a href="/sis/face/v1.0/?page=account-form&type=log-in&bpage=<?= $_GET['bpage'] ?>">
 					<div style="color: #919191; font-size: 18px; font-weight: 400">Log in with your Sunnies Club account to
 						earn points</div>
 				</a>
