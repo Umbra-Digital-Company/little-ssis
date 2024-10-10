@@ -6,18 +6,18 @@ error_reporting(E_ALL);
 
 
 if (!isset($_SESSION['customer_id'])) {
-?>
+    ?>
     <div class="wrapper">
         <p class="text-center font-bold h2 pt-3 pb-3">Complete step 1 to proceed</p>
         <div class="text-center mt-4">
             <a href="/sis/studios/v1.0/?page=store-home"><button class="btn btn-primary">go to step 1</button></a>
         </div>
     </div>
-<?php
+    <?php
 } else {
     include "./modules/includes/products/grab_sun_frames.php";
 
-?>
+    ?>
 
     <link rel="stylesheet" type="text/css" href="/sis/studios/v1.0/modules/store/little_sis.css">
     <link rel="stylesheet" type="text/css" href="/sis/studios/assets/css/color_pickers.css">
@@ -118,8 +118,8 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         /*.list-item.frame-grid {
-                                                                                                                                                                                                                                                                padding-bottom: 0 !important;
-                                                                                                                                                                                                                                                            }*/
+                                                                                                                                                                                                                                                                    padding-bottom: 0 !important;
+                                                                                                                                                                                                                                                                }*/
         #btn-filter {
             max-width: 111px;
             height: 40px;
@@ -350,7 +350,7 @@ if (!isset($_SESSION['customer_id'])) {
             }));
 
 
-        ?>
+            ?>
             <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;">
 
                 <form href="#" id="form-add-to-bag">
@@ -362,14 +362,14 @@ if (!isset($_SESSION['customer_id'])) {
                             <?php
 
                             // Set current colors array
-
+                    
                             $curColors = $arrProductDetails;
 
 
 
                             for ($a = 0; $a < sizeOf($curColors); $a++) {
 
-                            ?>
+                                ?>
 
 
                                 <div class="specific-product" data-color-name="<?= $curColors[$a]['color'] ?>"
@@ -391,9 +391,9 @@ if (!isset($_SESSION['customer_id'])) {
                                         }
                                         // $curStyle        = $arrProductsSorted[$i]['item_description'];
                                         // $curColor        = str_replace("-g", "-gradient", str_replace("-m", "-mirror", str_replace("-f", "-full", str_replace(" ", "-", trim($curColors[$a]['color'])))));
-
+                            
                                         // $curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/'.$curStyle.'/'.$curColor.'/front.png';
-
+                            
                                         ?>
 
 
@@ -435,10 +435,10 @@ if (!isset($_SESSION['customer_id'])) {
                                 <?php
                                 $totalColors = sizeof($curColors);
                                 $maxVisibleColors = 4; // Limit the number of visible colors
-
+                        
                                 foreach ($curColors as $key => $value) {
                                     $a = $key;
-                                ?>
+                                    ?>
                                     <li class="visible color-swatch " data-index="<?= $a ?>"
                                         data-style-name="<?= trim($arrProductDetails[0]['item_description']) ?>"
                                         data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
@@ -519,9 +519,9 @@ if (!isset($_SESSION['customer_id'])) {
             </section>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
                     // Event listener for color swatch clicks
-                    $('.color-swatch').on('click', function() {
+                    $('.color-swatch').on('click', function () {
                         // Get the product code of the selected color
                         let newProductCode = $(this).data('color-code');
                         let newColorName = $(this).data('color-name');
@@ -607,7 +607,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                                     for ($a = 0; $a < sizeOf($curColors); $a++) {
 
-                                    ?>
+                                        ?>
 
                                         <div class="product-option" data-color-name="<?= $curColors[$a]['color'] ?>"
                                             data-color-code="<?= $curColors[$a]['product_code'] ?>"
@@ -623,9 +623,9 @@ if (!isset($_SESSION['customer_id'])) {
                                                 $curImageURL = $curColors[$a]["image"];
                                                 // $curStyle        = $arrProductsSorted[$i]['item_description'];
                                                 // $curColor        = str_replace("-g", "-gradient", str_replace("-m", "-mirror", str_replace("-f", "-full", str_replace(" ", "-", trim($curColors[$a]['color'])))));
-
+                                
                                                 // $curImageURL = 'https://sunniesstudioseyewear.s3-ap-northeast-1.amazonaws.com/products/'.$curStyle.'/'.$curColor.'/front.png';
-
+                                
                                                 ?>
 
                                                 <div class="image-wrapper"
@@ -666,11 +666,11 @@ if (!isset($_SESSION['customer_id'])) {
                                         <?php
                                         $totalColors = sizeof($curColors);
                                         $maxVisibleColors = 4; // Limit the number of visible colors
-
+                            
                                         for ($a = 0; $a < $totalColors; $a++) {
                                             if ($a < $maxVisibleColors) {
                                                 // Display the first 4 items
-                                        ?>
+                                                ?>
                                                 <li class="visible" data-index="<?= $a ?>"
                                                     data-style-name="<?= trim($arrProductsSorted[$i]['item_description']) ?>"
                                                     data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
@@ -678,7 +678,7 @@ if (!isset($_SESSION['customer_id'])) {
                                                     data-color-price="P<?= $curColors[$a]['price'] ?>"
                                                     style="<?= ($curColors[$a]['color_swatch'] != '') ? 'background-color: ' . $curColors[$a]['color_swatch'] . ';' : 'background-color: #000;' ?>">
                                                 </li>
-                                            <?php
+                                                <?php
                                             }
                                         }
 
@@ -695,7 +695,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             <?php
                                             // Loop to display hidden colors
                                             for ($a = $maxVisibleColors; $a < $totalColors; $a++) {
-                                            ?>
+                                                ?>
                                                 <li class="hidden hidden-colors"
                                                     id="<?= trim($arrProductsSorted[$i]['item_description']) ?>" data-index="<?= $a ?>"
                                                     data-style-name="<?= trim($arrProductsSorted[$i]['item_description']) ?>"
@@ -704,7 +704,7 @@ if (!isset($_SESSION['customer_id'])) {
                                                     data-color-price="P<?= $curColors[$a]['price'] ?>"
                                                     style="<?= ($curColors[$a]['color_swatch'] != '') ? 'background-color: ' . $curColors[$a]['color_swatch'] . ';' : 'background-color: #000;' ?>">
                                                 </li>
-                                        <?php
+                                                <?php
                                             }
                                         }
                                         ?>
@@ -797,18 +797,18 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         /* #toggleLayout {
-                                                                            min-width: 25px;
-                                                                            min-height: 25px;
-                                                                            margin: 0 10px 0 15px;
-                                                                            background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
-                                                                            background-repeat: no-repeat;
-                                                                            background-size: 25px;
-                                                                            background-position: center;
-                                                                        } */
+                                                                                min-width: 25px;
+                                                                                min-height: 25px;
+                                                                                margin: 0 10px 0 15px;
+                                                                                background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
+                                                                                background-repeat: no-repeat;
+                                                                                background-size: 25px;
+                                                                                background-position: center;
+                                                                            } */
         /* 
-                            #toggleLayout.false {
-                                background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-                            } */
+                                #toggleLayout.false {
+                                    background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
+                                } */
 
 
         .product-details {
@@ -888,31 +888,31 @@ if (!isset($_SESSION['customer_id'])) {
         let arrCollections = <?= json_encode($getCollections) ?>;
         let queryProduct = <?= json_encode($arrProductsSortedToShow) ?>;
         // console.log(queryProduct);
-        $(document).ready(function() {
+        $(document).ready(function () {
 
 
 
             $('.packages-list').addClass('show');
 
             totalCount();
-            $('#filter').on('click', function() {
-                $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function(d) {
+            $('#filter').on('click', function () {
+                $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function (d) {
                     overlayFilter(d);
                 });
             });
 
-            $(this).on('click', '.product-option', function() {
+            $(this).on('click', '.product-option', function () {
                 let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
 
                 window.location = "?page=select-store-studios&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
             });
-            $(this).on('click', '.specific-product', function() {
+            $(this).on('click', '.specific-product', function () {
                 let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
                 console.log(arrProduct)
                 //window.location = "?page=select-store-studios&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
             });
 
-            $("#cart").click(function() {
+            $("#cart").click(function () {
                 window.location.href = "/sis/studios/v1.0/?page=cart";
                 //     let item_cart = '';
                 //     for (let i = 0; i < arrCart.length; i++) {
@@ -986,51 +986,51 @@ if (!isset($_SESSION['customer_id'])) {
                 //     }
                 //     $("#item_cart").html(item_cart);
                 //     $("#modal-item").modal("show");
-                // });
-                // $(document).on('submit', "#form-add-to-bag", function (e) {
-                //     e.preventDefault();
-                //     $.ajax({
-                //         url: "/sis/studios/func/process/add_to_bag.php",
-                //         type: "POST",
-                //         data: $(this).serialize(),
-                //         dataType: 'html',
-                //         success: function (response) {
-
-                //             window.location = "?page=select-store-studios";
-                //         },
-                //         error: function () {
-                //         }
-                //     });//END :: AJAX
             });
-
-
-
-
-
-            $(document).on('submit', ".form-quick-add-to-bag", function(e) {
+            $(document).on('submit', "#form-add-to-bag", function (e) {
                 e.preventDefault();
                 $.ajax({
                     url: "/sis/studios/func/process/add_to_bag.php",
                     type: "POST",
                     data: $(this).serialize(),
                     dataType: 'html',
-                    success: function(response) {
+                    success: function (response) {
+
+                        window.location = "?page=select-store-studios";
+                    },
+                    error: function () {
+                    }
+                });//END :: AJAX
+            });
+
+
+
+
+
+            $(document).on('submit', ".form-quick-add-to-bag", function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/sis/studios/func/process/add_to_bag.php",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    dataType: 'html',
+                    success: function (response) {
                         openNotification();
                         // auto-hide the notification after a few seconds
-                        setTimeout(function() {
+                        setTimeout(function () {
                             closeNotification();
                         }, 3000); // 3 seconds
                         //location.reload(true);
                     },
-                    error: function() {}
+                    error: function () { }
                 }); //END :: AJAX
             });
-            $(this).on('click', '.remove_item', function() {
+            $(this).on('click', '.remove_item', function () {
                 let this_div = $(this);
                 let remove = $.post("/sis/studios/func/process/remove_item.php", {
                     orders_specs_id: this_div.attr('orders-specs-id')
-                }, function() {});
-                $.when(remove).done(function() {
+                }, function () { });
+                $.when(remove).done(function () {
                     arrCart = arrCart.filter(item => item.group_orders_specs_id !== this_div.attr('orders-specs-id'));
                     //console.log(arrCart);
                     totalCount();
@@ -1040,7 +1040,7 @@ if (!isset($_SESSION['customer_id'])) {
                     }
                 });
             });
-            $(this).on('click', '.count_decrement ', function() {
+            $(this).on('click', '.count_decrement ', function () {
                 _this = $(this);
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 0) {
@@ -1050,7 +1050,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                     $.post("/sis/studios/func/process/remove_item.php", {
                         orders_specs_id: arrOrdersSpescIdRemove
-                    }, function() {
+                    }, function () {
 
                         arrOrdersSpescId.pop();
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -1068,7 +1068,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                 }
             });
-            $(this).on('click', '.count_increment', function() {
+            $(this).on('click', '.count_increment', function () {
                 _this = $(this);
                 arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
 
@@ -1079,7 +1079,7 @@ if (!isset($_SESSION['customer_id'])) {
                 itemProd = (attrProdItem != 'frame') ? '_' + attrProdItem : '';
                 $.post("/sis/studios/func/process/add_to_bag" + itemProd + ".php", {
                     studios_product_code: _this.attr('product-code')
-                }, function(result) {
+                }, function (result) {
                     //console.log(result);
                     arrOrdersSpescId.push(result);
                     arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -1098,11 +1098,11 @@ if (!isset($_SESSION['customer_id'])) {
                 });
             });
 
-            $(this).on('click', '.add_count_increment', function() {
+            $(this).on('click', '.add_count_increment', function () {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 $(this).parent().parent().find('.count_num').val(parseInt(current_value) + 1);
             });
-            $(this).on('click', '.minus_count_decrement', function() {
+            $(this).on('click', '.minus_count_decrement', function () {
                 current_value = $(this).parent().parent().find('.count_num').val();
                 if (current_value > 1) {
                     $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);
@@ -1112,14 +1112,14 @@ if (!isset($_SESSION['customer_id'])) {
             var typingTimer;
             var doneTypingInterval = 500;
 
-            $('#search_frame').on('keyup', function(e) {
+            $('#search_frame').on('keyup', function (e) {
                 if (e.keyCode === 13) { // Check if Enter key is pressed
                     performSearch();
                 }
             });
 
             // Click event for search button
-            $('#btn-search').on('click', function() {
+            $('#btn-search').on('click', function () {
                 performSearch();
             });
 
@@ -1137,14 +1137,14 @@ if (!isset($_SESSION['customer_id'])) {
             //     clearTimeout(typingTimer);
             // });
 
-            $('#btn-filter').click(function() {
+            $('#btn-filter').click(function () {
                 if ($(event.target).is('#btn-icon-close')) {
                     return;
                 }
                 $('#modal-filter').modal('show');
             });
 
-            $('.my-color').click(function() {
+            $('.my-color').click(function () {
                 if (arrColors.includes($(this).attr('colorData'))) {
                     arrColors = arrColors.filter(e => e !== $(this).attr('colorData'));
                     $(this).addClass('btn-no-filter').removeClass('btn-filter-selected');
@@ -1153,7 +1153,7 @@ if (!isset($_SESSION['customer_id'])) {
                     $(this).addClass('btn-filter-selected').removeClass('btn-no-filter');
                 }
             });
-            $('.my-shapes').click(function() {
+            $('.my-shapes').click(function () {
                 if (arrShapes.includes($(this).attr('shapesData'))) {
                     arrShapes = arrShapes.filter(e => e !== $(this).attr('shapesData'));
                     $(this).addClass('btn-no-filter').removeClass('btn-filter-selected');
@@ -1162,7 +1162,7 @@ if (!isset($_SESSION['customer_id'])) {
                     $(this).addClass('btn-filter-selected').removeClass('btn-no-filter');
                 }
             });
-            $('.my-collection').click(function() {
+            $('.my-collection').click(function () {
                 if (arrCollections.includes($(this).attr('collectionsData'))) {
                     arrCollections = arrCollections.filter(e => e !== $(this).attr('collectionsData'));
                     $(this).addClass('btn-no-filter').removeClass('btn-filter-selected');
@@ -1171,7 +1171,7 @@ if (!isset($_SESSION['customer_id'])) {
                     $(this).addClass('btn-filter-selected').removeClass('btn-no-filter');
                 }
             });
-            $('#filter-search-data').click(function() {
+            $('#filter-search-data').click(function () {
                 filter = '';
                 filter = (arrColors.length > 0 || arrShapes.length > 0 || arrCollections.length > 0) ? '&filter=true' : '';
                 window.location = '?page=select-store-studios' + filter + '&colors=' + arrColors + '&shapes=' + arrShapes + '&collections=' + arrCollections;
@@ -1180,7 +1180,7 @@ if (!isset($_SESSION['customer_id'])) {
         });
 
         var twoColumn = true;
-        $('#toggleLayout').on('click', function() {
+        $('#toggleLayout').on('click', function () {
             twoColumn = !twoColumn;
 
             $('.frame-style__slider')
@@ -1201,11 +1201,11 @@ if (!isset($_SESSION['customer_id'])) {
             swipeToSlide: false,
             touchMove: false,
             swipe: false
-        }).on('swipe', function(event, slick, direction) {
+        }).on('swipe', function (event, slick, direction) {
             var newActive = slick.currentSlide;
             var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
 
-            colorPicker.each(function() {
+            colorPicker.each(function () {
                 if ($(this).data('index') == newActive) {
                     $(this).addClass('active').siblings().removeClass('active')
                     $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
@@ -1214,7 +1214,7 @@ if (!isset($_SESSION['customer_id'])) {
             })
         })
 
-        $(document).on('click', '.switch-color li', function() {
+        $(document).on('click', '.switch-color li', function () {
             var slideIndex = $(this).data('index');
             var slider = $(this).parents('.frame-style').find('.frame-style__slider');
             var curStyle = $(this).data('style-name');
@@ -1228,14 +1228,14 @@ if (!isset($_SESSION['customer_id'])) {
             $(this).parents('.frame-style').find('.form-quick-add-to-bag').find('input').eq(0).val(curSKU);
         })
 
-        $('.image-wrapper').each(function() {
+        $('.image-wrapper').each(function () {
             var image = $(this).data('src');
             var no_image = $(this).data('no-image');
             var elem = $(this);
 
-            checkImage(image).on('error', function() {
+            checkImage(image).on('error', function () {
                 elem.css('background-image', 'url(' + no_image + ')')
-            }).on('load', function() {
+            }).on('load', function () {
                 elem.css('background-image', 'url(' + image + ')')
             })
         })
@@ -1273,7 +1273,7 @@ if (!isset($_SESSION['customer_id'])) {
                 var s = $("#search_frame").val().toLowerCase();
                 $('.ssis-searching').fadeIn();
 
-                $('.frame-style').each(function() {
+                $('.frame-style').each(function () {
                     if ($(this).data('style').match(s.toLowerCase())) {
                         $(this).fadeIn();
                     } else {
@@ -1297,7 +1297,7 @@ if (!isset($_SESSION['customer_id'])) {
         }
         const overlayFilter = body => {
             $('.ssis-overlay').fadeIn(200).addClass('show').html(body);
-            $('.close-overlay').click(function() {
+            $('.close-overlay').click(function () {
                 if ($(this).data('reload') == 'yes') {
                     window.location.reload(true);
                 } else {
@@ -1309,7 +1309,7 @@ if (!isset($_SESSION['customer_id'])) {
                 }
             });
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.frame-list').scroll(lazyload);
             lazyload();
         });
@@ -1323,7 +1323,7 @@ if (!isset($_SESSION['customer_id'])) {
                 var wt = $(window).scrollTop(); //* top of the window
                 var wb = wt + $(window).height(); //* bottom of the window
 
-                $(".hide-lazy").each(function() {
+                $(".hide-lazy").each(function () {
                     var ot = $(this).offset().top; //* top of object (i.e. advertising div)
                     var ob = ot + $(this).height(); //* bottom of object
 
@@ -1346,7 +1346,7 @@ if (!isset($_SESSION['customer_id'])) {
 
             $.post('modules/store/append-products.php', {
                 arrProd: arrProd
-            }, function(result) {
+            }, function (result) {
                 // Append the new product and fade it in
                 $(result.show_product).appendTo(".product-show").hide().fadeIn(2000);
 
@@ -1357,10 +1357,10 @@ if (!isset($_SESSION['customer_id'])) {
                     swipeToSlide: false,
                     touchMove: false,
                     swipe: false
-                }).on('swipe', function(event, slick, direction) {
+                }).on('swipe', function (event, slick, direction) {
                     var newActive = slick.currentSlide;
                     var colorPicker = $(this).parents('.frame-style').find('.switch-color li');
-                    colorPicker.each(function() {
+                    colorPicker.each(function () {
                         if ($(this).data('index') == newActive) {
                             $(this).addClass('active').siblings().removeClass('active');
                             $(this).parents('.frame-style').find('.product-details h4 span').text($(this).data("color-name"));
@@ -1372,7 +1372,7 @@ if (!isset($_SESSION['customer_id'])) {
                 // Reattach event listeners for .more-item after appending new content
                 rebindMoreItemEvents();
 
-                $(document).find('.more-item').each(function() {
+                $(document).find('.more-item').each(function () {
                     $(this).html(`<img id="down-arrow" src="${getIconUrl('icon-color-down.png')}" alt="down" style="height: 20px; width: 20px; border-radius: 50%; background-color: #fff; border: 2px solid black;">`);
                 });
             }, 'JSON');
@@ -1388,7 +1388,7 @@ if (!isset($_SESSION['customer_id'])) {
             const moreItems = document.querySelectorAll('.more-item');
 
             // Unbind previous click events and bind a new one
-            $(document).find('.more-item').off('click').on('click', function() {
+            $(document).find('.more-item').off('click').on('click', function () {
                 const parentCard = $(this).closest('.frame-style'); // Find the parent card
                 const hiddenColors = parentCard.find('.hidden-colors'); // Find hidden color elements in this card
                 const colorShowArrow = "<?= get_url('images/icons') ?>/icon-color-down.png";
@@ -1396,7 +1396,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                 let isHidden = true;
 
-                hiddenColors.each(function() {
+                hiddenColors.each(function () {
                     if ($(this).hasClass('hidden')) {
                         $(this).removeClass('hidden');
                         isHidden = false;
@@ -1417,7 +1417,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         // Initial call to attach event listeners on page load
-        $(document).ready(function() {
+        $(document).ready(function () {
             rebindMoreItemEvents();
         });
 
@@ -1431,13 +1431,13 @@ if (!isset($_SESSION['customer_id'])) {
 
             button.disabled = true;
             button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                                                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                                                                                                                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
 
         } else {
             const button = document.getElementById('cart');
             button.disabled = false;
             button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                                                                                                                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
 
         }
     </script>
