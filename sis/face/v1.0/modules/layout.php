@@ -10,7 +10,7 @@ if (isset($_GET['col'])) {
 	$col = $_GET['col'];
 }
 
-$arrPage = ['home', 'store-home', 'health-declaration-form', 'transactions','account-form', 'contact-tracing-form', 'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser', 'return-confirm', 'logout2', 'select-store', 'select-store-studios', 'select-merch', 'select-readers', 'order-confirmation', 'add-paper-bag', 'updatedb', 'order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad', 'for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test', "select-store-lips", "select-store-face", "select-store-brows", "select-store-eyes", "select-store-skin", "select-store-cheeks", "select-store-nails", "select-store-sets", "select-store-all", "cart"];
+$arrPage = ['home', 'store-home', 'health-declaration-form', 'account-form', 'transactions', 'account-form', 'contact-tracing-form', 'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser', 'return-confirm', 'logout2', 'select-store', 'select-store-studios', 'select-merch', 'select-readers', 'order-confirmation', 'add-paper-bag', 'updatedb', 'order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad', 'for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test', "select-store-lips", "select-store-face", "select-store-brows", "select-store-eyes", "select-store-skin", "select-store-cheeks", "select-store-nails", "select-store-sets", "select-store-all", "cart"];
 
 if (in_array($page, $arrPage)) {
 	switch ($page) {
@@ -19,8 +19,11 @@ if (in_array($page, $arrPage)) {
 			include("account/welcome.php");
 			break;
 
-
-			// store
+		// account
+		case "account-form":
+			include("store/accounts-form.php");
+			break;
+		// store
 		case "store-home":
 			include("store/store-home.php");
 			break;
@@ -30,7 +33,7 @@ if (in_array($page, $arrPage)) {
 		case "store-signin":
 			include("store/store-signin.php");
 			break;
-			//lil_ssis includes
+		//lil_ssis includes
 		case "select-store":
 		case "select-store-all":
 			include("store/select-store.php");
@@ -114,7 +117,7 @@ if (in_array($page, $arrPage)) {
 			include("logout2.php");
 			break;
 
-			//testing page
+		//testing page
 		case "select-store-studios-test":
 			include("store/sunnies-studios-test.php");
 			break;
