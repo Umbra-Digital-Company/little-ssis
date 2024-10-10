@@ -2974,6 +2974,7 @@ main.customer-layout .wrapper {
 
 /* store pages */
 
+
 .page-select-store-studios .container,
 .page-select-antirad .container,
 .page-select-merch .container,
@@ -2982,8 +2983,28 @@ main.customer-layout .wrapper {
 .page-order-confirmation .container,
 .page-cart .container {
   height: calc(90vh - 90%);
-  margin-top: 70px;
+  margin-top: 100px;
 }
+
+.page-select-store-brows .container,
+.page-select-store-face .container,
+.page-select-store-eyes .container,
+.page-select-store-skin .container,
+.page-select-store-cheeks .container,
+.page-select-store-sets .container,
+.page-select-store .container,
+.page-select-store-all .container,
+.page-select-store-lips .container,
+.page-select-store-nails .container{
+  height: calc(90vh - 90%);
+  margin-top: 20px;
+}
+
+.page-order-confirmation .container{
+  height: calc(90vh - 90%);
+  margin-top: 80px;
+}
+
 
 .page-order-dispatched .container {
   height: calc(90vh - 90%);
@@ -3356,3 +3377,94 @@ main.customer-layout .wrapper {
   font-weight: 400;
   color: #342c29;
 }
+
+
+/* notification toast */
+
+.notification {
+  background-color: #9DE356;
+  height: 48px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  max-width: 575px;
+  width: 100%;
+  margin: 0 auto;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.notification-icon {
+
+  height: 24px;
+  width: 24px;
+}
+
+.notification-message {
+  text-align: center;
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  /* Ensures block-level centering */
+  width: 100%;
+  /* Make it occupy the entire width of the container */
+}
+
+.notification-close {
+  background: transparent;
+  max-width: 30px;
+  max-height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  height: 24px;
+  width: 24px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
+
+.notification.hidden  {
+  animation-name: fadeout;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  
+}
+
+.notification.show  {
+  display: block;
+  /* animation */
+
+  animation-name: slidein;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes slidein {
+  from {
+    transform: translate(-50% , 20px); /* Start from below */
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    transform: translate(-50%, 0); /* End at original position */
+    opacity: 1; /* End fully visible */
+  }
+}
+/* Fade out animation */
+@keyframes fadeout {
+  from {
+    opacity: 1; /* Start fully visible */
+  }
+  to {
+    opacity: 0; /* End invisible */
+  }
+}
+
+/* end notification toast */

@@ -91,12 +91,14 @@
                         style="border-radius: 16px; background-color: #e8e8e8; height: 120px; width: 126px; background-image: url(<?= $arrOrdersConfirmed[$i]['image_url'] ?>); background-repeat: no-repeat; background-size: 80%; background-position: center;">
                     </div>
                     <div class="ml-3">
-                        <span style="text-transform: uppercase; font-size: 18px; font-weight: 700;" class="mt-2 product-title">
+                        <span style="text-transform: uppercase; font-size: 18px; font-weight: 700;"
+                            class="mt-2 product-title">
                             <?= $arrOrdersConfirmed[$i]['item_description'] ?>
                         </span>
                         <p class="mt-1" style=" font-size: 18px; font-weight: 400; color: #727272;">
                             <!-- <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : 'P' ?> -->
-                            P<?= number_format($total, 2) ?>
+                            P
+                            <?= number_format($total, 2) ?>
                         </p>
                     </div>
                 </div>
@@ -157,7 +159,7 @@
                 <?= $_GET['name'] ?>
             </p>
             <p class="custom-subtitle" style=" font-weight: 500; font-size: 14px;">
-            <?= $_GET['age'] ?> <?= $_GET['age'] == 1 || $_GET['age'] == 0 ? 'year' : 'years' ?> old
+                <?= $_GET['age'] ?> <?= $_GET['age'] == 1 || $_GET['age'] == 0 ? 'year' : 'years' ?> old
             </p>
         </div>
 
@@ -198,6 +200,39 @@
     </div>
 
 </div>
+
+<div id="notification" class="notification p-2 text-center align-items-center justify-content-center show "
+    style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+
+    <div id="notification" class="notification d-flex align-items-center justify-content-between "
+        style="width: 100%; padding: 0px 10px;">
+
+        <span class="notification-message text-align-center">Order has successfully been sent to Cashier</span>
+        <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">
+            <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
+        </button>
+    </div>
+</div>
+
+<script>
+   
+     function closeNotification() {
+            document.getElementById('notification').classList.remove('show');
+            document.getElementById('notification').classList.add('hidden');
+           
+        }
+
+        function openNotification() {
+            document.getElementById('notification').classList.remove('hidden');
+            document.getElementById('notification').classList.add('show');
+           
+            setTimeout(closeNotification, 5000);
+        }
+
+        window.onload = function() {
+        openNotification();
+    };
+</script>
 <!-- <hr class="spacing">
 <div class="col-12">
     <div class="card">

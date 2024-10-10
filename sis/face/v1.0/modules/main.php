@@ -31,23 +31,26 @@ if (!isset($_SESSION['user_login']['warehouse_code'])) {
 			for ($i = 0; $i < 1; $i++) {
 
 				$tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
-			};
+			}
+			;
 
 			$_SESSION['user_login']['warehouse_code'] = $tempArray['warehouse_code'];
-		};
+		}
+		;
 
 		mysqli_stmt_close($stmt);
 	} else {
 
 		echo mysqli_error($conn);
-	};
+	}
+	;
 }
 
 
 ////////////////////////////////////////////////////////////////
 
 $page = '';
-$col  = '';
+$col = '';
 
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
@@ -141,7 +144,8 @@ switch ($page) {
 			<?php if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
 					<a class="d-flex align-items-center" href="./?page=transactions&active=payment">
-						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
+						<canvas
+							style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
 						<span class="h3 ml-3">For Payments</span>
 					</a>
 				</li>
@@ -162,11 +166,11 @@ switch ($page) {
 </div>
 
 <div id="admin-bar"
-	class="d-flex align-items-center <?= ($page == 'rate-us') ? 'justify-content-center' : 'justify-content-between' ?> <?= ($page == 'order-confirmation' || $page == 'cart') ? 'order-confirmation' : '' ?>"
+	class="d-flex align-items-center <?= ($page == 'rate-us') ? 'justify-content-center' : 'justify-content-between' ?> <?= ($page == 'order-confirmation' || $page == 'cart' || $page == 'account-form' || $page == 'order-dispatched') ? 'order-confirmation' : '' ?>"
 	style="box-shadow: none;">
 
-	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES') : ?>
-		<?php if ($page != 'rate-us'): ?>
+	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES'): ?>
+		<?php if ($page != 'rate-us' && $page != 'account-form' && $page != 'cart' && $page != 'order-confirmation'): ?>
 			<div class="home">
 				<a href="#" class="prevent" id="exit_customer_page"><img
 						src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
@@ -181,69 +185,112 @@ switch ($page) {
 			</div>
 		<?php endif ?>
 
-		<?php if ($page == 'contact-tracing-form'): ?>
+		<?php if ($page == 'account-form'): ?>
+			<div class="home">
+				<a href="#" class="prevent" id="exit_customer_page" style="height: 32px ; width: 32px;"><img
+						src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			</div>
 			<div class="account-name">
 				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Account") ?></p>
 			</div>
 			<div class="account">
-				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
 
+
+
 		<?php if ($page == 'transactions'): ?>
+			<div class="home">
+				<a href="#" class="prevent" id="exit_customer_page" style="height: 32px ; width: 32px;"><img
+						src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			</div>
 			<div class="account-name">
 				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Transactions") ?>
 				</p>
 			</div>
 			<div class="account">
-				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
 
 
 		<?php if ($page == 'cart'): ?>
+			<div class="home">
+				<a  href="#" class="prevent" id="exit_customer_page" style="height: 32px ; width: 32px;"><img
+						src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			</div>
 			<div class="account-name">
 				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Bag") ?>
-			</p>
+				</p>
 			</div>
 			<div class="account">
-				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
 			</div>
 		<?php endif ?>
 
 		<?php if ($page == 'order-confirmation'): ?>
+			<div class="home">
+				<a href="#" class="prevent" id="exit_customer_page" style="height: 32px ; width: 32px;" style="height: 32px ; width: 32px;"><img
+						src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			</div>
 			<div class="account-name">
 				<p class="h3 mb-0" style="color: #FFF; font-weight: 700; font-size: 20px">
 					<?= strtoupper("Order Confirmation") ?>
 				</p>
 			</div>
+			<div class="account">
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
+			</div>
 		<?php endif ?>
 
 	<?php else: ?>
-			<?php if ($page == 'order-confirmation'): ?>
-				<a href="./?page=select-store" class="exit-frame-selection"><img src="<?= get_url('images/icons') ?>/icon-left-arrow.png" alt="exit" class="img-fluid"></a>
+		<?php if ($page == 'order-confirmation'): ?>
+			<a href="./?page=select-store" class="exit-frame-selection" style="height: 32px ; width: 32px;"><img
+					src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
 
-				<div class="account-name">
-					<p class="h3 mb-0" style="color: #FFF; font-weight: 700; font-size: 20px">
-						<?= strtoupper("Order Confirmation") ?>
-					</p>
-				</div>
-				<div class="account">
-					<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
-				</div>
-			<?php elseif ($page == 'cart'): ?>
-				<a href="./?page=select-store" class="exit-frame-selection"><img src="<?= get_url('images/icons') ?>/icon-left-arrow.png" alt="exit" class="img-fluid"></a>
-				<div class="account-name">
-					<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Bag") ?>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFF; font-weight: 700; font-size: 20px">
+					<?= strtoupper("Order Confirmation") ?>
 				</p>
-				</div>
-				<div class="account">
-					<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
-				</div>
-			<?php elseif ($page == 'bag'): ?>
-			<?php else: ?>
-			<div class="">
+			</div>
+			<div class="account">
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
+			</div>
+		<?php elseif ($page == 'cart'): ?>
+			<a href="./?page=select-store" class="exit-frame-selection" style="height: 32px ; width: 32px;"><img
+					src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Bag") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
+			</div>
 
+		<?php elseif ($page == 'order-dispatched'): ?>
+			<a href="./?page=store-home" class="exit-frame-selection" style="height: 32px ; width: 32px;"><img
+					src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px">
+					<?= strtoupper("Order sent to cashier") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
+			</div>
+
+		<?php else: ?>
+			<div class="home">
+				<a href="#" class="prevent" id="exit_customer_page"><img
+						src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
 			</div>
 
 			<div class="account-name">
@@ -265,11 +312,11 @@ switch ($page) {
 		<?php
 
 		switch ($page) {
-				// assistant
+			// assistant
 			case 'store-home':
 				$custom_title = $arrTranslate[greetings()];
 				break;
-				// customer
+			// customer
 			case 'health-declaration-form':
 				$custom_title = 'Health Declaration Form';
 				break;
@@ -330,7 +377,7 @@ switch ($page) {
 			case 'updatedb':
 				$custom_title = 'Maintenance';
 				break;
-				// Default
+			// Default
 			default:
 				$custom_title = $page;
 		}
@@ -341,7 +388,7 @@ switch ($page) {
 
 		?>
 
-		<?php if (isset($_SESSION['customer_page']) && isset($_SESSION['customer_page']) == 'YES') :
+		<?php if (isset($_SESSION['customer_page']) && isset($_SESSION['customer_page']) == 'YES'):
 			switch ($page) {
 				case 'health-declaration-form':
 					$step = 1;
@@ -365,7 +412,7 @@ switch ($page) {
 					$step = '';
 			}
 
-		?>
+			?>
 
 			<div class="text-center">
 
@@ -396,41 +443,47 @@ switch ($page) {
 
 			</div>
 
-		<?php else : ?>
+		<?php else: ?>
 
 			<h1 class="h1 m-0 text-center"><?= $custom_title ?></h1>
 			<div id="tabs" class="d-flex align-items-center justify-content-center">
 
-				<?php if ($_SESSION['userlvl'] == '2') : ?>
+				<?php if ($_SESSION['userlvl'] == '2'): ?>
 
 					<a href="./?page=store-home" class="<?= ($page == 'store-home') ? 'active' : '' ?>">
 						<img src="<?= get_url('images/icons') ?>/icon-home<?= ($page == 'store-home') ? '-primary' : '' ?>.png"
 							alt="Dashboard" class="img-fluid">
 					</a>
 					<a href="./?page=doctorque" class="<?= ($page == 'doctorque') ? 'active' : '' ?>">
-						<img src="<?= get_url('images/icons') ?>/icon-pending-list<?= ($page == 'doctorque') ? '-primary' : '' ?>.png" alt="Doctor's Queue" class="img-fluid">
+						<img src="<?= get_url('images/icons') ?>/icon-pending-list<?= ($page == 'doctorque') ? '-primary' : '' ?>.png"
+							alt="Doctor's Queue" class="img-fluid">
 					</a>
-					<a href="./?page=ordermanagement" class="<?= ($page == 'ordermanagement' || $page == 'overview_details') ? 'active' : '' ?>">
+					<a href="./?page=ordermanagement"
+						class="<?= ($page == 'ordermanagement' || $page == 'overview_details') ? 'active' : '' ?>">
 						<img src="<?= get_url('images/icons') ?>/icon-order-management<?= ($page == 'ordermanagement' || $page == 'overview_details') ? '-primary' : '' ?>.png"
 							alt="Order Management" class="img-fluid">
 					</a>
 
-				<?php elseif ($_SESSION['userlvl'] == '1') : ?>
+				<?php elseif ($_SESSION['userlvl'] == '1'): ?>
 
-					<?php if ($page == 'doctor' || $page == 'doctor-complete' || $page == 'customerdetails' || $page == 'customer-examine' || $page == 'change-current-frame' || $page == 'add-services') : ?>
+					<?php if ($page == 'doctor' || $page == 'doctor-complete' || $page == 'customerdetails' || $page == 'customer-examine' || $page == 'change-current-frame' || $page == 'add-services'): ?>
 
-						<a href="./?page=doctor" class="<?= ($page == 'doctor' || $page == 'customer-examine' || $page == 'change-current-frame' || $page == 'add-services') ? 'active' : '' ?>">
-							<img src="<?= get_url('images/icons') ?>/icon-pending-list<?= ($page == 'doctor' || $page == 'customer-examine' || $page == 'change-current-frame' || $page == 'add-services') ? '-theme-doctor' : '' ?>.png" alt="Pending List" class="img-fluid">
+						<a href="./?page=doctor"
+							class="<?= ($page == 'doctor' || $page == 'customer-examine' || $page == 'change-current-frame' || $page == 'add-services') ? 'active' : '' ?>">
+							<img src="<?= get_url('images/icons') ?>/icon-pending-list<?= ($page == 'doctor' || $page == 'customer-examine' || $page == 'change-current-frame' || $page == 'add-services') ? '-theme-doctor' : '' ?>.png"
+								alt="Pending List" class="img-fluid">
 						</a>
-						<a href="./?page=doctor-complete" class="<?= ($page == 'doctor-complete' || $page == 'customerdetails') ? 'active' : '' ?>">
-							<img src="<?= get_url('images/icons') ?>/icon-completed-list<?= ($page == 'doctor-complete' || $page == 'customerdetails') ? '-theme-doctor' : '' ?>.png" alt="Pending List" class="img-fluid">
+						<a href="./?page=doctor-complete"
+							class="<?= ($page == 'doctor-complete' || $page == 'customerdetails') ? 'active' : '' ?>">
+							<img src="<?= get_url('images/icons') ?>/icon-completed-list<?= ($page == 'doctor-complete' || $page == 'customerdetails') ? '-theme-doctor' : '' ?>.png"
+								alt="Pending List" class="img-fluid">
 						</a>
 
-					<?php else : ?>
+					<?php else: ?>
 
 					<?php endif ?>
 
-				<?php else : ?>
+				<?php else: ?>
 
 					Welcome
 
@@ -445,7 +498,7 @@ switch ($page) {
 
 <main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer' . $page : '' ?>">
 
-	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress'])) : ?>
+	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress'])): ?>
 
 		<?php
 		$progress_class = "";
@@ -462,7 +515,7 @@ switch ($page) {
 
 		?>
 
-		<?php if ($page != 'rate-us') : ?>
+		<?php if ($page != 'rate-us'): ?>
 
 			<?php
 
@@ -470,12 +523,13 @@ switch ($page) {
 			if (isset($_GET['checkout']) && $_GET['checkout'] == 'guest') {
 
 				$guestParam = "&checkout=guest";
-				$guestVal 	= "guest";
+				$guestVal = "guest";
 			} else {
 
 				$guestParam = "";
-				$guestVal 	= "regular";
-			};
+				$guestVal = "regular";
+			}
+			;
 
 			?>
 
@@ -486,7 +540,7 @@ switch ($page) {
 							<img src="<?= get_url('images/icons') ?>/icon-edibt-primary.png" alt="Account" class="img-fluid">
 						</a>
 					<?php } ?>
-					<a href="./?page=select-store" class="<?= ((isset($_SESSION['customer_id']) && $page == 'order-confirmation') || $page == 'select-store'  || $page == 'select-store-studios' || $page == 'select-merch' || $page == 'add-paper-bag') ? 'bg-success-lighten' : '' ?>">
+					<a href="./?page=select-store" class="<?= ((isset($_SESSION['customer_id']) && $page == 'order-confirmation') || $page == 'select-store' || $page == 'select-store-studios' || $page == 'select-merch' || $page == 'add-paper-bag') ? 'bg-success-lighten' : '' ?>">
 						<img src="<?= get_url('images/icons') ?>/icon-store-primary.png" alt="Frame" class="img-fluid">
 					</a>
 					<a href="./?page=order-confirmation&bpage=<?= (isset($_GET['bpage'])) ? $_GET['bpage'] : $_GET['page'] ?>" class="<?= ($page == 'order-confirmation' || $page == 'add-paper-bag') ? 'bg-success-lighten' : '' ?>">
@@ -500,7 +554,7 @@ switch ($page) {
 				<?php include("layout.php"); ?>
 			</div>
 
-		<?php else : ?>
+		<?php else: ?>
 
 			<div class="wrapper">
 				<?php include("layout.php"); ?>
@@ -508,7 +562,7 @@ switch ($page) {
 
 		<?php endif; ?>
 
-	<?php elseif (isset($_SESSION['customer_page']) && isset($_SESSION['doctor_progress']) && $_SESSION['doctor_progress'] == 'YES') : ?>
+	<?php elseif (isset($_SESSION['customer_page']) && isset($_SESSION['doctor_progress']) && $_SESSION['doctor_progress'] == 'YES'): ?>
 
 		<?php
 
@@ -528,13 +582,17 @@ switch ($page) {
 
 		<div class="step-progress">
 			<div class="d-flex justify-content-center">
-				<a href="./?page=prescription-list&profile_id=<?= (isset($_GET['profile_id'])) ? $_GET['profile_id'] : '' ?>&orderNo=<?= (isset($_GET['orderNo'])) ? $_GET['orderNo'] : '' ?>&pres_id=<?= (isset($_GET['pres_id'])) ? $_GET['pres_id'] : '' ?>&cartID=<?= (isset($_GET['cartID'])) ? $_GET['cartID'] : '' ?>&frame_price=<?= (isset($_GET['frame_price'])) ? $_GET['frame_price'] : '1200' ?>" class="<?= (isset($_GET['pres_name']) || isset($_GET['vision'])) ? 'bg-doctor-lighten' : '' ?> <?= ($page == 'prescription-list') ? 'bg-doctor-lighten' : '' ?>">
-					<img src="<?= get_url('images/icons') ?>/icon-prescription-theme-doctor.png" alt="Prescription" class="img-fluid">
+				<a href="./?page=prescription-list&profile_id=<?= (isset($_GET['profile_id'])) ? $_GET['profile_id'] : '' ?>&orderNo=<?= (isset($_GET['orderNo'])) ? $_GET['orderNo'] : '' ?>&pres_id=<?= (isset($_GET['pres_id'])) ? $_GET['pres_id'] : '' ?>&cartID=<?= (isset($_GET['cartID'])) ? $_GET['cartID'] : '' ?>&frame_price=<?= (isset($_GET['frame_price'])) ? $_GET['frame_price'] : '1200' ?>"
+					class="<?= (isset($_GET['pres_name']) || isset($_GET['vision'])) ? 'bg-doctor-lighten' : '' ?> <?= ($page == 'prescription-list') ? 'bg-doctor-lighten' : '' ?>">
+					<img src="<?= get_url('images/icons') ?>/icon-prescription-theme-doctor.png" alt="Prescription"
+						class="img-fluid">
 				</a>
-				<a href="#" class="prevent <?= (isset($_GET['vision'])) ? 'bg-doctor-lighten' : '' ?> <?= ($page == 'select-vision') ? 'bg-doctor-lighten' : '' ?>">
+				<a href="#"
+					class="prevent <?= (isset($_GET['vision'])) ? 'bg-doctor-lighten' : '' ?> <?= ($page == 'select-vision') ? 'bg-doctor-lighten' : '' ?>">
 					<img src="<?= get_url('images/icons') ?>/icon-vision-theme-doctor.png" alt="Vision" class="img-fluid">
 				</a>
-				<a href="#" class="prevent <?= (isset($_GET['lens'])) ? 'bg-doctor-lighten' : '' ?> <?= ($page == 'select-lenses') ? 'bg-doctor-lighten' : '' ?>">
+				<a href="#"
+					class="prevent <?= (isset($_GET['lens'])) ? 'bg-doctor-lighten' : '' ?> <?= ($page == 'select-lenses') ? 'bg-doctor-lighten' : '' ?>">
 					<img src="<?= get_url('images/icons') ?>/icon-lens-theme-doctor.png" alt="Lenses" class="img-fluid">
 				</a>
 				<a href="#" class="prevent <?= ($page == 'select-upgrades') ? 'bg-doctor-lighten' : '' ?>">
@@ -549,7 +607,7 @@ switch ($page) {
 			<?php include("layout.php"); ?>
 		</div>
 
-	<?php else : ?>
+	<?php else: ?>
 
 		<?php include("layout.php"); ?>
 
@@ -652,7 +710,8 @@ switch ($page) {
 		cursor: pointer;
 	}
 </style>
-<div class="modal fade" id="modal-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="height: 94vh;">
 			<div class="modal-header">
@@ -669,7 +728,8 @@ switch ($page) {
 </div>
 
 </style>
-<div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document" style="max-width: 100%; width: 590px; ">
 		<div class="modal-content filter" style="height: 95vh; border-radius: 16px; margin: 15px auto ; ">
 			<div class="modal-header">
@@ -689,9 +749,11 @@ switch ($page) {
 
 							$selected = (in_array($value['code'], $getCollections)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-						?>
+							?>
 							<div class="col-6 mt-3">
-								<div class="my-collection btn <?= $selected ?>" collectionsData="<?= $value['code'] ?>"><?= $value['name'] ?></div>
+								<div class="my-collection btn <?= $selected ?>" collectionsData="<?= $value['code'] ?>">
+									<?= $value['name'] ?>
+								</div>
 							</div>
 
 						<?php } ?>
@@ -709,10 +771,12 @@ switch ($page) {
 
 							$selected = (in_array($value['code'], $getShapes)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-						?>
+							?>
 
 							<div class="col-6 mt-3">
-								<div class="my-shapes btn <?= $selected ?>" shapesData="<?= $value['code'] ?>"><?= $value['name'] ?></div>
+								<div class="my-shapes btn <?= $selected ?>" shapesData="<?= $value['code'] ?>">
+									<?= $value['name'] ?>
+								</div>
 							</div>
 
 						<?php } ?>
@@ -730,10 +794,12 @@ switch ($page) {
 
 							$selected = (in_array($value['color'], $getColors)) ? 'btn-' . $value['color'] : 'btn-no-filter';
 
-						?>
+							?>
 
 							<div class="col-6 mt-3">
-								<div class="my-color btn <?= $selected ?>" colorData="<?= $value['color'] ?>"><?= ucwords(str_replace("_", " ", $value['color'])) ?></div>
+								<div class="my-color btn <?= $selected ?>" colorData="<?= $value['color'] ?>">
+									<?= ucwords(str_replace("_", " ", $value['color'])) ?>
+								</div>
 							</div>
 
 						<?php } ?>
@@ -750,7 +816,8 @@ switch ($page) {
 
 					<div class="d-flex justify-content-center mt-4">
 						<a href="/sis/face/v1.0/?page=<?= $_GET['page'] ?>">
-							<div class="btn btn-link" style="color: #000 !important; text-decoration: underline !important;">Reset Filter</div>
+							<div class="btn btn-link"
+								style="color: #000 !important; text-decoration: underline !important;">Reset Filter</div>
 						</a>
 					</div>
 
@@ -761,7 +828,8 @@ switch ($page) {
 	</div>
 </div>
 
-<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="height: 94vh;">
 			<div class="modal-header">
@@ -777,7 +845,8 @@ switch ($page) {
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="height: 94vh;">
 			<div class="modal-header">
@@ -794,7 +863,8 @@ switch ($page) {
 	</div>
 </div>
 
-<div class="modal fade" id="modal-guest-register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-guest-register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content" style="height: 94vh;">
 			<div class="modal-header">
