@@ -115,7 +115,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             alert('error');
         });
     </script>
@@ -149,6 +149,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
         return $arrExist;
     }
     ?>
+
+    <pre>
+        <?= print_r($_SESSION); ?>
+    </pre>
 
 
     <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
@@ -203,7 +207,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     $merchItem = true;
                 }
 
-                ?>
+            ?>
 
                 <div class="customized-card my-4 w-100 p-4 ">
                     <div class="no-gutters d-flex">
@@ -218,10 +222,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
                                 </p>
                                 <p class="custom-subtitle" style="color: #919191;">
                                     <?=
-                                        (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs')
+                                    (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs')
                                         ? 'VND '
                                         : '₱'
-                                        ?>
+                                    ?>
                                     <?= number_format($item['price'], 2) ?>
                                     <?php if ($item['count'] > 1): ?>
                                         x <?= $item['count'] ?>
@@ -250,13 +254,13 @@ if (!isset($_SESSION['customer_id'])) { ?>
             $arrPaperBag = paperBagList();
 
             $arrExistPBag = getExistingPaperBagSac($arrPaperBag, $arrCart)
-                ?>
+            ?>
 
             <div class="card-body p-0">
                 <?php
 
                 if (count($arrExistPBag) == 0) {
-                    ?>
+                ?>
                     <div class="product-section d-flex align-items-center justify-content-between gap-3" style="gap: 16px;">
                         <div class="d-flex justify-content-between">
                             <div class="form-group">
@@ -290,7 +294,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
                     </div>
-                <?php } else {
+                    <?php } else {
 
                     foreach ($arrExistPBag as $key => $value) {
                         $groupSelected = explode(',', $value);
@@ -303,7 +307,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                                 break;
                             }
                         }
-                        ?>
+                    ?>
                         <div class="product-section d-flex align-items-center justify-content-between" style="gap: 16px;">
                             <div class="d-flex justify-content-between">
                                 <div class="form-group ">
@@ -330,7 +334,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             </div>
 
                         </div>
-                    <?php }
+                <?php }
                 }
                 ?>
             </div>
@@ -388,7 +392,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             //         }
             //     endif;
             // endforeach;
-        
+
             $total_price = 0;
             $voucher_amount = 0;
             $promo_code = '';
@@ -411,13 +415,13 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <div class="d-flex justify-content-between">
                 <p class="custom-subtitle">Subtotal</p>
                 <p class="custom-subtitle">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>    <?= number_format($total_price, 2) ?>
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= number_format($total_price, 2) ?>
                 </p>
             </div>
             <div class="d-flex justify-content-between">
                 <p class="custom-subtitle">Discount</p>
                 <p class="custom-subtitle">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>    <?= $promo_code != '' ? $promo_code : number_format(0, 2) ?>
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $promo_code != '' ? $promo_code : number_format(0, 2) ?>
                 </p>
             </div>
 
@@ -426,7 +430,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <div class="d-flex justify-content-between" style="font-weight: 700">
                 <p class="custom-title">Total amount</p>
                 <p class="custom-title" style="color: #956E46;">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>    <?= number_format($total_price - $voucher_amount, 2) ?>
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= number_format($total_price - $voucher_amount, 2) ?>
                 </p>
             </div>
 
@@ -442,7 +446,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     </div>
                     <div class="col ml-2">
                         <p class="custom-subtitle" style="text-transform: capitalize; font-weight: 700; font-size: 18px;">
-                            <?= get_customer_data("first_name") ?>         <?= get_customer_data("last_name") ?>
+                            <?= get_customer_data("first_name") ?> <?= get_customer_data("last_name") ?>
                         </p>
                         <p class="custom-subtitle" style=" font-weight: 500; font-size: 14px;">
                             <?= get_customer_data("age") ?> <?= get_customer_data("age") == 1 ? 'year old' : 'years old' ?>
@@ -455,53 +459,53 @@ if (!isset($_SESSION['customer_id'])) { ?>
         <?php } ?>
 
         <div>
-            
+
             <!-- <?php print_r(get_customer_data("first_name")); ?>
             <?php print_r(get_customer_data("last_name")); ?>
             <?php print_r(get_customer_data("birthday")); ?>
             <?php print_r($_SESSION) ?> -->
             <?php if (isset($_SESSION["autologin"])) { ?>
                 <div id="bottom-content" class=" d-flex text-center align-items-center justify-content-center mt-5 mb-5"
-                style=" bottom: 0; left: 0; width: 100%; ">
-                <div id="bottom-content-inner" style=" width: 100%  ; ">
+                    style=" bottom: 0; left: 0; width: 100%; ">
+                    <div id="bottom-content-inner" style=" width: 100%  ; ">
 
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="customer-account text-center">
-                                <a
-                                    href="./?page=account-form&type=sign-up&bpage=<?php echo htmlspecialchars($_GET['bpage']); ?>">
-                                    <button class="btn btn-primary">Log in or Sign up </button>
-                                </a>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="customer-account text-center">
+                                    <a
+                                        href="./?page=account-form&type=sign-up&bpage=<?php echo htmlspecialchars($_GET['bpage']); ?>">
+                                        <button class="btn btn-primary">Log in or Sign up </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <div class="customer-account text-center">
+                                    <a
+                                        href="./?page=account-form&guest=true&bpage=<?php echo htmlspecialchars($_GET['bpage']); ?>">
+                                        <button class="btn btn-not-cancel">Continue as guest</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="col-12 mt-3">
-                            <div class="customer-account text-center">
-                                <a
-                                    href="./?page=account-form&guest=true&bpage=<?php echo htmlspecialchars($_GET['bpage']); ?>">
-                                    <button class="btn btn-not-cancel">Continue as guest</button>
-                                </a>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
-
-            </div>
-                <?php } else { ?>
-
-            
+            <?php } else { ?>
 
 
-            <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
-            <a href="/sis/face/func/process/order_payment.php?path_loc=v1.0&bdate=<?= get_customer_data('age') ?>" id="send-order">
-                <!-- <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center"
+
+
+                <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
+                <a href="/sis/face/func/process/order_payment.php?path_loc=v1.0&bdate=<?= get_customer_data('age') ?>" id="send-order">
+                    <!-- <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center"
                     value="<?= $textSend ?>"> -->
 
                     <button class="btn btn-primary mt-4 mb-5"><?php echo $textSend; ?></button>
-            </a>
+                </a>
 
             <?php } ?>
         </div>
@@ -512,12 +516,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
     <script>
-
-
         let total_count = <?= $total_count ?>;
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".use_code").hide();
-            $(".check_code").click(function (e) {
+            $(".check_code").click(function(e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -526,7 +528,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     type: "GET",
                     data: $("#form-check-promo").serialize(),
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
 
                         color = "red";
                         if (response.valid == true) {
@@ -541,7 +543,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $("#check-promo-message").css("color", color);
 
                     },
-                    error: function () {
+                    error: function() {
 
                     }
 
@@ -549,7 +551,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
             });
 
-            $("#form-check-promo").submit(function (e) {
+            $("#form-check-promo").submit(function(e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -558,7 +560,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     type: "GET",
                     data: $("#form-check-promo").serialize(),
                     dataType: 'json',
-                    success: function (response) {
+                    success: function(response) {
 
                         color = "red";
                         if (response.valid == true) {
@@ -572,7 +574,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $("#check-promo-message").css("color", color);
 
                     },
-                    error: function () {
+                    error: function() {
 
                     }
 
@@ -582,9 +584,9 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
 
-            $(this).on('click', '.add_count_increment_pbag', function () {
+            $(this).on('click', '.add_count_increment_pbag', function() {
                 let count_num_val = 0;
-                $('.count_num_pbag').each(function () {
+                $('.count_num_pbag').each(function() {
                     count_num_val += parseInt($(this).val());
                 });
                 productSelected = $(this).parents('.product-section').find('select').val();
@@ -606,7 +608,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                             studios_product_code: productSelected,
                             paper_bag: true
-                        }, function (result) {
+                        }, function(result) {
                             //console.log(result);
                             arrOrdersSpescId.push(result);
                             arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -615,7 +617,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             current_value = _this.parent().parent().find('.count_num_pbag').val();
                             _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
 
-                            _this.parents('.product-section').find('select option').each(function () {
+                            _this.parents('.product-section').find('select option').each(function() {
                                 if ($(this).val() != productSelected) {
                                     $(this).remove();
                                 }
@@ -640,7 +642,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                         studios_product_code: productSelected,
                         paper_bag: true
-                    }, function (result) {
+                    }, function(result) {
                         //console.log(result);
                         arrOrdersSpescId.push(result);
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -648,7 +650,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_pbag').attr('group-orders-specs-id', arrOrdersSpescId);
                         current_value = _this.parent().parent().find('.count_num_pbag').val();
                         _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
-                        _this.parents('.product-section').find('select option').each(function () {
+                        _this.parents('.product-section').find('select option').each(function() {
                             if ($(this).val() != productSelected) {
                                 $(this).remove();
                             }
@@ -660,7 +662,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $(this).on('click', '.minus_count_decrement_pbag', function () {
+            $(this).on('click', '.minus_count_decrement_pbag', function() {
 
                 _this = $(this);
                 current_value = $(this).parent().parent().find('.count_num_pbag').val();
@@ -671,7 +673,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                     $.post("/sis/studios/func/process/remove_item.php", {
                         orders_specs_id: arrOrdersSpescIdRemove
-                    }, function () {
+                    }, function() {
                         arrOrdersSpescId.pop();
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
                         _this.attr('group-orders-specs-id', arrOrdersSpescId);
@@ -685,15 +687,15 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $(this).on('click', '#add_section_paper_bag', function () {
-                $.get('/sis/studios/v1.0/modules/includes/products/add_paper_bag_section.php', function (result) {
+            $(this).on('click', '#add_section_paper_bag', function() {
+                $.get('/sis/studios/v1.0/modules/includes/products/add_paper_bag_section.php', function(result) {
                     $('.card-paper-bag .card-body').append(result);
                 });
             });
 
-            $(this).on('click', '.add_count_increment_sac', function () {
+            $(this).on('click', '.add_count_increment_sac', function() {
                 let count_num_val = 0;
-                $('.count_num_sac').each(function () {
+                $('.count_num_sac').each(function() {
                     count_num_val += parseInt($(this).val());
                 });
                 productSelected = $(this).parents('.product-section').find('select').val();
@@ -715,7 +717,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                             studios_product_code: productSelected,
                             paper_bag: true
-                        }, function (result) {
+                        }, function(result) {
                             //console.log(result);
                             arrOrdersSpescId.push(result);
                             arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -724,7 +726,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             current_value = _this.parent().parent().find('.count_num_sac').val();
                             _this.parent().parent().find('.count_num_sac').val(parseInt(current_value) + 1);
 
-                            _this.parents('.product-section').find('select option').each(function () {
+                            _this.parents('.product-section').find('select option').each(function() {
                                 if ($(this).val() != productSelected) {
                                     $(this).remove();
                                 }
@@ -749,7 +751,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                         studios_product_code: productSelected,
                         paper_bag: true
-                    }, function (result) {
+                    }, function(result) {
                         //console.log(result);
                         arrOrdersSpescId.push(result);
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -757,7 +759,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_sac').attr('group-orders-specs-id', arrOrdersSpescId);
                         current_value = _this.parent().parent().find('.count_num_sac').val();
                         _this.parent().parent().find('.count_num_sac').val(parseInt(current_value) + 1);
-                        _this.parents('.product-section').find('select option').each(function () {
+                        _this.parents('.product-section').find('select option').each(function() {
                             if ($(this).val() != productSelected) {
                                 $(this).remove();
                             }
@@ -769,7 +771,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $(this).on('click', '.minus_count_decrement_sac', function () {
+            $(this).on('click', '.minus_count_decrement_sac', function() {
                 $('#loading').modal('show');
                 _this = $(this);
                 current_value = $(this).parent().parent().find('.count_num_sac').val();
@@ -779,7 +781,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                     $.post("/sis/studios/func/process/remove_item.php", {
                         orders_specs_id: arrOrdersSpescIdRemove
-                    }, function () {
+                    }, function() {
                         arrOrdersSpescId.pop();
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
                         _this.attr('group-orders-specs-id', arrOrdersSpescId);
@@ -793,29 +795,29 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $(this).on('click', '#add_section_sac', function () {
+            $(this).on('click', '#add_section_sac', function() {
                 // console.log("Hello World!")
-                $.get('/sis/studios/v1.0/modules/includes/products/add_sac_section.php', function (result) {
+                $.get('/sis/studios/v1.0/modules/includes/products/add_sac_section.php', function(result) {
                     $('.card-sac .card-body').append(result);
                 });
             });
 
-            $(this).on('change', '#findout', function () {
+            $(this).on('change', '#findout', function() {
                 $('#loading').modal('show');
                 $.post("/sis/studios/func/process/findout.php", {
                     findout: $(this).val()
-                }, function (result) {
+                }, function(result) {
                     setTimeout(() => {
                         $('#loading').modal('hide');
                     }, 200);
                 });
             });
 
-            $(this).on('click', '.club_member', function () {
+            $(this).on('click', '.club_member', function() {
                 $('#loading').modal('show');
                 $.post("/sis/studios/func/process/club_member.php", {
                     club_member: $(this).val()
-                }, function (result) {
+                }, function(result) {
                     setTimeout(() => {
                         $('#loading').modal('hide');
                     }, 200);
@@ -824,7 +826,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
             bool_receipt_holder = ($('.set_receipt_holder').attr('orders-specs-id') == '') ? false : true;
 
-            $(this).on('click', '.set_receipt_holder', function () {
+            $(this).on('click', '.set_receipt_holder', function() {
                 bool_receipt_holder = true;
                 if ($(this).val() == 'yes') {
                     if ($(this).attr('orders-specs-id') == '') {
@@ -832,7 +834,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                             studios_product_code: $(this).attr('product-code'),
                             paper_bag: true
-                        }, function (result) {
+                        }, function(result) {
                             $('.set_receipt_holder').attr('orders-specs-id', result);
                             setTimeout(() => {
                                 $('#loading').modal('hide');
@@ -844,7 +846,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $('#loading').modal('show');
                         $.post("/sis/studios/func/process/remove_item.php", {
                             orders_specs_id: $(this).attr('orders-specs-id')
-                        }, function () {
+                        }, function() {
                             $('.set_receipt_holder').attr('orders-specs-id', '');
                             setTimeout(() => {
                                 $('#loading').modal('hide');
@@ -854,7 +856,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $('#send-order').click(function (e) {
+            $('#send-order').click(function(e) {
                 if (!bool_receipt_holder) {
                     e.preventDefault();
                     alert('Select Yes/No Does this order include a Receipt Holder?');
@@ -862,10 +864,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
             });
 
 
-            $(this).on('click', '.add_count_increment_others', function () {
+            $(this).on('click', '.add_count_increment_others', function() {
 
                 let count_num_val = 0;
-                $('.count_num_others').each(function () {
+                $('.count_num_others').each(function() {
                     count_num_val += parseInt($(this).val());
                 });
                 productSelected = $(this).parents('.product-section').find('select').val();
@@ -887,7 +889,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                             studios_product_code: productSelected,
                             paper_bag: true
-                        }, function (result) {
+                        }, function(result) {
                             //console.log(result);
                             arrOrdersSpescId.push(result);
                             arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -896,7 +898,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             current_value = _this.parent().parent().find('.count_num_others').val();
                             _this.parent().parent().find('.count_num_others').val(parseInt(current_value) + 1);
 
-                            _this.parents('.product-section').find('select option').each(function () {
+                            _this.parents('.product-section').find('select option').each(function() {
                                 if ($(this).val() != productSelected) {
                                     $(this).remove();
                                 }
@@ -921,7 +923,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     $.post("/sis/studios/func/process/add_to_bag_merch.php", {
                         studios_product_code: productSelected,
                         paper_bag: true
-                    }, function (result) {
+                    }, function(result) {
                         //console.log(result);
                         arrOrdersSpescId.push(result);
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
@@ -929,7 +931,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_others').attr('group-orders-specs-id', arrOrdersSpescId);
                         current_value = _this.parent().parent().find('.count_num_others').val();
                         _this.parent().parent().find('.count_num_others').val(parseInt(current_value) + 1);
-                        _this.parents('.product-section').find('select option').each(function () {
+                        _this.parents('.product-section').find('select option').each(function() {
                             if ($(this).val() != productSelected) {
                                 $(this).remove();
                             }
@@ -941,7 +943,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $(this).on('click', '.minus_count_decrement_others', function () {
+            $(this).on('click', '.minus_count_decrement_others', function() {
                 $('#loading').modal('show');
                 _this = $(this);
                 current_value = $(this).parent().parent().find('.count_num_others').val();
@@ -951,7 +953,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                     $.post("/sis/studios/func/process/remove_item.php", {
                         orders_specs_id: arrOrdersSpescIdRemove
-                    }, function () {
+                    }, function() {
                         arrOrdersSpescId.pop();
                         arrOrdersSpescId = arrOrdersSpescId.join(",");
                         _this.attr('group-orders-specs-id', arrOrdersSpescId);
@@ -965,8 +967,8 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $(this).on('click', '#add_section_others', function () {
-                $.get('/sis/studios/v1.0/modules/includes/products/add_others_section.php', function (result) {
+            $(this).on('click', '#add_section_others', function() {
+                $.get('/sis/studios/v1.0/modules/includes/products/add_others_section.php', function(result) {
                     $('.card-others .card-body').append(result);
                 });
             });
@@ -976,23 +978,23 @@ if (!isset($_SESSION['customer_id'])) { ?>
             //         $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);
             //     }
             // });
-            $('#btn-signup').click(function () {
+            $('#btn-signup').click(function() {
                 $('#modal-signup').modal('show');
             });
 
-            $('#update_guest_account').submit(function (e) {
+            $('#update_guest_account').submit(function(e) {
                 e.preventDefault();
                 $.ajax({
                     url: "/sis/studios/func/process/signup-guest-account.php",
                     type: "post",
                     data: $(this).serialize(),
-                    success: function (response) {
+                    success: function(response) {
                         alert(response);
                         if (response.indexOf('done') > -1) {
                             location.reload(true);
                         }
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
+                    error: function(jqXHR, textStatus, errorThrown) {
                         console.log(textStatus, errorThrown);
                     }
                 });
@@ -1022,13 +1024,13 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 $('#age').val(yoa);
             }
 
-            $('#bdate2').on('change', function () {
+            $('#bdate2').on('change', function() {
                 var bday = $(this).val();
                 $('#bdate').val(bday);
                 getAge(bday);
             });
 
-            $('#mnum').on('blur', function () {
+            $('#mnum').on('blur', function() {
                 if (/^[0-9]/.test(this.value)) {
                     this.value = this.value.replace(/^0/, "");
                     formatNumber(this);

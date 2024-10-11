@@ -45,7 +45,7 @@ if (!isset($_SESSION['customer_id'])) {
                 <div class="d-flex justify-content-between">
                     <div class=" no-gutters d-flex ">
 
-                        <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: cover;">
+                        <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: cover; border-radius: 8px">
 
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
