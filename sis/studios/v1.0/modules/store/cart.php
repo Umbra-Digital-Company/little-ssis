@@ -1,20 +1,15 @@
-<?php
-
-if (!isset($_SESSION['customer_id'])) {
-?>
+<?php if (!isset($_SESSION['customer_id'])): ?>
     <div class="wrapper">
         <p class="text-center font-bold h2 pt-3 pb-3">Complete step 1 to proceed</p>
         <div class="text-center mt-4">
             <a href="/sis/studios/v1.0/?page=store-home"><button class="btn btn-primary">go to step 1</button></a>
         </div>
     </div>
-<?php
-} else {
+<?php else:
     include "./modules/includes/products/grab_antirad_frames.php";
 ?>
 
-
-    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+    <div class="mx-2">
 
         <div class="custom-subtitle my-4">
             Total items <span class="custom-title"><?= count($arrCart); ?></span>
@@ -40,12 +35,12 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         ?>
-            <div class="customized-card my-4">
+            <div class="customized-card my-4" style="box-shadow: 0 1px 3px 0 rgba(54, 72, 46, 0.3);">
 
                 <div class="d-flex justify-content-between">
                     <div class=" no-gutters d-flex ">
 
-                        <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: cover; border-radius: 8px">
+                        <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: cover; border-radius: 8px; ">
 
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
@@ -83,17 +78,17 @@ if (!isset($_SESSION['customer_id'])) {
         <?php endforeach; ?>
 
 
-        <a href="/sis/studios/v1.0/?page=select-store" class="btn-custom-white w-100 mt-3 d-flex align-items-center justify-content-center">
+        <a href="/sis/studios/v1.0/?page=select-store" class="btn-custom-white w-100 d-flex align-items-center justify-content-center">
             Add Item
             <img src="/sis/studios/assets/images/icons/add-circle-plus.svg" alt="plus" class="btn-custom-svg">
         </a>
 
-        <a href="?page=order-confirmation&bpage=<?= $_GET['page'] ?>" class="btn-custom-blue w-100 mt-3 d-flex align-items-center justify-content-center">
+        <a href="?page=order-confirmation&bpage=<?= $_GET['page'] ?>" class="btn-custom-blue w-100 mt-4 d-flex align-items-center justify-content-center">
             Checkout
         </a>
     </div>
 
-<?php } ?>
+<?php endif; ?>
 
 
 <script>

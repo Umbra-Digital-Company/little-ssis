@@ -6,7 +6,7 @@
     <?php include "./modules/store/access-denied.php"; ?>
 
 <?php else: ?>
-    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+    <div class="mx-2">
 
         <div class="customized-card mt-4 w-100 p-4 ">
             <div>

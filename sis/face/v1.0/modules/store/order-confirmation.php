@@ -150,10 +150,6 @@ if (!isset($_SESSION['customer_id'])) { ?>
     }
     ?>
 
-    <pre>
-        <?= print_r($_SESSION); ?>
-    </pre>
-
 
     <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
 
@@ -344,6 +340,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <?php
             $arrPaperBagSelected = [];
             $arrPaperBag = othersList();
+
 
             $arrExistPBag = [];
             $orders_specs_id_selected = '';
@@ -831,7 +828,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 if ($(this).val() == 'yes') {
                     if ($(this).attr('orders-specs-id') == '') {
                         $('#loading').modal('show');
-                        $.post("/sis/studios/func/process/add_to_bag_merch.php", {
+                        $.post("/sis/face/func/process/add_to_bag_merch.php", {
                             studios_product_code: $(this).attr('product-code'),
                             paper_bag: true
                         }, function(result) {
@@ -841,10 +838,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             }, 200);
                         });
                     }
-                } else if ($(this).val() == 'no') {
+                } else {
                     if ($(this).attr('orders-specs-id') != '') {
                         $('#loading').modal('show');
-                        $.post("/sis/studios/func/process/remove_item.php", {
+                        $.post("/sis/face/func/process/remove_item.php", {
                             orders_specs_id: $(this).attr('orders-specs-id')
                         }, function() {
                             $('.set_receipt_holder').attr('orders-specs-id', '');
@@ -856,12 +853,12 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $('#send-order').click(function(e) {
-                if (!bool_receipt_holder) {
-                    e.preventDefault();
-                    alert('Select Yes/No Does this order include a Receipt Holder?');
-                }
-            });
+            // $('#send-order').click(function (e) {
+            //     if (!bool_receipt_holder) {
+            //         e.preventDefault();
+            //         alert('Select Yes/No Does this order include a Receipt Holder?');
+            //     }
+            // });
 
 
             $(this).on('click', '.add_count_increment_others', function() {

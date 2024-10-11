@@ -115,7 +115,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
 
-    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+    <div class="mx-2">
 
 
 
@@ -881,7 +881,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             }, 200);
                         });
                     }
-                } else if ($(this).val() == 'no') {
+                } else {
                     if ($(this).attr('orders-specs-id') != '') {
                         $('#loading').modal('show');
                         $.post("/sis/studios/func/process/remove_item.php", {
@@ -896,12 +896,12 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $('#send-order').click(function(e) {
-                if (!bool_receipt_holder) {
-                    e.preventDefault();
-                    alert('Select Yes/No Does this order include a Receipt Holder?');
-                }
-            });
+            // $('#send-order').click(function(e) {
+            //     if (!bool_receipt_holder) {
+            //         e.preventDefault();
+            //         alert('Select Yes/No Does this order include a Receipt Holder?');
+            //     }
+            // });
 
 
             $(this).on('click', '.add_count_increment_others', function() {
