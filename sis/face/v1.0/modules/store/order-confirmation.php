@@ -340,6 +340,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <?php
             $arrPaperBagSelected = [];
             $arrPaperBag = othersList();
+            
 
             $arrExistPBag = [];
             $orders_specs_id_selected = '';
@@ -360,7 +361,8 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     <div class="d-flex align-items-center radio">
                         <input type="checkbox" name="receipt_holder" id="receipt_holder_checkbox"
                             class="sr-only set_receipt_holder checkbox" orders-specs-id="<?= $orders_specs_id_selected ?>"
-                            product-code="<?= $arrPaperBag[0]['product_code'] ?>" value="yes" <?= $orders_specs_id_selected != '' ? 'checked' : '' ?>>
+                            product-code="<?= $arrPaperBag[0]['product_code'] ?>" value="yes" <?= $orders_specs_id_selected != '' ? 'checked' : '' ?>
+                        >
                         <label for="receipt_holder_checkbox" class="custom_checkbox"></label>
                     </div>
                 </div>
@@ -821,7 +823,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     }, 200);
                 });
             });
-
+            
             bool_receipt_holder = ($('.set_receipt_holder').attr('orders-specs-id') == '') ? false : true;
 
             $(this).on('click', '.set_receipt_holder', function () {
@@ -829,7 +831,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 if ($(this).val() == 'yes') {
                     if ($(this).attr('orders-specs-id') == '') {
                         $('#loading').modal('show');
-                        $.post("/sis/studios/func/process/add_to_bag_merch.php", {
+                        $.post("/sis/face/func/process/add_to_bag_merch.php", {
                             studios_product_code: $(this).attr('product-code'),
                             paper_bag: true
                         }, function (result) {
@@ -839,10 +841,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             }, 200);
                         });
                     }
-                } else if ($(this).val() == 'no') {
+                } else {
                     if ($(this).attr('orders-specs-id') != '') {
                         $('#loading').modal('show');
-                        $.post("/sis/studios/func/process/remove_item.php", {
+                        $.post("/sis/face/func/process/remove_item.php", {
                             orders_specs_id: $(this).attr('orders-specs-id')
                         }, function () {
                             $('.set_receipt_holder').attr('orders-specs-id', '');
@@ -854,12 +856,12 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 }
             });
 
-            $('#send-order').click(function (e) {
-                if (!bool_receipt_holder) {
-                    e.preventDefault();
-                    alert('Select Yes/No Does this order include a Receipt Holder?');
-                }
-            });
+            // $('#send-order').click(function (e) {
+            //     if (!bool_receipt_holder) {
+            //         e.preventDefault();
+            //         alert('Select Yes/No Does this order include a Receipt Holder?');
+            //     }
+            // });
 
 
             $(this).on('click', '.add_count_increment_others', function () {
