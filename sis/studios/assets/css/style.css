@@ -3192,6 +3192,7 @@ main.customer-layout .wrapper {
   overflow: hidden;
 }
 
+
 .btn-custom-blue {
   height: 3.625rem;
   font-size: 1.125rem;
@@ -3229,7 +3230,7 @@ main.customer-layout .wrapper {
   justify-content: center;
   padding: 0 1rem;
   cursor: pointer;
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .btn-custom-white:focus {
@@ -3273,7 +3274,6 @@ main.customer-layout .wrapper {
   text-align: center;
 }
 
-
 .switch-color {
   display: flex;
   /* Ensure items are displayed in a row */
@@ -3283,7 +3283,6 @@ main.customer-layout .wrapper {
   overflow: hidden;
   /* Hide overflowing items */
 }
-
 
 /* card switch */
 .switch-color li {
@@ -3298,7 +3297,7 @@ main.customer-layout .wrapper {
 }
 
 .switch-color li::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   width: 20px;
@@ -3326,14 +3325,12 @@ main.customer-layout .wrapper {
   /* Keep it circular */
 }
 
-
 .switch-color .hidden {
   display: none;
   /* Hide items that are not visible */
 }
 
 .switch-color .more-item {
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3347,12 +3344,10 @@ main.customer-layout .wrapper {
   /* Remove the border when .more-item is active */
 }
 
-
-
 /* notification toast */
 
 .notification {
-  background-color: #9DE356;
+  background-color: #9de356;
   height: 48px;
   position: fixed;
   bottom: 0;
@@ -3367,7 +3362,6 @@ main.customer-layout .wrapper {
 }
 
 .notification-icon {
-
   height: 24px;
   width: 24px;
 }
@@ -3398,15 +3392,14 @@ main.customer-layout .wrapper {
   font-weight: bold;
 }
 
-.notification.hidden  {
+.notification.hidden {
   animation-name: fadeout;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  
 }
 
-.notification.show  {
+.notification.show {
   display: block;
   /* animation */
 
@@ -3414,12 +3407,11 @@ main.customer-layout .wrapper {
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-
 }
 
 @keyframes slidein {
   from {
-    transform: translate(-50% , 20px); /* Start from below */
+    transform: translate(-50%, 20px); /* Start from below */
     opacity: 0; /* Start invisible */
   }
   to {

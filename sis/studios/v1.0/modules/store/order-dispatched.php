@@ -2,11 +2,11 @@
 
 
 
-<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] !== 'YES') { ?>
+<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] !== 'YES'): ?>
     <?php include "./modules/store/access-denied.php"; ?>
 
-<?php } else { ?>
-    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+<?php else: ?>
+    <div class="mx-2">
 
         <div class="customized-card mt-4 w-100 p-4 ">
             <div>
@@ -62,7 +62,7 @@
                     <div class="my-4">
                         <div class="row no-gutters">
                             <div>
-                                <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image">
+                                <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" style="border-radius: 8px" alt="Product Image">
                             </div>
                             <div class="col-md-8 d-flex align-items-center">
                                 <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
@@ -131,13 +131,13 @@
             </a>
         </div>
 
-        <div class="alert alert-warning alert-dismissible fade show text-center border-0 mb-0" role="alert" style="background-color: #9DE356; color: #342C29; font-size: 18px; border-radius: 16px 16px 0 0; margin-top: 6rem;">
+
+        <div class="alert alert-warning alert-dismissible fade show text-center border-0 mb-0 " role="alert" style="background-color: #9DE356; color: #342C29; font-size: 18px; border-radius: 16px 16px 0 0; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; width: 575px;">
             Order has successfully been sent to Cashier
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <svg style="height: 24px; width: 24px" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#342C29" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12" />
-                </svg>
+                <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
             </button>
         </div>
+
     </div>
-<?php } ?>
+<?php endif; ?>

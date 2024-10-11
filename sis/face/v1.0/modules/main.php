@@ -31,19 +31,16 @@ if (!isset($_SESSION['user_login']['warehouse_code'])) {
 			for ($i = 0; $i < 1; $i++) {
 
 				$tempArray[$grabParams[$i]] = ${'result' . ($i + 1)};
-			}
-			;
+			};
 
 			$_SESSION['user_login']['warehouse_code'] = $tempArray['warehouse_code'];
-		}
-		;
+		};
 
 		mysqli_stmt_close($stmt);
 	} else {
 
 		echo mysqli_error($conn);
-	}
-	;
+	};
 }
 
 
@@ -166,11 +163,11 @@ switch ($page) {
 </div>
 
 <div id="admin-bar"
-	class="d-flex align-items-center <?= ($page == 'rate-us') ? 'justify-content-center' : 'justify-content-between' ?> <?= ($page == 'order-confirmation' || $page == 'cart' || $page == 'account-form' || $page == 'order-dispatched') ? 'order-confirmation' : '' ?>"
+	class="d-flex align-items-center <?= ($page == 'rate-us') ? 'justify-content-center' : 'justify-content-between' ?> <?= ($page == 'order-confirmation' || $page == 'cart' || $page == 'transactions' || $page == 'account-form' || $page == 'order-dispatched') ? 'order-confirmation' : '' ?>"
 	style="box-shadow: none;">
 
 	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES'): ?>
-		<?php if ($page != 'rate-us' && $page != 'account-form' && $page != 'cart' && $page != 'order-confirmation'): ?>
+		<?php if ($page != 'rate-us' && $page != 'account-form' && $page != 'cart' && $page != 'transactions' &&  $page != 'order-confirmation'): ?>
 			<div class="home">
 				<a href="#" class="prevent" id="exit_customer_page"><img
 						src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid"></a>
@@ -219,7 +216,7 @@ switch ($page) {
 
 		<?php if ($page == 'cart'): ?>
 			<div class="home">
-				<a  href="#" class="prevent" id="exit_customer_page" style="height: 32px ; width: 32px;"><img
+				<a href="#" class="prevent" id="exit_customer_page" style="height: 32px ; width: 32px;"><img
 						src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
 			</div>
 			<div class="account-name">
@@ -262,6 +259,8 @@ switch ($page) {
 				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
 						alt="account" class="img-fluid"></a>
 			</div>
+
+
 		<?php elseif ($page == 'cart'): ?>
 			<a href="./?page=select-store" class="exit-frame-selection" style="height: 32px ; width: 32px;"><img
 					src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
@@ -312,11 +311,11 @@ switch ($page) {
 		<?php
 
 		switch ($page) {
-			// assistant
+				// assistant
 			case 'store-home':
 				$custom_title = $arrTranslate[greetings()];
 				break;
-			// customer
+				// customer
 			case 'health-declaration-form':
 				$custom_title = 'Health Declaration Form';
 				break;
@@ -377,7 +376,7 @@ switch ($page) {
 			case 'updatedb':
 				$custom_title = 'Maintenance';
 				break;
-			// Default
+				// Default
 			default:
 				$custom_title = $page;
 		}
@@ -412,7 +411,7 @@ switch ($page) {
 					$step = '';
 			}
 
-			?>
+		?>
 
 			<div class="text-center">
 
@@ -528,8 +527,7 @@ switch ($page) {
 
 				$guestParam = "";
 				$guestVal = "regular";
-			}
-			;
+			};
 
 			?>
 
@@ -749,7 +747,7 @@ switch ($page) {
 
 							$selected = (in_array($value['code'], $getCollections)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-							?>
+						?>
 							<div class="col-6 mt-3">
 								<div class="my-collection btn <?= $selected ?>" collectionsData="<?= $value['code'] ?>">
 									<?= $value['name'] ?>
@@ -771,7 +769,7 @@ switch ($page) {
 
 							$selected = (in_array($value['code'], $getShapes)) ? 'btn-filter-selected' : 'btn-no-filter';
 
-							?>
+						?>
 
 							<div class="col-6 mt-3">
 								<div class="my-shapes btn <?= $selected ?>" shapesData="<?= $value['code'] ?>">
@@ -794,7 +792,7 @@ switch ($page) {
 
 							$selected = (in_array($value['color'], $getColors)) ? 'btn-' . $value['color'] : 'btn-no-filter';
 
-							?>
+						?>
 
 							<div class="col-6 mt-3">
 								<div class="my-color btn <?= $selected ?>" colorData="<?= $value['color'] ?>">

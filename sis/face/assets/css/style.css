@@ -2974,7 +2974,6 @@ main.customer-layout .wrapper {
 
 /* store pages */
 
-
 .page-select-store-studios .container,
 .page-select-antirad .container,
 .page-select-merch .container,
@@ -2995,16 +2994,15 @@ main.customer-layout .wrapper {
 .page-select-store .container,
 .page-select-store-all .container,
 .page-select-store-lips .container,
-.page-select-store-nails .container{
+.page-select-store-nails .container {
   height: calc(90vh - 90%);
   margin-top: 20px;
 }
 
-.page-order-confirmation .container{
+.page-order-confirmation .container {
   height: calc(90vh - 90%);
   margin-top: 80px;
 }
-
 
 .page-order-dispatched .container {
   height: calc(90vh - 90%);
@@ -3378,11 +3376,16 @@ main.customer-layout .wrapper {
   color: #342c29;
 }
 
+.custom-sub-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #342c29;
+}
 
 /* notification toast */
 
 .notification {
-  background-color: #9DE356;
+  background-color: #9de356;
   height: 48px;
   position: fixed;
   bottom: 0;
@@ -3397,7 +3400,6 @@ main.customer-layout .wrapper {
 }
 
 .notification-icon {
-
   height: 24px;
   width: 24px;
 }
@@ -3428,15 +3430,14 @@ main.customer-layout .wrapper {
   font-weight: bold;
 }
 
-.notification.hidden  {
+.notification.hidden {
   animation-name: fadeout;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  
 }
 
-.notification.show  {
+.notification.show {
   display: block;
   /* animation */
 
@@ -3444,12 +3445,11 @@ main.customer-layout .wrapper {
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-
 }
 
 @keyframes slidein {
   from {
-    transform: translate(-50% , 20px); /* Start from below */
+    transform: translate(-50%, 20px); /* Start from below */
     opacity: 0; /* Start invisible */
   }
   to {

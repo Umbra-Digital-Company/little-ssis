@@ -46,7 +46,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 		}
 	</style>
 
-	<div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel mt-4">
+	<div class="mx-2 mt-4">
 
 		<div class="row align-items-stretch row-tiles">
 			<div class="col-12 align-items-stretch">

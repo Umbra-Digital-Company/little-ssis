@@ -115,7 +115,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
 
-    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+    <div class="mx-2">
 
 
 
