@@ -18,7 +18,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 	include("./modules/includes/date_convert.php");
 
 
-	$itemsPerPage = 5; // Set how many items you want per page
+	$itemsPerPage = 10; // Set how many items you want per page
 	$currentPage = isset($_GET['ppage']) ? (int)$_GET['ppage'] : 1; // Get current page or default to 1
 	$totalItems = getTotalItems(); // Get total number of items
 	$totalPages = ceil($totalItems / $itemsPerPage); // Calculate total pages
@@ -26,6 +26,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 	$offset = ($currentPage - 1) * $itemsPerPage;
 
 	$arrForPayments = getForPayments($offset, $itemsPerPage);
+
 ?>
 
 
@@ -106,7 +107,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 										<td>
 											<div class="row text-nowrap">
 												<span class="col-12 custom-sub-subtitle" style="padding-bottom: 10px; color: #919191">
-													<?= cvdate3($payment['date_created']) ?>
+													<?= cvdate3($payment['adjusted_date']) ?>
 												</span>
 												<div class="col-12">
 													<span class="custom-title d-block underline" style="text-decoration: underline">
@@ -124,7 +125,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 												<div class="col-12" style="padding-bottom: 30px"></div>
 												<div class="col-12">
 													<span class="custom-sub-subtitle" style="font-size: 16px;">
-														<?= $payment['item_description'] ?> <?= $payment['product_code'] ?>
+														<?= $payment['item_name'] ?> <?= $payment['product_code'] ?>
 													</span>
 												</div>
 												<span class="col-12 custom-sub-subtitle mt-1" style="color: #919191">
@@ -136,7 +137,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 										<td>
 											<div class="col-12"></div>
 											<span class="custom-sub-subtitle" style="font-size: 16px; color: #919191">
-												<?= number_format($payment['price'], 2) ?>
+												<?= $payment['price'] ? number_format($payment['price'], 2) : '0.00' ?>
 											</span>
 										</td>
 									</tr>

@@ -261,6 +261,18 @@ switch ($page) {
 			</div>
 
 
+		<?php elseif ($page == 'transactions'): ?>
+			<a href="./?page=select-store" class="exit-frame-selection" style="height: 32px ; width: 32px;"><img
+					src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>
+			<div class="account-name">
+				<p class="h3 mb-0" style="color: #FFFFFF; font-weight: 700; font-size: 20px"><?= strtoupper("Transactions") ?>
+				</p>
+			</div>
+			<div class="account">
+				<a href="#" style="height: 32px ; width: 32px;"><img src="<?= get_url('images/icons') ?>/icon-menu-white.png"
+						alt="account" class="img-fluid"></a>
+			</div>
+
 		<?php elseif ($page == 'cart'): ?>
 			<a href="./?page=select-store" class="exit-frame-selection" style="height: 32px ; width: 32px;"><img
 					src="<?= get_url('images/icons') ?>/icon-left-arrow-white.png" alt="exit" class="img-fluid"></a>

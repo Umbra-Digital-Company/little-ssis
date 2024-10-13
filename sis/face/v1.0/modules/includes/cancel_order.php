@@ -31,7 +31,7 @@ if (isset($_POST['order_id']) && isset($_POST['po_number']) && isset($_POST['id'
 
     // $cancel_reason = $_POST['cancel_reason'] ?? "";
 
-    $query = "UPDATE orders_sunnies_studios
+    $query = "UPDATE orders_face_details
           SET `status` = 'cancelled', synched = 'y'
           WHERE order_id = ? AND po_number = ? AND id = ?";
 
