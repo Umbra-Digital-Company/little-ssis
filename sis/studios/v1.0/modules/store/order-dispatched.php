@@ -12,9 +12,9 @@
             <div>
                 <div class="d-flex justify-content-between align-content-center">
                     <p class="custom-title">Order Details</p>
-                    <svg style="width: 24px; height: 24px" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m18 15l-6-6l-6 6" />
-                    </svg>
+                    <div style="height: 24px; width: 24px; cursor: pointer" id="toggle-chevron">
+                        <img src="<?= get_url('images/icons') ?>/icon-down-chevron.png" alt="user" class="img-fluid">
+                    </div>
                 </div>
 
                 <?php
@@ -59,7 +59,7 @@
                     }
 
                 ?>
-                    <div class="my-4">
+                    <div class="my-4 order-item">
                         <div class="row no-gutters">
                             <div>
                                 <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" style="border-radius: 8px" alt="Product Image">
@@ -141,3 +141,32 @@
 
     </div>
 <?php endif; ?>
+
+
+<script>
+    document.getElementById('toggle-chevron').addEventListener('click', function() {
+        const orderItems = document.querySelectorAll('.order-item');
+        const isCollapsed = orderItems[1] && orderItems[1].style.display === 'none';
+
+
+        orderItems.forEach((item, index) => {
+            if (index !== 0) {
+                item.style.display = isCollapsed ? 'block' : 'none';
+            }
+        });
+
+
+        const chevronIcon = this.querySelector('img');
+        chevronIcon.src = isCollapsed ? '<?= get_url("images/icons") ?>/icon-down-chevron.png' : '<?= get_url("images/icons") ?>/icon-up-chevron.png';
+    });
+
+
+    // window.onload = function() {
+    //     const orderItems = document.querySelectorAll('.order-item');
+    //     orderItems.forEach((item, index) => {
+    //         if (index !== 0) {
+    //             item.style.display = 'none';
+    //         }
+    //     });
+    // };
+</script>
