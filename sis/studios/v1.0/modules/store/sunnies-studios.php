@@ -118,8 +118,8 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         /*.list-item.frame-grid {
-                                                                                                                                                                                                                                                                    padding-bottom: 0 !important;
-                                                                                                                                                                                                                                                                }*/
+                                                                                                                                                                                                                                                                            padding-bottom: 0 !important;
+                                                                                                                                                                                                                                                                        }*/
         #btn-filter {
             max-width: 111px;
             height: 40px;
@@ -797,18 +797,18 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         /* #toggleLayout {
-                                                                                min-width: 25px;
-                                                                                min-height: 25px;
-                                                                                margin: 0 10px 0 15px;
-                                                                                background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
-                                                                                background-repeat: no-repeat;
-                                                                                background-size: 25px;
-                                                                                background-position: center;
-                                                                            } */
+                                                                                        min-width: 25px;
+                                                                                        min-height: 25px;
+                                                                                        margin: 0 10px 0 15px;
+                                                                                        background-image: url(<?= get_url('images') ?>/icons/icon-grid-view.png);
+                                                                                        background-repeat: no-repeat;
+                                                                                        background-size: 25px;
+                                                                                        background-position: center;
+                                                                                    } */
         /* 
-                                #toggleLayout.false {
-                                    background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
-                                } */
+                                        #toggleLayout.false {
+                                            background-image: url(<?= get_url('images') ?>/icons/icon-list-secondary.png);
+                                        } */
 
 
         .product-details {
@@ -887,14 +887,17 @@ if (!isset($_SESSION['customer_id'])) {
         let arrShapes = <?= json_encode($getShapes) ?>;
         let arrCollections = <?= json_encode($getCollections) ?>;
         let queryProduct = <?= json_encode($arrProductsSortedToShow) ?>;
+
+        let cartCount = arrCart.length;
         // console.log(queryProduct);
         $(document).ready(function () {
-
-
+        
+            
 
             $('.packages-list').addClass('show');
 
             totalCount();
+            updateBag()
             $('#filter').on('click', function () {
                 $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function (d) {
                     overlayFilter(d);
@@ -1016,7 +1019,8 @@ if (!isset($_SESSION['customer_id'])) {
                     dataType: 'html',
                     success: function (response) {
                         openNotification();
-                        // auto-hide the notification after a few seconds
+                        cartCount += 1;                      
+                        updateBag()
                         setTimeout(function () {
                             closeNotification();
                         }, 3000); // 3 seconds
@@ -1265,6 +1269,7 @@ if (!isset($_SESSION['customer_id'])) {
                 }
                 value += ((arrCart[i].item_description.toLowerCase().indexOf('paper bag') == -1 && arrCart[i].item_description.toLowerCase().indexOf('sac') == -1 && arrCart[i].item_description.toLowerCase().indexOf('receipt') == -1) || parseFloat(arrCart[i].price) > 0) ? parseInt(arrCart[i].count) : 0;
             }
+            cartCount = value;
 
             $('.count').text(value);
         }
@@ -1424,22 +1429,27 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         //-----------bag icon show when populated
-        const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
-        const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
-        if (arrCart.length == 0) {
-            const button = document.getElementById('cart');
 
-            button.disabled = true;
-            button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                                                                                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+        function updateBag() {
+            const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+            const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+            if (cartCount == 0) {
+                const button = document.getElementById('cart');
 
-        } else {
-            const button = document.getElementById('cart');
-            button.disabled = false;
-            button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                button.disabled = true;
+                button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                                                                                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
 
+            } else {
+                const button = document.getElementById('cart');
+                button.disabled = false;
+                button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                                                                                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${cartCount})`;
+
+            }
         }
+
+
     </script>
 
 
