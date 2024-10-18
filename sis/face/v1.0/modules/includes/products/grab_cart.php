@@ -65,7 +65,7 @@
                         o.order_id = "'.$order_no_Cart.'"
                             AND os.status != "cancelled"
                     GROUP BY 
-                        pr.item_code, os.product_upgrade ORDER BY os.id ASC';
+                        pr.item_code, os.product_upgrade';
 
 
     $grabParamsQF = array(

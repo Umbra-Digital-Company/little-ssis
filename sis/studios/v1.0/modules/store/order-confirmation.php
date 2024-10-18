@@ -64,52 +64,59 @@
 </style>
 
 
-<?php include "./modules/includes/grab_product_studios.php"; ?>
+
 <?php
+include "./modules/includes/grab_product_studios.php";
 include "./modules/includes/products/packaging_list.php";
-if (!isset($_SESSION['customer_id'])) { ?>
+
+if (!isset($_SESSION['customer_id'])): ?>
 
     <div class="wrapper">
         <p class="text-center font-bold h2 pt-3 pb-3"><?= $arrTranslate['Complete step 1 to proceed'] ?></p>
         <div class="text-center mt-4">
-            <a href="/sis/studios/v1.0/?page=store-home"><button class="btn btn-primary"><?= $arrTranslate['Go to step 1'] ?></button></a>
+            <a href="/sis/studios/v1.0/?page=store-home">
+                <button class="btn btn-primary"><?= $arrTranslate['Go to step 1'] ?></button>
+            </a>
         </div>
     </div>
 
-<?php } elseif (count($arrCart) == 0) { ?>
+<?php elseif (count($arrCart) == 0): ?>
 
     <div class="wrapper">
         <p class="text-center font-bold h2 pt-3 pb-3">Complete step 2 to proceed</p>
         <div class="text-center mt-4">
-            <a href="./?page=select-store-studios"><button class="btn btn-primary">go to step 2</button></a>
+            <a href="./?page=select-store-studios">
+                <button class="btn btn-primary">Go to step 2</button>
+            </a>
         </div>
     </div>
 
-<?php } elseif (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] !== 'YES') { ?>
+<?php elseif (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] !== 'YES'): ?>
+
     <?php include "./modules/store/access-denied.php"; ?>
 
-<?php } else { ?>
+<?php else: ?>
 
 
     <?php
 
-        function getExistingPaperBagSac($arrParams, $arrCart)
-        {
-            $arrExist = [];
-            foreach ($arrParams as $arrParam) {
-                foreach ($arrCart as $cartItem) {
-                    if (trim($arrParam["product_code"]) == trim($cartItem["product_upgrade"])) {
-                        $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
-                        break;
-                    }
-                    // if (trim($arrParam["product_code"]) == "P1009-34") {
-                    //     $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
-                    //     break;
-                    // }
+    function getExistingPaperBagSac($arrParams, $arrCart)
+    {
+        $arrExist = [];
+        foreach ($arrParams as $arrParam) {
+            foreach ($arrCart as $cartItem) {
+                if (trim($arrParam["product_code"]) == trim($cartItem["product_upgrade"])) {
+                    $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
+                    break;
                 }
+                // if (trim($arrParam["product_code"]) == "P1009-34") {
+                //     $arrExist[$arrParam["product_code"]] = $cartItem["group_orders_specs_id"];
+                //     break;
+                // }
             }
-            return $arrExist;
         }
+        return $arrExist;
+    }
     ?>
 
 
@@ -118,12 +125,11 @@ if (!isset($_SESSION['customer_id'])) { ?>
     <div class="mx-2">
 
 
-
         <div class="custom-subtitle my-4">
             Total order
             <span class="custom-title">
                 <?= count(array_filter($arrCart, function ($item) {
-                    return $item['price'] > 0;
+                    return $item['dispatch_type'] !== 'packaging';
                 })) ?>
             </span>
 
@@ -176,8 +182,8 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         </div>
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
-                                <p class="custom-title"><?= $item['style'] ?></p>
-                                <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= $item['color'] ?></p>
+                                <p class="custom-title"><?= ucwords($item['style']) ?></p>
+                                <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= ucwords($item['color']) ?></p>
                                 <p class="custom-subtitle" style="color: #919191;">
                                     <?=
                                     (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs')
@@ -219,14 +225,16 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                 if (count($arrExistPBag) == 0) {
                 ?>
-                    <div class="product-section d-flex align-items-center justify-content-between gap-3" style="gap: 16px;">
-                        <div class="d-flex justify-content-between">
-                            <div class="form-group">
-                                <select class="form-control add_paper " id="add_paper">
+                    <div class="product-section d-flex align-items-center" style="gap: 16px;">
+                        <div class="d-flex justify-content-between flex-grow-1">
+                            <div class="form-group w-100">
+                                <select class="form-control add_paper" id="add_paper">
                                     <option value="">Additional paper bag</option>
-                                    <?php for ($i = 0; $i < count($arrPaperBag); $i++) { ?>
-                                        <option value="<?= $arrPaperBag[$i]['product_code'] ?>"><?= $arrPaperBag[$i]['item_name'] ?></option>
-                                    <?php } ?>
+                                    <?php foreach ($arrPaperBag as $paperBag): ?>
+                                        <option value="<?= htmlspecialchars($paperBag['product_code']) ?>">
+                                            <?= htmlspecialchars($paperBag['item_name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
 
                             </div>
@@ -235,14 +243,25 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                         <div class="d-flex align-items-center justify-content-center count_item">
                             <div class="button-container">
-                                <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="" value="-">
+                                <!-- <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="" value="-"> -->
+                                <button type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id=""
+                                    style="height: 40px; width: 48px; background: #fff;">
+                                    <img src="<?= get_url('images/icons') ?>/icon-decrement.png" alt="minus"
+                                        style="height: 24px; width: 24px;">
+                                </button>
                             </div>
+
 
                             <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent" group-orders-specs-id="" value="0" readonly>
 
 
                             <div class="button-container">
-                                <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="" value="+">
+                                <!-- <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="" value="+"> -->
+                                <button type="button" class="add_count_increment_pbag custom-button"
+                                    style="height: 40px; width: 48px; background: #fff;">
+                                    <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="add"
+                                        style="height: 24px; width: 24px;">
+                                </button>
                             </div>
                         </div>
 
@@ -262,10 +281,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             }
                         }
                     ?>
-                        <div class="product-section d-flex align-items-center justify-content-between" style="gap: 16px;">
-                            <div class="d-flex justify-content-between">
-                                <div class="form-group ">
-                                    <select class="form-control add_paper" id="add_paper">
+                        <div class="product-section d-flex align-items-center" style="gap: 16px;">
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="form-group w-100">
+                                    <select class="form-control add_paper " id="add_paper">
                                         <option value="<?= $key ?>"><?= $product_name ?></option>
                                     </select>
                                 </div>
@@ -274,13 +293,23 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                             <div class="d-flex align-items-center justify-content-center count_item">
                                 <div class="button-container">
-                                    <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="-">
+                                    <!-- <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="-"> -->
+                                    <button type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>"
+                                        style="height: 40px; width: 48px; background: #fff;">
+                                        <img src="<?= get_url('images/icons') ?>/icon-decrement.png" alt="minus"
+                                            style="height: 24px; width: 24px;">
+                                    </button>
                                 </div>
 
                                 <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent" group-orders-specs-id="" value="<?= $countSelected ?>" readonly>
 
                                 <div class="button-container">
-                                    <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="+">
+                                    <!-- <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>" value="+"> -->
+                                    <button type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id="<?= implode(",", $groupSelected) ?>"
+                                        style="height: 40px; width: 48px; background: #fff;">
+                                        <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="add"
+                                            style="height: 24px; width: 24px;">
+                                    </button>
                                 </div>
                             </div>
 
@@ -307,6 +336,8 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
             </div>
         </div>
+
+
 
         <div class="card mt-3 card-sac">
 
@@ -623,8 +654,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
             });
 
-            $(this).on('click', '.add_count_increment_pbag', function() {
-                console.log("test")
+
+
+
+            $(document).on('click', '.add_count_increment_pbag', function() {
                 let count_num_val = 0;
                 $('.count_num_pbag').each(function() {
                     count_num_val += parseInt($(this).val());
@@ -634,38 +667,42 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     alert('Please select paper bag');
                     return false;
                 }
-                $('#loading').modal('show');
+
+                // $('#loading').modal('show');
                 if (count_num_val >= total_count) {
                     if (confirm('Your about to exceed the total count of frames.')) {
 
                         _this = $(this);
-                        arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
+                        // arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
+                        let groupOrdersSpecsIdAttr = $(this).attr('group-orders-specs-id');
+                        let arrOrdersSpescId = groupOrdersSpecsIdAttr ? groupOrdersSpecsIdAttr.split(",") : [];
+                        console.log("test 1", arrOrdersSpescId);
 
-                        processItem = '';
-                        attr = $(this).attr('merch_item');
+                        // processItem = '';
+                        // attr = $(this).attr('merch_item');
 
-                        // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
-                        $.post("/sis/studios/func/process/add_to_bag_merch.php", {
-                            studios_product_code: productSelected,
-                            paper_bag: true
-                        }, function(result) {
-                            //console.log(result);
-                            arrOrdersSpescId.push(result);
-                            arrOrdersSpescId = arrOrdersSpescId.join(",");
-                            _this.attr('group-orders-specs-id', arrOrdersSpescId);
-                            _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_pbag').attr('group-orders-specs-id', arrOrdersSpescId);
-                            current_value = _this.parent().parent().find('.count_num_pbag').val();
-                            _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
+                        // // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
+                        // $.post("/sis/studios/func/process/add_to_bag_merch.php", {
+                        //     studios_product_code: productSelected,
+                        //     paper_bag: true
+                        // }, function(result) {
+                        //     //console.log(result);
+                        //     arrOrdersSpescId.push(result);
+                        //     arrOrdersSpescId = arrOrdersSpescId.join(",");
+                        //     _this.attr('group-orders-specs-id', arrOrdersSpescId);
+                        //     _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_pbag').attr('group-orders-specs-id', arrOrdersSpescId);
+                        //     current_value = _this.parent().parent().find('.count_num_pbag').val();
+                        //     _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
 
-                            _this.parents('.product-section').find('select option').each(function() {
-                                if ($(this).val() != productSelected) {
-                                    $(this).remove();
-                                }
-                            });
-                            setTimeout(() => {
-                                $('#loading').modal('hide');
-                            }, 200);
-                        });
+                        //     _this.parents('.product-section').find('select option').each(function() {
+                        //         if ($(this).val() != productSelected) {
+                        //             $(this).remove();
+                        //         }
+                        //     });
+                        //     setTimeout(() => {
+                        //         $('#loading').modal('hide');
+                        //     }, 200);
+                        // });
                     } else {
                         setTimeout(() => {
                             $('#loading').modal('hide');
@@ -673,32 +710,34 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     }
                 } else {
                     _this = $(this);
-                    arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
+                    let groupOrdersSpecsIdAttr = $(this).attr('group-orders-specs-id');
+                    let arrOrdersSpescId = groupOrdersSpecsIdAttr ? groupOrdersSpecsIdAttr.split(",") : [];
+
+                    console.log("test 2", arrOrdersSpescId);
 
                     processItem = '';
                     attr = $(this).attr('merch_item');
 
-                    // For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
-                    $.post("/sis/studios/func/process/add_to_bag_merch.php", {
-                        studios_product_code: productSelected,
-                        paper_bag: true
-                    }, function(result) {
-                        //console.log(result);
-                        arrOrdersSpescId.push(result);
-                        arrOrdersSpescId = arrOrdersSpescId.join(",");
-                        _this.attr('group-orders-specs-id', arrOrdersSpescId);
-                        _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_pbag').attr('group-orders-specs-id', arrOrdersSpescId);
-                        current_value = _this.parent().parent().find('.count_num_pbag').val();
-                        _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
-                        _this.parents('.product-section').find('select option').each(function() {
-                            if ($(this).val() != productSelected) {
-                                $(this).remove();
-                            }
-                        });
-                        setTimeout(() => {
-                            $('#loading').modal('hide');
-                        }, 200);
-                    });
+                    // $.post("/sis/studios/func/process/add_to_bag_merch.php", {
+                    //     studios_product_code: productSelected,
+                    //     paper_bag: true
+                    // }, function(result) {
+                    //     //console.log(result);
+                    //     arrOrdersSpescId.push(result);
+                    //     arrOrdersSpescId = arrOrdersSpescId.join(",");
+                    //     _this.attr('group-orders-specs-id', arrOrdersSpescId);
+                    //     _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_pbag').attr('group-orders-specs-id', arrOrdersSpescId);
+                    //     current_value = _this.parent().parent().find('.count_num_pbag').val();
+                    //     _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
+                    //     _this.parents('.product-section').find('select option').each(function() {
+                    //         if ($(this).val() != productSelected) {
+                    //             $(this).remove();
+                    //         }
+                    //     });
+                    //     setTimeout(() => {
+                    //         $('#loading').modal('hide');
+                    //     }, 200);
+                    // });
                 }
             });
 
@@ -1080,4 +1119,4 @@ if (!isset($_SESSION['customer_id'])) { ?>
     </script>
 
 
-<?php } ?>
+<?php endif; ?>

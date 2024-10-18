@@ -675,7 +675,7 @@ function setPoNumberAdd($order_no_Cart)
                         o.order_id = "' . $order_no_Cart . '"
                             AND os.status != "cancelled"
                     GROUP BY 
-                        pr.product_code, os.product_upgrade ORDER BY os.id ASC';
+                        pr.product_code, os.product_upgrade';
 
     $grabParamsQF = array(
         "count",

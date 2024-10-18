@@ -6,7 +6,11 @@
     <div class="mx-2">
 
         <div class="custom-subtitle my-4">
-            Total items <span class="custom-title"><?= count($arrCart); ?></span>
+            Total items <span class="custom-title">
+                <?= count(array_filter($arrCart, function ($item) {
+                    return $item['dispatch_type'] !== 'packaging';
+                })) ?>
+            </span>
         </div>
         <?php foreach ($arrCart as $order) :
 
@@ -42,16 +46,27 @@
                                 <p class="custom-subtitle" style="color: #919191;">
                                     <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $order['price'] ?>
                                 </p>
-                                <div class="d-flex align-items-center justify-content-left mx-3">
-                                    <div class="button-container">
-                                        <input type="button" class="count_decrement custom-button" price="<?= $order['price'] ?>" group-orders-specs-id="<?= $order['group_orders_specs_id'] ?>" value="-">
+
+
+                                <div class="d-flex align-items-center mx-1 mt-2">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <button type="button" id="btn-decrement" class="count_decrement custom-button" price="<?= $order['price'] ?>" group-orders-specs-id="<?= $order['group_orders_specs_id'] ?>"
+                                            style="height: 40px; width: 48px; background: #fff;">
+                                            <img src="<?= get_url('images/icons') ?>/icon-decrement.png" alt="minus"
+                                                style="height: 24px; width: 24px;">
+                                        </button>
                                     </div>
 
-                                    <input type="text" style="font-size: 16px;" class="form-control count_num bg-transparent mx-3" group-orders-specs-id="<?= $order['group_orders_specs_id'] ?>" value="<?= $order['count'] ?>" readonly>
+                                    <input type="text" class="form-control count_num" value="<?= $order['count'] ?>"
+                                        style="background-color: transparent; border: 0; font-size: 16px; text-align: center; width: 50px;"
+                                        readonly>
 
-
-                                    <div class="button-container">
-                                        <input type="button" class="count_increment custom-button" <?= $merchItem ?> price="<?= $order['price'] ?>" group-orders-specs-id="<?= $order['group_orders_specs_id'] ?>" product-code="<?= $order['product_code'] ?>" value="+">
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" id="btn-increment" class="count_increment custom-button" <?= $merchItem ?> price="<?= $order['price'] ?>" group-orders-specs-id="<?= $order['group_orders_specs_id'] ?>" product-code="<?= $order['product_code'] ?>"
+                                            style="height: 40px; width: 48px; background: #fff;">
+                                            <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="add"
+                                                style="height: 24px; width: 24px;">
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +76,7 @@
                     </div>
                     <div class="d-flex align-items-center mx-2">
                         <button class="btn remove_item bg-transparent d-flex" orders-specs-id=<?= $order['group_orders_specs_id'] ?> style="cursor: pointer;">
-                            <img src="/sis/studios/assets/images/icons/icon-delete.svg" alt="plus" class="btn-custom-svg">
+                            <img src="<?= get_url('images/icons') ?> /icon-delete.svg" alt="remove" class="btn-custom-svg">
                         </button>
 
                     </div>
@@ -69,14 +84,18 @@
             </div>
         <?php endforeach; ?>
 
-        <a href="/sis/face/v1.0/?page=select-store" class="btn-custom-white w-100 mt-3 d-flex align-items-center justify-content-center">
-            Add Item
-            <img src="/sis/face/assets/images/icons/add-circle-plus.svg" alt="plus" class="btn-custom-svg">
-        </a>
+        <?php if (count($arrCart) > 0): ?>
 
-        <a href="?page=order-confirmation&bpage=<?= $_GET['page'] ?>" class="btn-custom-blue w-100 mt-3 d-flex align-items-center justify-content-center">
-            Checkout
-        </a>
+            <a href="/sis/face/v1.0/?page=select-store" class="btn-custom-white w-100 mt-3 d-flex align-items-center justify-content-center">
+                Add Item
+                <img src="<?= get_url('images/icons') ?> /icon-increment.png" alt="plus" class="btn-custom-svg">
+            </a>
+
+            <a href="?page=order-confirmation&bpage=<?= $_GET['page'] ?>" class="btn-custom-blue w-100 mt-3 d-flex align-items-center justify-content-center">
+                Checkout
+            </a>
+
+        <?php endif ?>
 
     </div>
 
@@ -86,27 +105,34 @@
             _this = $(this);
 
             current_value = $(this).parent().parent().find('.count_num').val();
-            if (current_value > 1) {
-                $(this).parent().parent().find('.count_num').val(parseInt(current_value) - 1);
-                arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
-                arrOrdersSpescIdRemove = arrOrdersSpescId[arrOrdersSpescId.length - 1];
+            let groupOrdersSpecsId = $(this).attr('group-orders-specs-id');
+
+            if (current_value > 1 && groupOrdersSpecsId) {
+
+                let arrOrdersSpescId = groupOrdersSpecsId.split(",");
+                const arrOrdersSpescIdRemove = arrOrdersSpescId.pop();
+
+                const new_value = current_value - 1;
+                _this.parent().parent().find('.count_num').val(new_value);
+                _this.attr('group-orders-specs-id', arrOrdersSpescId.join(","));
+
+                const index = arrCart.findIndex(item => item.group_orders_specs_id === groupOrdersSpecsId);
+                if (index !== -1) {
+                    arrCart[index].count = new_value;
+                    arrCart[index].group_orders_specs_id = arrOrdersSpescId.join(",");
+                }
 
                 $.post("/sis/face/func/process/remove_item.php", {
                     orders_specs_id: arrOrdersSpescIdRemove
-                }, function() {
-
-                    arrOrdersSpescId.pop();
-                    arrOrdersSpescId = arrOrdersSpescId.join(",");
-                    index = arrCart.findIndex(item => item.group_orders_specs_id === _this.attr('group-orders-specs-id'));
-                    arrCart[index].group_orders_specs_id = arrOrdersSpescId;
-                    arrCart[index].orders_specs_id = arrOrdersSpescId;
-                    arrCart[index].count = arrCart[index].count - 1;
-                    _this.attr('group-orders-specs-id', arrOrdersSpescId);
-                    _this.parent().parent().find('span').eq(1).find('.count_increment').attr('group-orders-specs-id', arrOrdersSpescId);
-                    _this.parent().parent().parent().parent().parent().find('.count_times').text(arrCart[index].count);
-                    t_price = parseFloat(arrCart[index].count) * parseInt(_this.attr('price'));
-                    _this.parent().parent().parent().parent().parent().find('.t_price').text(t_price);
-                    totalCount();
+                }).fail(function() {
+                    alert("Error while removing the item");
+                    $parent.find('.count_num').val(current_value);
+                    arrOrdersSpescId.push(arrOrdersSpescIdRemove);
+                    _this.attr('group-orders-specs-id', arrOrdersSpescId.join(","));
+                    if (index !== -1) {
+                        arrCart[index].count = current_value;
+                        arrCart[index].group_orders_specs_id = arrOrdersSpescId.join(",");
+                    }
                 });
 
             }
@@ -115,38 +141,39 @@
 
         $(document).on('click', '.count_increment', function() {
             _this = $(this);
-            arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
 
-            processItem = '';
-            attrProdItem = $(this).attr('prod-item');
+            const current_value = $(this).parent().parent().find('.count_num').val();
+            let groupOrdersSpecsId = $(this).attr('group-orders-specs-id');
 
-            //    For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
-            itemProd = (attrProdItem != 'frame') ? '_' + attrProdItem : '';
-            $.post("/sis/face/func/process/add_to_bag" + itemProd + ".php", {
+            if (groupOrdersSpecsId) {
+                let arrOrdersSpescId = groupOrdersSpecsId.split(",");
+                const attrProdItem = $(this).attr('prod-item');
+                const itemProd = (attrProdItem != 'frame') ? '_' + attrProdItem : '';
+
+                const new_value = parseInt(current_value) + 1;
+                _this.parent().parent().find('.count_num').val(new_value);
+
+                $.post("/sis/face/func/process/add_to_bag" + itemProd + ".php", {
                     studios_product_code: _this.attr('product-code')
-                },
-                function(result) {
-                    //console.log(result);
+                }, function(result) {
+
                     arrOrdersSpescId.push(result);
-                    arrOrdersSpescId = arrOrdersSpescId.join(",");
-                    index = arrCart.findIndex(item => item.group_orders_specs_id === _this.attr('group-orders-specs-id'));
-                    // console.log(index, "test")
-                    arrCart[index].group_orders_specs_id = arrOrdersSpescId;
-                    arrCart[index].orders_specs_id = arrOrdersSpescId;
-                    arrCart[index].count = parseInt(arrCart[index].count) + 1;
-                    _this.attr('group-orders-specs-id', arrOrdersSpescId);
-                    _this.parent().parent().find('span').eq(0).find('.count_decrement').attr('group-orders-specs-id', arrOrdersSpescId);
-                    current_value = _this.parent().parent().find('.count_num').val();
-                    _this.parent().parent().find('.count_num').val(parseInt(current_value) + 1);
-                    _this.parent().parent().parent().parent().parent().find('.count_times').text(arrCart[index].count);
-                    t_price = parseFloat(arrCart[index].count) * parseInt(_this.attr('price'));
-                    _this.parent().parent().parent().parent().parent().find('.t_price').text(t_price);
-                    totalCount();
+
+                    const updatedOrdersSpecsId = arrOrdersSpescId.join(",");
+                    _this.attr('group-orders-specs-id', updatedOrdersSpecsId);
+
+                    const index = arrCart.findIndex(item => item.group_orders_specs_id === groupOrdersSpecsId);
+                    if (index !== -1) {
+                        arrCart[index].count = new_value;
+                        arrCart[index].group_orders_specs_id = updatedOrdersSpecsId;
+                    }
                 });
+            }
         });
 
+
         $(document).on("click", ".remove_item", function() {
-            let orderSpecsId = $(this).attr('orders-specs-id');
+            const orderSpecsId = $(this).attr('orders-specs-id');
 
             $.post("/sis/face/func/process/remove_item.php", {
                 orders_specs_id: orderSpecsId
