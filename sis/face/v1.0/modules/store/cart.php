@@ -3,7 +3,7 @@
     ?>
 
 
-    <div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel">
+    <div class="mx-2">
 
         <div class="custom-subtitle my-4">
             Total items <span class="custom-title"><?= count($arrCart); ?></span>

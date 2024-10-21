@@ -223,7 +223,7 @@
 include("./modules/includes/grab_dispatch_order.php");
 ?>
 
-<div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel mt-4">
+<div class="mx-2 mt-4">
     <!-- Search Bar -->
     <form class="search-form" id="search-form" method="GET" action="">
         <div class="search-input-container">
@@ -328,22 +328,66 @@ include("./modules/includes/grab_dispatch_order.php");
                                 <?php
 
                                 $storeType = htmlspecialchars($customer['store_type']);
-                                $badgeClass = 'badge-merch';
-                                $displayText = 'Merch';
-
+                                $badgeClass = '';
+                                $displayText = '';
 
                                 switch ($storeType) {
-                                    case 'DCGC0028':
+                                    case 'DCGC0005':
+                                    case 'DCGC0016':
                                         $badgeClass = 'badge-antirad';
-                                        $displayText = 'Anti-Rad';
+                                        $displayText = 'Brows';
                                         break;
                                     case 'DCGC0003':
+                                    case 'DCGC0006':
+                                    case 'DCGC0001':
+                                    case 'DCGC0039':
                                         $badgeClass = 'badge-sunnies';
-                                        $displayText = 'Sunnies Studios';
+                                        $displayText = 'Lips';
                                         break;
-                                    case 'DCGC0034':
+                                    case 'DCGC0036':
+                                    case 'DCGC0040':
+                                    case 'DCGC0042':
+                                    case 'DCGC0052':
+                                    case 'DCGC0053':
                                         $badgeClass = 'badge-readers';
-                                        $displayText = 'Readers';
+                                        $displayText = 'Face';
+                                        break;
+                                    case 'DCGC0047':
+                                    case 'DCGC0029':
+                                    case 'DCGC0032':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Eyes';
+                                        break;
+                                    case 'DCGC0031':
+                                    case 'DCGC0030':
+                                    case 'DCGC0038':
+                                    case 'DCGC0026':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Skin';
+                                        break;
+                                    case 'DCGC0017':
+                                    case 'DCGC0020':
+                                    case 'DCGC0024':
+                                    case 'DCGC0004':
+                                    case 'DCGC0019':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Cheeks';
+                                        break;
+                                    case 'DCGC0025':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Nails';
+                                        break;
+                                    case 'DCGC0023':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Sets';
+                                        break;
+                                    case 'DCGC0043':
+                                    case 'DCGC0009':
+                                    case 'DCGC0014':
+                                    case 'DCGC0034':
+                                    case 'DCGC0011':
+                                        $badgeClass = 'badge-readers';
+                                        $displayText = 'Merch';
                                         break;
                                 }
                                 ?>

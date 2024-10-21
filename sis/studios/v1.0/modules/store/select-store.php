@@ -470,29 +470,10 @@
         let arrFreeItemCount = <?= json_encode($arrFreeItemCount) ?>;
         let arrMerchCount = <?= json_encode($arrMerchCount) ?>;
         let arrMerchSorted = <?= json_encode($arrMerchSorted) ?>;
-
+        let cartCount = arrCart.length;
 
         $(document).ready(function() {
 
-
-            const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
-            const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
-
-
-            if (arrCart.length == 0) {
-                const button = document.getElementById('bag-button');
-
-                button.disabled = true;
-                button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
-
-            } else {
-                const button = document.getElementById('bag-button');
-                button.disabled = false;
-                button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
-
-            }
 
 
 
@@ -507,6 +488,7 @@
             $('.packages-list').addClass('show');
 
             totalCount();
+            updateBag()
             $('#filter').on('click', function() {
                 $('.ssis-overlay').load("/ssis/modules/store/studios-filter.php", function(d) {
                     overlayFilter(d);
@@ -739,6 +721,8 @@
                 }, 2000);
             });
 
+            
+
         });
 
         var twoColumn = true;
@@ -817,6 +801,7 @@
                 value += ((arrCart[i].item_description.toLowerCase().indexOf('paper bag') == -1 && arrCart[i].item_description.toLowerCase().indexOf('sac') == -1 && arrCart[i].item_description.toLowerCase().indexOf('receipt') == -1) || parseFloat(arrCart[i].price) > 0) ? parseInt(arrCart[i].count) : 0;
             }
 
+            cartCount = value;
             $('.count').text(value);
         }
         const showAvailableFrame = () => {
@@ -861,10 +846,27 @@
             });
         }
 
-        // $('.select-link').click(function (e) {
-        //     e.preventDefault();
-        //     $('#loading').modal('show');
-        //     window.location = $(this).attr('href');
-        // });
+       
+        function updateBag() {
+            const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+            const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+
+
+            if (cartCount == 0) {
+                const button = document.getElementById('bag-button');
+
+                button.disabled = true;
+                button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+
+            } else {
+                const button = document.getElementById('bag-button');
+                button.disabled = false;
+                button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${cartCount})`;
+
+            }
+        }
+
     </script>
 <?php } ?>

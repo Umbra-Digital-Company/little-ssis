@@ -85,26 +85,30 @@ $query = '
         os.status,
         os.status_date,
         os.order_id,
-        pr.item_name,
-        pr.data_cgc,
+        ps.item_name,
+        ps.data_cgc,
         os.po_number,
         os.profile_id,
         os.orders_specs_id
     FROM
         profiles_info p
-    INNER JOIN
-        orders_sunnies_studios os ON os.profile_id = p.profile_id
-    LEFT JOIN
-        poll_51_studios_new pr ON pr.product_code = os.product_code
+    LEFT JOIN 
+        orders_face_details os ON os.profile_id = p.profile_id
+    LEFT JOIN 
+        orders_face o ON o.order_id = os.order_id
+    LEFT JOIN 
+        poll_51_face_new ps ON ps.item_code = os.product_code
     WHERE
         (CONCAT(p.first_name, " ", p.last_name) LIKE ? 
-        OR pr.item_name LIKE ? 
+        OR ps.item_name LIKE ? 
         OR os.order_id LIKE ?)
         AND os.status IN ("for payment", "paid", "cancelled", "returned")
     ORDER BY
         os.status_date DESC
     LIMIT ? OFFSET ?
 ';
+
+
 
 $grabParams = array(
     'id',
@@ -152,18 +156,21 @@ function getTotalResults($conn, $searchTerm)
     $countQuery = '
         SELECT COUNT(*) AS total
         FROM profiles_info p
-        INNER JOIN orders_sunnies_studios os ON os.profile_id = p.profile_id
-        LEFT JOIN poll_51_studios_new pr ON pr.product_code = os.product_code
-        WHERE CONCAT(p.first_name, " ", p.last_name) LIKE ? 
-           OR pr.item_name LIKE ? 
-           OR os.order_id LIKE ?
+        LEFT JOIN orders_face_details os ON os.profile_id = p.profile_id
+        LEFT JOIN users u ON u.id = p.sales_person
+        LEFT JOIN orders_face o ON o.order_id = os.order_id
+        LEFT JOIN poll_51_face ps ON ps.item_code = os.product_code
+        WHERE (CONCAT(p.first_name, " ", p.last_name) LIKE ? 
+        OR ps.item_name LIKE ? 
+        OR os.order_id LIKE ?)
+        AND os.status IN ("for payment", "paid", "cancelled", "returned")
     ';
 
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $countQuery)) {
         echo mysqli_error($conn);
-        return 0; // Return 0 or handle the error appropriately
+        return 0;
     }
 
     mysqli_stmt_bind_param($stmt, 'sss', $searchTerm, $searchTerm, $searchTerm);
@@ -172,5 +179,5 @@ function getTotalResults($conn, $searchTerm)
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
 
-    return (int)$totalResults; // Ensure the return value is an integer
+    return (int)$totalResults;
 }

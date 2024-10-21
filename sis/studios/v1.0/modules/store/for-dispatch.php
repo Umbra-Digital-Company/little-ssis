@@ -217,7 +217,7 @@
 include("./modules/includes/grab_dispatch_order.php");
 ?>
 
-<div class="col-lg-12 col-md-12 col-xs-12 hidden-xs product-panel mt-4">
+<div class="mx-2 mt-4">
     <!-- Search Bar -->
     <form class="search-form mb-4" id="search-form" method="GET" action="">
         <div class="search-input-container">

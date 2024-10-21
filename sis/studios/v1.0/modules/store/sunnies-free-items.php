@@ -882,6 +882,7 @@ if (!isset($_SESSION['customer_id'])) {
         let arrCollections = <?= json_encode($getCollections) ?>;
         let queryProduct = <?= json_encode($arrProductsSortedToShow) ?>;
         // console.log(queryProduct);
+        let cartCount = arrCart.length;
         $(document).ready(function() {
 
 
@@ -1001,6 +1002,8 @@ if (!isset($_SESSION['customer_id'])) {
                     success: function(response) {
 
                         openNotification();
+                        cartCount += 1;                      
+                        updateBag()
                         // auto-hide the notification after a few seconds
                         setTimeout(function() {
                             closeNotification();
@@ -1232,9 +1235,11 @@ if (!isset($_SESSION['customer_id'])) {
                 if (arrCart[i].dispatch_type == 'packaging') {
                     continue;
                 }
+                
                 value += ((arrCart[i].item_description.toLowerCase().indexOf('paper bag') == -1 && arrCart[i].item_description.toLowerCase().indexOf('sac') == -1 && arrCart[i].item_description.toLowerCase().indexOf('receipt') == -1) || parseFloat(arrCart[i].price) > 0) ? parseInt(arrCart[i].count) : 0;
             }
-
+            cartCount = value;
+            updateBag();
             $('.count').text(value);
         }
         const showAvailableFrame = () => {
@@ -1393,21 +1398,23 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         //-----------bag icon show when populated
-        const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
-        const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
-        if (arrCart.length == 0) {
-            const button = document.getElementById('cart');
+        function updateBag() {
+            const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+            const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+            if (cartCount == 0) {
+                const button = document.getElementById('cart');
 
-            button.disabled = true;
-            button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                button.disabled = true;
+                button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                                                                                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
 
-        } else {
-            const button = document.getElementById('cart');
-            button.disabled = false;
-            button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+            } else {
+                const button = document.getElementById('cart');
+                button.disabled = false;
+                button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                                                                                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${cartCount})`;
 
+            }
         }
     </script>
 
