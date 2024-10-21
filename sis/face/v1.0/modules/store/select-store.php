@@ -1275,11 +1275,11 @@
             });
         }
 
-        $('.select-link').click(function(e) {
-            e.preventDefault();
-            $('#loading').modal('show');
-            window.location = $(this).attr('href');
-        });
+        // $('.select-link').click(function(e) {
+        //     e.preventDefault();
+        //     $('#loading').modal('show');
+        //     window.location = $(this).attr('href');
+        // });
 
         const rebindMoreItemEvents = () => {
             const moreItems = document.querySelectorAll('.more-item');
