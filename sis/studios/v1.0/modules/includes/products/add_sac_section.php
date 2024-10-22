@@ -1,7 +1,8 @@
-<?php include 'packaging_list.php' ?>
-<div class="product-section d-flex align-items-center justify-content-between gap-3" style="gap: 16px;">
-    <div class="d-flex justify-content-between">
-        <div class="form-group">
+<?php include "packaging_list.php"; ?>
+<div class="product-section d-flex align-items-center" style="gap: 16px;">
+
+    <div class="d-flex justify-content-between flex-grow-1">
+        <div class="form-group w-100">
             <select class="form-control add_paper " id="add_paper">
                 <option selected value="" disabled>Sac</option>
                 <?php
@@ -15,18 +16,24 @@
             </select>
         </div>
     </div>
-
-
     <div class="d-flex align-items-center justify-content-center count_item">
         <div class="button-container">
-            <input type="button" class="minus_count_decrement_sac custom-button" group-orders-specs-id="" value="-">
+            <button type="button" class="minus_count_decrement_sac custom-button" group-orders-specs-id=""
+                style="height: 40px; width: 48px; background: #fff;">
+                <img src="/sis/studios/assets/images/icons/icon-decrement.png" alt="minus"
+                    style="height: 24px; width: 24px;">
+            </button>
         </div>
 
         <input type="text" style="font-size: 16px;" class="form-control count_num_sac bg-transparent" group-orders-specs-id="" value="0" readonly>
 
 
         <div class="button-container">
-            <input type="button" class="add_count_increment_sac custom-button" group-orders-specs-id="" value="+">
+            <button type="button" class="add_count_increment_sac custom-button" group-orders-specs-id=""
+                style="height: 40px; width: 48px; background: #fff;">
+                <img src="/sis/studios/assets/images/icons/icon-increment.png" alt="add"
+                    style="height: 24px; width: 24px;">
+            </button>
         </div>
     </div>
 

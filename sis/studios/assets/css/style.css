@@ -3192,7 +3192,6 @@ main.customer-layout .wrapper {
   overflow: hidden;
 }
 
-
 .btn-custom-blue {
   height: 3.625rem;
   font-size: 1.125rem;
@@ -3264,8 +3263,10 @@ main.customer-layout .wrapper {
   padding: 0;
   text-align: center;
   display: inline-block;
-  margin-bottom: 2px;
-  margin-left: 2px;
+}
+
+.custom-button:focus {
+  outline: none;
 }
 
 .count_num {

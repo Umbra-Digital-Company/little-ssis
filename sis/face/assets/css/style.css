@@ -3305,7 +3305,7 @@ main.customer-layout .wrapper {
   justify-content: center;
   padding: 0 1rem;
   cursor: pointer;
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .btn-custom-white:hover {
@@ -3343,8 +3343,10 @@ main.customer-layout .wrapper {
   padding: 0;
   text-align: center;
   display: inline-block;
-  margin-bottom: 2px;
-  margin-left: 2px;
+}
+
+.custom-button:focus {
+  outline: none;
 }
 
 .count_num {
