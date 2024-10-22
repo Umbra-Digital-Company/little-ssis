@@ -1375,8 +1375,10 @@ if (!isset($_SESSION['customer_id'])) {
         } else {
             const button = document.getElementById('cart');
             button.disabled = false;
+            const totalCount = arrCart.reduce((total, item) => total + item.count, 0);
+
             button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${totalCount})`;
 
         }
     </script>

@@ -547,9 +547,7 @@
                             src="/sis/face/assets/images/sections/sunnies-face.png?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-store-lips">
-                                <button class="btn btn-shop-header"> Shop All Lips</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Lips</button>
                         </div>
                     </div>
                 </a>
@@ -579,9 +577,7 @@
                             src="/sis/face/assets/images/sections/face.webp?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-store-face">
-                                <button class="btn btn-shop-header"> Shop All Face</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Face</button>
                         </div>
                     </div>
                 </a>
@@ -640,9 +636,7 @@
                         <img class="img-fluid img-header"
                             src="/sis/face/assets/images/sections/eyes.webp?v=1614047286">
                         <div class="select-link">
-                            <a href="./?page=select-store-eyes">
-                                <button class="btn btn-shop-header"> Shop All Eyes</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Eyes</button>
                         </div>
                     </div>
                 </a>
@@ -670,9 +664,7 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/skin.webp?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-store-skin">
-                                <button class="btn btn-shop-header"> Shop All Skin</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Skin</button>
                         </div>
                     </div>
                 </a>
@@ -699,9 +691,7 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/cheeks.jpg?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-store-cheeks">
-                                <button class="btn btn-shop-header"> Shop All Cheeks</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Cheeks</button>
                         </div>
                     </div>
                 </a>
@@ -727,9 +717,7 @@
                     <div class="col-12 text-center ">
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/nails.jpg?v=1614047286">
                         <div class="select-link">
-                            <a href="./?page=select-store-nails">
-                                <button class="btn btn-shop-header"> Shop All Nails</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Nails</button>
                         </div>
                     </div>
                 </a>
@@ -756,9 +744,7 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/sets.jpg?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-store-sets">
-                                <button class="btn btn-shop-header"> Shop All Sets</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Sets</button>
                         </div>
                     </div>
                 </a>
@@ -786,9 +772,7 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/Travel_Kit_Merch_Category_Banner_-_Desktop.webp?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-store-merch">
-                                <button class="btn btn-shop-header"> Shop All Merch</button>
-                            </a>
+                            <button class="btn btn-shop-header"> Shop All Merch</button>
                         </div>
                     </div>
                 </a>
@@ -1291,11 +1275,11 @@
             });
         }
 
-        $('.select-link').click(function(e) {
-            e.preventDefault();
-            $('#loading').modal('show');
-            window.location = $(this).attr('href');
-        });
+        // $('.select-link').click(function(e) {
+        //     e.preventDefault();
+        //     $('#loading').modal('show');
+        //     window.location = $(this).attr('href');
+        // });
 
         const rebindMoreItemEvents = () => {
             const moreItems = document.querySelectorAll('.more-item');
@@ -1340,8 +1324,11 @@
         } else {
             const button = document.getElementById('cart');
             button.disabled = false;
+            
+            const totalCount = arrCart.reduce((total, item) => total + item.count, 0);
+
             button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${arrCart.length})`;
+                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${totalCount})`;
 
         }
     </script>
