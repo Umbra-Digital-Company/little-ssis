@@ -86,6 +86,7 @@ if($valid){
 	
 	// Test password
 	$tryP = $uSPass.$password;
+	
 
 	if(password_verify($tryP, $uPass)) {
 			
@@ -161,7 +162,7 @@ if($valid){
 }
 else{
 	
-	echo '<p class="text-center text-danger">Invalid username or password</p>';
+	echo '<p class="text-center text-danger">Invalid username or passwordsss</p>';
 
 }
 

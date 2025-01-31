@@ -27,7 +27,7 @@ $querypn =  'SELECT DISTINCT
 $querypn .=' FROM 
                 poll_51_face_new p
             WHERE
-                 p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027")
+                 p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027", "DCGC0071")
                     '.$priceWhere.'
             ORDER BY 
                 p.item_name ASC;';
@@ -74,7 +74,7 @@ $arrColorData = [];
                         poll_51_face_new p
                         INNER JOIN products_colors_studios ps ON ps.product_code = p.item_code
                     WHERE 
-                        p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027")
+                        p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027", "DCGC0071")
                         AND (p.vnd_srp > 0 OR p.retail > 0 OR p.sr_srp > 0)
                      ORDER BY grab_color ASC;
                     ';
@@ -195,7 +195,7 @@ $arrShapesData = [];
                     pcs.name
                     FROM poll_51_face_new p
                         INNER JOIN poll_51_shapes pcs ON p.shape = pcs.code
-                            WHERE p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027")
+                            WHERE p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027", "DCGC0071")
                                 AND (p.vnd_srp > 0 OR p.retail > 0 OR p.sr_srp > 0)
                                 ORDER BY pcs.name ASC;';
 
@@ -240,7 +240,7 @@ $arrCollectionsData = [];
                     pcs.name
                     FROM poll_51_face_new p
                         INNER JOIN poll_51_collections pcs ON p.collection = pcs.code
-                        WHERE p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027")
+                        WHERE p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027", "DCGC0071")
                                 AND (p.vnd_srp > 0 OR p.retail > 0 OR p.sr_srp > 0)
                                 ORDER BY pcs.name ASC;';
 
@@ -422,7 +422,7 @@ $query .=       ' IF(
                     LEFT JOIN poll_51_shopify_colors psc
                         ON psc.name = s.color_name
             WHERE
-                p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027")
+                p.data_cgc IN("DCGC0037","DCGC0039","DCGC0001","DCGC0002","DCGC0048","DCGC0045","DCGC0041","DCGC0035","DCGC0018","DCGC0006","DCGC0021","DCGC0046","DCGC0007","DCGC0044","DCGC0027", "DCGC0071")
                     '.$priceWhere;
 
                 if(isset($_GET['page']) && $_GET['page'] == 'select-store-all'){

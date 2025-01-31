@@ -854,7 +854,7 @@ if (!isset($_SESSION['customer_id'])) {
             style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
 
             <div id="notification" class="notification d-flex align-items-center justify-content-between "
-                style="width: 100%; padding: 0px 10px;">
+                style="width: 100%; padding: 0px 10px; z-index: 1;">
 
                 <span class="notification-message text-align-center">Item successfully added to bag</span>
                 <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">

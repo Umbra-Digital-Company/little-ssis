@@ -123,8 +123,65 @@ $(document).ready(function () {
 	$('#toggle_password').on('click', togglePassword);
 
 	// ================== OPEN AND CLOSE SIDEBAR
-
+	let page = new URLSearchParams(window.location.search).get('page');
 	$('.account').on('click', function() {
+
+		if(page=='order-confirmation' || page=='cart' || page=='select-store') {
+$('.ssis-overlay').load("/v2.0/sis/face/func/store/cancel-confirmation.php", function (d) {
+			overlayContent(d);
+
+			let confirmAssistant = password => {
+				if ( $('#password_confirmation').val() != password ) {
+					$('.wrong-password').fadeIn();
+				} else {
+					$.post('/v2.0/sis/face/func/process/unset_login.php');
+					window.location.href="./?page=store-home";
+				}
+			}
+
+			const toggleButtonState = () => {
+				const password = $("#password_confirmation").val();
+				$("#yes_button").prop("disabled", password.trim() === "");
+			  };
+
+
+			  // Initial call to set the correct state
+			toggleButtonState();
+
+			// Listen for changes in the password field
+			$("#password_confirmation").on("keyup", function (e) {
+				if (e.keyCode == 13) {
+				confirmAssistant("SSIS");
+				}
+				toggleButtonState(); // Update button state on input change
+			});
+				
+
+			$(".form-control").on('keyup', function (e) {
+				if (e.keyCode == 13) {
+					confirmAssistant('SSIS');
+				};
+			});
+
+			// Listen for "Yes" button click
+			$("#yes_button").on("click", function () {
+				confirmAssistant("SSIS");
+				});
+
+				$("#no_button").on("click", function () {
+					$(".ssis-overlay").hide();
+					$(".modal-backdrop").remove(); // Ensure the backdrop is removed
+					$(".home.doctor-home").show(); // Ensure the exit button is shown
+				});
+
+			$("#check_password").on('click', function () {
+				confirmAssistant('SSIS');
+			});
+		});
+
+			return;
+		}
+
 		toggleSidebar('show');
 
 		$('#hide_sidebar').on('click', function() {
@@ -1687,7 +1744,7 @@ $(document).ready(function () {
         var gender = document.getElementById('gender').value;
         var ageRange = document.getElementById('age_range').value;
 
-        if (!lastname || !firstname || !gender || !ageRange) {
+        if (!gender || !ageRange) {
             isFormValid = false;
         }
 
@@ -1705,7 +1762,7 @@ $(document).ready(function () {
         var gender = document.getElementById('gender').value;
         var ageRange = document.getElementById('age_range').value;
 
-        if (!lastname || !firstname || !gender || !ageRange) {
+        if (!gender || !ageRange) {
             isFormValid = false;
         }
 

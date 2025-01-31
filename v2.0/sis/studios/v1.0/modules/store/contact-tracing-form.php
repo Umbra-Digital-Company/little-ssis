@@ -121,11 +121,11 @@ if (!isset($_SESSION['customer_id'])) {
 
 			<div class="form-group mt-4">
 				<input type="text" name="lastname" class="form-control" id="lastname" autocomplete="off" autofocus
-					required />
+					 />
 				<label class="placeholder" for="lastname">Last Name</label>
 			</div>
 			<div class="form-group mt-4">
-				<input type="text" name="firstname" class="form-control" id="firstname" autocomplete="off" required />
+				<input type="text" name="firstname" class="form-control" id="firstname" autocomplete="off" />
 				<label class="placeholder" for="firstname">First Name</label>
 			</div>
 

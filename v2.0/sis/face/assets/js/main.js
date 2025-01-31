@@ -1685,7 +1685,7 @@ document.getElementById('guestForm').addEventListener('input', function() {
 	var gender = document.getElementById('gender').value;
 	var ageRange = document.getElementById('age_range').value;
 
-	if (!lastname || !firstname || !gender || !ageRange) {
+	if (!gender || !ageRange) {
 		isFormValid = false;
 	}
 
@@ -1703,7 +1703,7 @@ document.getElementById('guestForm').addEventListener('input', function() {
 	var gender = document.getElementById('gender').value;
 	var ageRange = document.getElementById('age_range').value;
 
-	if (!lastname || !firstname || !gender || !ageRange) {
+	if (!gender || !ageRange) {
 		isFormValid = false;
 	}
 

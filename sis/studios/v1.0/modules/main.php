@@ -744,14 +744,14 @@ opacity: 0px;
 				<?php if (isset($arrCollectionsData)) { ?>
 
 					<p class=" filter-title "  >collections</p>
-					<div class="row collections-list mb-5">
+					<div class="d-flex flex-wrap gap-2 mb-5 color-list" style="max-width: 540px;">
 
 						<?php foreach ($arrCollectionsData as $value) {
 
 							$selected = (in_array($value, $getCollections)) ? 'btn-filter-selected' : 'btn-no-filter';
 
 						?>
-							<div class="col-3 mt-3">
+							<div class="m-2" style="max-width: 145px; min-width: 85px;">
 								<div class="my-collection filter-buttons btn <?= $selected ?>" collectionsData="<?= $value ?>">
 									<?= ucwords(strtolower($value)) ?></div>
 							</div>
@@ -765,7 +765,7 @@ opacity: 0px;
 				<?php if (isset($arrShapesData)) { ?>
 
 					<p class=" filter-title "  >sizing</p>
-					<div class="row shapes-list mb-5">
+					<div class="d-flex flex-wrap gap-2 mb-5 color-list" style="max-width: 540px;">
 
 						<?php foreach ($arrShapesData as $value) {
 
@@ -773,7 +773,7 @@ opacity: 0px;
 
 						?>
 
-							<div class="col-3 mt-3">
+							<div class="m-2" style="max-width: 145px; min-width: 85px;">
 								<div class="my-shapes filter-buttons btn <?= $selected ?>" shapesData="<?= $value ?>">
 									<?= ucwords(strtolower($value)) ?></div>
 							</div>
@@ -787,14 +787,14 @@ opacity: 0px;
 				<?php if (isset($arrFilterColors)) { ?>
 
 					<p class=" filter-title "  >colors</p>
-					<div class="d-flex color-list mb-5 justify-content-start flex-wrap" style="width: 540px;">
+					<div class="d-flex flex-wrap gap-2 mb-5 color-list" style="max-width: 540px;">
 
 						<?php foreach ($arrFilterColors as $value) {
 
 							$selected = (in_array($value['color'], $getColors)) ? 'btn-filter-selected' : 'btn-no-filter';
 
 						?>
-							<div class="col-3 mt-3">
+						<div class="m-2" style="max-width: 145px; min-width: 85px;">
 								<div class="my-color filter-buttons btn <?= $selected ?>" colorData="<?= $value['color'] ?>">
 									<?= ucwords(str_replace("_", " ", $value['color'])) ?></div>
 							</div>

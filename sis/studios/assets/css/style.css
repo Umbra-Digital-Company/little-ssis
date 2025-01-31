@@ -3172,6 +3172,15 @@ main.customer-layout .wrapper {
   color: #342c29;
 }
 
+.btn.btn-filter-selected {
+  border: 2px solid #0b5893;
+  background-color: #e2e9f3;
+  background-repeat: no-repeat;
+  padding: 0 5px;
+  height: 48px !important;
+  color: #342c29;
+}
+
 #btn-filter {
   max-width: 111px;
   height: 40px;
@@ -3548,5 +3557,5 @@ main.customer-layout .wrapper {
 }
 
 .btn {
-  font-family: 'Surt-Bold';
+  font-family: "Surt-Bold";
 }

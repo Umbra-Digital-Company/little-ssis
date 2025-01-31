@@ -22,7 +22,7 @@
             <button type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id=""
                 style="height: 40px; width: 48px; background: #fff;">
                 <img src="/v2.0/sis/studios/assets/images/icons/icon-decrement.png" alt="minus"
-                    style="height: 24px; width: 24px;">
+                    style="height: 24px; width: 24px;  z-index: 99;">
             </button>
         </div>
         
@@ -34,7 +34,7 @@
             <button type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id=""
                 style="height: 40px; width: 48px; background: #fff;">
                 <img src="/v2.0/sis/studios/assets/images/icons/icon-increment.png" alt="add"
-                    style="height: 24px; width: 24px;">
+                    style="height: 24px; width: 24px; z-index: 99;">
             </button>
         </div>
     </div>
