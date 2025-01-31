@@ -1,0 +1,23 @@
+.emoji {
+	max-width: 500px;
+	margin: 0 auto;
+
+	img {
+		filter: grayscale(100%);
+		-webkit-filter: grayscale(100%);
+		@include transition(filter, .3s, ease);
+	}
+
+	input:checked ~ label {
+
+		img {
+			filter: none;
+			-webkit-filter: none;
+		}
+
+		p {
+			color: $color_primary;
+			font-weight: 700;
+		}
+	}
+}

@@ -1,0 +1,156 @@
+a {
+	text-decoration: none !important;
+	outline: none !important;
+}
+
+p {
+	margin: 0;
+}
+
+.h1 {
+	font-size: $fz_medium;
+	margin: 0;
+
+	@media (min-width: 992px) {
+		font-size: $fz_large;
+	}
+
+	@media (min-width: 1600px) {
+		font-size: $fz_huge;
+	}
+}
+
+.h2 {
+	font-size: $fz_normal;
+	margin: 0;
+
+	@media (min-width: 992px) {
+		font-size: $fz_medium;
+	}
+
+	@media (min-width: 1600px) {
+		font-size: $fz_large;
+	}
+}
+
+.h3 {
+	font-size: $fz_small;
+	margin: 0;
+
+	@media (min-width: 992px) {
+		font-size: $fz_normal;
+	}
+
+	@media (min-width: 1600px) {
+		font-size: $fz_medium;
+	}
+}
+
+.text-primary {
+	color: $color_primary !important;
+}
+
+.text-vvm {
+	color: $color_vvm !important;
+}
+
+.text-secondary {
+	color: $color_secondary !important;
+}
+
+.text-danger {
+	color: $color_danger !important;
+}
+
+.text-danger-dark {
+	color: darken($color_danger, 20%) !important;
+}
+
+.text-success {
+	color: $color_success !important;
+}
+
+.text-success-dark {
+	color: darken($color_success, 20%) !important;
+}
+
+.text-dark {
+	color: $color_dark !important;
+}
+
+.text-gray {
+	color: $color_gray !important;
+}
+
+.text-white {
+	color: $color_default !important;
+}
+
+.bg-danger {
+	background-color: $color_danger !important;
+}
+
+.bg-success {
+	background-color: $color_success !important;
+}
+
+.bg-primary {
+	background-color: $color_primary !important;
+}
+
+.bg-secondary {
+	background-color: $color_secondary !important;
+}
+
+.bg-white {
+	background-color: $color_default !important;
+}
+
+.bg-gray {
+	background-color: $color_gray !important;
+}
+
+.bg-vvm {
+	background-color: $color_vvm !important;
+}
+
+.bg-danger-light {
+	background-color: rgba($color_danger, .35) !important;
+}
+
+.bg-success-light {
+	background-color: rgba($color_success, .35) !important;
+}
+
+.bg-success-lighten {
+	background-color: lighten($color_success, 30%) !important;
+}
+
+.bg-primary-light {
+	background-color: rgba($color_primary, .35) !important;
+}
+
+.bg-secondary-light {
+	background-color: rgba($color_secondary, .35) !important;
+}
+
+.bg-white-light {
+	background-color: rgba($color_default, .35) !important;
+}
+
+.border-secondary {
+	border-color: $color_secondary !important;
+}
+
+.border-danger {
+	border-color: $color_danger !important;
+}
+
+.font-bold {
+	font-family: $ff_medium;
+	font-weight: 700;
+}
+
+.large {
+	font-size: 120%;
+}

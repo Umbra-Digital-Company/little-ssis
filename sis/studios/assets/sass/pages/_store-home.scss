@@ -1,0 +1,73 @@
+.ratings-status {
+	background-color: $color_default;
+	position: relative;
+	margin-top: 90px;
+	padding: 45px 25px 15px;
+	@include box_shadow(0, 3px, 6px, 0, rgba($color_dark, .25));
+	@include radius(15px);
+
+	.emoji-status {
+		position: absolute;
+		background-color: $color_default;
+		padding: 20px 20px 0;
+		top: -70px;
+		left: 50%;
+		margin-left: -70px;
+		@include radius(100%);
+	}
+
+	&.starting {
+		padding: 15px 25px;
+		margin-top: 30px;
+
+		.emoji-status {
+			display: none;
+		}
+	}
+}
+
+.store-statistics {
+
+	.d-flex {
+		margin: 0 -10px;
+
+		.col-6 {
+			padding: 0 10px;
+		}
+	}
+
+	.stats-wrap {
+		background-color: $color_default;
+		padding: 20px;
+		@include radius(8px);
+		@include box_shadow(0, 3px, 6px, 0, rgba($color_dark, .25));
+
+		p.count {
+			font-size: 40px;
+			font-weight: 700;
+			font-family: $ff_bold;
+		}
+	}
+
+	.rate-stats {
+		.col {
+			// background: $color_default;
+			width: 20%;
+			-ms-flex:0 0 20%;
+			flex:0 0 20%;
+			max-width:20%;
+		}
+
+		.count {
+			position: absolute;
+			right: -2px;
+			top: -2px;
+			background-color: $color_dark;
+			display: block;
+			line-height: 0;
+			padding: 15px 10px;
+			@include box_shadow(0, 3px, 6px, 0, rgba($color_dark, .25));
+			@include square(30px, 30px);
+		}
+	}
+}

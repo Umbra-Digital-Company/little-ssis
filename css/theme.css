@@ -1,0 +1,27 @@
+/* ======================================== SSIS ADMIN */
+
+#ssis-admin {
+	width: 100%;
+	background-color: #eeeeee;
+}
+
+/* ======================================== SSIS BODY */
+
+#ssis-body {
+	margin: 0;
+	padding: 0;
+}
+
+/* ======================================== SSIS SIDEBAR */
+
+#ssis-sidebar {
+	background-color: #1a262b;
+	min-height: 100vh;
+	max-width: 300px;
+}
+
+/* ======================================== SSIS MAIN */
+
+
+
+/* ======================================== SSIS TOPBAR */

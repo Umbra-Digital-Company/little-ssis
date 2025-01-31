@@ -1,0 +1,11 @@
+.custom-card {
+	@include custom_card(8px, 2px, 3px);
+
+	&.prescription {
+
+		p {
+			font-size: 12px;
+			white-space: nowrap;
+		}
+	}
+}

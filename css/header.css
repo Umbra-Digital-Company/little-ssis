@@ -1,0 +1,48 @@
+/************************************************ PAGE HEADER **/
+
+.ssis-2.bg-a {
+    background-color: #F7A072 !important;
+}
+.ssis-2.bg-b {
+    background-color: #ffffff;
+    padding-bottom: 100px;
+}
+.ssis-2 .section-header > div {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.ssis-2 .section-header > div .header-icon {
+    max-width: 65px;
+    margin-bottom: 20px;
+}
+.ssis-2 .section-header > div h2 {
+    font-size: 36px;
+}
+.ssis-2 .section-header > div .inner-nav {
+    width: 250px;
+    margin: 0 auto;
+} 
+.ssis-2 .section-header > div .inner-nav > div {
+    width: 50px;
+    height: 50px;            
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #282828;
+    transition: box-shadow 0.2s ease-in-out;
+    background: white;
+    transition: background 0.2s ease-in-out;
+    border: 1px solid #ffffff;
+}
+.ssis-2 .section-header > div .inner-nav > .selected {
+    border: 1px solid #000000;
+    background: transparent;
+    box-shadow: none;
+}
+.ssis-2 .section-header > div .inner-nav > div .btn {
+    padding: 0;
+}
+.ssis-2 .section-header > div .inner-nav > div .btn:focus {
+    box-shadow: none !important;
+}

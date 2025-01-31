@@ -1,0 +1,33 @@
+.payment-type {
+	
+	p {
+		position: relative;
+		z-index: 5;
+	}
+
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		z-index: 1;
+		height: 2px;
+		width: 100%;
+		background-color: lighten($color_secondary,20%);
+		left: 0;
+		top: 50%;
+		margin-top: -1px;
+	}
+}
+
+.canvas-holder {
+	width: 100%;
+	max-width: 525px;
+	position: relative;
+	padding: 20px;
+}
+
+.canvas-holder .thecanvas {
+	border: 2px solid $color_secondary;
+	width: 100%;
+	@include radius(8px);
+}

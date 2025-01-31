@@ -1,0 +1,168 @@
+.switch-color li[data-color-picker="Sepia"] { background: #624533 !important; }
+
+
+
+.switch-color li[data-color-picker="Black"] { background: #000000 !important; } 
+.switch-color li[data-color-picker="Brown"] { background: #8c674c !important; } 
+.switch-color li[data-color-picker="Taupe"] { background: #c0b5ab !important; }
+.switch-color li[data-color-picker="Nude"] { background: #e2ceae !important; }
+.switch-color li[data-color-picker="Gray"] { background: #b2b2b5 !important; }
+.switch-color li[data-color-picker="Tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/tort_color_group_48x.png?v=1599802863) !important; }
+.switch-color li[data-color-picker="White"] { background: #ffffff !important; }
+.switch-color li[data-color-picker="Clear"] {  }
+.switch-color li[data-color-picker="Gold Frame"] { background: #bcac59 !important; }
+.switch-color li[data-color-picker="Green"] { background: #698a49 !important; }
+.switch-color li[data-color-picker="Yellow"] { background: #eacf63 !important; }
+.switch-color li[data-color-picker="Orange"] { background: #e7a065 !important; }
+.switch-color li[data-color-picker="Red"] { background: #bf3e3e !important; }
+.switch-color li[data-color-picker="Pink"] { background: #e8a29c !important; } [data-handle-name="purple"] { background: #be92c4; }
+.switch-color li[data-color-picker="Purple"] { background: #be92c4 !important; } [data-handle-name="blue"] { background: #4479b1; }
+.switch-color li[data-color-picker="Blue"] { background: #4479b1 !important; } [data-handle-name="sun"], [data-handle-name="ink"] { background: #141615; }
+.switch-color li[data-color-picker="Sun"], .switch-color li[data-color-picker="Ink"] { background: #141615 !important; } [data-handle-name="ore"] { background: #262426; }
+.switch-color li[data-color-picker="Ore"] { background: #262426 !important; } [data-handle-name="graphite"] { background: #282522; }
+.switch-color li[data-color-picker="Graphite"] { background: #282522 !important; } 
+.switch-color li[data-color-picker="Sepia"] { background: #624533 !important; } [data-handle-name="ink"] { background: #0a0909; }
+.switch-color li[data-color-picker="Ink"] { background: #0a0909 !important; } [data-handle-name="charcoal"], [data-handle-name="black"] { background: #0d0f0e; }
+.switch-color li[data-color-picker="Charcoal"], .switch-color li[data-color-picker="Black"] { background: #0d0f0e !important; } [data-handle-name="mantis"] { background: #252119; }
+.switch-color li[data-color-picker="Mantis"] { background: #252119 !important; } [data-handle-name="seal"] { background: #496f89; }
+.switch-color li[data-color-picker="Seal"] { background: #496f89 !important; } [data-handle-name="celadon"] { background: #283426; }
+.switch-color li[data-color-picker="Celadon"] { background: #283426 !important; } [data-handle-name="gravel"] { background: #444549; }
+.switch-color li[data-color-picker="Gravel"] { background: #444549 !important; } [data-handle-name="kelp"] { background: #462823; }
+.switch-color li[data-color-picker="Kelp"] { background: #462823 !important; } [data-handle-name="cayenne"] { background: #603940; }
+.switch-color li[data-color-picker="Cayenne"] { background: #603940 !important; } [data-handle-name="mink"] { background: #605147; }
+.switch-color li[data-color-picker="Mink"] { background: #605147 !important; } [data-handle-name="sepia"] { background: #624533; }
+.switch-color li[data-color-picker="Sepia"] { background: #624533 !important; } [data-handle-name="amber-brown"] { background: #673817; }
+.switch-color li[data-color-picker="Amber Brown"] { background: #673817 !important; } [data-handle-name="caviar"] { background: #827165; }
+.switch-color li[data-color-picker="Caviar"] { background: #827165 !important; } [data-handle-name="watermelon"] { background: #838979; }
+.switch-color li[data-color-picker="Watermelon"] { background: #838979 !important; } [data-handle-name="storm"] { background: #142f41; }
+.switch-color li[data-color-picker="Storm"] { background: #142f41 !important; } [data-handle-name="dark-tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/DARK_TORT_48x.png?v=1596028567); }
+.switch-color li[data-color-picker="Dark Tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/DARK_TORT_48x.png?v=1596028567) !important; } [data-handle-name="pecan"], [data-handle-name="skin"] { background: #2d2223; }
+.switch-color li[data-color-picker="Pecan"], .switch-color li[data-color-picker="Skin"] { background: #2d2223 !important; } [data-handle-name="polished-tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/POLISHED_TORT_48x.png?v=1596028567); }
+.switch-color li[data-color-picker="Polished Tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/POLISHED_TORT_48x.png?v=1596028567) !important; } [data-handle-name="ink-tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/INK_TORT_48x.png?v=1596028568); }
+.switch-color li[data-color-picker="Ink Tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/INK_TORT_48x.png?v=1596028568) !important; } [data-handle-name="gunmetal"] { background: #372b2b; }
+.switch-color li[data-color-picker="Gunmetal"] { background: #372b2b !important; } [data-handle-name="bronze"] { background: #3b3134; }
+.switch-color li[data-color-picker="Bronze"] { background: #3b3134 !important; } [data-handle-name="camo"] { background: #3e3e36; }
+.switch-color li[data-color-picker="Camo"] { background: #3e3e36 !important; } [data-handle-name="midnight"] { background: #484b56; }
+.switch-color li[data-color-picker="Midnight"] { background: #484b56 !important; } [data-handle-name="pond"] { background: #495b5f; }
+.switch-color li[data-color-picker="Pond"] { background: #495b5f !important; } [data-handle-name="shiraz"] { background: #4d282c; }
+.switch-color li[data-color-picker="Shiraz"] { background: #4d282c !important; } [data-handle-name="brunette"] { background: #4f2a15; }
+.switch-color li[data-color-picker="Brunette"] { background: #4f2a15 !important; } [data-handle-name="malbec"] { background: #51020b; }
+.switch-color li[data-color-picker="Malbec"] { background: #51020b !important; } [data-handle-name="cocoa"] { background: #583c27; }
+.switch-color li[data-color-picker="Cocoa"] { background: #583c27 !important; } [data-handle-name="walnut"] { background: #5c3632; }
+.switch-color li[data-color-picker="Walnut"] { background: #5c3632 !important; } [data-handle-name="ant"] { background: #5f5759; }
+.switch-color li[data-color-picker="Ant"] { background: #5f5759 !important; } [data-handle-name="espresso"] { background: #62341e; }
+.switch-color li[data-color-picker="Espresso"] { background: #62341e !important; } [data-handle-name="plum"] { background: #662c3d; }
+.switch-color li[data-color-picker="Plum"] { background: #662c3d !important; } [data-handle-name="hickory"] { background: #6c3f23; }
+.switch-color li[data-color-picker="Hickory"] { background: #6c3f23 !important; } [data-handle-name="cosmos"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/COSMOS_48x.png?v=1596028565); }
+.switch-color li[data-color-picker="Cosmos"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/COSMOS_48x.png?v=1596028565) !important; } [data-handle-name="mosaic"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/MOSAIC_48x.png?v=1596028564); }
+.switch-color li[data-color-picker="Mosaic"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/MOSAIC_48x.png?v=1596028564) !important; } [data-handle-name="denim"] { background: #6c7597; }
+.switch-color li[data-color-picker="Denim"] { background: #6c7597 !important; } [data-handle-name="rose"] { background: #722d39; }
+.switch-color li[data-color-picker="Rose"] { background: #722d39 !important; } [data-handle-name="twill"] { background: #72635a; }
+.switch-color li[data-color-picker="Twill"] { background: #72635a !important; } [data-handle-name="seaweed"] { background: #747d6c; }
+.switch-color li[data-color-picker="Seaweed"] { background: #747d6c !important; } [data-handle-name="chrome"] { background: #7e7a81; }
+.switch-color li[data-color-picker="Chrome"] { background: #7e7a81 !important; } [data-handle-name="rye"] { background: #827a73; }
+.switch-color li[data-color-picker="Rye"] { background: #827a73 !important; } [data-handle-name="basil"] { background: #846d4c; }
+.switch-color li[data-color-picker="Basil"] { background: #846d4c !important; } [data-handle-name="cadet"] { background: #84a0c5; }
+.switch-color li[data-color-picker="Cadet"] { background: #84a0c5 !important; } [data-handle-name="gold"] { background: #865e3d; }
+.switch-color li[data-color-picker="Gold"] { background: #865e3d !important; } [data-handle-name="cacao"] { background: #8a5737; }
+.switch-color li[data-color-picker="Cacao"] { background: #8a5737 !important; } [data-handle-name="henna"] { background: #8d5a4e; }
+.switch-color li[data-color-picker="Henna"] { background: #8d5a4e !important; } [data-handle-name="rodeo"] { background: #8e6852; }
+.switch-color li[data-color-picker="Rodeo"] { background: #8e6852 !important; } [data-handle-name="albatross"] { background: #8ea6b2; }
+.switch-color li[data-color-picker="Albatross"] { background: #8ea6b2 !important; } [data-handle-name="amber-tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/Screen_Shot_2020-10-22_at_1.00.58_AM_48x.png?v=1603299696); }
+.switch-color li[data-color-picker="Amber Tort"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/Screen_Shot_2020-10-22_at_1.00.58_AM_48x.png?v=1603299696) !important; } [data-handle-name="sable"] { background: #925f4d; }
+.switch-color li[data-color-picker="Sable"] { background: #925f4d !important; } [data-handle-name="coffee"] { background: #946c52; }
+.switch-color li[data-color-picker="Coffee"] { background: #946c52 !important; } [data-handle-name="greige"], [data-handle-name="tinsel"] { background: #978d88; }
+.switch-color li[data-color-picker="Greige"], .switch-color li[data-color-picker="Tinsel"] { background: #978d88 !important; } [data-handle-name="mercury"] { background: #9895a1; }
+.switch-color li[data-color-picker="Mercury"] { background: #9895a1 !important; } [data-handle-name="khaki"] { background: #9d795e; }
+.switch-color li[data-color-picker="Khaki"] { background: #9d795e !important; } [data-handle-name="cognac"] { background: #a04403; }
+.switch-color li[data-color-picker="Cognac"] { background: #a04403 !important; } [data-handle-name="syrup"] { background: #a4674e; }
+.switch-color li[data-color-picker="Syrup"] { background: #a4674e !important; } [data-handle-name="plantain"] { background: #a47a40; }
+.switch-color li[data-color-picker="Plantain"] { background: #a47a40 !important; } [data-handle-name="tawny"] { background: #a57b80; }
+.switch-color li[data-color-picker="Tawny"] { background: #a57b80 !important; } [data-handle-name="rose-gold"] { background: #a6665c; }
+.switch-color li[data-color-picker="Rose Gold"] { background: #a6665c !important; } [data-handle-name="cashmere"] { background: #a67a6a; }
+.switch-color li[data-color-picker="Cashmere"] { background: #a67a6a !important; } [data-handle-name="rosewater"] { background: #a69a7e; }
+.switch-color li[data-color-picker="Rosewater"] { background: #a69a7e !important; } [data-handle-name="petal"] { background: #a87d87; }
+.switch-color li[data-color-picker="Petal"] { background: #a87d87 !important; } [data-handle-name="parakeet"] { background: #a98b44; }
+.switch-color li[data-color-picker="Parakeet"] { background: #a98b44 !important; } [data-handle-name="bronze"] { background: #ae7458; }
+.switch-color li[data-color-picker="Bronze"] { background: #ae7458 !important; } [data-handle-name="oak"] { background: #af907f; }
+.switch-color li[data-color-picker="Oak"] { background: #af907f !important; } [data-handle-name="bellini"] { background: #b09a8e; }
+.switch-color li[data-color-picker="Bellini"] { background: #b09a8e !important; } [data-handle-name="espresso"] { background: #b17f5e; }
+.switch-color li[data-color-picker="Espresso"] { background: #b17f5e !important; } [data-handle-name="cedar"] { background: #b1836d; }
+.switch-color li[data-color-picker="Cedar"] { background: #b1836d !important; } [data-handle-name="honey"] { background: #b1948b; }
+.switch-color li[data-color-picker="Honey"] { background: #b1948b !important; } [data-handle-name="hazelnut"] { background: #b1a396; }
+.switch-color li[data-color-picker="Hazelnut"] { background: #b1a396 !important; } [data-handle-name="ginger"] { background: #b27b67; }
+.switch-color li[data-color-picker="Ginger"] { background: #b27b67 !important; } [data-handle-name="white-gold"] { background: #b29d8c; }
+.switch-color li[data-color-picker="White Gold"] { background: #b29d8c !important; } [data-handle-name="amethyst"] { background: #b3abbf; }
+.switch-color li[data-color-picker="Amethyst"] { background: #b3abbf !important; } [data-handle-name="praline"] { background: #b48c72; }
+.switch-color li[data-color-picker="Praline"] { background: #b48c72 !important; } [data-handle-name="salmon"] { background: #b57c53; }
+.switch-color li[data-color-picker="Salmon"] { background: #b57c53 !important; } [data-handle-name="smoke"] { background: #b5b2b0; }
+.switch-color li[data-color-picker="Smoke"] { background: #b5b2b0 !important; } [data-handle-name="flax"] { background: #ba885c; }
+.switch-color li[data-color-picker="Flax"] { background: #ba885c !important; } [data-handle-name="rose-taupe"] { background: #ba9889; }
+.switch-color li[data-color-picker="Rose Taupe"] { background: #ba9889 !important; } [data-handle-name="silver"] { background: #bcbabd; }
+.switch-color li[data-color-picker="Silver"] { background: #bcbabd !important; } [data-handle-name="rose-gold"] { background: #bf8d66; }
+.switch-color li[data-color-picker="Rose Gold"] { background: #bf8d66 !important; } [data-handle-name="rose"] {  }
+.switch-color li[data-color-picker="Rose"] {  } [data-handle-name="petal"] { background: #c0b6c8; }
+.switch-color li[data-color-picker="Petal"] { background: #c0b6c8 !important; } [data-handle-name="vapor"] { background: #c2bcc7; }
+.switch-color li[data-color-picker="Vapor"] { background: #c2bcc7 !important; } [data-handle-name="cornhusk"] { background: #c3a488; }
+.switch-color li[data-color-picker="Cornhusk"] { background: #c3a488 !important; } [data-handle-name="dark-peach"] { background: #c59185; }
+.switch-color li[data-color-picker="Dark Peach"] { background: #c59185 !important; } [data-handle-name="nougat"] { background: #c6a692; }
+.switch-color li[data-color-picker="Nougat"] { background: #c6a692 !important; } [data-handle-name="pink-lemonade"] { background: #c89486; }
+.switch-color li[data-color-picker="Pink Lemonade"] { background: #c89486 !important; } [data-handle-name="palomino"] { background: #c99b81; }
+.switch-color li[data-color-picker="Palomino"] { background: #c99b81 !important; } [data-handle-name="pickle"] { background: #cdc5c8; }
+.switch-color li[data-color-picker="Pickle"] { background: #cdc5c8 !important; } [data-handle-name="rose-taupe"] { background: #ceafa9; }
+.switch-color li[data-color-picker="Rose Taupe"] { background: #ceafa9 !important; } [data-handle-name="salt"] { background: #cec7ce; }
+.switch-color li[data-color-picker="Salt"] { background: #cec7ce !important; } [data-handle-name="eggnog"] { background: #cfbc89; }
+.switch-color li[data-color-picker="Eggnog"] { background: #cfbc89 !important; } [data-handle-name="coin"] { background: #d1d1d1; }
+.switch-color li[data-color-picker="Coin"] { background: #d1d1d1 !important; } [data-handle-name="rosewood"] { background: #d48068; }
+.switch-color li[data-color-picker="Rosewood"] { background: #d48068 !important; } [data-handle-name="pale-nude"] { background: #d5c7b9; }
+.switch-color li[data-color-picker="Pale Nude"] { background: #d5c7b9 !important; } [data-handle-name="peony"] { background: #d79785; }
+.switch-color li[data-color-picker="Peony"] { background: #d79785 !important; } [data-handle-name="daisy"] { background: #d8b374; }
+.switch-color li[data-color-picker="Daisy"] { background: #d8b374 !important; } [data-handle-name="capsicum"] { background: #d8c193; }
+.switch-color li[data-color-picker="Capsicum"] { background: #d8c193 !important; } [data-handle-name="tea"] { background: #d8c3b7; }
+.switch-color li[data-color-picker="Tea"] { background: #d8c3b7 !important; } [data-handle-name="peach-milk"] { background: #dabcb9; }
+.switch-color li[data-color-picker="Peach Milk"] { background: #dabcb9 !important; } [data-handle-name="quartz"] { background: #dac3b5; }
+.switch-color li[data-color-picker="Quartz"] { background: #dac3b5 !important; } [data-handle-name="elm"] { background: #dba47b; }
+.switch-color li[data-color-picker="Elm"] { background: #dba47b !important; } [data-handle-name="linen"] { background: #dbb9a6; }
+.switch-color li[data-color-picker="Linen"] { background: #dbb9a6 !important; } [data-handle-name="tart"] { background: #ddc5c6; }
+.switch-color li[data-color-picker="Tart"] { background: #ddc5c6 !important; } [data-handle-name="pumpkin"] { background: #df4414; }
+.switch-color li[data-color-picker="Pumpkin"] { background: #df4414 !important; } [data-handle-name="white"] { background: #e2e5e9; }
+.switch-color li[data-color-picker="White"] { background: #e2e5e9 !important; } [data-handle-name="oat"] { background: #e5d5be; }
+.switch-color li[data-color-picker="Oat"] { background: #e5d5be !important; } [data-handle-name="gold"] { background: #e5d6c8; }
+.switch-color li[data-color-picker="Gold"] { background: #e5d6c8 !important; } [data-handle-name="blondie"] { background: #e6b87a; }
+.switch-color li[data-color-picker="Blondie"] { background: #e6b87a !important; } [data-handle-name="glaze"] { background: linear-gradient(to right, #f1c9bb 0%,#f1c9bb 50%,#f1c9bb 50%,#f1c9bb 100%); }
+.switch-color li[data-color-picker="Glaze"] { background: linear-gradient(to right, #f1c9bb 0%,#f1c9bb 50%,#f1c9bb 50%,#f1c9bb 100%) !important; } [data-handle-name="crystal"] { background: #eaeaec; }
+.switch-color li[data-color-picker="Crystal"] { background: #eaeaec !important; } [data-handle-name="blush-steel"] { background: #f2be9e; }
+.switch-color li[data-color-picker="Blush Steel"] { background: #f2be9e !important; } [data-handle-name="panda"] { background: #f7efea; }
+.switch-color li[data-color-picker="Panda"] { background: #f7efea !important; } [data-handle-name="coconut"] { background: #f9eeea; }
+.switch-color li[data-color-picker="Coconut"] { background: #f9eeea !important; } [data-handle-name="cloud-gradient"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/CLOUD_GRADIENT_48x.png?v=1596028565); }
+.switch-color li[data-color-picker="Cloud Gradient"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/CLOUD_GRADIENT_48x.png?v=1596028565) !important; } [data-handle-name="husk"] { background: #f8d69c; }
+.switch-color li[data-color-picker="Husk"] { background: #f8d69c !important; } [data-handle-name="maraschino"] { background: #720109; }
+.switch-color li[data-color-picker="Maraschino"] { background: #720109 !important; } [data-handle-name="maple"] { background: #a25a41; }
+.switch-color li[data-color-picker="Maple"] { background: #a25a41 !important; } [data-handle-name="cadet"] { background: #3d5364; }
+.switch-color li[data-color-picker="Cadet"] { background: #3d5364 !important; } [data-handle-name="forest"] { background: #3c3f2e; }
+.switch-color li[data-color-picker="Forest"] { background: #3c3f2e !important; } [data-handle-name="suede"] { background: #c1aba2; }
+.switch-color li[data-color-picker="Suede"] { background: #c1aba2 !important; } [data-handle-name="guava"] { background: #c3a8a9; }
+.switch-color li[data-color-picker="Guava"] { background: #c3a8a9 !important; } [data-handle-name="rose"] { background: #c07877; }
+.switch-color li[data-color-picker="Rose"] { background: #c07877 !important; } [data-handle-name="peach"] { background: #dab6a3; }
+.switch-color li[data-color-picker="Peach"] { background: #dab6a3 !important; } [data-handle-name="latte"] { background: #8d6f61; }
+.switch-color li[data-color-picker="Latte"] { background: #8d6f61 !important; } [data-handle-name="almond"] { background: #bb9960; }
+.switch-color li[data-color-picker="Almond"] { background: #bb9960 !important; } [data-handle-name="barbecue"] { background: #3d0a08; }
+.switch-color li[data-color-picker="Barbecue"] { background: #3d0a08 !important; } [data-handle-name="currant"] { background: #7d4a40; }
+.switch-color li[data-color-picker="Currant"] { background: #7d4a40 !important; } [data-handle-name="gold-rush"] { background: #e3ae88; }
+.switch-color li[data-color-picker="Gold Rush"] { background: #e3ae88 !important; } [data-handle-name="navy"] { background: linear-gradient(to right, #192549 0%,#192549 50%,#192549 50%,#192549 100%); }
+.switch-color li[data-color-picker="Navy"] { background: linear-gradient(to right, #192549 0%,#192549 50%,#192549 50%,#192549 100%) !important; } [data-handle-name="pine"] { background: linear-gradient(to right, #535b53 0%,#535b53 50%,#535b53 50%,#535b53 100%); }
+.switch-color li[data-color-picker="Pine"] { background: linear-gradient(to right, #535b53 0%,#535b53 50%,#535b53 50%,#535b53 100%) !important; } [data-handle-name="2021"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/Screen_Shot_2020-10-27_at_9.45.38_PM_48x.png?v=1603806350); }
+.switch-color li[data-color-picker="2021"] { background: url(//cdn.shopify.com/s/files/1/0172/4383/2374/files/Screen_Shot_2020-10-27_at_9.45.38_PM_48x.png?v=1603806350) !important; } [data-handle-name="chalk"] { background: linear-gradient(to right, #ffffff 0%,#ffffff 50%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 100%); }
+.switch-color li[data-color-picker="Chalk"] { background: linear-gradient(to right, #ffffff 0%,#ffffff 50%,rgba(0,0,0,0) 50%,rgba(0,0,0,0) 100%) !important; } [data-handle-name="seafoam"] { background: linear-gradient(to right, #a0c6a5 0%,#a0c6a5 50%,#a0c6a5 50%,#a0c6a5 100%); }
+.switch-color li[data-color-picker="Seafoam"] { background: linear-gradient(to right, #a0c6a5 0%,#a0c6a5 50%,#a0c6a5 50%,#a0c6a5 100%) !important; } [data-handle-name="gingerbread"] { background: linear-gradient(to right, #d6a769 0%,#d6a769 50%,#d6a769 50%,#d6a769 100%); }
+.switch-color li[data-color-picker="Gingerbread"] { background: linear-gradient(to right, #d6a769 0%,#d6a769 50%,#d6a769 50%,#d6a769 100%) !important; } [data-handle-name="teddy"] { background: linear-gradient(to right, #705449 0%,#705449 50%,#705449 50%,#705449 100%); }
+.switch-color li[data-color-picker="Teddy"] { background: linear-gradient(to right, #705449 0%,#705449 50%,#705449 50%,#705449 100%) !important; } [data-handle-name="p100"] { background: linear-gradient(to right, #e5bf40 0%,#e5bf40 50%,#e5bf40 50%,#e5bf40 100%); }
+.switch-color li[data-color-picker="P100"] { background: linear-gradient(to right, #e5bf40 0%,#e5bf40 50%,#e5bf40 50%,#e5bf40 100%) !important; } [data-handle-name="p300"] { background: #e5bf40; }
+.switch-color li[data-color-picker="P300"] { background: #e5bf40 !important; } [data-handle-name="p500"] { background: #e5bf40; }
+.switch-color li[data-color-picker="P500"] { background: #e5bf40 !important; } [data-handle-name="p1000"] { background: #e1a09f; }
+.switch-color li[data-color-picker="P1000"] { background: #e1a09f !important; } [data-handle-name="p2000"] { background: #e1a09f; }
+.switch-color li[data-color-picker="P2000"] { background: #e1a09f !important; } [data-handle-name="p3000"] { background: #e1a09f; }
+.switch-color li[data-color-picker="P3000"] { background: #e1a09f !important; } [data-handle-name="ink-clear-ombre"] { background: linear-gradient(to right, #000000 0%,#000000 50%,#ffffff 50%,#ffffff 100%); }
+.switch-color li[data-color-picker="Ink Clear Ombre"] { background: linear-gradient(to right, #000000 0%,#000000 50%,#ffffff 50%,#ffffff 100%) !important; } [data-handle-name="ceylon"] { background: #c6a694; }
+.switch-color li[data-color-picker="Ceylon"] { background: #c6a694 !important; } [data-handle-name="anti-fog-wipe"] { background: #b6c17b; }
+.switch-color li[data-color-picker="Anti Fog Wipe"] { background: #b6c17b !important; }

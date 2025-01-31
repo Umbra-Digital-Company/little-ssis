@@ -1,0 +1,81 @@
+.table-default {
+	width: 100%;
+	max-width: 600px;
+	max-height: 305px;
+	overflow: auto;
+	background-color: $color_default;
+	@include radius(8px);
+	@include box_shadow(0, 5px, 15px, 0, rgba($color_dark, .25) !important);
+
+
+	table {
+		width: 100%;
+	}
+
+	thead {
+		background-color: $color_primary;
+
+		th {
+			text-transform: uppercase;
+			color: $color_default;
+			font-weight: 700;
+			padding: 20px 15px;
+		}
+	}
+
+	td {
+		padding: 15px;
+		border-bottom: 1px solid $color_gray;
+	}
+
+	&.auto {
+		max-height: initial;
+	}
+}
+
+.table-custom {
+	width: 100%;
+	overflow: hidden;
+	background-color: $color_default;
+	@include radius(8px);
+	@include box_shadow(0, 5px, 15px, 0, rgba($color_dark, .25) !important);
+
+	.thead {
+		background-color: $color_primary;
+
+		.th {
+			text-transform: uppercase;
+			color: $color_default;
+			font-weight: 700;
+			padding: 20px 15px;
+		}
+	}
+
+	.tbody {
+		max-height: 500px;
+		overflow-y: auto;
+
+		.tr {
+			border-bottom: 1px solid $color_gray;
+
+			&:hover {
+				background-color: darken($color_default, 10%);
+			}
+		}
+
+		.td {
+			padding: 15px;
+		}
+
+		&.lg {
+			max-height: calc(100vh - 250px);
+		}
+	}
+}
+
+.table-comfortable {
+	padding-bottom: 5px;
+	max-height: 345px;
+	overflow-y: auto;
+	border-radius: 8px;
+}

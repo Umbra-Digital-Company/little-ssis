@@ -1,0 +1,315 @@
+#sidebar {
+	position: fixed;
+	width: 100%;
+	max-width: 320px;
+	top: 0;
+	left: -320px;
+	z-index: 500;
+	height: 100vh;
+	background-color: $color_sidebar;
+	@include transition(left, .1s, ease-in);
+
+	&.show {
+		left: 0;
+	}
+
+	.close-sidebar {
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		margin-top: -12px;
+		height: 24px !important;
+	}
+
+	.logo {
+		position: relative;
+		padding: 20px;
+		border-bottom: 1px solid #10171b;
+		max-height: 80px;
+
+		img {
+			height: 40px;
+		}
+	}
+
+	.navigation {
+		position: relative;
+		height: calc(100vh - 80px);
+		top: 0;
+		left: 0;
+		overflow-y: auto;
+		padding-bottom: 80px;
+
+		.sidebar-menu {
+
+			p {
+				color: darken($color_default, 25%);
+				padding: 15px 20px;
+				border-top: 1px solid #192b32;
+				border-bottom: 1px solid #10171b;
+			}
+
+			li {
+
+				a {
+					padding: 15px 20px;
+					display: block;
+					color: #9aa9af;
+					width: 100%;
+					border-top: 1px solid #192b32;
+					border-bottom: 1px solid #10171b;
+
+					canvas {
+						background-position: center;
+						background-size: 25px;
+						background-repeat: no-repeat;
+						display: inline-block;
+						vertical-align: middle;
+						margin-right: 10px;
+						background-color: $color_sidebar;
+						@include square(25px, 0);
+					}
+
+					&.active {
+						background-color: #3a4549;
+						color: $color_default;
+
+						canvas {
+							background-color: #3a4549;
+						}
+					}
+
+					&:hover {
+						color: $color_default;
+						@include transition(all, .1s, linear);
+
+						canvas {
+							color: $color_default;
+							@include transition(all, .1s, linear);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#hide_sidebar {
+		display: block;
+		max-width: 30px;
+		cursor: pointer;
+	}
+
+	#admin-logout {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		padding: 20px;
+		left: 0;
+		background: $color_sidebar;
+
+		.btn {
+			width: 100%;
+			color: $color_default;
+			background-color: #3a4549;
+			@include radius(8px);
+		}
+	}
+
+	@media (min-width: 1200px) {
+		position: relative;
+		width: 100%;
+		top: 0;
+		left: 0;
+		display: block;
+		transition: none;
+		-webkit-transition: none;
+		-moz-transition: none;
+		-ms-transition: none;
+		-o-transition: none;
+	}
+}
+
+#sidebar-vvm {
+	position: relative;
+	width: 100%;
+	max-width: 460px;
+	min-width: 460px;
+	top: 0;
+	left: 0;
+	z-index: 500;
+	height: 100vh;
+	padding: 30px;
+	background-color: transparent;
+
+	.sidebar-container {
+		position: relative;
+		height: 100%;
+		padding: 25px;
+		background: $color_default;
+		@include radius(20px);
+		@include box_shadow(6px, 0, 18px, 0, rgba($color_dark, .10) !important);
+	}
+
+	.logo {
+		position: relative;
+
+		img {
+			height: 35px;
+
+			&:last-of-type {
+				height: 25px;
+			}
+		}
+	}
+
+	.burger-vvm {
+		width: 25px;
+		height: 35px;
+		position: relative;
+		cursor: pointer;
+		@include transition(transform, .3s, linear);
+
+		>span {
+			background-color: $color_vvm;
+			position: absolute;
+			display: block;
+			height: 2px;
+			margin-top: -1px;
+			width: 25px;
+			right: 0;
+			@include radius(2px);
+			@include transition(all, .3s, linear);
+
+			&:first-of-type {
+				top: 10px;
+			}
+
+			&:nth-of-type(2) {
+				width: 15px;
+				top: 50%;
+			}
+
+			&:last-of-type {
+				bottom: 9px;
+				width: 20px;
+			}
+		}
+
+		&.open {
+			@include transform(rotate(180deg));
+
+			>span:nth-of-type(2) {
+				display: none !important;
+			}
+
+			>span:first-of-type {
+				top: 17px;
+				@include transform(rotate(45deg));
+			}
+
+			>span:last-of-type {
+				width: 25px;
+				bottom: 17px;
+				@include transform(rotate(-45deg));
+			}
+		}
+	}
+
+	.search-vvm {
+		margin-top: 25px;
+		padding: 25px 0;
+		border-top: 1px solid $color_gray;
+	}
+
+	.list-vvm {
+		height: 100%;
+
+		#vvm-data {
+			
+			ul {
+				position: relative;
+				margin: -10px -25px 0;
+				height: 100%;
+				overflow-y: auto;
+			}
+
+			li {
+				padding: 0 25px;
+				@include transition(all, .3s, ease);
+
+				.action {
+					opacity: 0;
+					@include transition(opacity, .3s, ease);
+
+					.edit {
+						max-height: 25px;
+					}
+
+					.preview {
+						max-height: 30px;
+					}
+				}
+
+				&:hover, &.active {
+					background-color: $color_gray;
+
+					.action {
+						opacity: 1;
+					}
+
+					> div {
+						border-top: 0;
+					}
+				}
+
+				> div {
+					padding: 20px 0;
+				}
+
+				&:not(:first-of-type) > div {
+					border-top: 1px solid $color_gray;
+
+					&.specs-frame-style {
+						border: 0;
+					}
+				}
+			}
+		}
+	}
+
+	.main-menu-vvm {
+		display: none;
+		position: absolute;
+		right: -210px;
+		top: -10px;
+		overflow: hidden;
+		@include radius(15px);
+
+		&.show {
+			display: block;
+		}
+
+		canvas {
+			margin-right: 15px;
+			display: block;
+			background-repeat: no-repeat;
+			background-size: 25px;
+			background-position: center;
+			background-color: $color_vvm;
+			@include square(50px, 10px);
+		}
+
+		a {
+			padding: 10px 0;
+			display: block;
+			position: relative;
+			left: 0;
+			opacity: 0;
+			@include transition(opacity, .3s, ease-in);
+
+			&.show {
+				opacity: 1;
+			}
+		}
+	}
+}

@@ -1,0 +1,87 @@
+RewriteEngine On
+
+RewriteRule ^includes/ - [F,L]
+
+# If the requested file or directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Return a 404 error
+RewriteRule ^.*$ - [F,L]
+
+Order Deny,Allow
+Deny from 23.26.201.31
+Deny from 112.208.186.61
+
+
+
+Deny from 68.183.183.250
+Deny from 112.209.143.71
+Deny from 104.156.155.36
+Deny from  128.199.134.36
+Deny from 178.128.89.220
+
+Deny from 165.232.172.78
+Deny from 43.167.243.32
+Deny from 47.89.242.141
+Deny from 57.129.23.166 
+Deny from 15.235.41.22
+Deny from 128.199.243.235
+Deny from 47.251.99.88
+Deny from 178.215.236.175
+Deny from 27.45.41.217
+Deny from 152.32.107.230
+Deny from 101.36.114.124
+
+#RewriteCond %{HTTP_USER_AGENT} "Go-http-client" [NC]
+#RewriteRule .* - [F]
+
+RewriteCond %{HTTP_USER_AGENT} "Custom-AsyncHttpClient" [NC]
+RewriteRule .* - [F]
+
+# Block Python requests
+RewriteCond %{HTTP_USER_AGENT} "python" [NC]
+RewriteRule .* - [F]
+
+# Block SQLMap
+RewriteCond %{HTTP_USER_AGENT} "sqlmap" [NC]
+RewriteRule .* - [F]
+
+# Block Artillery
+RewriteCond %{HTTP_USER_AGENT} "artillery" [NC]
+RewriteRule .* - [F]
+
+# Block curl/7.54
+RewriteCond %{HTTP_USER_AGENT} "curl/7.54" [NC]
+RewriteRule .* - [F]
+
+# Block nvdorz
+RewriteCond %{HTTP_USER_AGENT} "nvdorz" [NC]
+RewriteRule .* - [F]
+
+# Block Odin
+RewriteCond %{HTTP_USER_AGENT} "odin" [NC]
+RewriteRule .* - [F]
+
+# Block Odin
+RewriteCond %{HTTP_USER_AGENT} "Odin" [NC]
+RewriteRule .* - [F]
+
+
+# Deny access to specific files (e.g., .htaccess itself and sensitive files)
+<FilesMatch "^\.ht">
+    Require all denied
+</FilesMatch>
+
+# Deny access to other sensitive file types (optional)
+<FilesMatch "\.(env|ini|log|sh|git|sh|jsa|dll|xml)$">
+    Require all denied
+</FilesMatch>
+
+# Redirect 404s for missing favicon (optional)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^favicon\.ico$ /path/to/default/favicon.ico [L,R=301]
+
+# Disable directory listing
+Options -Indexes
+

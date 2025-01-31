@@ -1,0 +1,152 @@
+<meta charset="utf-8">
+
+<?php if(!isset($_SESSION)){
+	session_start();
+}
+
+include("../connect.php");
+
+function checkProfileID($profile_id){
+	global $conn;
+
+	$arrProfileChecker= array();
+
+	$query="Select profile_id from profiles_info where profile_id= ? ";
+
+	$grabParams = array('profile_id');
+	$stmt = mysqli_stmt_init($conn);
+	if (mysqli_stmt_prepare($stmt, $query)) {
+
+		mysqli_stmt_bind_param($stmt, 's', $profile_id);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_bind_result($stmt, $result1);
+
+		while (mysqli_stmt_fetch($stmt)) {
+			$tempArray = array();
+
+			for ($i=0; $i < 1; $i++) {
+				$tempArray[$grabParams[$i]] = ${'result' . ($i+1)};
+			};
+
+			$arrProfileChecker[] = $tempArray;
+		};
+
+		mysqli_stmt_close($stmt);
+	}
+	else {
+		echo mysqli_error($conn);
+	};
+
+	if($arrProfileChecker){
+		$generate_id = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqxyz';
+		$profileID = "";
+
+		for ($i=0; $i < 17; $i++) {
+			$profileID .=$generate_id[rand(0, (strlen($generate_id)-1))];
+		};
+
+		$profileIDF=$_SESSION["store_code"]."-".date('ymd').$profileID;
+
+	}else{
+		$profileIDF=$profile_id;
+	}
+
+	return $profileIDF;
+}
+
+			// GENERATE AND ENCRYPTED PASSWORD FOR THE STORE REGISTER
+			// SET UP PROFILE PASSWORD
+			// SET UP PROFILE ID
+			$generate_id = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqxyz';
+			$generate_no = '0123456789';
+			$profileID = "";
+			$email = "";
+			for ($i=0; $i < 18; $i++) {
+
+				$profileID .=$generate_id[rand(0, (strlen($generate_id)-1))];
+
+			};
+			for ($i=0; $i < 10; $i++) {
+
+				$email .=$generate_no[rand(0, (strlen($generate_id)-1))];
+
+			};
+			$email = date('YmdHis').'guest@'.$_SESSION["store_code"].'sunniesstudios.com'.$email;
+
+			//$profileIDF=$_SESSION["store_code"]."-".$profileID;
+			$profileIDF=checkProfileID($_SESSION["store_code"]."-".date('ymd').$profileID);
+
+			$query="INSERT INTO profiles_info(
+				profile_id,
+				last_name,
+				first_name,
+				middle_name,
+
+				country,
+				province,
+				city,
+				barangay,
+				birthday,
+				age,
+				gender,
+				email_address,
+				phone_number,
+				branch_applied,
+				joining_date,
+				sales_person,
+				address
+			) VALUES (
+				?,
+				'guest',
+				'guest',
+				'guest',
+
+				'philippines',
+				'N/A',
+				'N/A',
+				'N/A',
+				'1900-01-01',
+				'0',
+				'N/A',
+				?,
+				'630123456789',
+				?,
+				?,
+				?,
+				'N/A'
+			)";
+
+			$stmt = mysqli_stmt_init($conn);
+
+			if (mysqli_stmt_prepare($stmt, $query)) {
+
+				mysqli_stmt_bind_param($stmt, 'sssss', $profileIDF, $email, $_SESSION["store_code"], now(), $_SESSION['id']);
+				mysqli_stmt_execute($stmt);
+			}
+
+			$query2 ="INSERT INTO profiles(
+				profile_id,
+				email_address,
+				password
+			) VALUES (
+				?,
+				?,
+				'Jan011970'
+			)
+			";
+
+			$stmt2 = mysqli_stmt_init($conn);
+
+			if (mysqli_stmt_prepare($stmt2, $query2)) {
+
+				mysqli_stmt_bind_param($stmt2, 'ss', $profileIDF, $email);
+				mysqli_stmt_execute($stmt2);
+			}
+		
+			$_SESSION["customer_id"] = $profileIDF;
+			$_SESSION['priority'] = $priority;
+
+			unset($_SESSION['email_taken']);
+			echo "	<script>	window.location='../../?page=select-store'</script>";
+
+?>

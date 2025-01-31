@@ -1,0 +1,147 @@
+<?php
+	
+$arrSpecs = array();
+
+$query =    "SELECT
+                LOWER(TRIM(LEFT(p51.item_name , LOCATE(' ', p51.item_name) - 1))) AS 'grab_style' ,
+                LOWER(REPLACE(item_name,  TRIM(LEFT(p51.item_name , LOCATE(' ', p51.item_name) - 1)), '')) AS 'grab_color',
+                p51.item_name,
+                p51.product_code,
+                p51.price,
+                pc.color_picker,
+                s.code,
+                LOWER(s.name),
+                m.code,
+                LOWER(m.name),
+                gc.code,
+                LOWER(gc.name),
+                f.code,
+                LOWER(f.name),
+                size.code,
+                LOWER(size.name),
+                col.code,
+                LOWER(col.name),
+                gen.code,
+                LOWER(gen.name),
+                img.image_url,
+                ps.status
+            FROM 
+                poll_51 p51
+                    LEFT JOIN products_colors pc
+                        ON pc.product_code = p51.product_code
+                    LEFT JOIN poll_51_shapes s
+                        ON s.code = p51.shape
+                    LEFT JOIN poll_51_materials m
+                        ON m.code = p51.material
+                    LEFT JOIN poll_51_general_colors gc
+                        ON gc.code = p51.general_color
+                    LEFT JOIN poll_51_finish f
+                        ON f.code = p51.finish
+                    LEFT JOIN poll_51_sizes size
+                        ON size.code = p51.size
+                    LEFT JOIN poll_51_collections col
+                        ON col.code = p51.collection
+                    LEFT JOIN poll_51_genders gen
+                        ON gen.code = p51.gender
+                    LEFT JOIN poll_51_image_urls img
+                        ON img.product_code = p51.product_code
+                    LEFT JOIN poll_51_status ps
+                        ON ps.product_code = p51.product_code
+            WHERE 
+                p51.item_name LIKE '%".$_GET['style']."%'
+            ORDER BY
+                grab_style ASC, p51.product_code ASC";
+
+$arrParams= array(
+    "item_description",
+    "color",
+    "full_item_description",
+    "product_code",
+    "price",
+    "color_picker",
+    "shapes_code",
+    "shapes_name",
+    "material_code",
+    "material_name",
+    "general_color_code",
+    "general_color_name",
+    "finish_code",
+    "finish_name",
+    "size_code",
+    "size_name",
+    "collection_code",
+    "collection_name",
+    "gender_code",
+    "gender_name",
+    "image_url",
+    "status"
+);
+
+$stmt = mysqli_stmt_init($conn);
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15, $result16, $result17, $result18, $result19, $result20, $result21, $result22);
+
+    while (mysqli_stmt_fetch($stmt)) {
+
+        $tempArray = array();
+
+        for ($i=0; $i < sizeOf($arrParams); $i++) { 
+
+            $tempArray[$arrParams[$i]] = ${'result' . ($i+1)};
+
+        };
+
+        $arrSpecs[] = $tempArray;
+
+    };
+
+    mysqli_stmt_close($stmt);    
+                            
+}
+else {
+
+    echo mysqli_error($conn);
+
+};
+
+//////////////////////////////////////////////////// ADD IMAGE URLS
+
+// // Cycle through the frames to see which images exist
+// for ($i=0; $i < sizeOf($arrSpecs); $i++) { 
+
+//     // Set current data
+//     $style = $arrSpecs[$i]['item_description'];
+//     $color = str_replace(' ', '-', trim($arrSpecs[$i]['color']));
+
+//     // Set up images
+//     $img = "/images/specs/".$style."/".$color."/front.png";
+//     $img_placeholder = "/images/specs/no-image/no_specs_frame_available_b.png";
+//     $img_thumbnail = file_exists($_SERVER["DOCUMENT_ROOT"] . $img) ? $img : $img_placeholder;
+
+//     $arrSpecs[$i]['image_url'] = $img_thumbnail;
+
+// };
+
+//////////////////////////////////////////////////// GRAB ARRAY ID
+
+// Set position ID
+$posID = 0;
+
+// Cycle through the frames to see which should be selected
+for ($i=0; $i < sizeOf($arrSpecs); $i++) { 
+  
+    // Set current data
+    $curProductCode = $arrSpecs[$i]['product_code'];
+
+    // Check GET
+    if($_GET['product_code'] == $curProductCode) {
+
+        $posID = $i;
+
+    };
+
+};
+
+?>

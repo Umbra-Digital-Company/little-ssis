@@ -1,0 +1,52 @@
+.btn {
+	height: 40px;
+	border: 0;
+	padding: 10px 30px;
+	text-transform: uppercase;
+	box-shadow: none !important;
+	outline: none !important;
+	font-size: $fz_small;
+	font-family: $ff_medium;
+	@include radius(40px);
+}
+
+.btn-link {
+	text-decoration: none !important;
+}
+
+.btn-primary {
+	@include button($color_primary);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+	opacity: .65;
+	@include button($color_primary);
+}
+
+.btn-secondary {
+	@include button($color_secondary);
+}
+
+.btn-secondary.disabled,
+.btn-secondary:disabled {
+	opacity: .65;
+	@include button($color_secondary);
+}
+
+.btn-vvm {
+	color: $color_default;
+	@include button($color_vvm);
+}
+
+.btn-vvm-outline {
+	color: $color_vvm;
+	border: 1px solid $color_vvm;
+	@include button(transparent);
+}
+
+.btn-vvm.disabled,
+.btn-vvm:disabled {
+	opacity: .65;
+	@include button($color_vvm);
+}

@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+@import 'keyframes';
+@import 'fonts';
+@import 'typography';
+
+body * {
+	font-size: $fz_normal;
+	letter-spacing: 1px;
+	font-family: $ff_regular;
+	color: $color_dark;
+}
+
+body {
+	background-color: $color_gray;
+}

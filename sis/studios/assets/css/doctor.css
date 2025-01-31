@@ -1,0 +1,52 @@
+body {
+    background-color: #051046 !important;
+}
+
+body #admin-bar {
+    background-color: #051046;
+    -webkit-box-shadow: 0 5px 15px 0 rgba(5, 16, 70, 0.55);
+    box-shadow: 0 5px 15px 0 rgba(5, 16, 70, 0.55);
+}
+
+.btn-primary {
+    background-color: #051046;
+}
+
+.btn-primary:not([disabled]):hover,
+.btn-primary:not([disabled]):focus,
+.btn-primary *:not([disabled]):active {
+    background-color: #081866 !important;
+}
+
+.btn-default {
+    background-color: #f7f7f7;
+    color: #051046;
+}
+
+.btn-default:not([disabled]):hover,
+.btn-default:not([disabled]):focus,
+.btn-default *:not([disabled]):active {
+    background-color: #e2dddd !important;
+}
+
+.text-primary,
+.checkbox:checked ~ label:not(.custom_checkbox) {
+    color: #051046 !important;
+}
+
+#ssis_sidebar #ssis_menu li canvas,
+.list-item.active.non-tints,
+.list-item.lens-upgrade.active.tints,
+.frame-action,
+.list-item.prescription.active {
+    background-color: #051046;
+}
+
+.frame-list input:checked ~ label::before {
+    border-right-color: #051046;
+    border-top-color: #051046; 
+}
+
+.step-progress .progress-bar {
+    background-color: #879af6 !important;
+}

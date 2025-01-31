@@ -1,0 +1,98 @@
+.stretch {
+	height: 100%;
+}
+
+#template_section {
+	opacity: 0;
+
+	.custom-card {
+		background-color: #fff;
+		-webkit-box-shadow: none !important;
+		box-shadow: none !important;
+		@include transition(background-color, .3s, ease);
+
+		&.drawer {
+			background-color: #caa177;
+		}
+
+		> p {
+			margin-bottom: 15px;
+		}
+
+		.planogram-holder {
+
+			.empty-planogram {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				padding: 15px;
+				background-color: $color_default;
+				z-index: 5;
+				@include radius(15px 15px 0 0);
+
+				.btn {
+					width: 100%;
+				}
+			}
+		}
+
+	}
+	
+	.wall-holder {
+		position: relative;
+		margin: 0 -15px;
+		padding: 0 15px;
+
+		.wall-frame-container {
+
+			p {
+				white-space: nowrap;
+				display: block;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+			}
+		}
+	}
+
+	.slick-track {
+		margin: 0;
+	}
+
+	/* the slides */
+	.slick-slide {
+		margin: 0 15px;
+	}
+
+	/* the parent */
+	.slick-list {
+		margin: 0 -15px;
+	}
+
+	#details-panel {
+		max-width: 300px;
+
+		@media (min-width:1600px) {
+			max-width: 400px;
+		}
+
+		.template-action > .d-block {
+			padding: 10px 0;
+			cursor: pointer;
+
+			canvas {
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 20px;
+				@include square(50px, 50px);
+				@include box_shadow(0, 3px, 6px, 0, rgba($color_dark, 0.15));
+			}
+
+			label {
+				cursor: pointer;
+			}
+		}
+	}
+}

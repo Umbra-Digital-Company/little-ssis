@@ -1,0 +1,35 @@
+.personal-card {
+	@include custom_card(8px, 3px, 6px);
+
+	.gender-icon {
+		display: block;
+		margin-right: 10px;
+		background-color: $color_dark;
+		background-repeat: no-repeat;
+		background-size: 25px;
+		background-position: center;
+		@include square(50px, 50px);
+	}
+
+	#edit-personal {
+		display: block;
+		max-width: 20px;
+	}
+
+	#show-more {
+		display: block;
+		max-width: 25px;
+	}
+}
+
+.details-list span {
+	display: block;
+	min-width: 20px;
+	max-width: 20px;
+	margin-right: 10px;
+	@include square(20px);
+
+	img {
+		max-height: 20px;
+	}
+}

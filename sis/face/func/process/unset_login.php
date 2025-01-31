@@ -1,0 +1,19 @@
+<?php 
+session_save_path($_SERVER["DOCUMENT_ROOT"]."/cgi-bin/tmp");
+session_start();
+if(isset($_SESSION['login_set'])){
+    unset($_SESSION['login_set']);
+}
+if(isset($_SESSION['guest_customer'])){
+    unset($_SESSION['guest_customer']);
+}
+if(isset($_SESSION['customer_id'])){
+    unset($_SESSION['customer_id']);
+}
+if(isset($_SESSION['order_no'])){
+    unset($_SESSION['order_no']);
+}
+if(isset($_SESSION['priority'])){
+    unset($_SESSION['priority']);
+}
+?>

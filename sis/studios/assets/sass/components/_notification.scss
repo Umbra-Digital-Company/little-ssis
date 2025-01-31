@@ -1,0 +1,23 @@
+#admin-bar {
+	.notification {
+		position: relative;
+		width: 40px;
+
+		span.notif-alert {
+			position: absolute;
+			background-color: transparent;
+			display: block;
+			top: 8px;
+			right: 8px;
+			@include square(5px, 5px);
+
+			&.new {
+				background-color: $color_danger;
+			}
+		}
+	}
+	
+	.language {
+		width: 50px;
+	}
+}

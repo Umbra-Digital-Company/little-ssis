@@ -1,0 +1,27 @@
+.ssis-2 nav {
+    padding: 30px;
+}
+.ssis-2 nav .menu  {            
+    width: 50px;
+    padding: 10px;
+    cursor: pointer;
+}
+.ssis-2 nav .menu > div  {
+    width: 100%;
+    height: 3px;
+    background-color: #000000;
+}
+.ssis-2 nav .menu #menu-a,
+.ssis-2 nav .menu #menu-b {
+    margin-bottom: 6px;
+}
+.ssis-2 nav img {
+	max-width: 150px;
+	width: 100%;
+}
+
+@media screen and (min-width:1200px) {
+    .ssis-2 nav img {
+        max-width: 200px;
+    }
+}

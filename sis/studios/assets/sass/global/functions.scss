@@ -1,0 +1,11 @@
+@function asset($type, $file) {
+	@return url($asset-base-path + '/' + $type + '/' + $file);
+}
+
+@function image($file) {
+	@return asset('images', $file);
+}
+
+@function font($file) {
+	@return asset('fonts', $file);
+}

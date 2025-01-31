@@ -1,0 +1,44 @@
+.switch-layout {
+	position: relative;
+	width: 250px;
+	overflow: hidden;
+	margin: 0 auto;
+	border: 1px solid $color_secondary;
+	@include radius(40px);
+
+	.switch-animation {
+		width: 135px;
+		display: block;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: $color_secondary;
+		@include radius(40px);
+		@include transition(left, .3s, linear);
+
+		&.slide {
+			left: 115px;
+		}
+	}
+
+	.account-navigation {
+		a {
+			color: $color_secondary;
+			height: 40px;
+			padding: 10px 20px;
+
+			&.active {
+				color: $color_default;
+			}
+		}
+	}
+}
+
+.account-content {
+	display: none;
+
+	&.active {
+		display: block;
+	}
+}

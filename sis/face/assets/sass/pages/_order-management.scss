@@ -1,0 +1,120 @@
+.overview-top-bar {
+	
+	#input_search {
+		margin-right: 10px;
+	}
+
+	#change_theme {
+		background-color: $color_default;
+		min-width: 40px;
+		background-repeat: no-repeat;
+		background-size: 25px;
+		background-position: center;
+		@include square(40px, 8px);
+		@include box_shadow(0, 2px, 3px, 0, rgba($color_dark, .25) !important);
+	}
+}
+
+.overview-content {
+
+	.overview-table {
+		max-height: 305px;
+	}
+
+	.alert {
+		display: none;
+	}
+}
+
+.overview-details {
+	padding-bottom: 65px;
+
+	.details-navigation {
+		position: fixed;
+		width: 100%;
+		left: 0;
+		bottom: 0;
+		background-color: $color_default;
+		padding: 15px 0;
+		@include radius(20px 20px 0 0);
+		@include box_shadow(0, -2px, 15px, 5px, rgba($color_dark, .15) !important);
+
+		canvas {
+			width: 100%;
+			height: 35px;
+			background-repeat: no-repeat;
+			background-size: 35px;
+			background-position: center;
+
+			&.nav-1 {
+				background-image: image('/icons/icon-exit.png');
+			}
+
+			&.nav-2 {
+				background-image: image('/icons/icon-personal-details.png');
+
+				&.active {
+					background-image: image('/icons/icon-personal-details-primary.png');
+
+					&.doctor {
+						background-image: image('/icons/icon-personal-details-theme-doctor.png');
+					}
+				}
+			}
+
+			&.nav-3 {
+				background-image: image('/icons/icon-prescription-details.png');
+
+				&.active {
+					background-image: image('/icons/icon-prescription-details-primary.png');
+
+					&.doctor {
+						background-image: image('/icons/icon-prescription-details-theme-doctor.png');
+					}
+				}
+			}
+
+			&.nav-4 {
+				background-image: image('/icons/icon-order-details.png');
+
+				&.active {
+					background-image: image('/icons/icon-order-details-primary.png');
+
+					&.doctor {
+						background-image: image('/icons/icon-order-details-theme-doctor.png');
+					}
+				}
+			}
+		}
+
+		
+	}
+
+	.details-content {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	#order-content {
+
+		.order-list img {
+			max-width: 80px;
+			margin-right: 15px;
+
+			&.signature {
+				max-width: 100%;
+			}
+		}
+
+		.list-item span {
+			font-size: $fz_small;
+
+			a {
+				font-size: 10px;
+			}
+		}
+	}
+}

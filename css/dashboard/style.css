@@ -1,0 +1,354 @@
+
+.mb-none {
+    margin-bottom: 0;
+}           
+
+.show-title {
+    width: 100%;
+}
+.show-title p {
+    margin-bottom: 0;
+    font-size: 12px;
+}
+.show-title #filterBTN .btn:active {
+    background: ;
+}
+.row-filter-options .collapse {
+    margin-bottom: 30px;
+}
+#showLocation > .row,
+#showDateTime > .row {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+#showLocation > .row .f-title,
+#showDateTime > .row .f-title {
+    font-size: 15px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 5px;
+}
+#showLocation #optionAllStoresLabel {
+    background: #7b7b9c;
+    color: #ffffff;
+    padding: 5px 10px;
+}
+.row-data-range select {
+    padding: 5px;
+}
+.btn-submit-store-form {
+    margin-top: 30px;
+    min-width: 100px;           
+}
+.table_div_head,
+#table_div {
+    background: #ffffff;
+}
+.table_div_head {
+    font-family: 'Poppins-Medium';
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px solid #eeeeee;          
+    text-align: center;
+}
+.table_div_head p {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+.table-header-black {
+    background: #000000;
+    color: #ffffff;
+}
+.table-header-black th {
+    font-family: 'Poppins-Medium' !important;
+    text-transform: uppercase !important;
+    padding: 10px 15px !important;
+    background-image: none !important;
+}
+.table-row-style td {
+    padding: 10px 15px !important;
+    font-family: 'Poppins-Medium' !important;
+}  
+
+/************************************************ CUSTOM CHARTS **/
+
+/* PRESCRIPTION TYPE */
+
+#prx-split {
+    height: 400px;                          
+}
+#prx-split > div {
+    height: 100%;
+    background: #ffffff;
+}
+#prx-split > div .row-title {
+    height: 20%;
+}
+#prx-split > div .row-title p {
+    margin-bottom: 0;
+    width: 50%;
+    margin-left: 15px;
+    text-align: center;
+}
+#prx-split > div > div {
+    height: 80%;
+}
+#prx-split > div .fillUP-container {
+    height: 100%;
+}
+#prx-split > div .fillUP-container #fillUP {
+    height: 100%;
+    padding-top: 5%;
+    padding-bottom: 25%;
+    width: 50px;
+    margin: 0 auto;
+}
+#prx-split > div .fillUP-container #fillUP #withPRX {
+    height: 50%;
+    background: #dc3912;
+    border-bottom: 1px solid #ffffff;
+}
+#prx-split > div .fillUP-container #fillUP #withoutPRX {
+    height: 50%;
+    background: #3366cc;
+    border-top: 1px solid #ffffff;
+}
+#prx-split > div .fillUP-container #fillUP > div {
+    position: relative;
+}
+#prx-split > div .fillUP-container #fillUP > div > p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 70px;
+    margin-bottom: 0;    
+    width: 200%;
+}
+#prx-split > div .list-container > .list {
+    padding-bottom: 25%;
+}
+#prx-split > div .list-container > .list p {
+    margin-bottom: 0;
+}
+#prx-split > div .list-container > .list p span {
+    font-size: 30px;                            
+}
+#prx-split > div .list-container > .list p #list-withPRX {
+    color: #dc3912;
+}
+#prx-split > div .list-container > .list p #list-withoutPRX {
+    color: #3366cc;
+}
+
+/* GENDER */
+
+#gender {
+    height: 400px;
+}
+#gender > div {
+    height: 100%;
+    background: #ffffff;
+}
+#gender > div .row-title {
+    height: 20%;
+}
+#gender > div .row-title p {
+    margin-bottom: 0;
+    width: 50%;
+    margin-left: 15px;
+    text-align: center;
+}
+#gender > div > div {
+    height: 80%;
+}
+#gender > div .fillUP-container {
+    height: 100%;
+}
+#gender > div .fillUP-container #fillUP {
+    height: 100%;
+    padding-top: 5%;
+    padding-bottom: 25%;
+    width: 50px;
+    margin: 0 auto;
+}
+#gender > div .fillUP-container #fillUP #male {
+    height: 50%;
+    background: #dc3912;
+    border-bottom: 1px solid #ffffff;
+}
+#gender > div .fillUP-container #fillUP #female {
+    height: 50%;
+    background: #3366cc;
+    border-top: 1px solid #ffffff;
+}
+#gender > div .fillUP-container #fillUP > div {
+    position: relative;
+}
+#gender > div .fillUP-container #fillUP > div > p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 70px;
+    margin-bottom: 0;    
+    width: 200%;
+}
+#gender > div .list-container > .list {
+    padding-bottom: 25%;
+}
+#gender > div .list-container > .list p {
+    margin-bottom: 0;
+}
+#gender > div .list-container > .list p span {
+    font-size: 30px;                            
+}
+#gender > div .list-container > .list p #list-male {
+    color: #dc3912;
+}
+#gender > div .list-container > .list p #list-female {
+    color: #3366cc;
+}
+
+/* PRESCRIPTION BREAKDOWN */
+
+#prx-breakdown {
+    height: 400px;                          
+}
+#prx-breakdown > div {
+    height: 100%;
+    background: #ffffff;
+}
+#prx-breakdown > div .row-title {
+    height: 20%;
+}
+#prx-breakdown > div .row-title p {
+    margin-bottom: 0;
+    width: 100%;
+    margin-left: 15px;
+    text-align: center;
+}
+#prx-breakdown > div > div {
+    height: 80%;
+}
+#prx-breakdown > div .fillUP-container {
+    height: 50px;
+}
+#prx-breakdown > div .fillUP-container #fillUP {
+    height: 50px;
+    /*padding-top: 5%;
+    padding-bottom: 25%;*/
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+#prx-breakdown > div .fillUP-container #fillUP > div {
+    width: 14%;
+    height: 50px;
+    float: left;
+    border-right: 1px solid #ffffff;
+}
+#prx-breakdown > div .fillUP-container #fillUP #single_vision_stock {    
+    background: #dc3912;
+}
+#prx-breakdown > div .fillUP-container #fillUP #single_vision_rx {    
+    background: #3366cc;
+}
+#prx-breakdown > div .fillUP-container #fillUP #double_vision_stock {    
+    background: #ff9900;
+}
+#prx-breakdown > div .fillUP-container #fillUP #double_vision_rx {    
+    background: #109618;
+}
+#prx-breakdown > div .fillUP-container #fillUP #progressive_stock {    
+    background: #e7cdeb;
+}
+#prx-breakdown > div .fillUP-container #fillUP #progressive_rx {    
+    background: #0099c6;
+}
+#prx-breakdown > div .fillUP-container #fillUP #special_order {    
+    background: #dd4477;
+}
+#prx-breakdown > div .fillUP-container #fillUP > div {
+    position: relative;
+}
+#prx-breakdown > div .fillUP-container #fillUP > div > p {
+    /*position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 70px;
+    margin-bottom: 0;    
+    width: 200%;*/
+    display: none;
+}
+#prx-breakdown > div .list-container > .list {
+    padding-left: 15%;
+    padding-right: 15%;    
+}
+#prx-breakdown > div .list-container > .list p {
+    margin-bottom: 0;
+}
+#prx-breakdown > div .list-container > .list p span {
+    font-size: 20px;                            
+}
+#prx-breakdown > div .list-container > .list p #list-single_vision_stock {
+    color: #dc3912;
+}
+#prx-breakdown > div .list-container > .list p #list-single_vision_rx {
+    color: #3366cc;
+}
+#prx-breakdown > div .list-container > .list p #list-double_vision_stock {
+    color: #109618;
+}
+#prx-breakdown > div .list-container > .list p #list-double_vision_rx {
+    color: #109618;
+}
+#prx-breakdown > div .list-container > .list p #list-progressive_stock {
+    color: #e7cdeb;
+}
+#prx-breakdown > div .list-container > .list p #list-progressive_rx {
+    color: #0099c6;
+}
+#prx-breakdown > div .list-container > .list p #list-special_order {
+    color: #dd4477;
+}
+
+/* LOCATIONS */
+
+#location > div {    
+    background: #ffffff;
+}
+#location .head {
+    font-family: 'Poppins-Medium';
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 1px solid #eeeeee;          
+    text-align: center;
+}
+#location .head p {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+#location .body {
+    max-height: 750px;
+    overflow-y: scroll;
+    padding-top: 15px;
+}
+#location .body .city {
+    float: left;
+    margin-bottom: 15px;
+}
+#location .body .city p {
+    position: relative;
+    margin-bottom: 0;
+    padding: 15px;
+    border: 1px solid #000;
+}
+#location .body .city p span {
+    position: absolute;
+    right: 15px;
+    padding-left: 15px;
+    width: 36px;
+    border-left: 1px solid #000;    
+}

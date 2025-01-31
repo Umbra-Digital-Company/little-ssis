@@ -1,0 +1,48 @@
+.checkbox {
+
+	~ .custom_checkbox {
+		margin: 0;
+		width: 25px;
+		height: 25px;
+		background-image: image('/icons/icon-uncheck.png');
+		background-size: 25px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	&:checked ~ .custom_checkbox {
+		background-image: image('/icons/icon-checked.png');
+	}
+
+	&:checked ~ label:not(.custom_checkbox) {
+		font-weight: 700;
+		color: $color_primary;
+	}
+}
+
+.final_rx_opt {
+	
+	~ label {
+		padding-top: 11px;
+		padding-bottom: 11px;
+	}
+
+	&.disabled {
+		~ label {
+			color: $color_secondary !important;
+			position: relative;
+
+			&::after {
+				content: '';
+				display: block;
+				width: 24px;
+				height: 1px;
+				background-color: $color_secondary;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				@include transform(translate(-50%,-50%));
+			}
+		}
+	}
+}

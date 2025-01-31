@@ -1,0 +1,462 @@
+.template-name {
+	margin-bottom: 30px;
+	position: relative;
+
+	.template-action {
+		display: none;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		margin-top: -20px;
+
+		@media (min-width:1600px) {
+			display: block;
+		}
+	}
+}
+
+#panel-top-bar {
+	margin-bottom: 30px;
+
+	@media (min-width:1600px) {
+		display: none;
+	}
+
+	a {
+		padding: 10px 20px;
+		margin: 0 10px;
+		background-color: $color_default;
+		color: $color_vvm !important;
+		@include transition(all, .3s, ease);
+		@include radius(40px);
+
+		&:hover,
+		&:focus {
+			background-color: lighten($color_vvm, 25%);
+			color: $color_default !important;
+		}
+
+		&.active {
+			background-color: $color_vvm;
+			color: $color_default !important;
+		}
+	}
+}
+
+.panels {
+	position: relative;
+
+	.panel-scroll {
+		background-color: $color_default;
+		display: none;
+		height: calc(100% - 30px);
+		padding: 10px 25px;
+		@include radius(20px);
+		@include box_shadow(0, 6px, 18px, 0, rgba($color_dark, .10) !important);
+	}
+
+	.panel {
+		position: relative;
+		height: 100%;
+		margin: 0 -25px;
+		padding: 0 25px;
+
+		.add-block {
+			padding: 15px; 
+
+			&.brd-black {
+				border: 2px dashed  $color_brown;
+				@include radius(15px);
+				cursor: pointer;
+
+				p {
+					color: $color_secondary;
+				}
+
+				img {
+					max-width: 35px;
+				}
+			}
+
+		}
+	}
+}
+
+#left-panel {
+
+	.row-wall-block {
+		position: relative;
+		padding: 10px 0;
+
+		.add-block.change {
+			position: absolute;
+			right: 0;
+			top: 0;
+			padding: 0;
+			z-index: 5;
+			display: none;
+			cursor: pointer;
+			width: 40px;
+			height: 40px;
+			background: $color_vvm;
+			padding: 9px;
+			@include radius(40px);
+
+			img {
+				width: 25px;
+			}
+		}
+
+		&:hover .change {
+			display: block !important;
+		}
+	}
+
+	div.upload-image-wall {
+		
+		&::after {
+			content: 'Upload';
+			position: absolute;
+			display: block;
+			font-size: $fz_huge;
+			top: 50%;
+			left: 50%;
+			color: $color_default;
+			@include transform(translate(-50%, -50%));
+		}
+
+		&.uploaded::after {
+			display: none;
+		}
+	}
+
+	.wall-banner {
+		position: relative;
+		width: 100%;
+		background-color: $color_gray;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		cursor: pointer;
+		@include radius(10px);
+
+		&.banner-sub {
+			max-height: 150px;
+
+			@media (min-width:1600px) {
+				max-height: 100px;
+			}
+		}
+
+		&.uploaded {
+			border: 0;
+			@include radius(0);
+		}
+	}
+
+	.edit-block {
+
+		.wall-frame-container>div {
+			position: relative;
+			height: 50px;
+			padding: 10px;
+			border: 2px dashed $color_brown;
+			@include radius(10px);
+
+			> img {
+				max-height: 25px;
+			}
+		}
+
+		.sample-holder {
+			display: block;
+			border: 3px solid $color_brown;
+			background: $color_brown;
+			width: 100%;
+			margin-top: 15px;
+		}
+	} 
+
+	.edit-block .wall-frame-container {
+
+		.mini-tooltip {
+			font-size: 8px;
+			white-space: nowrap;
+		}
+
+		.remove-frame {
+			display: none;
+			position: absolute;
+			top: 40px;
+			left: 50%;
+			margin-left: -12px;
+			z-index: 5;
+			cursor: pointer;
+
+			img {
+				width: 25px;
+			}
+		}
+
+		&:hover .remove-frame {
+			display: block;
+		}
+	}
+}
+
+#right-panel {
+	display: none;
+
+	.drawer-divider {
+		margin: 15px 0;
+		border: 5px solid $color_brown;
+		background: $color_brown;
+		@include radius(5px);
+	}
+
+	.drawer-row .row-fh {
+		position: relative;
+		padding: 10px 0 0;
+		margin: 0 -5px -10px;
+
+		> div {
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+
+		.row-qh {
+			margin: 0 -5px;
+
+			> .rounded-container {
+				padding: 20px 5px;
+
+				.remove-frame {
+					display: none;
+					position: absolute;
+					top: 30px;
+					left: 50%;
+					margin-left: -12px;
+					z-index: 5;
+					cursor: pointer;
+
+					img {
+						width: 25px;
+					}
+				}
+
+				&:hover .remove-frame {
+					display: block;
+				}
+			}
+
+			&.row-center {
+
+
+				> div {
+					padding: 0 5px;
+
+					.rounded-container {
+						padding: 20px 5px;
+					}
+				}
+			}
+		}
+	}
+
+	.drawer-row .row-fh .rounded-container {
+		height: 100%;
+		padding-top: 20px;
+		padding-bottom: 20px;
+
+		&.uploader-image {
+			position: relative;
+
+			&::after {
+				content: 'Upload';
+				position: absolute;
+				display: block;
+				font-size: $fz_large;
+				top: 50%;
+				left: 50%;
+				color: $color_default;
+				@include transform(translate(-50%, -50%));
+			}
+
+			&.normal::after {
+				font-size: $fz_normal;
+			}
+
+			&.smaller::after {
+				font-size: $fz_small;
+			}
+
+			&.contain {
+				background-color: transparent;
+				@include radius(10px);
+
+				&::after {
+					display: none;
+				}
+			}
+
+			.upload-image-b {
+				max-height: 50px;
+			}
+		}
+
+		canvas {
+			display: block;
+			height: 100%;
+			width: 100%;
+			background-color: $color_gray;
+			@include radius(10px);
+		}
+	}
+
+	.drawer-row .row-fh .rounded-container>div {
+		position: relative;
+		height: 50px;
+		padding: 10px;
+		border: 2px dashed $color_brown;
+		@include radius(10px);
+	}
+
+	.drawer-row .row-fh .rounded-container>div img {
+		max-height: 25px;
+	}
+
+	.drawer-row .row-fh .rounded-container>div p {
+		font-size: 8px;
+		position: absolute;
+		top: -30px;
+
+		&.tooltip-color {
+			top: -20px;
+			white-space: nowrap;
+		}
+	}
+
+	.drawer-row .row-th {
+		height: 75%;
+	}
+
+	.drawer-row .row-th>div,
+	.drawer-row .row-th>div>div {
+		height: 100%;
+	}
+
+	.drawer-row .row-fh .row-th .rounded-container {
+		height: 33.33%;
+		padding: 5px;
+	}
+
+	.drawer-row .row-fh .row-th .frame {
+		height: 66.66% !important;
+	}
+
+	.edit-drawer-template {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 0;
+		z-index: 5;
+		display: none;
+		cursor: pointer;
+		width: 40px;
+		height: 40px;
+		background: $color_vvm;
+		padding: 9px;
+		@include radius(40px);
+
+		img {
+			width: 25px;
+		}
+	}
+
+	.row-fh:hover .edit-drawer-template {
+		display: block;
+	}
+
+	@media (min-width: 1600px) {
+
+		display: block;
+	}
+}
+
+#treasure-chest {
+	width: 400px;
+	min-width: 400px;
+	max-width: 400px;
+	margin-left: 30px;
+
+	.panel-scroll {
+		background-color: $color_vvm;
+	}
+
+	.treasure {
+		padding: 25px 0 50px;
+
+		img {
+			max-height: 80px;
+			margin: 0 auto;
+			display: block;
+			cursor: move; /* fallback if grab cursor is unsupported */
+			cursor: grab;
+			cursor: -moz-grab;
+			cursor: -webkit-grab;
+
+			&:active {
+				cursor: grabbing;
+				cursor: -moz-grabbing;
+				cursor: -webkit-grabbing;
+			}
+
+			&.ui-draggable-dragging {
+				@include transform(scale(0.6));
+			}
+		}
+	}
+
+	.frame-container {
+		position: relative;
+
+		&::before,
+		&::after {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 25px;
+			left: 0;
+			z-index: 5;
+			position: absolute;
+			background: $color_default;
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+		}
+
+		.search-frame {
+			position: absolute;
+			z-index: 50;
+			top: -25px;
+			width: 90%;
+			left: 5%;
+		}
+
+		#search-result {
+			position: relative;
+			padding: 50px 25px 25px;
+			background-color: $color_default;
+			@include radius(20px);
+
+			> div {
+				padding: 15px 0;
+			}
+		}
+	}
+}
