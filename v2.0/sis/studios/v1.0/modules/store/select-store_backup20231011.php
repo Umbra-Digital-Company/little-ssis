@@ -127,7 +127,7 @@
             </div>
             <div class="col-12 col-lg-6 mt-4">
                 <a href="./?page=select-merch" id="studios" class="select-link">                    
-                    <div  class="card" style="height: 254px; padding: 14px; text-align: center; border-radius: 0; background-image: url(/sis/studios/assets/images/sections/merch.webp?v=1614047286); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    <div  class="card" style="height: 254px; padding: 14px; text-align: center; border-radius: 0; background-image: url(/v2.0/sis/studios/assets/images/sections/merch.webp?v=1614047286); background-size: cover; background-position: center; background-repeat: no-repeat;">
                     </div>
                 </a>
             </div>
@@ -280,10 +280,10 @@
 
                 curStyle = arrCart[i].style;
                 curColor = arrCart[i].color.trim();
-                // curColor = arrCart[i].color.trim().replace(/ /g, "-");
-                // curColor = curColor.replace(/-f/g, "-full");
-                // curColor = curColor.replace(/-m/g, "-mirror");
-                // curColor = curColor.replace(/-gdt/, "-g");
+                // curColor = arrCart[i].color.trim().replace(/v2.0/ /g, "-");
+                // curColor = curColor.replace(/v2.0/-f/g, "-full");
+                // curColor = curColor.replace(/v2.0/-m/g, "-mirror");
+                // curColor = curColor.replace(/v2.0/-gdt/, "-g");
                 // curImageURL = "images/studios/"+curStyle+"/"+curColor+"/front.png";
                 width = '';
                 curImageURL =  arrCart[i].image_url;

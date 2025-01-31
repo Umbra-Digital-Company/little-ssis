@@ -193,28 +193,22 @@ if (!isset($_SESSION['customer_id'])) {
 				<!-- <p class="font-bold text-uppercase text-primary"><?= $arrTranslate['Personal Details'] ?> </p> -->
 
 				<div class="d-flex form-row form-group justify-content-center mt-3">
-
-
-
-					<div class="form-group col-md-2 col-sm-2" id="div_area_codes"
-						style='padding-left: 0px; padding-right: 0px; margin: 0px; display: none'>
-						<select class="text-left select mh-40 form-control" name="country_codes_login"
-							id="country_codes_login"
-							style="margin: 0px; padding-top:0px; padding-bottom:0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">
-							<option></option>
-						</select>
-						<label class="placeholder" for="country_codes_login">Area Code</label>
-					</div>
-
-
-					<div class="form-group col-md-12 col-sm-12" id="div_mobile_number">
+					<div class="form-group col-md-12 col-sm-12 d-flex" id="div_mobile_number">
+						<div class="form-group col-md-3 col-sm-3" id="div_area_codes"
+							style='padding-left: 0px; padding-right: 0px; margin: 0px; display: none'>
+							<select class="text-left select form-control" name="country_codes_login"
+								id="country_codes_login">
+								<option></option>
+							</select>
+							<!-- <label class="placeholder" for="country_codes_login">Area Code</label> -->
+						</div>
 						<input type="text" name="username" class="form-control text-lowercase" id="username"
 							required="required" autocomplete="nope" />
 						<label class="placeholder email" display="none"
 							for="username"><?= $arrTranslate['Email or Mobile Number'] ?></label>
 
 						<p class="text-danger" id="msg" style="font-size: 14px;"></p>
-						<span class="mobile-format" id="mobile-format_login" style="display: none;"></span>
+						<!-- <span class="mobile-format" id="mobile-format_login" style="display: none;"></span> -->
 					</div>
 
 					<div class="form-group col-md-12 col-sm-12 mt-2" id="div_birthdate" data-provide="datepicker">
@@ -225,49 +219,10 @@ if (!isset($_SESSION['customer_id'])) {
 						<input name="year" id="year" hidden value="">
 					</div>
 				</div>
-
-				<!-- <p class="font-bold text-uppercase text-primary mt-3"><?= $arrTranslate['Birthdate'] ?></p> -->
-
-				<!-- <div class="d-flex form-row form-group justify-content-center mt-3">
-					<div class="col-4 form-group">
-						<select name="month" id="birthMonth" class="form-control">
-							<option value=""><?= strtoupper($arrTranslate['Month']) ?></option>
-							<?php
-							$arrMonth = ['Jan' => 'January', 'Feb' => 'February', 'Mar' => 'March', 'Apr' => 'April', 'May' => 'May', 'Jun' => 'June', 'Jul' => 'July', 'Aug' => 'August', 'Sep' => 'September', 'Oct' => 'October', 'Nov' => 'November', 'Dec' => 'December'];
-
-							foreach ($arrMonth as $key => $value) {
-								?>
-							<option value="<?= $key ?>"><?= $value ?></option>
-								<?php } ?>
-						</select>
-					</div>
-					<div class="col-4 form-group">
-						<select name="day" id="birthDay" class="form-control ">
-							<option value=""><?= strtoupper($arrTranslate['Day']) ?></option>
-							<?php
-							for ($i = 1; $i <= 31; $i++) {
-								$i = ($i < 10) ? '0' . $i : $i;
-								?>
-								<option value="<?= $i ?>"><?= $i ?></option>
-							<?php } ?>
-						</select>
-					</div>
-					<div class="col-4 form-group">
-						<select name="year" id="birthYear" class="form-control ">
-							<option value=""><?= strtoupper($arrTranslate['Year']) ?></option>
-							<?php
-							$year = date('Y');
-							for ($i = $year; $i >= 1920; $i--) {
-								?>
-								<option value="<?= $i ?>"><?= $i ?></option>
-							<?php } ?>
-						</select>
-					</div>
-				</div> -->
 				<div class="text-center mt-2">
 					<div class="form-row">
 						<div class="col-md-12 form-group">
-							<input type="button" name="login-submit" id="btnsubmit" value="Log in"
+							<input type="button" name="login-submit" id="btnsubmit" value="Log in" style="height: 45px !important;" 
 								class="btn btn-primary" disabled />
 						</div>
 					</div>
@@ -276,7 +231,7 @@ if (!isset($_SESSION['customer_id'])) {
 					<div class="form-row">
 						<div class="col-md-12 form-group">
 							<a href="/v2.0/sis/studios/v1.0/?page=contact-tracing-form&guest=true">
-								<input type="button" class="btn btn-not-cancel" value="Check out as guest" />
+								<input type="button" class="btn btn-not-cancel" value="Check out as guest" style="height: 45px !important;" />
 							</a>
 						</div>
 					</div>
@@ -345,24 +300,38 @@ if (!isset($_SESSION['customer_id'])) {
 
 		</div>
 		<script type="text/javascript">
-			$('#username').on('keydown', function () {
-				if ($.isNumeric($(this).val())) {
-					if ($('#country_codes_login').val() == '') {
-						$('#country_codes_login').val('63');
-						$('#country_codes_login').select2().trigger('change');
+			$('#username').on('input', function () {
+					const inputVal = $(this).val();
+					
+					// Handle empty input case
+					if (inputVal.length === 0 || inputVal.length===1) {
+							$('#div_area_codes').css('display', 'none');
+							$('#mobile-format_login').css('display', 'none');
+							$("#username").attr('style', false);
+							return;
 					}
-					$('#div_area_codes').css('display', '');
-					//$("#div_mobile_number").attr('class', 'form-group col-md-11 col-sm-9');
-					$("#username").css({ "border-bottom-left-radius": "0px", "border-top-left-radius": "0px", "border-left-style": "none" });
-					paddingUsername($('#country_codes_login'));
-				} else {
-					$(this).next('label').text('Email Address');
-					//$("#div_mobile_number").attr('class', 'form-group col-md-12 col-sm-9');
-					$('#div_area_codes').css('display', 'none');
-					$('#mobile-format_login').css('display', 'none');
-					$("#username").attr('style', false);
-				}
+
+					// Check if input contains any numbers
+					if ($.isNumeric(inputVal)) {
+							if ($('#country_codes_login').val() == '') {
+									$('#country_codes_login').val('63');
+									$('#country_codes_login').select2().trigger('change');
+							}
+							$('#div_area_codes').css('display', '');
+							$("#username").css({
+									"border-bottom-left-radius": "0px",
+									"border-top-left-radius": "0px",
+									"border-left-style": "none"
+							});
+							paddingUsername($('#country_codes_login'));
+					} else {
+							$(this).next('label').text('Email Address');
+							$('#div_area_codes').css('display', 'none');
+							$('#mobile-format_login').css('display', 'none');
+							$("#username").attr('style', false);
+					}
 			});
+
 			$('#country_codes_login').change(function () {
 				paddingUsername(this);
 			});
@@ -377,9 +346,9 @@ if (!isset($_SESSION['customer_id'])) {
 						$('#username').val($('#username').val().substring(area_code));
 					if (code != '') {
 						$('#mobile-format_login').text('+' + code);
-						$('#username').css('padding-left', '50px');
-						(code.length == 3) ? $('#username').css('padding-left', '60px') : '';
-						(code.length == 4) ? $('#username').css('padding-left', '65px') : '';
+						// $('#username').css('padding-left', '50px');
+						// (code.length == 3) ? $('#username').css('padding-left', '60px') : '';
+						// (code.length == 4) ? $('#username').css('padding-left', '65px') : '';
 						$('#mobile-format_login').css('display', '');
 					} else {
 						$('#username').css('padding-left', '');
@@ -629,10 +598,10 @@ if (!isset($_SESSION['customer_id'])) {
 					<!-- email end -->
 
 
-					<div class=" col-12 d-flex align-items-center mt-2">
+					<div class="col-12 d-flex align-items-end mt-2">
 						<div class=" d-flex  form-group  mr-2"
-							style='padding-left: 0px; margin-right: 2px; border-bottom: 1px solid #dee2e6 '>
-							<select class="text-left select form-control" name="country_codes" id="country_codes" required>
+							style='padding-left: 0px; padding-bottom: 6px; margin-right: 2px; border-bottom: 1px solid #dee2e6 '>
+							<select class="text-left select form-control" name="country_codes" id="country_codes" required style="padding-bottom: 12px !important;">
 
 								<?php
 
@@ -689,13 +658,13 @@ if (!isset($_SESSION['customer_id'])) {
 				let code = '';
 				code = $('#country_codes').val();
 				$('.mobile-format').text('+' + code);
-				(code.length == 3) ? $('.mobile-number').css('padding-left', '60px') : '';
-				(code.length == 4) ? $('.mobile-number').css('padding-left', '65px') : '';
+				// (code.length == 3) ? $('.mobile-number').css('padding-left', '60px') : '';
+				// (code.length == 4) ? $('.mobile-number').css('padding-left', '65px') : '';
 				$('#country_codes').change(function () {
 					code = $(this).val();
-					$('.mobile-number').css('padding-left', '50px');
-					(code.length == 3) ? $('.mobile-number').css('padding-left', '60px') : '';
-					(code.length == 4) ? $('.mobile-number').css('padding-left', '65px') : '';
+					// $('.mobile-number').css('padding-left', '50px');
+					// (code.length == 3) ? $('.mobile-number').css('padding-left', '60px') : '';
+					// (code.length == 4) ? $('.mobile-number').css('padding-left', '65px') : '';
 					$('.mobile-format').text('+' + code);
 				});
 			</script>

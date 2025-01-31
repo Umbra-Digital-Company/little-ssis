@@ -113,7 +113,7 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         #cart .bag-wrapper {
-            background-image: url(/sis/studios/assets/images/icons/icon-bag-black.png);
+            background-image: url(/v2.0/sis/studios/assets/images/icons/icon-bag-black.png);
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -152,13 +152,13 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         }
-
+/* 
         ul li {
             line-height: 1;
             padding: 16px 0;
 
 
-        }
+        } */
 
 
 

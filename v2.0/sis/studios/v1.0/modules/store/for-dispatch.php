@@ -279,12 +279,14 @@ include("./modules/includes/grab_dispatch_order.php");
                         <tr>
 
                             <td>
-                                <span class="custom-title d-block mb-2 underline" style="text-decoration: underline">
-                                    <?= htmlspecialchars(ucwords($customer['fullname'])) ?>
-                                </span>
-                                <span class="custom-sub-subtitle d-block " style="color: #919191">
-                                    <?php echo htmlspecialchars($customer['order_id']) ?>
-                                </span>
+                                <a href="<?= '?page=customer-details' . '&profile_id=' . htmlspecialchars($customer['profile_id']) . '&order_id=' . htmlspecialchars($customer['order_id']) ?>" class="d-flex align-items-center">
+                                    <span class="custom-title d-block mb-2 underline" style="text-decoration: underline">
+                                        <?= htmlspecialchars(ucwords($customer['fullname'])) ?>
+                                    </span>
+                                    <span class="custom-sub-subtitle d-block " style="color: #919191">
+                                        <?php echo htmlspecialchars($customer['order_id']) ?>
+                                    </span>
+                                </a>
                             </td>
 
                             <td>

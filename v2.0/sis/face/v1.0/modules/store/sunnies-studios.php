@@ -109,7 +109,7 @@ if(!isset($_SESSION['customer_id'])) {
         cursor: pointer;
     }
     #cart .bag-wrapper {
-        background-image: url(/sis/face/assets/images/icons/icon-bag-black.png);
+        background-image: url(/v2.0/sis/face/assets/images/icons/icon-bag-black.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -598,10 +598,10 @@ if(!isset($_SESSION['customer_id'])) {
 
                 curStyle = arrCart[i].style;
                 curColor = arrCart[i].color.trim();
-                // curColor = arrCart[i].color.trim().replace(/ /g, "-");
-                // curColor = curColor.replace(/-f/g, "-full");
-                // curColor = curColor.replace(/-m/g, "-mirror");
-                // curColor = curColor.replace(/-gdt/, "-g");
+                // curColor = arrCart[i].color.trim().replace(/v2.0/ /g, "-");
+                // curColor = curColor.replace(/v2.0/-f/g, "-full");
+                // curColor = curColor.replace(/v2.0/-m/g, "-mirror");
+                // curColor = curColor.replace(/v2.0/-gdt/, "-g");
                 // curImageURL = "images/face/"+curStyle+"/"+curColor+"/front.png";
                 width = '';
                 curImageURL =  arrCart[i].image_url;

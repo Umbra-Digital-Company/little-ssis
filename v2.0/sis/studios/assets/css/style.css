@@ -337,8 +337,8 @@ body {
 }
 
 #ssis_sidebar #ssis_menu li a {
-  margin: 0px 20px;
-  padding: 5px 10px;
+  margin: 0px 16px !important;
+  padding: 5px 10px !important;
   display: block;
   color: #2a2323;
   width: calc(100% - 40px);
@@ -598,7 +598,7 @@ body.customer-page {
 }
 
 .form-control {
-  height: 40px;
+  height: 56px;
   color: #2a2323;
   font-size: 20px;
   background-color: transparent;
@@ -773,7 +773,7 @@ body.customer-page {
 }
 
 .btn {
-  height: 56px;
+  height: 56px !important;
   border: 0;
   box-shadow: none !important;
   outline: none !important;
@@ -1069,6 +1069,7 @@ body.customer-page {
 
 .btn.btn-shop-header {
   background-color: #fff;
+  height: 42px !important;
   border-radius: 28px;
   font-size: 18px;
   padding: 16px 20px;
@@ -1835,7 +1836,7 @@ main {
 }
 
 .account-login {
-  height: 300px;
+  height: 330px;
   max-width: 715px;
   margin: 0 auto;
   background: #ffffff !important;
@@ -1852,7 +1853,7 @@ main {
 main.customer-layout {
   top: 20px;
   padding: 0;
-  /* padding-top: 10px; */
+  padding-top: 10px;
   min-height: 100%;
 }
 
@@ -1886,7 +1887,7 @@ main.customer-layout .wrapper-2 {
 }
 
 main.customer-layout .wrapper-guest {
-  height: 440px;
+  height: 520px;
   padding: 24px;
   overflow-y: scroll;
 }
@@ -3157,7 +3158,8 @@ main.customer-layout .wrapper {
 .btn.btn-no-filter {
   border: 2px solid #dcdcdc;
   background-color: #ffffff;
-  height: 48px;
+  height: 48px !important;
+  padding: 0 5px;
   color: #342c29;
 }
 
@@ -3543,4 +3545,8 @@ main.customer-layout .wrapper {
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Dimmed background */
   z-index: -1; /* Make sure the backdrop is behind the content */
+}
+
+.btn {
+  font-family: 'Surt-Bold';
 }

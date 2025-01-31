@@ -597,7 +597,7 @@ body.customer-page {
 }
 
 .form-control {
-  height: 40px;
+  height: 56px;
   color: #2a2323;
   font-size: 20px;
   background-color: transparent;
@@ -1858,7 +1858,7 @@ main {
 }
 
 .account-login {
-  height: 300px;
+  height: 330px;
   max-width: 715px;
   margin: 0 auto;
   background: #ffffff !important;
@@ -1901,7 +1901,7 @@ main.customer-layout .wrapper-2 {
 }
 
 main.customer-layout .wrapper-guest {
-  height: 440px;
+  height: 520px;
   padding: 24px;
   overflow-y: scroll;
 }
@@ -3247,7 +3247,6 @@ main.customer-layout .wrapper {
 }
 
 #btn-filter {
-  max-width: 111px;
   height: 40px;
 }
 

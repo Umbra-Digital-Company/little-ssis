@@ -660,7 +660,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 			<div class=" account-signup-contact mt-4">
-				<p class="font-bold text-uppercase" style="font-size: 18px">
+				<p class="font-bold text-uppercase mt-2" style="font-size: 18px; color: #342C29;">
 					<?= $arrTranslate['Contact Details'] ?></p>
 				<div class="form-row no-gutters mt-3">
 					<div class="col-12">
@@ -670,70 +670,57 @@ if (!isset($_SESSION['customer_id'])) {
 									value="<?= ($arrCustomer[0]['email_address'] != '') ? $arrCustomer[0]['email_address'] : '' ?>">
 							<?php endif ?>
 							<input type="email" name="email" class="form-control" id="s_email"
-								value="" required>
-							<label class="placeholder s_email" for="s_email"><?= $arrTranslate['Email Address'] ?>
-							
-						</label>
-						<p class="text-danger" id="err_msg" style="font-size: 14px;"></p>
+								value="<?= get_customer_data('email_address') ?>" required>
+							<label class="placeholder" for="s_email"><?= $arrTranslate['Email Address'] ?></label>
 							<div class="emailAvail"></div>
 						</div>
 					</div>
 					<!-- email end -->
-					<style>
-						.select2-container--default .select2-selection--single .select2-selection__rendered {
-							padding-left: 0px;
-							/* padding-top: 8px; */
-						}
-						.select2-selection__arrow {
-							top: 10px;
-						}
-						.col-md-2 {
-							padding-right: 0px;
-						}b
-					</style>
 
-					<div class=" col-sm-12 d-flex align-items-center mt-2">
-						<div class=" d-flex col-md-2 form-group  mr-2"
-							style='padding-left: 0px; margin-right: 2px; border-bottom: 1px solid #dee2e6 '>
-							<select class="text-left select form-control" name="country_codes" id="country_codes" required>
-    				<?php
+
+					<div class="col-12 d-flex align-items-end mt-2">
+						<div class=" d-flex  form-group  mr-2"
+							style='padding-left: 0px; padding-bottom: 6px; margin-right: 2px; border-bottom: 1px solid #dee2e6 '>
+							<select class="text-left select form-control" name="country_codes" id="country_codes" required style="padding-bottom: 12px !important;">
+
+								<?php
+
 								usort($countryArray, function ($a, $b) {
-										return $a['code'] - $b['code'];
+									return $a['code'] - $b['code'];
 								});
 								$countryArray = array_reverse($countryArray);
 								$get_num = get_customer_data('phone_number');
-								$get_num = '';
 								echo '<option></option>';
 								$phone_number = '';
 								foreach ($countryArray as $key => $value) {
-										$ac_length = strlen($value['code']);
-										if ($get_num == '') {
-												if (isset($_SESSION['user_type']) && trim($_SESSION['store_type']) == 'vs') {
-														if ($value['code'] == '84') {
-																echo '<option value="' . $value['code'] . '" selected>+' . $value['code'] . '</option>';
-																break;
-														}
-												} else {
-														if ($value['code'] == '63') {
-																echo '<option value="' . $value['code'] . '" selected>+' . $value['code'] . '</option>';
-																break;
-														}
-												}
-										} elseif ($value['code'] == substr($get_num, 0, $ac_length)) {
-												echo '<option value="' . $value['code'] . '" selected>+' . $value['code'] . '</option>';
-												$phone_number = substr($get_num, $ac_length);
+									$ac_length = strlen($value['code']);
+									if ($get_num == '') {
+										if (isset($_SESSION['user_type']) && trim($_SESSION['store_type']) == 'vs') {
+											if ($value['code'] == '84') {
+												echo '<option  value="' . $value['code'] . '" selected>' . $value['key'] . ' +' . $value['code'] . '</option>';
 												break;
+											}
 										} else {
-												echo '<option value="' . $value['code'] . '">+' . $value['code'] . '</option>';
+											if ($value['code'] == '63') {
+												echo '<option  value="' . $value['code'] . '" selected>' . $value['key'] . ' +' . $value['code'] . '</option>';
+												break;
+											}
 										}
+									} elseif ($value['code'] == substr($get_num, 0, $ac_length)) {
+										echo '<option  value="' . $value['code'] . '" selected>' . $value['key'] . ' +' . $value['code'] . '</option>';
+										$phone_number = substr($get_num, $ac_length);
+										break;
+									}
 								}
+
 								?>
-						</select>
-							<label class="placeholder" for="country_codes">Country</label>
+
+							</select>
+							<!-- <label class="placeholder" for="country_codes">Countries</label> -->
 						</div>
-						<div class="form-group col-md-10 country_num" style='padding-left: 0px; padding-right: 0px;'>
+						<div class="form-group  country_num" style="padding-left: 0px; padding-right: 0px; width: 100%;">
 							<input type="text"
-								style="border-bottom-left-radius: 0px; border-top-left-radius: 0px; max-width: 548px;"
+								style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;"
 								name="mnum"
 								class="form-control <?= (get_customer_data('phone_number') != '') ? 'active' : '' ?>"
 								id="mnum" class="mnum" value="<?= $phone_number ?>" required>

@@ -173,7 +173,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 				<div class="row" >
 					<div class="col-12 ">
 						<div class="customer-account text-center">
-							<a href="./?page=contact-tracing-form&type=sign-up">
+							<a href="./?page=contact-tracing-form&type=login">
 								<button class="btn btn-primary"  >Log in or Sign up </button>
 							</a>
 						</div>

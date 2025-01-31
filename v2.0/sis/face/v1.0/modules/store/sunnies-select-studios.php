@@ -106,7 +106,7 @@ if(!isset($_SESSION['customer_id'])) {
         cursor: pointer;
     }
     #cart .bag-wrapper {
-        background-image: url(/sis/face/assets/images/icons/icon-bag-black.png);
+        background-image: url(/v2.0/sis/face/assets/images/icons/icon-bag-black.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;

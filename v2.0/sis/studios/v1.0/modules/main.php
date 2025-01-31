@@ -121,7 +121,7 @@ switch ($page) {
 
 		<ul class="nav-list nav flex-column mb-2">
 			<li class="text-secondary text-uppercase mb-2 font-bold mt-2"></li>
-			<li>
+			<li style='padding: 0; margin-bottom: 16px;'>
 				<a class="d-flex align-items-center" href="./?page=store-home">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-home.png);"></canvas>
 
@@ -156,9 +156,9 @@ switch ($page) {
 			<?php } ?>
 		</ul>
 		<hr style="border-top: 1px solid #dcdcdc; max-width: 95%; ">
-		<ul class="nav-list nav flex-column ">
+		<ul class="nav-list nav flex-column mb-2">
 			<li class="text-secondary text-uppercase mb-2 font-bold"></li>
-			<li>
+			<li style='padding: 0; margin-bottom: 16px;'>
 				<a class="d-flex align-items-center mb-4" href="/v2.0/sis/studios/func/logout.php?path_loc=v1.0">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
 					<span class="h3 ml-3"><?= $arrTranslate['Logout'] ?></span>
@@ -467,7 +467,7 @@ switch ($page) {
 	</div>
 </header>
 
-<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer ' . $page : '' ?>">
+<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer' . $page : '' ?> <?= ($page == 'customer-details') ? '"style="top: 90px; margin-top: auto;' : '' ?>">
 
 	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress'])): ?>
 
@@ -787,7 +787,7 @@ opacity: 0px;
 				<?php if (isset($arrFilterColors)) { ?>
 
 					<p class=" filter-title "  >colors</p>
-					<div class="row color-list mb-5">
+					<div class="d-flex color-list mb-5 justify-content-start flex-wrap" style="width: 540px;">
 
 						<?php foreach ($arrFilterColors as $value) {
 

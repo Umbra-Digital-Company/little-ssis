@@ -147,7 +147,7 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         #cart .bag-wrapper {
-            background-image: url(/sis/studios/assets/images/icons/icon-bag-black.png);
+            background-image: url(/v2.0/sis/studios/assets/images/icons/icon-bag-black.png);
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -851,7 +851,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden "
-            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 492px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
 
             <div id="notification" class="notification d-flex align-items-center justify-content-between "
                 style="width: 100%; padding: 0px 10px;">
@@ -1055,10 +1055,10 @@ if (!isset($_SESSION['customer_id'])) {
 
                 //     curStyle = arrCart[i].style;
                 //     curColor = arrCart[i].color.trim();
-                //     // curColor = arrCart[i].color.trim().replace(/ /g, "-");
-                //     // curColor = curColor.replace(/-f/g, "-full");
-                //     // curColor = curColor.replace(/-m/g, "-mirror");
-                //     // curColor = curColor.replace(/-gdt/, "-g");
+                //     // curColor = arrCart[i].color.trim().replace(/v2.0/ /g, "-");
+                //     // curColor = curColor.replace(/v2.0/-f/g, "-full");
+                //     // curColor = curColor.replace(/v2.0/-m/g, "-mirror");
+                //     // curColor = curColor.replace(/v2.0/-gdt/, "-g");
                 //     // curImageURL = "images/studios/"+curStyle+"/"+curColor+"/front.png";
                 //     width = '';
                 //     curImageURL = arrCart[i].image_url;
