@@ -1,3 +1,4 @@
+
 <style>
     .search-form {
         display: flex;
@@ -69,6 +70,7 @@
         border: none;
         background: transparent;
         cursor: pointer;
+       
     }
 
 
@@ -223,6 +225,7 @@
 include("./modules/includes/grab_dispatch_order.php");
 ?>
 
+
 <div class="mx-2 mt-4">
     <!-- Search Bar -->
     <form class="search-form" id="search-form" method="GET" action="">
@@ -250,7 +253,7 @@ include("./modules/includes/grab_dispatch_order.php");
 
 
         <?php if (!empty($arrCustomer)): ?>
-            <select class="pagination-select custom-subtitle" onchange="location = this.value;">
+            <select class="pagination-select custom-subtitle" onchange="location = this.value;" style="width: 160px; !important">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                     <option value="?page=transactions&active=dispatch&dpage=<?= $i ?>" <?= $i == $pagination ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
                 <?php endfor; ?>
@@ -264,7 +267,7 @@ include("./modules/includes/grab_dispatch_order.php");
     <?php if (empty($arrCustomer)): ?>
         <div class="no-orders-message" style="text-align: center; margin-top: 5rem">
             <img src="/sis/face/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
-            <h1 style="color: #B7B7B7;">No Pending Orders</h1>
+            <h1 style="color:rgb(118, 118, 118);">No Pending Orders</h1>
         </div>
     <?php else: ?>
 
@@ -284,9 +287,11 @@ include("./modules/includes/grab_dispatch_order.php");
                         <tr>
 
                             <td>
-                                <span class="custom-title d-block mb-2 underline" style="text-decoration: underline">
-                                    <?= htmlspecialchars(ucwords($customer['fullname'])) ?>
-                                </span>
+                                <a href="<?= '?page=customer-details' . '&profile_id=' . htmlspecialchars($customer['profile_id']) . '&order_id=' . htmlspecialchars($customer['order_id']) ?>" class="d-flex align-items-center">
+                                    <span class="custom-title d-block mb-2 underline" style="text-decoration: underline">
+                                        <?= htmlspecialchars(ucwords($customer['fullname'])) ?>
+                                    </span>
+                                </a>
                                 <span class="custom-sub-subtitle d-block " style="color: #919191">
                                     <?php echo htmlspecialchars($customer['order_id']) ?>
                                 </span>

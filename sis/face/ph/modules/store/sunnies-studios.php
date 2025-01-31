@@ -167,7 +167,7 @@ if(!isset($_SESSION['customer_id'])) {
             
                 <div class="d-flex align-items-center mb-3">
                     <a href="./?page=select-store" class="exit-frame-selection"><img src="/ssis/assets/images/icons/icon-left-arrow.png" alt="exit" class="img-fluid" style="padding-left: 20px;"></a>
-					<input type="search" name="search_frame" id="search_frame" class="form-control filled search" placeholder="Search" style="margin-left: 20px;">
+					<input type="search" name="search_frame" id="search_frame" class="form-control filled search" placeholder="Search" style="margin-left: 24px;">
                     <div  class="d-flex justify-content-between" id="cart" title="Cart" style="padding-left: 20px;">
                         <img src="/sis/studios/assets/images/icons/icon-cart.png" class="img-responsive" width="40px" height="40px">
                         <span><div class="count" count="<?= $order_count ?>"></div></span>

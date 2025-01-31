@@ -1,0 +1,215 @@
+# Enable mod_rewrite, necessary for rewriting rules (optional if not needed)
+RewriteEngine On
+
+# Example rewrite rule to force HTTPS (optional)
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteRule ^includes/ - [F,L]
+RewriteRule ^vendor/ - [F,L]
+RewriteRule ^.git/ - [F,L]
+#RewriteRule ^downloads/ - [F,L]
+
+
+# If the requested file or directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Return a 404 error
+RewriteRule ^.*$ - [F,L]
+
+# Block the CONNECT method
+RewriteCond %{REQUEST_METHOD} ^CONNECT$
+RewriteRule .* - [F,L]
+
+
+# Block Specific IPs (Apache 2.4+ syntax)
+<RequireAll>
+    Require all granted
+    Require not ip 23.26.201.31
+    Require not ip 112.208.186.61
+   
+   
+   
+    Require not ip 68.183.183.250
+    Require not ip 112.209.143.71
+    Require not ip 104.156.155.36
+    Require not ip 128.199.134.36
+    
+    Require not ip 178.128.89.220
+    Require not ip 165.232.172.78
+    Require not ip 47.89.242.141
+    Require not ip 43.167.243.32
+    Require not ip 57.129.23.166 
+    Require not ip 15.235.41.22
+    Require not ip 128.199.243.235
+    Require not ip 47.251.99.88
+    Require not ip 178.215.236.175
+    Require not ip 27.45.41.217 
+    Require not ip 152.32.107.230
+    Require not ip 101.36.114.124
+	Require not ip 185.224.128.47
+Require not ip 79.137.198.113
+Require not ip 152.32.183.231
+Require not ip 147.185.132.117
+Require not ip 5.189.172.158
+Require not ip 112.94.98.188
+Require not ip 185.189.182.234
+</RequireAll>
+
+RewriteCond %{HTTP_USER_AGENT} "Go-http-client" [NC]
+RewriteRule .* - [F]
+
+RewriteCond %{HTTP_USER_AGENT} "Custom-AsyncHttpClient" [NC]
+RewriteRule .* - [F]
+
+# Block Python requests
+RewriteCond %{HTTP_USER_AGENT} "python" [NC]
+RewriteRule .* - [F]
+
+# Block SQLMap
+RewriteCond %{HTTP_USER_AGENT} "sqlmap" [NC]
+RewriteRule .* - [F]
+
+# Block Artillery
+RewriteCond %{HTTP_USER_AGENT} "artillery" [NC]
+RewriteRule .* - [F]
+
+# Block curl/7.54
+RewriteCond %{HTTP_USER_AGENT} "curl/7.54" [NC]
+RewriteRule .* - [F]
+
+# Block nvdorz
+RewriteCond %{HTTP_USER_AGENT} "nvdorz" [NC]
+RewriteRule .* - [F]
+
+# Block Odin
+RewriteCond %{HTTP_USER_AGENT} "odin" [NC]
+RewriteRule .* - [F]
+
+# Block perl
+RewriteCond %{HTTP_USER_AGENT} "perl" [NC]
+RewriteRule .* - [F]
+
+
+# Block insomnia
+RewriteCond %{HTTP_USER_AGENT} "insomnia" [NC]
+RewriteRule .* - [F]
+
+# Block CFNetwork
+RewriteCond %{HTTP_USER_AGENT} "CFNetwork" [NC]
+RewriteRule .* - [F]
+
+# Block Googlebot
+RewriteCond %{HTTP_USER_AGENT} "Googlebot" [NC]
+RewriteRule .* - [F]
+
+# Block bot
+RewriteCond %{HTTP_USER_AGENT} "bot" [NC]
+RewriteRule .* - [F]
+
+# Block bot
+RewriteCond %{HTTP_USER_AGENT} "git" [NC]
+RewriteRule .* - [F]
+
+# Block bot
+RewriteCond %{HTTP_USER_AGENT} "WOW64" [NC]
+RewriteRule .* - [F]
+
+# Block Palo
+RewriteCond %{HTTP_USER_AGENT} "Palo" [NC]
+RewriteRule .* - [F]
+
+# Block ALittle
+RewriteCond %{HTTP_USER_AGENT} "ALittle" [NC]
+RewriteRule .* - [F]
+
+#rv:32.0
+# Block ALittle
+RewriteCond %{HTTP_USER_AGENT} "rv:32.0" [NC]
+RewriteRule .* - [F]
+
+#NetworkingExtension
+RewriteCond %{HTTP_USER_AGENT} "NetworkingExtension" [NC]
+RewriteRule .* - [F]
+
+#Searcherxweb
+RewriteCond %{HTTP_USER_AGENT} "Searcherxweb" [NC]
+RewriteRule .* - [F]
+
+#kubuntu
+RewriteCond %{HTTP_USER_AGENT} "kubuntu" [NC]
+RewriteRule .* - [F]
+
+#Gregarius
+RewriteCond %{HTTP_USER_AGENT} "Gregarius" [NC]
+RewriteRule .* - [F]
+
+
+#UNTRUSTED
+RewriteCond %{HTTP_USER_AGENT} "UNTRUSTED" [NC]
+RewriteRule .* - [F]
+
+#Presto
+RewriteCond %{HTTP_USER_AGENT} "Presto" [NC]
+RewriteRule .* - [F]
+
+#InternetMeasurement
+RewriteCond %{HTTP_USER_AGENT} "InternetMeasurement" [NC]
+RewriteRule .* - [F]
+
+#Iceweasel/14.0.1
+RewriteCond %{HTTP_USER_AGENT} "Iceweasel" [NC]
+RewriteRule .* - [F]
+
+
+# Block requests that start with non-ASCII characters (binary data or malformed requests)
+RewriteCond %{THE_REQUEST} "[\x00-\x1F\x7F-\xFF]" [OR]
+RewriteCond %{REQUEST_METHOD} "!^(GET|POST|HEAD|PUT|DELETE|OPTIONS|PATCH)$"
+RewriteRule .* - [F,L]
+
+
+
+# Deny access to specific files (e.g., .htaccess itself and sensitive files)
+<FilesMatch "^\.ht">
+    Require all denied
+</FilesMatch>
+
+# Deny access to other sensitive file types (optional)
+<FilesMatch "\.(env|ini|log|sh|git|jsa|dll|xml|yml|ds|well|bak)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "sftp">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "actuator">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "ssl">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "aws">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "NewWindow">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "Gpon">
+    Require all denied
+</FilesMatch>
+
+
+
+# Redirect 404s for missing favicon (optional)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^favicon\.ico$ /path/to/default/favicon.ico [L,R=301]
+
+# Disable directory listing
+Options -Indexes
+
+

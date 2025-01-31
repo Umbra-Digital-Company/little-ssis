@@ -1,3 +1,12 @@
+<style>
+
+.page-transaction main {
+  top: 90px !important;
+  margin-top: auto !important;
+}
+
+</style>
+
 <?php
 
 ////////////////////////////////////////////////////////////////
@@ -84,8 +93,11 @@ switch ($page) {
 }
 
 ////////////////////////////////////////////////////////////////
-
+// echo '<pre>';
+// print_r($page);
+// echo '</pre>';
 ?>
+
 
 <style>
 	.sidebar-top .container {
@@ -96,12 +108,9 @@ switch ($page) {
 		
 	} */
 	#ssis_sidebar #ssis_menu li .doctor-hover:hover {
-		background-color: #E2E9F3;
+		background-color: #F8F5EF;
 	}
 
-	.page-select-store main {
-		top: 90px !important;
-	}
 </style>
 
 <div id="ssis_sidebar">
@@ -123,7 +132,7 @@ switch ($page) {
 
 		<ul class="nav-list nav flex-column mb-2">
 			<li class="text-secondary text-uppercase mb-3 font-bold"></li>
-			<li>
+			<li style='padding: 0; margin-bottom: 16px;'>
 				<a class="d-flex align-items-center" href="./?page=store-home">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-home.png);"></canvas>
 
@@ -131,27 +140,27 @@ switch ($page) {
 				</a>
 			</li>
 
-			<li>
-				<a class="d-flex align-items-center" href="/face/dispatch-face">
+			<li style='padding: 0; margin-bottom: 16px;'>
+				<a class="d-flex align-items-center" href="./?page=transactions&active=dispatch">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-dispatch.png);"></canvas>
 					<span class="h3 ml-3"><?= $arrTranslate['Dispatch'] ?></span>
 				</a>
 			</li>
 
 			<?php if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
-				<li>
+				<li style='padding: 0;'>
 					<a class="d-flex align-items-center" href="./?page=transactions&active=payment">
 						<canvas
 							style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
-						<span class="h3 ml-3">For Payments</span>
+						<span class="h3 ml-3">For Payment</span>
 					</a>
 				</li>
 			<?php } ?>
 		</ul>
+		<hr style="border-top: 2px solid #eeeeee; max-width: 100%; margin: 1rem 2rem;">
 
 		<ul class="nav-list nav flex-column">
-			<li class="text-secondary text-uppercase mb-2 font-bold"></li>
-			<li>
+			<li style='padding: 0; margin-bottom: 16px;'>
 				<a class="d-flex align-items-center mb-4" href="/sis/face/func/logout.php?path_loc=v1.0">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
 					<span class="h3 ml-3"><?= $arrTranslate['Logout'] ?></span>
@@ -175,7 +184,7 @@ switch ($page) {
 			<div class="account-name">
 				<!-- <p class="small m-0 "><?= $arrTranslate['Dashboard']; ?></p> -->
 				<img class="img-fluid" src="<?= get_url('images/logo') ?>/sunnies-face-logo-black.webp?v=1614047286"
-					style=" max-width: 120px;">
+					style=" max-width: 170px;">
 			</div>
 			<div class="account">
 				<a href="#"><img src="<?= get_url('images/icons') ?>/icon-menu.png" alt="account" class="img-fluid"></a>
@@ -388,6 +397,8 @@ switch ($page) {
 			case 'updatedb':
 				$custom_title = 'Maintenance';
 				break;
+			case 'transactions':
+				$custom_title = 'Transactions';
 				// Default
 			default:
 				$custom_title = $page;
@@ -507,7 +518,7 @@ switch ($page) {
 	</div>
 </header>
 
-<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer' . $page : '' ?>">
+<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer' . $page : '' ?> <?= ($page == 'customer-details') ? '"style="top: 90px; margin-top: auto;' : '' ?>">
 
 	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress'])): ?>
 
@@ -566,7 +577,7 @@ switch ($page) {
 
 		<?php else: ?>
 
-			<div class="wrapper">
+			<div class="wrapper-2">
 				<?php include("layout.php"); ?>
 			</div>
 

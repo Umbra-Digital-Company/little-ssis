@@ -61,8 +61,10 @@
                 ?>
                     <div class="my-4 order-item">
                         <div class="row no-gutters">
-                            <div>
-                                <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" style="border-radius: 8px" alt="Product Image">
+                            <div class="col-md-4 d-flex align-items-center">
+                                <div class="card-img-container" style="border-radius: 8px; height: 150px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                                    <img src="<?= !empty($order['image_url']) ? $order['image_url'] : '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="object-fit-contain" alt="Product Image" style="max-height: 100%; max-width: 100%; border-radius: 8px;">
+                                </div>
                             </div>
                             <div class="col-md-8 d-flex align-items-center">
                                 <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">

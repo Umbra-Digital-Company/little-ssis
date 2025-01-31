@@ -78,6 +78,11 @@
             outline: none;
         }
 
+        #search_frame {
+    padding-left: 0; /* Removes left padding */
+    text-align: left; /* Ensures placeholder text is aligned to the left */
+}
+
         .btn-search {
             width: 48px;
             /* Adjust width and height to make it circular */
@@ -149,7 +154,7 @@
         <div class="search-container-store d-flex align-items-center mb-3">
             <div id="form-search" class="d-flex align-items-center">
                 <input type="search" name="search_frame" id="search_frame" class="form-control search"
-                    placeholder="Search product code / product name"
+                    placeholder="Search"
                     value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
                 <!-- <input type="search" name="search_frame_filter" id="search_frame_filter" class="form-control search" placeholder="Search Frame Style"  value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>"> -->
                 <button class="btn-search">
@@ -158,11 +163,11 @@
             </div>
         </div>
 
-        <div class="flex-container mb-3">
+        <div class="flex-container mb-4 mt-4">
 
             <button class="btn btn-bag " id="bag-button" disabled>
                 <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
-                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px; vertical-align: middle;"> View Bag
             </button>
         </div>
 
@@ -186,7 +191,7 @@
 
         <div class="packages-list">
 
-            <div class="form-row  mb-5 section-frames">
+            <div class="form-row  mb-4 section-frames">
                 <span class="type-header  mb-3">SUN</span>
                 <a href="./?page=select-store-studios">
                     <div class="col-12 text-start ">
@@ -216,7 +221,7 @@
         $arrFramesCount = count($arrProduct);
         $arrProductMerge = $arrProduct;
         ?>
-        <div class="form-row mb-5 section-antirad">
+        <div class="form-row mb-4 section-antirad">
             <span class="type-header mb-3">ANTI-RAD</span>
             <a href="./?page=select-antirad">
                 <div class="col-12 text-center ">
@@ -242,7 +247,7 @@
         $arrAntiRadCount = count($arrProduct);
         $arrProductMerge = array_merge($arrProductMerge, $arrProduct);
         ?>
-        <div class="form-row mb-5 section-readers">
+        <div class="form-row mb-4 section-readers">
 
             <span class="type-header mb-3">READERS</span>
             <a href="./?page=select-readers">
@@ -270,7 +275,7 @@
         $arrProductMerge = array_merge($arrProductMerge, $arrProduct);
         ?>
 
-        <div class="form-row mb-5 section-free-item">
+        <div class="form-row mb-4 section-free-item">
 
 
             <span class="type-header mb-3">FREE ITEM</span>
@@ -297,7 +302,7 @@
         $arrProductMerge = array_merge($arrProductMerge, $arrProduct);
         ?>
 
-        <div class="form-row mb-5 section-merch">
+        <div class="form-row mb-4 section-merch">
 
 
             <span class="type-header mb-3"> MERCH</span>
@@ -863,7 +868,13 @@
                 const button = document.getElementById('bag-button');
                 button.disabled = false;
                 button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${cartCount})`;
+  style="margin-left: 3px; margin-right: 9px; height: 28px; width: 28px; vertical-align: middle; !important">
+  View Bag (${cartCount})`;
+
+// Apply flexbox styles to the button to center the content vertically
+button.style.display = 'flex';
+button.style.alignItems = 'center';
+button.style.justifyContent = 'center';
 
             }
         }

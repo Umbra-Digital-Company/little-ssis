@@ -143,14 +143,14 @@ if (!isset($_SESSION['customer_id'])) {
 			<div class="form-group mt-4">
 				<select class="text-left s-a mh-40 select form-control" name="age_range" id="age_range" required>
 					<option value="" disabled selected></option>
-					<option value="1">0-12</option>
-					<option value="13">13-17</option>
+					<!-- <option value="1">0-12</option>
+					<option value="13">13-17</option> -->
 					<option value="18">18-24</option>
 					<option value="25">25-34</option>
 					<option value="35">35-44</option>
 					<option value="45">45-54</option>
-					<option value="55">55-64</option>
-					<option value="65">65+</option>
+					<!-- <option value="55">55-64</option>
+					<option value="65">65+</option> -->
 				</select>
 				<label class="placeholder" for="age_range">Age Group</label>
 			</div>
@@ -458,7 +458,7 @@ if (!isset($_SESSION['customer_id'])) {
 			<input type="hidden" name="age" value="">
 			<div class="account-signup-personal">
 
-				<p class="font-bold text-uppercase text-primary" style="font-size: 18px">
+				<p class="font-bold text-uppercase" style="font-size: 18px">
 					<?= $arrTranslate['Profile Details'] ?></p>
 				<div class="no-gutters mt-4">
 
@@ -660,7 +660,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 			<div class=" account-signup-contact mt-4">
-				<p class="font-bold text-uppercase text-primary mt-2" style="font-size: 18px">
+				<p class="font-bold text-uppercase mt-2" style="font-size: 18px; color: #342C29;">
 					<?= $arrTranslate['Contact Details'] ?></p>
 				<div class="form-row no-gutters mt-3">
 					<div class="col-12">
@@ -670,21 +670,18 @@ if (!isset($_SESSION['customer_id'])) {
 									value="<?= ($arrCustomer[0]['email_address'] != '') ? $arrCustomer[0]['email_address'] : '' ?>">
 							<?php endif ?>
 							<input type="email" name="email" class="form-control" id="s_email"
-								value="" required>
-							<label class="placeholder s_email" for="s_email"><?= $arrTranslate['Email Address'] ?>
-							
-						</label>
-						<p class="text-danger" id="err_msg" style="font-size: 14px;"></p>
+								value="<?= get_customer_data('email_address') ?>" required>
+							<label class="placeholder" for="s_email"><?= $arrTranslate['Email Address'] ?></label>
 							<div class="emailAvail"></div>
 						</div>
 					</div>
 					<!-- email end -->
 
 
-					<div class=" col-sm-12 d-flex align-items-center mt-2">
+					<div class="col-12 d-flex align-items-end mt-2">
 						<div class=" d-flex  form-group  mr-2"
-							style='padding-left: 0px; margin-right: 2px; border-bottom: 1px solid #dee2e6 '>
-							<select class="text-left select form-control" name="country_codes" id="country_codes" required>
+							style='padding-left: 0px; padding-bottom: 6px; margin-right: 2px; border-bottom: 1px solid #dee2e6 '>
+							<select class="text-left select form-control" name="country_codes" id="country_codes" required style="padding-bottom: 12px !important;">
 
 								<?php
 
@@ -692,8 +689,7 @@ if (!isset($_SESSION['customer_id'])) {
 									return $a['code'] - $b['code'];
 								});
 								$countryArray = array_reverse($countryArray);
-								//$get_num = get_customer_data('phone_number');
-								$get_num = '';
+								$get_num = get_customer_data('phone_number');
 								echo '<option></option>';
 								$phone_number = '';
 								foreach ($countryArray as $key => $value) {
@@ -720,11 +716,11 @@ if (!isset($_SESSION['customer_id'])) {
 								?>
 
 							</select>
-							<label class="placeholder" for="country_codes">Countries</label>
+							<!-- <label class="placeholder" for="country_codes">Countries</label> -->
 						</div>
-						<div class="form-group col-md-10 country_num" style='padding-left: 0px; padding-right: 0px;'>
+						<div class="form-group  country_num" style="padding-left: 0px; padding-right: 0px; width: 100%;">
 							<input type="text"
-								style="border-bottom-left-radius: 0px; border-top-left-radius: 0px; max-width: 548px;"
+								style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;"
 								name="mnum"
 								class="form-control <?= (get_customer_data('phone_number') != '') ? 'active' : '' ?>"
 								id="mnum" class="mnum" value="<?= $phone_number ?>" required>
@@ -761,23 +757,39 @@ if (!isset($_SESSION['customer_id'])) {
 							<?= $arrTranslate['By clicking Submit, you have read and agreed to our Terms and Conditions'] ?>.
 						</p>
 					<?php } else { ?>
-						<div class="d-flex align-items-center mb-3">
-							<!-- <input type="checkbox" id="agree" name="agree" required class="sr-only checkbox"> -->
-							<label for="agree" class="custom-checkbox"></label>
-							<div class="flex-grow-1 ">
-								<label for="agree" class="text-secondary" style=" font-size: 18px;">
-									By clicking Register, you have read and agreed to our <br />
-									<span class="font-bold text-primary btn-terms"
-										style="cursor: pointer; text-decoration: underline; font-size: 20px; ">Terms and
-										Conditions</span>.
-								</label>
+						<div class="d-flex align-items-center justify-content-center mb-3">
+							<div>
+								<input type="checkbox" id="agree" name="agree" required class="sr-only checkbox">
+								<label for="agree" class="custom-checkbox"></label>
 							</div>
-						</div>
+							<div style="padding:0 15px !important;">
+									<label for="agree" class="text-secondary">
+											By clicking Register, you have read and agreed to our <br/>
+												<span class="font-bold text-primary btn-terms">Terms and Conditions</span> and <span class="font-bold text-primary btn-policy">Privacy Policy</span>.
+									</label>
+							</div>
+					</div>
 					<?php } ?>
 
 					<?php include("terms-and-condition.php") ?>
+					<?php include("privacy-policy.php") ?>
 
 					<script type="text/javascript">
+
+						$('.btn-policy').click(function () {
+
+							if ($('.policy-well').hasClass('open')) {
+
+								$('.policy-well').removeClass('open').addClass('closed');
+
+							}
+							else {
+
+								$('.policy-well').removeClass('closed').addClass('open');
+
+							};
+
+						});
 
 						$('.btn-terms').click(function () {
 

@@ -124,9 +124,9 @@ if (!isset($_SESSION['customer_id'])): ?>
 
     <div class="mx-2">
 
-        <div class="custom-subtitle my-4">
+        <div class="custom-subtitle my-4"  style="height: 48px;  display: flex; align-items: center; justify-content: start;  ">
             Total order
-            <span class="custom-title">
+            <span class="custom-title" style="margin-left: 12px;">
                 <?= count(array_filter($arrCart, function ($item) {
                     return $item['dispatch_type'] !== 'packaging';
                 })) ?>
@@ -171,13 +171,12 @@ if (!isset($_SESSION['customer_id'])): ?>
                 ) {
                     $merchItem = true;
                 }
-
             ?>
 
                 <div class="customized-card my-4 w-100 p-4 ">
                     <div class="row no-gutters">
-                        <div class="">
-                            <img src="<?= !empty($cart['image_url']) ? $cart['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image">
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <img src="<?= !empty($item['image_url']) ? $item['image_url'] : '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="card-img" alt="Product Image">
                         </div>
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
@@ -498,6 +497,13 @@ if (!isset($_SESSION['customer_id'])): ?>
                     <option value="<?= $value ?>" <?= $selected ?>><?= $value ?></option>
                 <?php } ?>
             </select>
+        </div>
+
+        <div class="card mt-4 d-flex align-items-left flex-column" style="height: 120px; border-radius: 16px;">
+                <div class="d-flex justify-content-between mb-1" style="font-weight: 700">
+                        <p class="custom-title">How was your experience with us?</p>
+                </div>
+                <input class="form-control p-0" id="feedback" name="feedback" placeholder="Share your feedback..." style="font-size: 14px;"/>
         </div>
 
 

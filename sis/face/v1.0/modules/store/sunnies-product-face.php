@@ -151,7 +151,7 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         #cart {
-            padding: 5px 5px 0px 5px;
+            padding: 2px 5px 0px 5px;
             vertical-align: center;
             border-radius: 30px;
             cursor: pointer;
@@ -182,6 +182,22 @@ if (!isset($_SESSION['customer_id'])) {
         .cart_view .card-body {
             padding-top: 10px;
             padding-bottom: 10px;
+        }
+
+        
+        .btn-product {
+            /* Should be outline button, text is not bold and padding is small */
+            background-color: #fff;
+            border: 3px solid #956E46;
+            color: #956E46;
+            padding: 3px 10px;
+            font-size: 16px;
+            line-height: 1; /* Adjust the line-height to reduce height */
+        }
+
+        .btn-product:hover {
+            background-color: #956E46;
+            color: #fff;
         }
 
         .select-store-studios {
@@ -374,6 +390,10 @@ if (!isset($_SESSION['customer_id'])) {
             <section class="product-view" id="product-panel" style="height:100vh; max-width: 575px; overflow: auto;  margin-bottom: 120px;">
 
                 <div class="search-container-store d-flex align-items-center mb-4">
+                    <!-- Add Back Button here -->
+                    <a href="/sis/face/v1.0/?page=<?= $_GET['page'] ?>" class="exit-frame-selection">
+                        <img src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid" style="width: 24px;">
+                    </a>
                     <!-- <div id="btn-filter" class="btn btn-not-cancel"> <img id="bag-icon"
                             src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
                             style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
@@ -383,7 +403,7 @@ if (!isset($_SESSION['customer_id'])) {
                     <div id="toggleLayout" style="display: none;"></div>
 
                     <div class="">
-                        <button id="btn-search" class="btn btn-primary" style="height: 48px; width: 48px">
+                        <button id="btn-search" class="btn-search">
                             <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search"
                                 style=" height: 24px; width: 24px;">
                         </button>
@@ -396,9 +416,9 @@ if (!isset($_SESSION['customer_id'])) {
                 if (!isset($_GET['search'])) {
                 ?>
                     <div class="flex-container mb-3">
-                        <button class="btn btn-bag " id="bag-button" disabled>
+                        <button class="btn btn-bag d-flex align-items-center justify-content-center" id="cart" disabled>
                             <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
-                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                                style="margin-left: 3px; margin-right: 9px; width: 18px;"> View Bag
                         </button>
                     </div>
                 <?php
@@ -435,7 +455,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             ?>
 
                                             <div class="image-wrapper"
-                                                style="width: 100%;  padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center;">
+                                                style="width: 100%; height: 45vh;  padding-bottom: 50%; border-radius: 8px; background-color: #f2efea; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center;">
                                             </div>
                                         </label>
                                     </div>
@@ -449,26 +469,27 @@ if (!isset($_SESSION['customer_id'])) {
 
                             <div class="d-flex justify-content-between">
                                 <section class="product-details align-items-start justify-content-between">
-                                    <div>
-                                        <h4><?= $arrProductDetails[0]['item_description'] ?></h4>
-                                        <h4><span class="item-price" style="color:#919191 !important;"><?= trimColor($curColors[0]['color']); ?></span></h4>
+                                    <div class="d-flex flex-column gap-4">
+                                        <h4 class="mb-3"><?= $arrProductDetails[0]['item_description'] ?></h4>
+                                        <h4 class="mb-3"><span class="item-price" style="color:#919191 !important;"><?= trimColor($curColors[0]['color']); ?></span></h4>
                                     </div>
                                 </section>
                             </div>
-                            <section class="product-details align-items-start justify-content-between">
+
+                            <section class="product-details align-items-start justify-content-between mb-3">
                                 <h5>
                                     <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>
                                 </h5>
                             </section>
 
-                            <ul class="switch-color d-flex align-items-center justify-content-between" style="overflow-y: auto;">
+                            <ul class="switch-color d-flex align-items-center justify-content-between flex-wrap" style="overflow-y: auto;">
                                 <?php
                                 $totalColors = sizeof($curColors);
 
                                 foreach ($curColors as $key => $value) {
                                     $a = $key;
                                 ?>
-                                    <li class="visible color-swatch " data-index="<?= $a ?>"
+                                    <li class="visible color-swatch" data-index="<?= $a ?>"
                                         data-style-name="<?= trim($arrProductDetails[0]['item_description']) ?>"
                                         data-color-name="<?= trimColor($curColors[$a]['color']) ?>"
                                         data-color-code="<?= trim($curColors[$a]['product_code']) ?>"
@@ -496,7 +517,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                     <div id="bottom-content" class=" d-flex p-2 text-center align-items-center justify-content-center"
                         style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1; background: #fff;">
-                        <div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+                        <div id="bottom-content-inner" style=" width: 575px; padding: 20px 0;">
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center mr-4">
@@ -509,7 +530,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     </div>
 
                                     <input type="text" class="form-control count_num" name="count_num_value" value="1"
-                                        style="background-color: transparent; border: 0; font-size: 16px; text-align: center; width: 50px;"
+                                        style="background-color: transparent; border: 0; font-size: 16px; text-align: center; width: 50px; padding-bottom: 1px;"
                                         readonly>
 
                                     <div class="d-flex justify-content-center" style="width: 50px; background: #fff;">
@@ -556,7 +577,7 @@ if (!isset($_SESSION['customer_id'])) {
 
         <?php } else { ?>
 
-            <section class="product-panel" id="product-panel">
+            <section class="product-view" id="product-panel" style="max-width: 575px; overflow: auto;">
 
                 <!-- <div class="d-flex align-items-center mb-3 mt-5">
                     <a href="./?page=select-store" class="exit-frame-selection"><img src="/assets/images/icons/icon-left-arrow.png" alt="exit" class="img-fluid" style="width: 50px;"></a>
@@ -570,13 +591,18 @@ if (!isset($_SESSION['customer_id'])) {
                     </div>
                 </div> -->
 
-                <div class="search-container-store d-flex align-items-center mb-4">
+                <div class="search-container-store d-flex align-items-center">
+                    <!-- Add Back Button here -->
+                    <a href="/sis/face/v1.0/?page=select-store" class="exit-frame-selection">
+                        <img src="<?= get_url('images/icons') ?>/icon-arrow-left.png" alt="exit" class="img-fluid" style="width: 24px;">
+                    </a>
+
                     <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
                         value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
                     <div id="toggleLayout" style="display: none;"></div>
 
                     <div class="">
-                        <button id="btn-search" class="btn btn-primary" style="height: 48px; width: 48px">
+                        <button id="btn-search" class="btn-search">
                             <img src="<?= get_url('images/icons') ?>/icon-search.png" alt="Search"
                                 style=" height: 24px; width: 24px;">
                         </button>
@@ -588,17 +614,17 @@ if (!isset($_SESSION['customer_id'])) {
                 <?php
                 if (!isset($_GET['search']) || $_GET['search'] == '') {
                 ?>
-                    <div class="flex-container mb-3">
-                        <button class="btn btn-bag " id="cart" disabled>
+                    <div class="flex-container">
+                        <button class="btn btn-bag d-flex align-items-center justify-content-center" id="cart" disabled>
                             <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
-                                style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                                style="margin-left: 3px; margin-right: 9px; width: 18px;"> View Bag
                         </button>
                     </div>
                 <?php
                 }
                 ?>
                 <div class="font-weight-bold">
-                    <h4 class="type-header font-weight-bold">
+                    <h4 class="type-header font-weight-bold p-0">
                         <?php
                         $parts = explode('-', $_GET['page']);
                         echo strtoupper(end($parts));
@@ -606,7 +632,7 @@ if (!isset($_SESSION['customer_id'])) {
                     </h4>
                 </div>
 
-                <div class="frame-list" style="height:62vh; overflow: auto;">
+                <div class="frame-list" style="height:70vh; overflow-y: auto; overflow-x: hidden; padding: 0 5px 0 0;">
                     <?php if (isset($_GET['filter']) && $_GET['filter']) { ?>
                         <!-- <div class="d-flex justify-content-center mt-2 mb-2">
                             <a href="/sis/face/v1.0/?page=<?= $_GET['page'] ?>&filter=true&sub-product=<?= $_GET['sub-product'] ?>&data_cgc=<?= $_GET['data_cgc'] ?>&sub_category=<?= $_GET['sub_category'] ?>&category=<?= $_GET['category'] ?>">
@@ -617,7 +643,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                     <?php } ?>
 
-                    <div class="row align-items-start align-items-stretch product-show" style="margin: 0 -10px;">
+                    <div class="row align-items-start align-items-stretch product-show" style="margin: 0;">
                         <?php
                         $countData = count($arrProductsSorted);
                         $showDataCount = ($countData < 10) ? $countData : 10;
@@ -665,7 +691,7 @@ if (!isset($_SESSION['customer_id'])) {
                                         <section
                                             class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
                                             <div>
-                                                <h4><?= $arrProductsSorted[$i]['item_description'] ?>
+                                                <h4><?= $arrProductsSorted[$i]['item_description'] !== '' ? $arrProductsSorted[$i]['item_description'] : '-' ?>
                                                 </h4>
                                                 <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span> </h4>
                                                 <?php
@@ -687,11 +713,16 @@ if (!isset($_SESSION['customer_id'])) {
                                     if (!isset($_GET['search']) || $_GET['search'] == '') {
                                     ?>
                                         <div class="row d-flex justify-content-center mt-3">
-                                            <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST">
-                                                <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[0]['product_code']) ?>">
-                                                <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
-                                                <button type="submit" class="btn btn-primary">Shop</button>
-                                            </form>
+                                            <!-- <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST"> -->
+                                                <div class="col-12">
+                                                    <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[0]['product_code']) ?>">
+                                                    <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
+                                                    <button type="submit" class="btn btn-product product-option"
+                                                            data-color-name="<?= $curColors[0]['color'] ?>"
+                                                            data-color-code="<?= $curColors[0]['product_code'] ?>"
+                                                            product-code="<?= $curColors[0]['product_code'] ?>">Shop</button>
+                                                </div>
+                                            <!-- </form> -->
                                         </div>
 
                                     <?php } ?>
@@ -1112,6 +1143,15 @@ if (!isset($_SESSION['customer_id'])) {
                 window.location = '?page=<?= $_GET['page'] ?>' + filter + '&colors=' + arrColors + '&shapes=' + arrShapes + '&collections=' + arrCollections;
             });
 
+            $('.exit-frame-selection').click(function() {
+                e.preventDefault();
+                window.location = "?page=select-store";
+            });
+
+            $("#bag-button").click(function() {
+                window.location.href = "/sis/face/v1.0/?page=cart";
+            });
+
         });
 
         var twoColumn = true;
@@ -1370,7 +1410,7 @@ if (!isset($_SESSION['customer_id'])) {
 
             button.disabled = true;
             button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                                                                                                        style="margin-left: 3px; margin-right: 9px; width: 18px;">View Bag`;
 
         } else {
             const button = document.getElementById('cart');
@@ -1378,8 +1418,29 @@ if (!isset($_SESSION['customer_id'])) {
             const totalCount = arrCart.reduce((total, item) => total + item.count, 0);
 
             button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${totalCount})`;
+                                                                                                        style="margin-left: 3px; margin-right: 9px; width: 18px;">View Bag (${totalCount})`;
 
+        }
+
+        function updateBag() {
+            const bagEmptyURL = " <?= get_url('images/icons') ?>/icon-shopping-bag.png";
+            const bagActiveURL = " <?= get_url('images/icons') ?>/icon-shopping-bag-active.png";
+
+
+            if (cartCount == 0) {
+                const button = document.getElementById('cart');
+
+                button.disabled = true;
+                button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
+                                                style="margin-left: 3px; margin-right: 9px; width: 18px;">View Bag`;
+
+            } else {
+                const button = document.getElementById('cart');
+                button.disabled = false;
+                button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
+                                                style="margin-left: 3px; margin-right: 9px; width: 18px;">View Bag (${cartCount})`;
+
+            }
         }
     </script>
 <?php } ?>

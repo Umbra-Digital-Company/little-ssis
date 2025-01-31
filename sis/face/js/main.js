@@ -615,6 +615,7 @@ $(document).ready(function () {
 		});
 
 		$('.btn-terms').on('click', function() {
+			console.log('clicked');
 			var body = $('#termsAndCondition').html();
 			overlayContent(body);
 		})

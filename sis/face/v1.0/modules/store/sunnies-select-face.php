@@ -97,7 +97,7 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         #cart {
-            padding: 5px 5px 0px 5px;
+            padding: 0px 5px 0px 5px;
             vertical-align: center;
             border-radius: 30px;
             cursor: pointer;
@@ -342,7 +342,7 @@ if (!isset($_SESSION['customer_id'])) {
                                         
                                      </div>
                                      
-                                     <div
+                                     <div class="card-shadow"
                                     style="border-radius: 0 0 16px 16px !important; background-color: #fff; padding: 0 15px 15px 15px;">
                                     <div class="d-flex flex-column justify-content-between align-items-center">
                                         <section
@@ -359,7 +359,8 @@ if (!isset($_SESSION['customer_id'])) {
                                             </h5>
                                         </section>
                                         <button
-                                            class="btn btn-product">
+                                            class="btn btn-product product-option" prod-item-link="face"
+                                            product-code="<?= $curColors[0]['product_code'] ?>">
                                             Shop
                                         </button>
                                     </div>

@@ -170,16 +170,16 @@
 
 
 
-    <div id="bottom-content" class=" d-flex text-center align-items-center justify-content-center mt-5 mb-5"
+    <div id="bottom-content" class=" d-flex text-center align-items-center justify-content-center mb-5"
         style=" bottom: 0; left: 0; width: 100%; ">
-        <div id="bottom-content-inner" style=" width: 100%  ; ">
+        <div id="bottom-content-inner" style=" width: 575px; padding: 8px 0;">
 
             <?php if (isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
                 <div class="row">
-                    <div class="col-12 ">
+                    <div class="col-12 mt-3">
                         <div class="customer-account text-center">
                             <a href="/face/dispatch-face">
-                                <button class="btn btn-not-cancel">Open Dispatch </button>
+                                <button class="btn btn-not-cancel"  style="height: 56px;">Open Dispatch </button>
                             </a>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                 <div class="col-12 mt-3">
                     <div class="customer-account text-center">
                         <a href="/sis/face/v1.0/?page=store-home">
-                            <button class="btn btn-primary">Make a new order</button>
+                            <button class="btn btn-primary" style="height: 56px;">Make a new order</button>
                         </a>
                     </div>
                 </div>

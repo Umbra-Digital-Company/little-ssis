@@ -127,7 +127,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 														<?= $payment['item_description'] ?> <?= $payment['product_code'] ?>
 													</span>
 												</div>
-												<span class="col-12 custom-sub-subtitle mt-1" style="color: #919191">
+												<span class="col-12 custom-sub-subtitle mt-1" style="color: #919191;">
 													<?= $payment['po_number'] ?>
 												</span>
 											</div>

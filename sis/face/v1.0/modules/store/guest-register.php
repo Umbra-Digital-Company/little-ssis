@@ -24,14 +24,14 @@
 	<div class="form-group">
 		<select class="text-left s-a mh-40 select form-control" name="age_range-guest" id="age_range-guest" required>
 			<option value="" disabled selected>-</option>
-			<option value="1">0-12</option>
-			<option value="13">13-17</option>
+			<!-- <option value="1">0-12</option>
+			<option value="13">13-17</option> -->
 			<option value="18">18-24</option>
 			<option value="25">25-34</option>
 			<option value="35">35-44</option>
 			<option value="45">45-54</option>
-			<option value="55">55-64</option>
-			<option value="65">65+</option>
+			<!-- <option value="55">55-64</option> -->
+			<!-- <option value="65">65+</option> -->
 		</select>
 		<label class="placeholder" for="age_range-guest">Age Group</label>
 	</div>

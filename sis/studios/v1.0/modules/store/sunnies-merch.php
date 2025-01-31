@@ -177,12 +177,13 @@ if (!isset($_SESSION['customer_id'])) {
         /*.list-item.frame-grid {
                                                                                                                                                                                                                                                             padding-bottom: 0 !important;
                                                                                                                                                                                                                                                         }*/
+
+
         #btn-filter {
             max-width: 111px;
-            height: 40px;
+            height: 48px !important;
             background-color: transparent;
         }
-
         .btn-counts {
             height: 56px;
             border: none;
@@ -555,7 +556,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                     <div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center"
                         style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
-                        <div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+                        <div id="bottom-content-inner" style="width: 575px; padding-top: 10px; padding-bottom: 10px;">
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center mr-4">
@@ -623,11 +624,24 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-                <div class="search-container-store d-flex align-items-center mb-4">
-                    <div id="btn-filter" class="btn btn-not-cancel "> <img id="bag-icon"
-                            src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
-                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
-                    <div id="form-search" class="d-flex align-items-center"></div>
+                <div class="search-container-store d-flex align-items-center ">
+                <div id="btn-filter" class="btn btn-not-cancel" 
+                    style="<?= (isset($_GET['filter']) && $_GET['filter']) ? 'background-color: #0B5893 !important;  color: white; border-color: #0B5893; width: 151px;' : '' ?>">  
+                    <img id="bag-icon"
+                        src="<?= get_url('images/icons') ?><?= (isset($_GET['filter']) && $_GET['filter']) ? '/icon-filter-active.png' : '/icon-filter.png' ?>" 
+                        alt="Bag"
+                        style=" <?= (isset($_GET['filter']) && $_GET['filter']) ? 'margin-left: 5px; margin-right: 10px; height: 24px; width: 24px;' : 'margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;' ?>"> 
+                    Filter 
+                    <?php if (isset($_GET['filter']) && $_GET['filter']) { ?>   
+                        <a href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>" 
+                        onclick=""> 
+                            <img id="btn-icon-close"
+                                src="<?= get_url('images/icons') ?>/icon-close-white.png" 
+                                alt="x"
+                                style="margin-left: 10px; margin-right: 2px; height: 24px; width: 24px;">   
+                        </a>   
+                    <?php } ?> 
+                </div>
                     <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
                         style="margin-left: 20px;"
                         value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
@@ -643,9 +657,9 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-                <div class="flex-container mb-3">
+                <div class="flex-container mb-4 mt-4">
 
-                    <button class="btn btn-bag " id="cart" title="Cart" disabled>
+                    <button class="btn btn-bag d-flex align-items-center justify-content-center" id="cart" title="Cart" disabled>
                         <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
                             style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
                     </button>
@@ -1190,11 +1204,15 @@ if (!isset($_SESSION['customer_id'])) {
                 window.location = '?page=select-merch' + filter + '&search=' + $('#search_frame').val();
             });
 
-            $('#btn-filter').click(function() {
-                if ($(event.target).is('#btn-icon-close')) {
-                    return;
-                }
-                $('#modal-filter').modal('show');
+            $('#btn-filter').click(function(event) {
+            // Check if the clicked target is the close icon
+            if ($(event.target).is('#btn-icon-close') || $(event.target).closest('#btn-icon-close').length) {
+                // Allow default behavior and prevent modal
+                return;
+            }
+
+            // Show the modal if the click is outside the close icon
+            $('#modal-filter').modal('show');
             });
 
             $('.my-color').click(function() {
@@ -1312,7 +1330,12 @@ if (!isset($_SESSION['customer_id'])) {
                 value += ((arrCart[i].item_description.toLowerCase().indexOf('paper bag') == -1 && arrCart[i].item_description.toLowerCase().indexOf('sac') == -1 && arrCart[i].item_description.toLowerCase().indexOf('receipt') == -1) || parseFloat(arrCart[i].price) > 0) ? parseInt(arrCart[i].count) : 0;
             }
             cartCount = value;
-            updateBag();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const productDetail = urlParams.get('product-detail');
+            if (!productDetail || productDetail.trim() === "") {
+                updateBag();
+            }
             $('.count').text(value);
         }
         const showAvailableFrame = () => {

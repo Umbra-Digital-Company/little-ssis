@@ -152,13 +152,13 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         }
-
+/* 
         ul li {
             line-height: 1;
             padding: 16px 0;
 
 
-        }
+        } */
 
 
 
@@ -349,7 +349,11 @@ if (!isset($_SESSION['customer_id'])) {
 
                                 <div
                                     style="border-radius: 0 0 16px 16px !important; background-color: #fff; padding: 0 15px 15px 15px;">
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between product-option"
+                                            prod-item-link="store-studios"
+                                            data-color-name="<?= $curColors[$i]['color'] ?>"
+                                            data-color-code="<?= $curColors[$i]['product_code'] ?>"
+                                            product-code="<?= $curColors[$i]['product_code'] ?>">
                                         <section
                                             class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
                                             <h4><?= $arrProductsSorted[$i]['item_description'] ?>

@@ -120,12 +120,12 @@ if (!isset($_SESSION['customer_id'])) {
         /*.list-item.frame-grid {
                                                                                                                                                                                                                                                         padding-bottom: 0 !important;
                                                                                                                                                                                                                                                     }*/
+
         #btn-filter {
             max-width: 111px;
-            height: 40px;
+            height: 48px !important;
             background-color: transparent;
         }
-
         .btn-counts {
             height: 56px;
             border: none;
@@ -577,7 +577,7 @@ if (!isset($_SESSION['customer_id'])) {
 
                     <div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center"
                         style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
-                        <div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+                        <div id="bottom-content-inner" style=" width: 575px; padding-top: 10px; padding-bottom: 10px;">
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center mr-4">
@@ -642,12 +642,24 @@ if (!isset($_SESSION['customer_id'])) {
             <section class="product-panel" id="product-panel">
 
 
-
-
-                <div class="search-container-store d-flex align-items-center mb-4">
-                    <div id="btn-filter" class="btn btn-not-cancel "> <img id="bag-icon"
-                            src="<?= get_url('images/icons') ?>/icon-filter.png" alt="Bag"
-                            style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> Filter</div>
+                <div class="search-container-store d-flex align-items-center ">
+                <div id="btn-filter" class="btn btn-not-cancel" 
+                    style="<?= (isset($_GET['filter']) && $_GET['filter']) ? 'background-color: #0B5893 !important;  color: white; border-color: #0B5893; width: 151px;' : '' ?>">  
+                    <img id="bag-icon"
+                        src="<?= get_url('images/icons') ?><?= (isset($_GET['filter']) && $_GET['filter']) ? '/icon-filter-active.png' : '/icon-filter.png' ?>" 
+                        alt="Bag"
+                        style=" <?= (isset($_GET['filter']) && $_GET['filter']) ? 'margin-left: 5px; margin-right: 10px; height: 24px; width: 24px;' : 'margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;' ?>"> 
+                    Filter 
+                    <?php if (isset($_GET['filter']) && $_GET['filter']) { ?>   
+                        <a href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>" 
+                        onclick=""> 
+                            <img id="btn-icon-close"
+                                src="<?= get_url('images/icons') ?>/icon-close-white.png" 
+                                alt="x"
+                                style="margin-left: 10px; margin-right: 2px; height: 24px; width: 24px;">   
+                        </a>   
+                    <?php } ?> 
+                </div>
                     <div id="form-search" class="d-flex align-items-center"></div>
                     <input type="search" name="search_frame" id="search_frame" class="form-control  search" placeholder="Search"
                         style="margin-left: 20px;"
@@ -664,20 +676,20 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-                <div class="flex-container mb-3">
+                <div class="flex-container mb-4 mt-4">
                     <!-- <a href="/sis/studios/v1.0/?page=cart" type="button" class="btn btn-bag d-flex" id="cart" title="Cart">
                         <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
                             style="margin-left: 3px; margin-right: 12px; height: 24px; width: 24px;"> View Bag
                     </a> -->
 
-                    <button class="btn btn-bag " id="cart" title="Cart" disabled>
+                    <button class="btn btn-bag d-flex align-items-center justify-content-center" id="cart" title="Cart" disabled>
                         <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
                             style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
                     </button>
                 </div>
                 <div class="frame-list" style="height:62vh; overflow: auto;">
 
-                    <?php if (isset($_GET['filter']) && $_GET['filter']) { ?>
+                    <!-- <?php if (isset($_GET['filter']) && $_GET['filter']) { ?>
                         <div class="d-flex justify-content-center mt-2 mb-2">
                             <a href="/sis/studios/v1.0/?page=<?= $_GET['page'] ?>">
                                 <div class="btn btn-link" style="color: #000 !important; text-decoration: underline !important;">
@@ -685,7 +697,7 @@ if (!isset($_SESSION['customer_id'])) {
                             </a>
                         </div>
 
-                    <?php } ?>
+                    <?php } ?> -->
 
                     <div class="row align-items-start align-items-stretch product-show" style="margin: 0 -10px;">
                         <?php
@@ -839,7 +851,7 @@ if (!isset($_SESSION['customer_id'])) {
 
 
         <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden "
-            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 492px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
 
             <div id="notification" class="notification d-flex align-items-center justify-content-between "
                 style="width: 100%; padding: 0px 10px;">
@@ -1259,11 +1271,15 @@ if (!isset($_SESSION['customer_id'])) {
             //     clearTimeout(typingTimer);
             // });
 
-            $('#btn-filter').click(function() {
-                if ($(event.target).is('#btn-icon-close')) {
-                    return;
-                }
-                $('#modal-filter').modal('show');
+            $('#btn-filter').click(function(event) {
+            // Check if the clicked target is the close icon
+            if ($(event.target).is('#btn-icon-close') || $(event.target).closest('#btn-icon-close').length) {
+                // Allow default behavior and prevent modal
+                return;
+            }
+
+            // Show the modal if the click is outside the close icon
+            $('#modal-filter').modal('show');
             });
 
             $('.my-color').click(function() {
@@ -1378,7 +1394,11 @@ if (!isset($_SESSION['customer_id'])) {
             }
 
             cartCount = value;
-            updateBag();
+            const urlParams = new URLSearchParams(window.location.search);
+            const productDetail = urlParams.get('product-detail');
+            if (!productDetail || productDetail.trim() === "") {
+                updateBag();
+            }
 
             $('.count').text(value);
         }

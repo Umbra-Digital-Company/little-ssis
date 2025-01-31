@@ -148,6 +148,17 @@ $(document).ready(function () {
 	// ================= ASSISTANT CONFIRMATION
 
 	$('#exit_customer_page').on('click', function() {
+
+		// Check the get parameter "page=?"" value
+		var page = window.location.search;
+		var pageValue = page.split('=')[1];
+		if (pageValue != 'select-store') {
+			// Back in the previous page
+			window.history.back();
+			return;
+		}
+		
+
 		$('.ssis-overlay').load("/sis/studios/func/store/cancel-confirmation.php", function (d) {
 			overlayContent(d);
 

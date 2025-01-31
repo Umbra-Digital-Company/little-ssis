@@ -68,7 +68,7 @@ require $sDocRoot."/footer.php";
 		$('#toggle_password').on('click', showPassword);
 
 		function adminLogin() {
-			$.post("/process/loginConfirm_v2.php",$("form#login_form").serialize(),function(d){
+			$.post("/process/loginConfirm.php",$("form#login_form").serialize(),function(d){
 				$('#msg').html("");
 				if (d.substring(0,7)=='success') {
 					location.reload();

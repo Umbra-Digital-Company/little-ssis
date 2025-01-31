@@ -25,6 +25,7 @@ if(count($_SESSION['access_brands']) == 1 || $_SESSION['user_login']['position']
     // echo '</pre>';
     // exit;
     if(count($_SESSION['access_brands']) == 1){
+        
         if($_SESSION['access_brands'][0] == 'specs'){
             $_SESSION['selected-brand'] = 'specs';
             
@@ -35,6 +36,11 @@ if(count($_SESSION['access_brands']) == 1 || $_SESSION['user_login']['position']
             echo '<script> window.location = "'.$arrDefaultPage['studios_link'].'";</script>';
         }elseif($_SESSION['access_brands'][0] == 'face') {
             $_SESSION['selected-brand'] = 'face';
+            // echo '<pre>';
+            // print_r($_SESSION);
+            // echo '</pre>';
+            // echo $arrDefaultPage['face_link'];
+            // exit;
             echo '<script> window.location = "'.$arrDefaultPage['face_link'].'";</script>';
         }elseif($_SESSION['access_brands'][0] == 'flask') {
             $_SESSION['selected-brand'] = 'flask';

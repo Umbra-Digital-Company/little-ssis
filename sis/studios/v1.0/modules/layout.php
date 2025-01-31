@@ -10,7 +10,7 @@ if (isset($_GET['col'])) {
 	$col = $_GET['col'];
 }
 
-$arrPage = ['home', 'store-home', 'health-declaration-form', 'contact-tracing-form', 'transactions',  'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser', 'return-confirm', 'logout2', 'select-store', 'select-store-studios', 'select-merch', 'select-readers', 'select-free-item', 'order-confirmation', 'add-paper-bag', 'updatedb', 'order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad', 'for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test', 'cart'];
+$arrPage = ['home', 'store-home', 'health-declaration-form', 'contact-tracing-form', 'transactions',  'contact-tracing-form-test', 'store-signup', 'store-signin', 'logout', 'customerdetails', 'success', 'returns', 'returns-login', 'returns-search', 'returns-details', 'createuser', 'return-confirm', 'logout2', 'select-store', 'select-store-studios', 'select-merch', 'select-readers', 'select-free-item', 'order-confirmation', 'add-paper-bag', 'updatedb', 'order-dispatched', 'select-store-studios-test', 'select-store-test', 'store-home-test', 'select-antirad', 'for-payments', 'select-antirad-test', 'select-merch-test', 'order-confirmation-test', 'cart', 'customer-details'];
 
 if (in_array($page, $arrPage)) {
 	switch ($page) {
@@ -73,6 +73,9 @@ if (in_array($page, $arrPage)) {
 			break;
 		case "contact-tracing-form":
 			include("store/contact-tracing-form.php");
+			break;
+		case "customer-details":
+			include("store/customer-details.php");
 			break;
 
 		case "returns":

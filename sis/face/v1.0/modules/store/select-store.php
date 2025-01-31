@@ -270,13 +270,13 @@
             padding-bottom: 0 !important;
         }*/
         #btn-filter {
-            max-width: 100px;
+            max-width: 120px;
             color: #fff;
-            height: 40px;
+            height: 140px;
         }
 
         #cart {
-            padding: 5px 5px 0px 5px;
+            padding: 0px 5px 0px 5px;
             vertical-align: center;
             border-radius: 30px;
             cursor: pointer;
@@ -321,10 +321,10 @@
             list-style: none
         }
 
-        ul li {
+        /* ul li {
             line-height: 1;
             padding: 16px 0
-        }
+        } */
 
         ul.tags-list {
             padding-left: 10px;
@@ -442,9 +442,9 @@
                 overflow-y: none;
             }
 
-            .btn {
+            /* .btn {
                 padding-top: 13px !important;
-            }
+            } */
 
         }
 
@@ -519,7 +519,7 @@
         <div class="search-container-store d-flex align-items-center mb-3">
             <div id="form-search" class="d-flex align-items-center">
                 <input type="search" name="search_frame" id="search_frame" class="form-control search"
-                    placeholder="Search product code / product name"
+                    placeholder="Search"
                     value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>">
                 <!-- <input type="search" name="search_frame_filter" id="search_frame_filter" class="form-control search" placeholder="Search Frame Style"  value="<?= (isset($_GET['search']) && $_GET['search'] != '') ? $_GET['search'] : '' ?>"> -->
                 <button class="btn-search">
@@ -530,15 +530,15 @@
 
         <div class="flex-container mb-3">
 
-            <button class="btn btn-bag " id="cart" disabled>
+            <button class="btn btn-bag d-flex align-items-center justify-content-center" id="cart" disabled>
                 <img id="bag-icon" src="<?= get_url('images/icons') ?>/icon-shopping-bag.png" alt="Bag"
-                    style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;"> View Bag
+                    style="margin-left: 3px; margin-right: 9px; width: 18px;"> View Bag
             </button>
         </div>
 
         <div class="packages-list">
 
-            <div class="form-row mb-5 section-frames">
+            <div class="form-row mb-4 section-frames">
                 <span class="type-header  mb-3">LIPS</span>
                 <a href="./?page=select-store-lips">
                     <div class="col-12 text-center ">
@@ -547,7 +547,9 @@
                             src="/sis/face/assets/images/sections/sunnies-face.png?v=1614047286">
 
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Lips</button>
+                            <a href="./?page=select-store-lips">
+                                <button class="btn btn-shop-header"> Shop All Lips</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -567,7 +569,7 @@
 
             ?>
 
-            <div class="form-row mb-5 section-face">
+            <div class="form-row mb-4 section-face">
 
                 <span class="type-header mb-3">FACE</span>
                 <a href="./?page=select-store-face">
@@ -577,7 +579,9 @@
                             src="/sis/face/assets/images/sections/face.webp?v=1614047286">
 
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Face</button>
+                            <a href="./?page=select-store-face">
+                                <button class="btn btn-shop-header"> Shop All Face</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -599,7 +603,7 @@
             // print_r($arrProduct); exit;
             ?>
 
-            <div class="form-row mb-5 section-brows">
+            <div class="form-row mb-4 section-brows">
 
                 <span class="type-header mb-3">BROWS</span>
                 <a href="./?page=select-store-brows">
@@ -608,7 +612,7 @@
                             src="/sis/face/assets/images/sections/brows.webp?v=1614047286">
 
                         <div class="select-link">
-                            <a href="./?page=select-brows">
+                            <a href="./?page=select-store-brows">
                                 <button class="btn btn-shop-header"> Shop All Brows</button>
                             </a>
                         </div>
@@ -629,14 +633,16 @@
             // print_r($arrProduct); exit;
             ?>
 
-            <div class="form-row mb-5 section-eyes">
+            <div class="form-row mb-4 section-eyes">
                 <span class="type-header mb-3">EYES</span>
                 <a href="./?page=select-store-eyes">
                     <div class="col-12 text-center ">
                         <img class="img-fluid img-header"
                             src="/sis/face/assets/images/sections/eyes.webp?v=1614047286">
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Eyes</button>
+                            <a href="./?page=select-store-eyes">
+                                <button class="btn btn-shop-header"> Shop All Eyes</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -656,7 +662,7 @@
             // print_r($arrProduct); exit;
             ?>
 
-            <div class="form-row mb-5 section-skin">
+            <div class="form-row mb-4 section-skin">
 
                 <span class="type-header mb-3">SKIN</span>
                 <a href="./?page=select-store-skin">
@@ -664,7 +670,9 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/skin.webp?v=1614047286">
 
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Skin</button>
+                            <a href="./?page=select-store-skin">
+                                <button class="btn btn-shop-header"> Shop All Skin</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -683,7 +691,7 @@
             $arrProductMerge = array_merge($arrProductMerge, $arrProduct);
             ?>
 
-            <div class="form-row mb-5 section-cheeks">
+            <div class="form-row mb-4 section-cheeks">
 
                 <span class="type-header mb-3">CHEEKS</span>
                 <a href="./?page=select-store-cheeks">
@@ -691,7 +699,9 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/cheeks.jpg?v=1614047286">
 
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Cheeks</button>
+                            <a href="./?page=select-store-cheeks">
+                                <button class="btn btn-shop-header"> Shop All Cheeks</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -711,13 +721,16 @@
             // print_r($arrProduct); exit;
             ?>
 
-            <div class="form-row mb-5 section-nails">
+            <div class="form-row mb-4 section-nails">
                 <span class="type-header mb-3">NAILS</span>
                 <a href="./?page=select-store-nails">
                     <div class="col-12 text-center ">
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/nails.jpg?v=1614047286">
+                        
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Nails</button>
+                            <a href="./?page=select-store-nails">
+                                <button class="btn btn-shop-header"> Shop All Nails</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -736,7 +749,7 @@
             // print_r($arrProduct); exit;
             ?>
 
-            <div class="form-row mb-5 section-sets">
+            <div class="form-row mb-4 section-sets">
                 <span class="type-header mb-3">SETS</span>
                 <a href="./?page=select-store-sets">
                     <div class="col-12 text-center ">
@@ -744,7 +757,9 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/sets.jpg?v=1614047286">
 
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Sets</button>
+                            <a href="./?page=select-store-sets">
+                                <button class="btn btn-shop-header"> Shop All Sets</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -764,7 +779,7 @@
             // print_r($arrProduct); exit;
             ?>
 
-            <div class="form-row mb-5 section-merch">
+            <div class="form-row mb-4 section-merch">
 
                 <span class="type-header mb-3">MERCH</span>
                 <a href="./?page=select-store-merch">
@@ -772,7 +787,9 @@
                         <img class="img-fluid img-header" src="/sis/face/assets/images/sections/Travel_Kit_Merch_Category_Banner_-_Desktop.webp?v=1614047286">
 
                         <div class="select-link">
-                            <button class="btn btn-shop-header"> Shop All Merch</button>
+                            <a href="./?page=select-store-merch">
+                                <button class="btn btn-shop-header"> Shop All Merch</button>
+                            </a>
                         </div>
                     </div>
                 </a>
@@ -1001,7 +1018,7 @@
                 //                         +'</div>'
                 //                         +'<div class="row no-gutters d-flex justify-content-start mt-3">'
                 //                             +'<p style="font-size: 12px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>'+parseFloat(arrCart[i].price).toFixed(2)+'</p>'
-                //                         +'</div>'
+                //                         +'</div>'icon-shopping-bag-active
                 //                         +'<div class="row no-gutters d-flex justify-content-start mt-1">'
                 //                             +'<span><input type="button" class="form-control count_decrement"  price="'+arrCart[i].price+'" group-orders-specs-id="'+arrCart[i].group_orders_specs_id+'" value="-"></span>'
                 //                             +'<input type="text" class="form-control count_num" value="'+arrCart[i].count+'" readonly>'
@@ -1319,7 +1336,7 @@
 
             button.disabled = true;
             button.innerHTML = `<img id="bag-icon" src="${bagEmptyURL}" alt="Bag"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 24px;">View Bag`;
+                                                                                                        style="margin-left: 3px; margin-right: 9px; width: 18px;">View Bag`;
 
         } else {
             const button = document.getElementById('cart');
@@ -1328,7 +1345,7 @@
             const totalCount = arrCart.reduce((total, item) => total + item.count, 0);
 
             button.innerHTML = `<img id="bag-icon" src="${bagActiveURL}" alt="Bag Active"
-                                                                                                        style="margin-left: 3px; margin-right: 9px; height: 24px; width: 28px;">View Bag (${totalCount})`;
+                                                                                                        style="margin-left: 3px; margin-right: 9px; width: 18px;">View Bag (${totalCount})`;
 
         }
     </script>

@@ -5,7 +5,7 @@
 
     <div class="mx-2">
 
-        <div class="custom-subtitle my-4">
+        <div class="custom-subtitle mb-4 mt-3">
             Total items <span class="custom-title">
                 <?= count(array_filter($arrCart, function ($item) {
                     return $item['dispatch_type'] !== 'packaging';
@@ -35,8 +35,17 @@
 
                 <div class="d-flex justify-content-between">
                     <div class=" no-gutters d-flex ">
-
-                        <img src="<?= !empty($order['image_url']) ? $order['image_url'] : 'https://via.placeholder.com/120x126' ?>" class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: cover; border-radius: 8px">
+                        
+                        <?php
+                            if (!empty($order['image_url'])) {
+                                $image_url = $order['image_url'];
+                                $fit = 'cover';
+                            } else {
+                                $image_url = '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png';
+                                $fit = 'contain';
+                            }
+                        ?>
+                        <img src="<?= !empty($order['image_url']) ? $order['image_url'] : '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: <?= $fit ?>; border-radius: 8px">
 
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
@@ -76,7 +85,7 @@
                     </div>
                     <div class="d-flex align-items-center mx-2">
                         <button class="btn remove_item bg-transparent d-flex" orders-specs-id=<?= $order['group_orders_specs_id'] ?> style="cursor: pointer;">
-                            <img src="<?= get_url('images/icons') ?> /icon-delete.svg" alt="remove" class="btn-custom-svg">
+                            <img src="<?= get_url('images/icons') ?>/icon-delete.svg" alt="remove" class="btn-custom-svg">
                         </button>
 
                     </div>
@@ -88,7 +97,7 @@
 
             <a href="/sis/face/v1.0/?page=select-store" class="btn-custom-white w-100 mt-3 d-flex align-items-center justify-content-center">
                 Add Item
-                <img src="<?= get_url('images/icons') ?> /icon-increment.png" alt="plus" class="btn-custom-svg">
+                <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="plus" class="btn-custom-svg">
             </a>
 
             <a href="?page=order-confirmation&bpage=<?= $_GET['page'] ?>" class="btn-custom-blue w-100 mt-3 d-flex align-items-center justify-content-center">

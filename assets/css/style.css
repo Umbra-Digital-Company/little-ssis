@@ -562,8 +562,8 @@ body {
     background-size: 20px; }
 
 .form-control {
-  height: 40px;
-  padding: 8px 15px;
+  height: 56px;
+  padding: 8px 13px;
   color: #2a2323;
   font-size: 14px;
   background-color: transparent;
@@ -591,7 +591,7 @@ body {
     font-size: 80%;
     top: -5px;
     left: 10px;
-    padding: 0 5px;
+    padding: 0 4px;
     background-color: #e6e6e6;
     line-height: 10px; }
     .form-control:focus ~ label.placeholder.white, .form-control:valid ~ label.placeholder.white {

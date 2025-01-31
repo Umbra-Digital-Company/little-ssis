@@ -1,3 +1,5 @@
+
+
 <?php
 
 ini_set('display_errors', 1);
@@ -77,7 +79,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 
 					<?php if (!empty($arrForPayments)): ?>
-						<select class="pagination-select custom-subtitle" onchange="location = this.value;">
+						<select class="pagination-select custom-subtitle" onchange="location = this.value;" style="width: 145px; !important">
 							<?php for ($i = 1; $i <= $totalPages; $i++): ?>
 								<option value="?page=transactions&active=payment&date=<?= urlencode((isset($_GET['date']) ? $_GET['date'] : '')) ?>&ppage=<?= $i ?>" <?= $i == $currentPage ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
 							<?php endfor; ?>

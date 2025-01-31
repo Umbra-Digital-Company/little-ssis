@@ -103,7 +103,7 @@ if (!isset($_SESSION['customer_id'])) {
         }
 
         #cart {
-            padding: 5px 5px 0px 5px;
+            padding: 2px 5px 0px 5px;
             vertical-align: center;
             border-radius: 30px;
             cursor: pointer;
@@ -462,7 +462,8 @@ if (!isset($_SESSION['customer_id'])) {
                                             </h5>
                                         </section>
                                         <button
-                                            class="btn btn-product">
+                                            class="btn btn-product product-option" prod-item-link="lips"
+                                            product-code="<?= $curColors[$i]['product_code'] ?>">
                                             Shop
                                         </button>
                                     </div>

@@ -1,6 +1,5 @@
 <?php 
-
-session_save_path("/var/www/html/cgi-bin/tmp");
+session_save_path($_SERVER["DOCUMENT_ROOT"]."/cgi-bin/tmp");
 session_start();
 
 $sDocRoot = $_SERVER["DOCUMENT_ROOT"];
@@ -9,9 +8,9 @@ $sDocRoot = $_SERVER["DOCUMENT_ROOT"];
 require $sDocRoot."/includes/connect.php";
 
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Set variables
 $msg = '';
@@ -50,10 +49,11 @@ if($valid){
 					s.password,
 					s.user_type,
 					s.store_type,
-					uc.dispatch_studios0sunnies_studios
+					uc.dispatch_studios0sunnies_studios,
+					s.access_brands
 				FROM
 					users s
-					LEFT JOIN user_access uc ON s.id = uc.user_id
+					LEFT JOIN user_access_v2 uc ON s.username = uc.username
 				WHERE
 					s.username=?
 						AND s.locked != 'y'";
@@ -63,11 +63,11 @@ if($valid){
 
 		mysqli_stmt_bind_param($stmt, 's', $username);
 		mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11);
+        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12);
         mysqli_stmt_fetch($stmt);
 		mysqli_stmt_store_result($stmt);
 
-		$username  		= $result1;
+		 $username  		= $result1;
 		$id				= $result2;
 		$isadmin		= $result3;
 		$position 		= $result4;
@@ -78,6 +78,7 @@ if($valid){
 		$user_type 		= $result9;
 		$store_type 	= $result10;
 		$dispatch_access= $result11;
+		$access_brands  = $result12;
 
 		mysqli_stmt_close($stmt);
 
@@ -95,6 +96,7 @@ if($valid){
 		$_SESSION['dashboard_login'] = "YES";
 		$_SESSION['user_type'] = $user_type;
 		$_SESSION['store_type'] = $store_type;
+		$_SESSION['language_setting'] = ($store_type == 'vs') ? 'vn' : 'us';
 
 		$_SESSION['user_login']['username'] 	   = $username;
 		$_SESSION['user_login']['id'] 			   = $id;
@@ -105,6 +107,7 @@ if($valid){
 		$_SESSION['user_login']['login'] 		   = "YES";
 		$_SESSION['user_login']['dashboard_login'] = "YES";
 		$_SESSION['dispatch_studios_no_access'] = ($dispatch_access == 1) ? false : true;
+		$_SESSION['access_brands'] = explode(',', $access_brands);
 
     	$query = "UPDATE
 			users
@@ -112,7 +115,7 @@ if($valid){
 			online = 1,
 			date_log = now()
 		WHERE
-			username = '$username'";				
+			username = '".$username."'";				
 
 		$stmt = mysqli_stmt_init($conn);
 		if (mysqli_stmt_prepare($stmt, $query)) {
@@ -122,124 +125,31 @@ if($valid){
 
 		if($position == 'store' && $user_type == 1){
 			$position = 'store-studios';
+		}else{
+			echo '<p class="text-center text-danger">You dont have any access on this website</p>';
+			exit;
 		}
 
-		switch ($position) {
+		$querlog="INSERT INTO users_access_logs(`username`,`action`,`application`) 
+				VALUES('".$_SESSION['user_login']['username'] ."',
+				'login',
+				'sunniesstore')";
 
-			case 'laboratory':
-				echo '<script>	window.location.href="/list"; </script>';				
-				break;
-			
-			case 'store':
-				echo '<script>	window.location.href="/dispatch"; </script>';
-				break;
 
-			case 'store-studios':
-				echo '<script>	window.location.href="/sis/studios/v1.0/?page=store-home"; </script>';
-				break;
+				$stmtBig2 = mysqli_stmt_init($conn);
+				if (mysqli_stmt_prepare($stmtBig2, $querlog)) {
 
-			case 'admin':
-				echo '<script>	window.location.href="/dashboard/philippines"; </script>';				
-				break;
+				    mysqli_stmt_execute($stmtBig2);
+				    mysqli_stmt_close($stmtBig2);
 
-			case 'vvm-admin':
-				echo '<script>	window.location.href="/vvm/specs"; </script>';
-				break;
+				}
+				else {
 
-			case 'vvm-studios':
-				echo '<script>	window.location.href="/vvm/studios"; </script>';
-				break;
+				    echo mysqli_error($conn);
 
-			case 'vvm-specs':
-				echo '<script>	window.location.href="/vvm/specs"; </script>';
-				break;
+				}
 
-			case 'vvm-user':
-				echo '<script>	window.location.href="/vvm/specs"; </script>';
-				break;
-
-			case 'vvm-user-mixed':
-				echo '<script>	window.location.href="/patient-profile"; </script>';
-				break;
-
-			case 'supervisor':
-				echo '<script>	window.location.href="/dashboard/supervisor"; </script>';
-				break;
-
-			case 'profiler':
-				echo '<script>	window.location.href="/patient-profile"; </script>';
-				break;
-
-			case 'aim-warehouse':
-				echo '<script>	window.location.href="/inventory/warehouse/"; </script>';
-				break;
-
-			case 'aim-store':
-				echo '<script>	window.location.href="/inventory/store/stock-movement/"; </script>';
-				break;
-
-			case 'aim-lab':
-				echo '<script>	window.location.href="/inventory/lab/stock-movement/"; </script>';
-				break;
-
-			case 'aim-runner':
-				echo '<script>	window.location.href="/inventory/runner/orders/"; </script>';
-				break;
-
-			case 'admin-distributor':
-				echo '<script>	window.location.href="/distributors/dashboard/"; </script>';
-				break;
-
-			case 'aim-overseer':
-				echo '<script>	window.location.href="/inventory/admin/"; </script>';
-				break;
-
-			case 'aim-auditor':
-				echo '<script>	window.location.href="/inventory/audit/"; </script>';
-				break;
-
-			case 'aim-clerk':
-				echo '<script>	window.location.href="/inventory/admin/history-all"; </script>';
-				break;
-
-			case 'dashboard':
-			case 'dashboard-plus':
-				echo '<script>	window.location.href="/dashboard/philippines/"; </script>';
-				break;
-
-			case 'accountant':
-				echo '<script>	window.location.href="/lens-po-report/"; </script>';
-				break;
-
-			case 'vs-doctor':
-				echo '<script>	window.location.href="/virtual-store/doctors/"; </script>';
-				break;
-
-			case 'vs-admin':
-				echo '<script>	window.location.href="/products/"; </script>';
-				break;
-
-			case 'activator':
-				echo '<script>	window.location.href="/system/poll-51/specs/"; </script>';
-				break;
-
-			case 'hr':
-				echo '<script>	window.location.href="/employees/"; </script>';
-				break;
-			case 'vn-admin':
-				echo '<script>	window.location.href="/dashboard/vietnam/"; </script>';
-				break;
-				case 'marketing':
-					echo '<script>	window.location.href="/product-assortment/"; </script>';
-					break;
-					case 'sourcing':
-						echo '<script>	window.location.href="/product-assortment/"; </script>';
-						break;
-						case 'merch':
-							echo '<script>	window.location.href="/product-assortment/"; </script>';
-							break;
-
-		};
+		echo '<script>	window.location.href="/brand-select"; </script>';
 	
 	}
 	else{

@@ -13,26 +13,27 @@ $arrTranslate = grabLanguageTags();
 
 
 <div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content cancel" style="padding: 20px;">
+		<div class="modal-content  cancel modal-cancel" style=" width: 400px !important; ">
 			<div class="modal-body">
-				<div class="text-center" style="margin-bottom: 20px;">
-					<span class="font-bold text-center" style="font-size: 18px;">Are you sure you want to leave?</span>
+				<div class="text-center" style="margin-bottom: 30px;">
+					<span class="font-bold text-center" style="font-size: 18px; font-weight: 700;">Are you sure you want to leave?</span>
 				</div>
 				<div class="text-center">
 					<?php if(isset($_SESSION['language_setting']) && $_SESSION['language_setting'] == 'vn') {?>
 					<p style="font-size: 18px;"><?= $arrTranslate['You are about to cancel this order. If you\'d wish to proceed please type "SSIS" in the input below'] ?>.</p>
 					<?php }else{ ?>
-						<p>You are about to cancel this order. If you'd wish to proceed please type "SSIS" in the input below.</p>
+						<p style="font-size: 18px; margin-bottom: 30px;  font-weight: 400;">You are about to cancel this order. If you'd wish to proceed please type "SSIS" in the input below</p>
 					<?php } ?>
 				</div>
-				<div class="form-group mt-3">
+				<div class="form-group mt-2" >
 					<input type="password" id="password_confirmation" class="form-control" required>
 					<label for="password_confirmation" class="placeholder">Type SSIS to confirm</label>
 				</div>
-				<div class="text-center mt-4">
-					<button class="btn btn-discontinue" id="yes_button">Yes, discontinue my order</button>
+				<div class="text-center mt-4" style="margin-bottom: 20px !important;" >
+					<button class="btn btn-discontinue mb-3" id="yes_button" >Yes, discontinue my order</button>
+			
 					<button class="btn btn-not-cancel mt-2" id="no_button">No, I want to keep my order</button>
-					<p class="mt-4 text-danger hide wrong-password">Invalid password</p>
+					<p class="mt-2 text-danger hide wrong-password" style="font-size: 12px;">Invalid password</p>
 				</div>
 			</div>
 		</div>
@@ -40,19 +41,58 @@ $arrTranslate = grabLanguageTags();
 
 	<style>
 
+
+
 #yes_button {
   display: flex !important;
   align-items: center !important; /* Center text vertically */
   justify-content: center !important; /* Center text horizontally */
+  height: 56px;
 }
+
+#no_button {
+  font-size: 18px ;
+  font-weight: 400;
+  font-family: "Surt-Regular";
+  display: flex !important;
+  align-items: center !important; /* Center text vertically */
+  justify-content: center !important; /* Center text horizontally */
+  height: 56px;
+}
+
+.placeholder {
+  font-weight: 400; /* Regular font weight */
+}
+.modal-cancel {
+	padding: 0px !important;
+	margin: 0 auto;
+}
+
+.modal-body {
+	padding: 20px 12px 12px 12px !important;
+
+  }
 .cancel {
   background-color: #fefefe;
-  margin: 10% auto; /* Center the modal */
   border-radius: 16px;
-  padding: 15px 15px 15px 15px !important;
+  padding: 20px 24px 24px 24px !important;
   border: none;
-  width: 80%; /* Adjust width as needed */
-  max-width: 80% !important; /* Set a maximum width */
+  height: 446px !important; /* Adjust width as needed */
+  width: 400px !important;
+  max-width: 450px !important; /* Set a maximum width */
+}
+
+
+@media (max-width: 768px) {
+  .cancel {
+    height: 446px !important; /* Adjust width as needed */
+	max-width: 400px !important; /* Set a maximum width */
+  }
+
+  .modal-body {
+	
+	padding: 12px 0px 15px 0px !important;
+  }
 }
 
 	.ssis-overlay {

@@ -123,7 +123,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 				<div class="d-flex justify-content-center mb-4">
 					<video autoplay muted loop playsinline style="width: 100%;height: auto; border-radius: 16px;">
-						<source src="https://www.sunniessystems.com/face/face-settings/videos/<?= $arrTextImages[0]['video'] ?>" type="video/mp4">
+						<source src="/face/face-settings/videos/<?= $arrTextImages[0]['video'] ?>" type="video/mp4">
 					</video>
 				</div>
 
@@ -132,7 +132,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			<!-- recommended -->
 			<div class="row">
 				<div class="col-12 mb-4">
-					<div class="col-md-12 custom-card bg-white-tile " style ="border-radius: 16px;">
+					<div class="col-md-12 custom-card bg-white-tile " style="border-radius: 16px;">
 					<p class="mb-2 font font-weight-bold ml-3 mt-3" style="font-size: 18px"><?= $arrTranslate['Recommended'] ?></p>
 						<ol>
 							<?php foreach ($arrRecommended as $key => $value) { ?>
@@ -144,8 +144,8 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			</div>
 			<?php if ($arrTextImages[0]['image_1'] != '' && $arrTextImages[0]['image_1_status'] == 1) { ?>
 
-				<div class="d-flex justify-content-center mb-4">
-					<div class="img-holder" style="background-image:url(https://www.sunniessystems.com/face/face-settings/images/<?= $arrTextImages[0]['image_1'] ?>);"></div>
+				<div class="d-flex justify-content-center mb-4" style ="border-radius: 16px;">
+					<div class="img-holder" style="background-image:url(/face/face-settings/images/<?= $arrTextImages[0]['image_1'] ?>); border-radius: 16px;"></div>
 				</div>
 
 			<?php } ?>
@@ -160,22 +160,22 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 		<?php if ($arrTextImages[0]['image_2'] != ''  && $arrTextImages[0]['image_2_status'] == 1) { ?>
 
-			<div class="d-flex justify-content-center mb-4" style= "padding-bottom: 150px"> 
-				<div class="img-holder" style="background-image:url(https://www.sunniessystems.com/face/face-settings/images/<?= $arrTextImages[0]['image_2'] ?>);"></div>
+			<div class="d-flex justify-content-center mb-4" style= "padding-bottom: 100px; border-radius: 16px;"> 
+				<div class="img-holder" style="background-image:url(/face/face-settings/images/<?= $arrTextImages[0]['image_2'] ?>); border-radius: 16px;"></div>
 			</div>
 
 		<?php } ?>
 
 		<div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
-			<div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+			<div id="bottom-content-inner" style=" width: 575px; padding: 20px 0;">
 		
 				<div class="row" >
 					<div class="col-12 ">
 						<div class="customer-account text-center">
 							<a href="modules/store/auto_guest.php">
-							<button class="btn btn-primary d-flex align-items-center justify-content-center">
+							<button class="btn btn-primary d-flex align-items-center justify-content-center" style='height: 56px; font-size: 16px;'>
 								Start
-								<img src="<?= get_url('images/icons') ?>/icon-arrow-right.png" alt="exit" class="img-fluid ml-2" style="max-height: 20px;">
+								<img src="<?= get_url('images/icons') ?>/icon-arrow-right.png" alt="exit" class="img-fluid ml-3" style="max-height: 24px;">
 							</button>
 							</a>
 						</div>

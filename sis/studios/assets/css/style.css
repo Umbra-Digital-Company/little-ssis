@@ -337,8 +337,8 @@ body {
 }
 
 #ssis_sidebar #ssis_menu li a {
-  margin: 0px 20px;
-  padding: 5px 10px;
+  margin: 0px 16px !important;
+  padding: 5px 10px !important;
   display: block;
   color: #2a2323;
   width: calc(100% - 40px);
@@ -598,7 +598,7 @@ body.customer-page {
 }
 
 .form-control {
-  height: 40px;
+  height: 56px;
   color: #2a2323;
   font-size: 20px;
   background-color: transparent;
@@ -773,12 +773,12 @@ body.customer-page {
 }
 
 .btn {
-  height: 56px;
+  height: 56px !important;
   border: 0;
   box-shadow: none !important;
   outline: none !important;
   font-size: 18px;
-  font-family: "Surt-Bold";
+  /* font-family: "Surt-Bold"; */
   border-radius: 28px;
   -webkit-border-radius: 28px;
   -moz-border-radius: 28px;
@@ -801,9 +801,9 @@ body.customer-page {
 
 .btn-guest {
   padding-top: 12px;
-  color: #5478a0;
+  color: #0b5893;
   /* Button text color */
-  border: #5478a0 2px solid;
+  border: #0b5893 2px solid;
   /* Remove border */
   cursor: pointer;
   /* Pointer cursor on hover */
@@ -812,7 +812,7 @@ body.customer-page {
 
 .btn-discontinue {
   background-color: #d84e42;
-  border: #d84e42 2px solid;
+
   cursor: pointer;
   color: white;
 }
@@ -826,9 +826,9 @@ body.customer-page {
 
 .btn-cancel {
   background-color: #ffffff !important;
-  color: #5478a0 !important;
+  color: #0b5893 !important;
   /* Button text color */
-  border: #5478a0 2px solid !important;
+  border: #0b5893 2px solid !important;
   /* Remove border */
   cursor: pointer;
   /* Pointer cursor on hover */
@@ -844,11 +844,11 @@ body.customer-page {
   width: 45% !important;
   /* Ensure the width is applied */
   height: 48px;
-  color: #5478a0;
+  color: #0b5893;
   /* Button text color */
   border-radius: 40px;
   /* Rounded corners */
-  border: 2px solid #5478a0;
+  border: 2px solid #0b5893;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -864,13 +864,13 @@ body.customer-page {
   /* Center text vertically */
   justify-content: center !important;
   /* Center text horizontally */
-  color: #5478a0;
+  color: #0b5893;
   /* Button text color */
   border-radius: 40px;
   /* Rounded corners */
-  border: 2px solid #5478a0;
+  border: 2px solid #0b5893;
   /* Border color and thickness */
-  font-size: 16px;
+  font-size: 18px;
   /* Font size */
   cursor: pointer;
   /* Pointer cursor on hover */
@@ -922,7 +922,7 @@ body.customer-page {
   /* Button text color */
   border-radius: 28px;
   /* Rounded corners */
-  border: 2px solid #5478a0;
+  border: 2px solid #0b5893;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -931,7 +931,7 @@ body.customer-page {
   font-family: "Surt-Bold" !important;
   white-space: nowrap;
   /* Prevent text wrapping */
-  background-color: #5478a0;
+  background-color: #0b5893;
   margin-left: 25px !important;
   z-index: 0 !important;
 }
@@ -953,7 +953,7 @@ body.customer-page {
   /* Button text color */
   border-radius: 28px;
   /* Rounded corners */
-  border: 2px solid #5478a0;
+  border: 2px solid #0b5893;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -982,7 +982,7 @@ body.customer-page {
   /* Button text color */
   border-radius: 28px;
   /* Rounded corners */
-  border: 2px solid #5478a0;
+  border: 2px solid #0b5893;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -991,7 +991,7 @@ body.customer-page {
   font-family: "Surt-Bold" !important;
   white-space: nowrap;
   /* Prevent text wrapping */
-  background-color: #5478a0;
+  background-color: #0b5893;
   margin-left: 25px !important;
 }
 
@@ -1008,19 +1008,19 @@ body.customer-page {
   width: 100%;
   height: 48px;
   min-height: 48px;
-  color: #5478a0;
-
+  color: #0b5893;
   border-radius: 28px;
-
-  border: 2px solid #5478a0;
-
+  border: 2px solid #0b5893;
   font-size: 16px;
-
   cursor: pointer;
-
   font-family: "Surt-Regular" !important;
-
   background-color: #ffffff;
+
+  /* Flexbox to center the content */
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
+  padding: 16px 20px !important; /* Padding on all sides, horizontal padding of 20px */
 }
 
 .btn-bag.extended {
@@ -1054,7 +1054,7 @@ body.customer-page {
 }
 
 .btn-guest:hover {
-  color: #5478a0;
+  color: #0b5893;
   /* Button text color */
 }
 
@@ -1069,6 +1069,7 @@ body.customer-page {
 
 .btn.btn-shop-header {
   background-color: #fff;
+  height: 42px !important;
   border-radius: 28px;
   font-size: 18px;
   padding: 16px 20px;
@@ -1090,8 +1091,8 @@ body.customer-page {
 .btn-primary:not([disabled]):hover,
 .btn-primary:not([disabled]):focus,
 .btn-primary *:not([disabled]):active {
-  background-color: #5478a0 !important;
-  box-shadow: 0 0 1px 1px #5478a0 !important;
+  background-color: #0b5893 !important;
+  box-shadow: 0 0 1px 1px #0b5893 !important;
 }
 
 .btn-primary.disabled,
@@ -1588,14 +1589,14 @@ body.customer-page {
   margin: 0;
   width: 25px;
   height: 25px;
-  background-image: url("../../assets/images//icons/icon-uncheck.png");
+  background-image: url("../../assets/images/icons/icon-uncheck.png");
   background-size: 25px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .checkbox:checked ~ .custom_checkbox {
-  background-image: url("../../assets/images//icons/icon-checked.png");
+  background-image: url("../../assets/images/icons/icon-checked.png");
 }
 
 .checkbox:checked ~ .custom_checkbox.doctor {
@@ -1835,7 +1836,7 @@ main {
 }
 
 .account-login {
-  height: 300px;
+  height: 330px;
   max-width: 715px;
   margin: 0 auto;
   background: #ffffff !important;
@@ -1870,7 +1871,15 @@ main.customer-layout .wrapper {
 }
 
 main.customer-layout .wrapper-2 {
-  top: 20px;
+  top: 30px;
+  height: auto;
+  margin-right: 0px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.wrapper {
+  top: 30px;
   height: auto;
   margin-right: 0px;
   overflow-y: scroll;
@@ -1878,7 +1887,7 @@ main.customer-layout .wrapper-2 {
 }
 
 main.customer-layout .wrapper-guest {
-  height: 470px;
+  height: 520px;
   padding: 24px;
   overflow-y: scroll;
 }
@@ -2836,6 +2845,11 @@ main.customer-layout .wrapper {
   margin-top: auto;
 }
 
+.page-transaction main {
+  top: 90px !important;
+  margin-top: auto !important;
+}
+
 .page-select-store .packages-list .section-frames,
 .page-select-store .packages-list .antirad {
   /*margin-bottom: .5rem !important;*/
@@ -2883,7 +2897,7 @@ main.customer-layout .wrapper {
 }
 
 .switch-layout-transactions .switch-animation {
-  width: 47.5%;
+  width: 48%;
   display: block;
   height: 48px;
   position: absolute;
@@ -2904,11 +2918,7 @@ main.customer-layout .wrapper {
 }
 
 .switch-layout-transactions .switch-animation.slide {
-  left: 46.5%;
-}
-
-.switch-layout-transactions .switch-animation.slide {
-  left: 46.5%;
+  left: 48%;
 }
 
 .switch-layout-transactions .account-navigation a {
@@ -2976,7 +2986,7 @@ main.customer-layout .wrapper {
 .page-order-confirmation .container,
 .page-order-dispatched .container,
 .page-cart .container {
-  height: calc(90vh - 90%);
+  height: calc(100vh - 10px);
   margin-top: 70px;
 }
 
@@ -2985,8 +2995,15 @@ main.customer-layout .wrapper {
 .modal-content {
   width: 575px !important;
   max-width: 575px !important;
-  width: 100% !important;
   border-radius: 16px;
+}
+
+.modal-content .cancel {
+  max-width: 400px !important;
+}
+
+.modal-content .cancel .modal-body {
+  padding: 0 !important;
 }
 
 .modal-header {
@@ -3141,7 +3158,8 @@ main.customer-layout .wrapper {
 .btn.btn-no-filter {
   border: 2px solid #dcdcdc;
   background-color: #ffffff;
-  height: 48px;
+  height: 48px !important;
+  padding: 0 5px;
   color: #342c29;
 }
 
@@ -3430,4 +3448,105 @@ main.customer-layout .wrapper {
   }
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(150, 150, 150);
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(131, 131, 131);
+}
+
+/* Handle on active */
+/* set the color of the scrollbar when clicked */
+
+::-webkit-scrollbar-thumb:active {
+  background: rgb(104, 104, 104);
+}
+
 /* end notification toast */
+
+.custom-checkbox {
+  margin-top: 10px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #b7b7b7;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: #0b5893;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  border-radius: 3px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.2s ease;
+}
+
+.sr-only:checked + .custom-checkbox::after {
+  opacity: 1;
+  background-image: url("../../assets/images/icons/icon-check.png");
+}
+
+/* Modal background overlay */
+#termsAndCondition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 1050;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal content area */
+#termsAndCondition .modal-content {
+  background-color: white;
+  border-radius: 16px;
+  max-width: 696px;
+  max-height: 90%; /* Ensure modal doesn't exceed viewport height */
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+/* Close button styles */
+#termsAndCondition .close-overlay {
+  cursor: pointer;
+}
+
+/* The backdrop to dim the background */
+.overlay-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  z-index: -1; /* Make sure the backdrop is behind the content */
+}
+
+.btn {
+  font-family: 'Surt-Bold';
+}

@@ -120,15 +120,15 @@ switch ($page) {
 	<nav id="ssis_menu">
 
 		<ul class="nav-list nav flex-column mb-2">
-			<li class="text-secondary text-uppercase mb-2 font-bold"></li>
-			<li>
+			<li class="text-secondary text-uppercase mb-2 font-bold mt-2"></li>
+			<li style='padding: 0; margin-bottom: 16px;'>
 				<a class="d-flex align-items-center" href="./?page=store-home">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-home.png);"></canvas>
 
 					<span class="h3 ml-3"><?= $arrTranslate['Home'] ?></span>
 				</a>
 			</li>
-			<?php if (isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
+			<!-- <?php if (isset($_SESSION['dispatch_studios_no_access']) && !$_SESSION['dispatch_studios_no_access']) { ?>
 				<li>
 					<a class="d-flex align-items-center" href="/studios/dispatch-studios">
 						<canvas style="background-image:url(<?= get_url('images/icons') ?>/icon-dispatch.png);"></canvas>
@@ -138,13 +138,13 @@ switch ($page) {
 			<?php } ?>
 			<?php if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
-					<a class="d-flex align-items-center" href="./?page=for-payments">
+					<a class="d-flex align-items-center" href="./?page=transactions&active=payment">
 						<canvas
 							style="background-image:url(<?= get_url('images/icons') ?>/icon-order-management.png);"></canvas>
 						<span class="h3 ml-3">For Payments</span>
 					</a>
 				</li>
-			<?php } ?>
+			<?php } ?> -->
 			<?php if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'ns') { ?>
 				<li>
 					<a class="d-flex align-items-center" href="./?page=transactions">
@@ -155,10 +155,10 @@ switch ($page) {
 				</li>
 			<?php } ?>
 		</ul>
-		<hr style="border-top: 2px solid #eeeeee; max-width: 95%">
-		<ul class="nav-list nav flex-column ">
+		<hr style="border-top: 1px solid #dcdcdc; max-width: 95%; ">
+		<ul class="nav-list nav flex-column mb-2">
 			<li class="text-secondary text-uppercase mb-2 font-bold"></li>
-			<li>
+			<li style='padding: 0; margin-bottom: 16px;'>
 				<a class="d-flex align-items-center mb-4" href="/sis/studios/func/logout.php?path_loc=v1.0">
 					<canvas style="background-image:url(<?= get_url('images/icons') ?>/sidebar-logout.png);"></canvas>
 					<span class="h3 ml-3"><?= $arrTranslate['Logout'] ?></span>
@@ -467,7 +467,7 @@ switch ($page) {
 	</div>
 </header>
 
-<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer ' . $page : '' ?>">
+<main class="<?= (isset($_SESSION['customer_page'])) ? 'customer-layout main-customer' . $page : '' ?> <?= ($page == 'customer-details') ? '"style="top: 90px; margin-top: auto;' : '' ?>">
 
 	<?php if (isset($_SESSION['customer_page']) && $_SESSION['customer_page'] == 'YES' && !isset($_SESSION['doctor_progress'])): ?>
 
@@ -633,11 +633,22 @@ switch ($page) {
 	.modal-content {
 		max-width: 747px !important;
 		width: 100% !important;
-		border-radius: .5rem;
+		/* padding: 0px 24px 24px 24px; */
+		border-radius: 16px;
+		height: 446px; 
+
 	}
 
+
+	/* width: Fixed (400px)px;
+height: Hug (446px)px;
+padding: 40px 24px 24px 24px;
+gap: 40px;
+border-radius: 16px 0px 0px 0px;
+opacity: 0px;
+ */
 	.modal-header {
-		padding-top: 20px;
+		padding-top: 0px;
 		height: 72px;
 		align-items: center;
 		border-radius: 5px;
@@ -679,6 +690,14 @@ switch ($page) {
 	.color-list div {
 		cursor: pointer;
 	}
+
+	.filter-title {
+		font-size: 18px;
+		font-weight: 650;
+		text-transform: uppercase !important;
+		line-height: 21.6px;
+    letter-spacing: 1px;
+	}
 </style>
 <div class="modal fade" id="modal-item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
@@ -700,16 +719,17 @@ switch ($page) {
 
 <div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
-	<div class="modal-dialog" role="document" style="max-width: 100%; width: 590px; ">
-		<div class="modal-content filter" style="height: 95vh; border-radius: 16px; margin: 15px auto ; ">
-			<div class="modal-header">
+	<div class="modal-dialog" role="document" style="max-width: 100%; width: 590px;  ">
+		<div class="modal-content filter" style="height: 95vh;  margin: 15px auto ; ">
+			<div class="modal-header" style="padding: 0px 24px; !important; border-bottom: none !important;  ">
 				<div class="left-section">
-					<div id="filter-arrow" class="filter-arrow" data-dismiss="modal" aria-label="Close"
+					<!-- <div id="filter-arrow" class="filter-arrow" data-dismiss="modal" aria-label="Close"
 						style="cursor: pointer;">
-
-					</div>
+						
+						<img src="<?= get_url('images/icons') ?>/icon-left-arrow.png" alt="left arrow" class="img-fluid">
+					</div> -->
 				</div>
-				<p class="title">Filter</p>
+				<p class="title" style="font-size: 20px; font-weight: 700;">Filter</p>
 				<div class="right-section">
 					<button type="button" class="close-button" id="close-button" data-dismiss="modal"
 						aria-label="Close">
@@ -718,11 +738,12 @@ switch ($page) {
 					</button>
 				</div>
 			</div>
-			<div class="modal-body" style="overflow-y:auto;">
+			<hr style="border: 1px solid #DCDCDC; margin: 0px 0px; ">
+			<div class="modal-body" style="overflow-y:auto; padding: 0px 24px 24px 24px; margin: 32px 0px; ">
 
 				<?php if (isset($arrCollectionsData)) { ?>
 
-					<p class="h2 font-bold label mt-2">Collections</p>
+					<p class=" filter-title "  >collections</p>
 					<div class="row collections-list mb-5">
 
 						<?php foreach ($arrCollectionsData as $value) {
@@ -743,7 +764,7 @@ switch ($page) {
 
 				<?php if (isset($arrShapesData)) { ?>
 
-					<p class="h2 font-bold label">Sizing</p>
+					<p class=" filter-title "  >sizing</p>
 					<div class="row shapes-list mb-5">
 
 						<?php foreach ($arrShapesData as $value) {
@@ -765,8 +786,8 @@ switch ($page) {
 
 				<?php if (isset($arrFilterColors)) { ?>
 
-					<p class="h2 font-bold label">Colors</p>
-					<div class="row color-list mb-5">
+					<p class=" filter-title "  >colors</p>
+					<div class="d-flex color-list mb-5 justify-content-start flex-wrap" style="width: 540px;">
 
 						<?php foreach ($arrFilterColors as $value) {
 
@@ -782,26 +803,32 @@ switch ($page) {
 
 					</div>
 
+	
+			
+
+
 				<?php } ?>
 
-				<div class="d-flex justify-content-center">
-					<input type="submit" class="btn btn-primary" id="filter-search-data" value="Apply Filter">
-				</div>
+				
+			
+			
+			</div>
 
-				<?php if (isset($_GET['filter']) && $_GET['filter']) {
+			<div class="d-flex flex-column justify-content-center"  style= "background-color: #FFFFFF !important; position: absolute; bottom: 0; left: 0; right: 0; margin: 0 auto; padding: 20px 24px 20px 24px; border-radius: 16px; ">
+					<input type="submit" class="btn btn-primary" id="filter-search-data" value="Apply Filter">
+
+					<?php if (isset($_GET['filter']) && $_GET['filter']) {
 					$url_page = explode('&filter', $_SERVER['REQUEST_URI']);
 				?>
-					<div class="d-flex justify-content-center mt-4">
+					<!-- <div class="d-flex justify-content-center mt-2">
 						<a href="<?= $url_page[0] ?>">
 							<div class="btn btn-link"
 								style="color: #000 !important; text-decoration: underline !important;">Reset Filter</div>
 						</a>
-					</div>
+					</div> -->
 
 				<?php } ?>
-
-			</div>
-
+				</div>
 			<script>
 				$(document).ready(function() {
 					// Function to enable/disable the Apply Filter button
@@ -823,20 +850,34 @@ switch ($page) {
 			</script>
 
 		</div>
+
+		
+		
 	</div>
 </div>
 
 <div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content" style="height: 94vh;">
+		<div class="modal-content" style=" height: 80vh; width: 100% !important;">
 			<div class="modal-header">
-				<h5 class="modal-title">Sign up</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+			<div class="left-section">
+					<div id="filter-arrow" class="filter-arrow" data-dismiss="modal" aria-label="Close"
+						style="cursor: pointer;">
+						<!-- Left Arrow -->
+						<img src="<?= get_url('images/icons') ?>/icon-left-arrow.png" alt="left arrow" class="img-fluid">
+					</div>
+				</div>
+				<p class="title">Sign Up</p>
+				<div class="right-section">
+					<!-- <button type="button" class="close-button" id="close-button" data-dismiss="modal"
+						aria-label="Close">
+						<img src="<?= get_url('images/icons') ?>/icon-close.png" alt="close" class="img-fluid"
+							style="height: 30px; width: 30px;">
+					</button> -->
+				</div>
 			</div>
-			<div class="modal-body" style="overflow-y:auto;">
+			<div class="modal-body" style="overflow-y:auto; padding: 0px 24px;">
 				<?php include 'store/sign-up-form.php' ?>
 
 			</div>

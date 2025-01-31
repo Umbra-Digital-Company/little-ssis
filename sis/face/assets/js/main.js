@@ -522,7 +522,9 @@ $(document).ready(function () {
 		}
 
 		today = yyyy + '-' + mm + '-' + dd;
-		document.getElementById("bdate2").setAttribute("max", '2019-12-31');
+		if ($('#bdate').length) {
+			document.getElementById("bdate2").setAttribute("max", '2019-12-31');
+		}
 
 		let getAge = (value) => {
 			var today = new Date().getTime(),
@@ -654,6 +656,10 @@ $(document).ready(function () {
 			overlayContent(body);
 		})
 
+		$('.btn-policy').on('click', function() {
+			var body = $('#privacyPolicy').html();
+			overlayContent(body);
+		})
 	}
 
 	// =================================== STEP 2 - Add Packages or Services

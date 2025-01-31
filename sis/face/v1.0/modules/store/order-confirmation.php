@@ -8,7 +8,7 @@
     }
 
     .add_paper {
-        height: 56px;
+        height: 48px;
         width: 100%;
         border-left: none;
         border-right: none;
@@ -68,6 +68,9 @@
         border: 2px solid #956E46;
     }
 
+    .select_paper_bag {
+        margin-bottom: 0;
+    }
 
     .count_num_pbag,
     .count_num_sac,
@@ -155,7 +158,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
 
-        <div class="custom-subtitle my-4">
+        <div class="custom-subtitle mb-3 mt-3">
             Total order
             <span class="custom-title">
                 <?= count(array_filter($arrCart, function ($item) {
@@ -205,16 +208,26 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
             ?>
 
-                <div class="customized-card my-4 w-100 p-4 ">
+                <div class="customized-card my-4 w-100 p-4 " style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                     <div class="no-gutters d-flex">
-                        <div class="">
-                            <img src="<?= !empty($cart['image_url']) ? $cart['image_url'] : 'https://via.placeholder.com/120x126' ?>"
-                                class="card-img" alt="Product Image">
+                        <div class="d-flex align-items-center justify-content-center">
+                                                    
+                        <?php
+                            if (!empty($item['image_url'])) {
+                                $image_url = $item['image_url'];
+                                $fit = 'cover';
+                            } else {
+                                $image_url = '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png';
+                                $fit = 'contain';
+                            }
+                        ?>
+                            <img src="<?= !empty($item['image_url']) ? $item['image_url'] : '/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>"
+                                class="card-img" alt="Product Image" style="width: 120px; height: 126px; object-fit: <?= $fit ?>; border-radius: 8px">
                         </div>
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
-                                <p class="custom-title"><?= $item['style'] ?></p>
-                                <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= $item['color'] ?>
+                                <p class="custom-title"><?= ucfirst($item['style']) ?></p>
+                                <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= ucfirst(trim($item['color'])) ?>
                                 </p>
                                 <p class="custom-subtitle" style="color: #919191;">
                                     <?=
@@ -239,12 +252,12 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
 
-        <div class="custom-title mb-4" style="text-transform: uppercase;">
+        <div class="custom-title mb-3" style="text-transform: uppercase;">
             <?= $arrTranslate['Packaging'] ?>
         </div>
 
 
-        <div class="card mt-3 card-paper-bag">
+        <div class="card mt-3 card-paper-bag" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <?php
             $arrPaperBagSelected = [];
             $arrPaperBag = paperBagList();
@@ -259,7 +272,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                 ?>
                     <div class="product-section d-flex align-items-center justify-content-between gap-3" style="gap: 16px;">
                         <div class="d-flex justify-content-between">
-                            <div class="form-group">
+                            <div class="form-group select_paper_bag">
                                 <select class="form-control add_paper " id="add_paper">
                                     <option value="">Additional paper bag</option>
                                     <?php for ($i = 0; $i < count($arrPaperBag); $i++) { ?>
@@ -274,8 +287,13 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
                         <div class="d-flex align-items-center justify-content-center count_item">
                             <div class="button-container">
-                                <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id=""
-                                    value="-">
+                                <!-- <input type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id=""
+                                    value="-"> -->
+                                <button type="button" class="minus_count_decrement_pbag custom-button" group-orders-specs-id=""
+                                    style="height: 40px; width: 48px; background: #fff;">
+                                    <img src="<?= get_url('images/icons') ?>/icon-decrement.png" alt="minus"
+                                        style="height: 24px; width: 24px;">
+                                </button>
                             </div>
 
                             <input type="text" style="font-size: 16px;" class="form-control count_num_pbag bg-transparent"
@@ -283,8 +301,13 @@ if (!isset($_SESSION['customer_id'])) { ?>
 
 
                             <div class="button-container">
-                                <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id=""
-                                    value="+">
+                                <!-- <input type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id=""
+                                    value="+"> -->
+                                <button type="button" class="add_count_increment_pbag custom-button" group-orders-specs-id=""
+                                    style="height: 40px; width: 48px; background: #fff;">
+                                    <img src="<?= get_url('images/icons') ?>/icon-increment.png" alt="add"
+                                        style="height: 24px; width: 24px;">
+                                </button>
                             </div>
                         </div>
 
@@ -336,7 +359,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             </div>
         </div>
 
-        <div class="card card-others mt-4 w-100 p-4 d-flex align-items-left justify-content-center">
+        <!-- <div class="card card-others mt-3 w-100 p-4 d-flex align-items-left justify-content-center" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <?php
             $arrPaperBagSelected = [];
             $arrPaperBag = othersList();
@@ -357,7 +380,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             }
             ?>
             <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex pb-2">
+                <div class="d-flex">
                     <div class="d-flex align-items-center radio">
                         <input type="checkbox" name="receipt_holder" id="receipt_holder_checkbox"
                             class="sr-only set_receipt_holder checkbox" orders-specs-id="<?= $orders_specs_id_selected ?>"
@@ -366,14 +389,21 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     </div>
                 </div>
 
-                <div class="col align-items-center pb-2">
+                <div class="col align-items-center">
                     <p style="font-size: 18px; font-weight: 400">Receipt Holder?</p>
                 </div>
 
             </div>
+        </div> -->
+
+        <div class="card mt-4 w-100 p-4 d-flex align-items-left" style="height: 120px;">
+            <div class="d-flex justify-content-between mb-1" style="font-weight: 700">
+                <p class="custom-title">How was your experience with us?</p>
+            </div>
+            <input class="form-control p-0" id="feedback" name="feedback" placeholder="Share your feedback..." style="font-size: 14px;"/>
         </div>
 
-        <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1.5rem">
+        <div class="card mt-3 w-100 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <?php
             // $total_price = 0;
             // $voucher_amount = 0;
@@ -435,8 +465,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
         </div>
 
         <?php if (!isset($_SESSION["autologin"])) { ?>
-            <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1.5rem">
-
+            <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                 <div class="d-flex align-items-center ">
                     <div style="height: 40px; width: 40px">
                         <img src="<?= get_url('images/icons') ?>/icon-user.png" alt="user" class="img-fluid">
@@ -462,16 +491,16 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <?php print_r(get_customer_data("birthday")); ?>
             <?php print_r($_SESSION) ?> -->
             <?php if (isset($_SESSION["autologin"])) { ?>
-                <div id="bottom-content" class=" d-flex text-center align-items-center justify-content-center mt-5 mb-5"
+                <div id="bottom-content" class=" d-flex text-center align-items-center justify-content-center mt-3 mb-3"
                     style=" bottom: 0; left: 0; width: 100%; ">
-                    <div id="bottom-content-inner" style=" width: 100%  ; ">
+                    <div id="bottom-content-inner" style=" width: 575px; padding: 8px 0;">
 
                         <div class="row">
                             <div class="col-12 ">
                                 <div class="customer-account text-center">
                                     <a
                                         href="./?page=account-form&type=sign-up&bpage=<?php echo htmlspecialchars($_GET['bpage']); ?>">
-                                        <button class="btn btn-primary">Log in or Sign up </button>
+                                        <button class="btn btn-primary" style='height: 56px;'>Log in or Sign up </button>
                                     </a>
                                 </div>
                             </div>
@@ -482,7 +511,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                                 <div class="customer-account text-center">
                                     <a
                                         href="./?page=account-form&guest=true&bpage=<?php echo htmlspecialchars($_GET['bpage']); ?>">
-                                        <button class="btn btn-not-cancel">Continue as guest</button>
+                                        <button class="btn btn-not-cancel" style='height: 56px;'>Check out as guest</button>
                                     </a>
                                 </div>
                             </div>
@@ -501,7 +530,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     <!-- <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center"
                     value="<?= $textSend ?>"> -->
 
-                    <button class="btn btn-primary mt-4 mb-5"><?php echo $textSend; ?></button>
+                    <button class="btn btn-primary mt-4 mb-5" style="height: 56px;"><?php echo $textSend; ?></button>
                 </a>
 
             <?php } ?>
@@ -592,8 +621,9 @@ if (!isset($_SESSION['customer_id'])) { ?>
                     return false;
                 }
                 $('#loading').modal('show');
+                
                 if (count_num_val >= total_count) {
-                    if (confirm('Your about to exceed the total count of frames.')) {
+                    if (confirm('Your about to exceed the total count of items.')) {
 
                         _this = $(this);
                         arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
@@ -614,11 +644,11 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             current_value = _this.parent().parent().find('.count_num_pbag').val();
                             _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
 
-                            _this.parents('.product-section').find('select option').each(function() {
-                                if ($(this).val() != productSelected) {
-                                    $(this).remove();
-                                }
-                            });
+                            // _this.parents('.product-section').find('select option').each(function() {
+                            //     if ($(this).val() != productSelected) {
+                            //         $(this).remove();
+                            //     }
+                            // });
                             setTimeout(() => {
                                 $('#loading').modal('hide');
                             }, 200);
@@ -628,7 +658,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
                             $('#loading').modal('hide');
                         }, 50);
                     }
-                } else {
+                } else if ((count_num_val < total_count) && (count_num_val >= 0)) {
                     _this = $(this);
                     arrOrdersSpescId = $(this).attr('group-orders-specs-id').split(",");
 
@@ -647,11 +677,11 @@ if (!isset($_SESSION['customer_id'])) { ?>
                         _this.parent().parent().find('span').eq(0).find('.minus_count_decrement_pbag').attr('group-orders-specs-id', arrOrdersSpescId);
                         current_value = _this.parent().parent().find('.count_num_pbag').val();
                         _this.parent().parent().find('.count_num_pbag').val(parseInt(current_value) + 1);
-                        _this.parents('.product-section').find('select option').each(function() {
-                            if ($(this).val() != productSelected) {
-                                $(this).remove();
-                            }
-                        });
+                        // _this.parents('.product-section').find('select option').each(function() {
+                        //     if ($(this).val() != productSelected) {
+                        //         $(this).remove();
+                        //     }
+                        // });
                         setTimeout(() => {
                             $('#loading').modal('hide');
                         }, 200);

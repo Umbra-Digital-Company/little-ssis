@@ -337,8 +337,8 @@ body {
 }
 
 #ssis_sidebar #ssis_menu li a {
-  margin: 0px 20px;
-  padding: 5px 10px;
+  margin: 0px 16px !important;
+  padding: 5px 10px !important;
   display: block;
   color: #2a2323;
   width: calc(100% - 40px);
@@ -351,9 +351,9 @@ body {
 #ssis_sidebar #ssis_menu li a:hover,
 #ssis_sidebar #ssis_menu li a.active {
   /* Add .active class for selected item */
-  background-color: #ebf2fb;
+  background-color: #f8f5ef;
   /* Desired background color on hover or selected */
-  font-weight: bold;
+  font-weight: bold !important;
   border-radius: 15px;
   border: none;
   cursor: pointer;
@@ -388,7 +388,6 @@ body {
 
 body #admin-bar {
   margin: 0 auto;
-  width: 100%;
   background-color: #fff;
   position: fixed;
   max-width: 575px;
@@ -598,7 +597,7 @@ body.customer-page {
 }
 
 .form-control {
-  height: 40px;
+  height: 56px;
   color: #2a2323;
   font-size: 20px;
   background-color: transparent;
@@ -679,8 +678,10 @@ body.customer-page {
   background-color: transparent;
   height: 40px;
   margin-right: 20px;
+  margin-left: 12px;
   background-repeat: no-repeat;
   background-position: right 15px center;
+  padding: 0;
 }
 
 .form-control.textarea {
@@ -812,12 +813,13 @@ body.customer-page {
 
 .btn-discontinue {
   background-color: #d84e42;
-  border: #d84e42 2px solid;
+  /* border: #d84e42 2px solid !important; */
   cursor: pointer;
   color: white;
+  font-weight: 400;
 }
 
-.btn-discontinue:disabled {
+.btn-discontinue:disabled, .btn-discontinue[disabled] {
   background-color: #dcdcdc;
   border: #dcdcdc 2px solid;
   cursor: pointer;
@@ -826,9 +828,9 @@ body.customer-page {
 
 .btn-cancel {
   background-color: #ffffff !important;
-  color: #cda991 !important;
+  color: #956E46 !important;
   /* Button text color */
-  border: #cda991 2px solid !important;
+  border: #956E46 2px solid !important;
   /* Remove border */
   cursor: pointer;
   /* Pointer cursor on hover */
@@ -844,11 +846,11 @@ body.customer-page {
   width: 45% !important;
   /* Ensure the width is applied */
   height: 48px;
-  color: #cda991;
+  color: #956E46;
   /* Button text color */
   border-radius: 40px;
   /* Rounded corners */
-  border: 2px solid #cda991;
+  border: 2px solid #956E46;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -858,17 +860,37 @@ body.customer-page {
   /* Adjust as needed */
 }
 
+.btn-search {
+  width: 48px;
+  /* Adjust width and height to make it circular */
+  height: 48px;
+  background-color: #956E46;
+  /* Button background color */
+  border: none;
+  /* Remove border */
+  border-radius: 100%;
+  /* Make it circular */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 20px 16px 20px;
+
+  /* Remove default padding */
+}
+
 .btn-not-cancel {
   display: flex !important;
   align-items: center !important;
   /* Center text vertically */
   justify-content: center !important;
   /* Center text horizontally */
-  color: #cda991;
+  color: #956E46;
   /* Button text color */
   border-radius: 40px;
   /* Rounded corners */
-  border: 2px solid #cda991;
+  border: 2px solid #956E46;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -1008,11 +1030,11 @@ body.customer-page {
   width: 100%;
   height: 48px;
   min-height: 48px;
-  color: #cda991;
+  color: #956E46;
 
   border-radius: 28px;
 
-  border: 2px solid #cda991;
+  border: 2px solid #956E46;
 
   font-size: 16px;
 
@@ -1818,8 +1840,8 @@ body.customer-page {
 main {
   background-color: #f0f0f0;
   min-height: calc(100vh - 210px);
+  top: 20px;
   position: relative;
-  top: 10px;
   display: flex;
   flex-direction: column;
   z-index: 5;
@@ -1835,7 +1857,7 @@ main {
 }
 
 .account-login {
-  height: 300px;
+  height: 330px;
   max-width: 715px;
   margin: 0 auto;
   background: #ffffff !important;
@@ -1850,9 +1872,9 @@ main {
 }
 
 main.customer-layout {
-  top: 20px;
+  /* top: 20px; */
   padding: 0;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   min-height: 100%;
 }
 
@@ -1878,7 +1900,7 @@ main.customer-layout .wrapper-2 {
 }
 
 main.customer-layout .wrapper-guest {
-  height: 470px;
+  height: 520px;
   padding: 24px;
   overflow-y: scroll;
 }
@@ -2815,7 +2837,7 @@ main.customer-layout .wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
   border-radius: 16px;
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
@@ -2831,15 +2853,55 @@ main.customer-layout .wrapper {
   justify-content: flex-end;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(150, 150, 150);
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(131, 131, 131);
+}
+
+/* Handle on active */
+/* set the color of the scrollbar when clicked */
+
+::-webkit-scrollbar-thumb:active {
+  background: rgb(104, 104, 104);
+}
+
 .page-select-store main,
 .page-select-store-all main,
 .page-select-store-lips main,
 .page-select-store-nails main,
-.page-account-form main,
 .page-order-dispatched main,
 [class^="page-select-store-"] main {
   top: 90px !important;
   margin-top: auto;
+}
+
+.page-account-form main{
+  top: 100px !important;
+  margin-top: auto;
+}
+
+.page-cart main {
+  margin-top: 70px;
+  top: 0;
+}
+
+.overlay-title {
+  background: white;
+  margin-top: 24px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  width: 90vw;
+  max-width: 696px;
 }
 
 .page-select-store .packages-list .section-frames,
@@ -2910,11 +2972,11 @@ main.customer-layout .wrapper {
 }
 
 .switch-layout-transactions .switch-animation.slide {
-  left: 46.5%;
+  left: 48.5%;
 }
 
 .switch-layout-transactions .switch-animation.slide {
-  left: 46.5%;
+  left: 48.5%;
 }
 
 .switch-layout-transactions .account-navigation a {
@@ -2984,6 +3046,7 @@ main.customer-layout .wrapper {
   height: calc(90vh - 90%);
   margin-top: 100px;
 }
+
 
 .page-select-store-brows .container,
 .page-select-store-face .container,
@@ -3184,7 +3247,6 @@ main.customer-layout .wrapper {
 }
 
 #btn-filter {
-  max-width: 111px;
   height: 40px;
 }
 
@@ -3197,6 +3259,7 @@ main.customer-layout .wrapper {
 .switch-color {
   display: flex;
   /* Ensure items are displayed in a row */
+  gap: 8px;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -3212,7 +3275,7 @@ main.customer-layout .wrapper {
   display: block;
   padding: 0;
   border-radius: 100%;
-  margin: 19px 13px;
+  margin: 8px 10px;
   position: relative;
 }
 
@@ -3234,9 +3297,9 @@ main.customer-layout .wrapper {
 .switch-color li.active::before {
   border: 2px solid #2a2323;
   /* Border color for the outer circle when active */
-  width: 25px;
+  width: 26px;
   /* Adjust size for the outer circle */
-  height: 25px;
+  height: 26px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -3470,3 +3533,33 @@ main.customer-layout .wrapper {
 }
 
 /* end notification toast */
+.custom-checkbox {
+  margin-top: 10px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #b7b7b7;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: #956e46;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  border-radius: 3px;
+  background-size: 24px 24px; /* Adjust size of checkmark image */
+  background-repeat: no-repeat;
+  background-position: center; /* Center the checkmark */
+  transition: opacity 0.2s ease;
+}
+.sr-only:checked + .custom-checkbox::after {
+  opacity: 1;
+  background-image: url("/sis/face/assets/images/icons/icon-check-white.png");
+}

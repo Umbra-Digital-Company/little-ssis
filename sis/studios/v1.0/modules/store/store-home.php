@@ -168,12 +168,12 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 		
 		<div id="bottom-content" class=" d-flex bg-white p-2 text-center align-items-center justify-content-center" style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1;">
-			<div id="bottom-content-inner" style=" width: 527px; padding: 20px">
+			<div id="bottom-content-inner" style=" width: 595px; padding: 10px">
 		
 				<div class="row" >
 					<div class="col-12 ">
 						<div class="customer-account text-center">
-							<a href="./?page=contact-tracing-form&type=sign-up">
+							<a href="./?page=contact-tracing-form&type=login">
 								<button class="btn btn-primary"  >Log in or Sign up </button>
 							</a>
 						</div>
