@@ -1,0 +1,341 @@
+.list-item {
+	position: relative;
+	height: 60px;
+	padding: 10px 15px;
+	background-color: $color_default;
+	@include box_shadow(0, 2px, 3px, 0, rgba($color_dark, .25));
+	@include radius(8px);
+
+	&:not(:last-of-type) {
+		margin-bottom: 10px;
+	}
+
+	&.button {
+		height: auto;
+
+		img {
+			max-width: 50px;
+
+			&.package {
+				max-width: 80px;
+				margin: 15px auto 10px;
+			}
+		}
+	}
+
+	&.add {
+		height: auto;
+
+		img {
+			max-width: 30px;
+		}
+
+		.toggle_special_order img {
+			max-width: 20px;
+		}
+
+		#create_special_order {
+
+			> div, > form {
+				height: 70px;
+			}
+
+			img {
+				max-width: 40px;
+			}
+		}
+	}
+
+	&.current-frame {
+		height: auto;
+		padding: 20px 15px;
+		@include radius(20px);
+
+		img.frame-preview {
+			max-width: 90px;
+			margin-right: 10px;
+		}
+
+		#switch_curr_frame {
+			display: block;
+			@include square(45px, 45px);
+			@include box_shadow(0, 2px, 3px, 0, rgba($color_dark, .20));
+
+			img {
+				width: 25px;
+				display: block;
+				margin: 10px auto;
+			}
+		}
+	}
+
+	&.frame {
+
+		img.frame-preview {
+			max-width: 90px;
+			margin-right: 10px;
+		}
+
+		.delete img {
+			max-width: 25px;
+		}
+
+		.remove-frame-count,
+		.change-frame-doctor {
+			display: none;
+		}
+
+		.switch_frame img {
+			width: 20px;
+		}
+	}
+
+	&.account {
+		
+		.acct-icon img {
+			max-width: 50px;
+		}
+
+		.btn_remove_account img,
+		.btn_add_account img {
+			max-width: 25px;
+		}
+	}
+
+	&.frame-grid {
+		height: 100%;
+		padding: 20px 15px;
+
+		img {
+			height: 40px;
+			max-width: auto;
+		}
+	}
+
+	&.frame-list-view {
+		height: 100%;
+		padding: 20px 15px;
+
+		img {
+			max-width: 150px;
+		}
+	}
+
+	&.pending-customer {
+
+		.gender-icon {
+			display: block;
+			margin-right: 10px;
+			background-color: $color_dark;
+			background-repeat: no-repeat;
+			background-size: 15px;
+			background-position: center;
+			@include square(35px, 35px);
+		}
+
+		> span:not(:first-of-type) {
+			margin-left: 15px;
+		}
+
+		.cancel-order {
+
+			img {
+				max-width: 20px;
+			}
+		}
+	}
+
+	&.prescription {
+		overflow: hidden;
+		height: auto;
+		padding: 0;
+		@include transition(all, .3s, linear);
+
+		&.view-old-pres {
+
+			form .header * {
+				font-size: 12px;
+			}
+		}
+
+		> div.d-flex {
+			padding: 15px;
+
+			> span,
+			> a {
+				display: none;
+			}
+		}
+
+		> .prescription-card {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background-color: $color_gray;
+			box-shadow: none !important;
+			z-index: -5;
+			opacity: 0;
+			@include radius(20px);
+			@include transition(opacity, .3s, linear);
+		}
+
+		img {
+			width: 25px;	
+		}
+
+		&.active {
+			background-color: $color_primary;
+			padding-bottom: 105px;
+			@include radius(20px);
+
+			&.view-old-pres {
+				padding-bottom: 165px;
+			}
+
+			> .d-flex {
+
+				span, a {
+					display: block;
+				}
+			}
+
+			* {
+				color: $color_default;
+			}
+
+			.text-secondary {
+				color: $color_gray !important;
+			}
+
+			> .prescription-card {
+				z-index: 1;
+				opacity: 1;
+
+				* {
+					color: $color_dark;
+				}
+			}
+		}
+	}
+
+	&.lens-upgrade {
+		overflow: hidden;
+		height: auto;
+		padding: 0;
+		@include transition(all, .3s, linear);
+
+		img.upgrade-icon {
+			width: 80px;
+			margin-right: 15px;
+		}
+		
+		> div.d-flex {
+			padding: 15px;
+		}
+
+		> .upgrade-details {
+			position: absolute;
+			padding: 20px 15px;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background-color: $color_gray;
+			box-shadow: none !important;
+			z-index: -5;
+			opacity: 0;
+			@include radius(20px);
+			@include transition(opacity, .3s, linear);
+
+			.tint-div {
+				padding: 10px 0;
+			}
+
+			.tint-color {
+				margin: 0 auto 10px;
+				@include square(60px, 60px);
+
+				&.active {
+					background-image: image('icons/icon-check.png');
+					background-repeat: no-repeat;
+					background-size: 30px;
+					background-position: center;
+				}
+			}
+		}
+
+		&.active.tints {
+			background-color: $color_primary;
+			padding-bottom: 373px;
+			@include radius(20px);
+
+			* {
+				color: $color_default;
+			}
+
+			.text-secondary {
+				color: $color_gray !important;
+			}
+
+			.text-primary.upt-opt-price {
+				color: $color_default !important;
+			}
+
+			> .upgrade-details {
+				z-index: 1;
+				opacity: 1;
+
+				* {
+					color: $color_dark;
+				}
+			}
+		}
+	}
+
+	&.active.non-tints {
+		background-color: $color_primary;
+
+		* {
+			color: $color_default;
+		}
+
+		.text-secondary {
+			color: $color_gray !important;
+		}
+
+		.text-primary.upt-opt-price {
+			color: $color_default !important;
+		}
+	}
+
+	.que-number {
+		background: $color_dark;
+		padding: 4px 0;
+		margin-right: 10px;
+		@include square(25px,25px);
+	}
+	
+	.tagline {
+		display: block;
+	}
+
+	.priority {
+
+		img {
+			max-width: 20px;
+		}
+	}
+
+	.icons {
+		display: block;
+		max-height: 25px;
+	
+		img {
+			max-height: 25px;
+		}
+
+		&:not(:last-of-type) {
+			margin-right: 15px;
+		}
+	}
+}

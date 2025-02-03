@@ -1,0 +1,12 @@
+.prescription-card {
+	@include custom_card(8px, 3px, 6px);
+
+	p {
+		font-size: 12px;
+		white-space: nowrap;
+
+		&:not(:last-of-type) {
+			margin-bottom: 15px;
+		}
+	}
+}

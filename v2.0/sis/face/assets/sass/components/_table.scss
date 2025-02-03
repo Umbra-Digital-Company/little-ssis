@@ -1,0 +1,42 @@
+.table-default {
+	width: 100%;
+	max-height: 305px;
+	overflow: auto;
+	background-color: $color_default;
+	@include radius(20px);
+	@include box_shadow(0, 5px, 15px, 0, rgba($color_dark, .25) !important);
+
+
+	table {
+		width: 100%;
+	}
+
+	thead {
+		background-color: $color_primary;
+
+		th {
+			text-transform: uppercase;
+			color: $color_default;
+			font-family: $ff_medium;
+			font-weight: 700;
+			padding: 20px 15px;
+		}
+	}
+
+	td {
+		padding: 15px;
+		border-bottom: 1px solid $color_gray;
+		font-size: $fz_small;
+
+		a {
+			font-size: $fz_small;
+		}
+	}
+}
+
+.table-comfortable {
+	padding-bottom: 5px;
+	max-height: 345px;
+	overflow-y: auto;
+	border-radius: 8px;
+}

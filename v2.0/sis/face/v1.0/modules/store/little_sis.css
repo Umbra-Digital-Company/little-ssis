@@ -1,0 +1,69 @@
+@media screen and (min-width: 100px) {
+  /** HOME PAGE **/
+
+  .page-store-home #ssis_header {
+    display: none;
+  }
+
+  .page-store-home #ssis_sidebar {
+    max-width: 100%;
+  }
+
+  .page-store-home main {
+    margin-top: 100px;
+  }
+  .page-store-home .little-sis .img-holder {
+    height: 280px;
+  }
+
+  .page-contact-tracing-form #ssis_sidebar {
+    max-width: 100%;
+  }
+
+  .page-contact-tracing-form #ssis_sidebar {
+    display: none;
+  }
+
+  /** SHOP PAGES **/
+
+  main.customer-layout .wrapper {
+    overflow-y: scroll !important;
+  }
+
+  #modal-item .modal-dialog {
+    max-width: 90% !important;
+  }
+
+  /** SELECT STORE **/
+
+  .page-select-store .packages-list {
+    overflow-x: hidden !important;
+    height: auto !important;
+  }
+
+  .page-select-store .packages-list .section-frames,
+  .page-select-store .packages-list .antirad {
+    /*margin-bottom: .5rem !important;*/
+  }
+
+  /** SELECT STORE - SUN **/
+
+  .page-select-store-nails .frame-list {
+    height: 73vh !important;
+  }
+
+  /** SELECT STORE - ANTI-RAD **/
+
+  .page-select-antirad .frame-list {
+    height: 73vh !important;
+  }
+
+  /** SELECT STORE - MERCH **/
+
+  .page-select-merch .frame-list {
+    height: 73vh !important;
+  }
+
+
+  /** CLOSE **/
+}

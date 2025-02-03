@@ -1,0 +1,82 @@
+body {
+
+	#admin-bar {
+		background-color: $color_primary;
+		position: fixed;
+		width: 100%;
+		padding: 10px;
+		left: 0;
+		top: 0;
+		max-height: 80px;
+		z-index: 150;
+		@include radius(0 0 30px 30px);
+		@include box_shadow(0, 5px, 15px, 0, rgba($color_primary, .55));
+		
+		> div {
+			padding: 10px;
+		}
+
+		.logo {
+			width: 80px;
+			// max-height: 40px;
+		}
+	}
+
+	header {
+		position: fixed;
+		padding: 10px;
+		top: 0;
+		left: 0;
+		width: 100%;
+
+		* {
+			color: $color_default;
+		}
+
+		#navigation-tab {
+			margin-top: 70px;
+
+			#tabs {
+				margin: 20px -10px 0;
+
+				a {
+					position: relative;
+					display: block;
+					margin: 0 10px;
+					background-color: transparent;
+					border: 1px solid $color_default;
+					@include square(45px, 45px);
+
+					&.active {
+						background-color: $color_default;
+					}
+
+					img {
+						position: absolute;
+						max-width: 20px;
+						display: block;
+						top: 50%;
+						left: 50%;
+						@include transform(translate(-50%, -50%))
+					}
+				}
+			}
+		}
+	}
+}
+
+body.customer-page {
+
+	#admin-bar {
+		position: relative;
+	}
+
+	header {
+		position: relative;
+		padding: 30px 10px 60px;
+
+		#navigation-tab {
+			margin-top: 0;
+		}
+	}
+}
