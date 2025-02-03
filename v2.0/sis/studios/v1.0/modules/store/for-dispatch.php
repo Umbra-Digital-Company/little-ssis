@@ -283,10 +283,10 @@ include("./modules/includes/grab_dispatch_order.php");
                                     <span class="custom-title d-block mb-2 underline" style="text-decoration: underline">
                                         <?= htmlspecialchars(ucwords($customer['fullname'])) ?>
                                     </span>
-                                    <span class="custom-sub-subtitle d-block " style="color: #919191">
-                                        <?php echo htmlspecialchars($customer['order_id']) ?>
-                                    </span>
                                 </a>
+                                <span class="custom-sub-subtitle d-block " style="color: #919191">
+                                    <?php echo htmlspecialchars($customer['order_id']) ?>
+                                </span>
                             </td>
 
                             <td>

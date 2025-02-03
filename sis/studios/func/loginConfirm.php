@@ -45,7 +45,8 @@ if($valid){
 					s.password,
 					s.user_type,
 					s.store_type,
-					uc.dispatch_studios0sunnies_studios
+					uc.dispatch_studios0sunnies_studios,
+					s.password2
 				FROM
 					users s
 					LEFT JOIN user_access_v2 uc ON s.username = uc.username
@@ -58,7 +59,7 @@ if($valid){
 
 		mysqli_stmt_bind_param($stmt, 's', $username);
 		mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11);
+        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12);
         mysqli_stmt_fetch($stmt);
 		mysqli_stmt_store_result($stmt);
 
@@ -73,6 +74,7 @@ if($valid){
 		$user_type 		= $result9;
 		$store_type 	= $result10;
 		$dispatch_access= $result11;
+		$password2		= $result12;
 
 		mysqli_stmt_close($stmt);
 
@@ -81,7 +83,7 @@ if($valid){
 	// Test password
 	$tryP = $uSPass.$password;
 
-	if(password_verify($tryP, $uPass)) {
+	if(password_verify($password, $password2)) {
 			
 		$_SESSION['userlvl'] 		 = $isadmin;
 		$_SESSION['id'] 			 = $id;

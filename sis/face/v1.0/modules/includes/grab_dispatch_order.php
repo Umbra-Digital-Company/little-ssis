@@ -103,6 +103,7 @@ $query = '
         OR ps.item_name LIKE ? 
         OR os.order_id LIKE ?)
         AND os.status IN ("for payment", "paid", "cancelled", "returned")
+        AND DATE(os.status_date) = CURDATE()
     ORDER BY
         os.status_date DESC
     LIMIT ? OFFSET ?

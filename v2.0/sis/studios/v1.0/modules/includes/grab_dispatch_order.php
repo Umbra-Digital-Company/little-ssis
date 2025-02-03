@@ -68,7 +68,7 @@ $arrCustomer = array();
 $itemsPerPage = isset($_GET['itemsPerPage']) && is_numeric($_GET['itemsPerPage']) ? (int)$_GET['itemsPerPage'] : 10;
 $pagination = isset($_GET['dpage']) && is_numeric($_GET['dpage']) ? (int)$_GET['dpage'] : 1;
 $offset = ($pagination - 1) * $itemsPerPage;
-
+$store_id =$_SESSION["store_code"];
 // echo 'Current page: ' . $pagination;
 // echo 'Items per page: ' . $itemsPerPage;
 
@@ -122,12 +122,15 @@ $query = '
     INNER JOIN
         orders_sunnies_studios os ON os.profile_id = p.profile_id
     LEFT JOIN
+        orders_studios o ON o.order_id = os.order_id
+    LEFT JOIN
         poll_51_studios_new pr ON pr.product_code = os.product_code
     WHERE
         (CONCAT(p.first_name, " ", p.last_name) LIKE ? 
         OR pr.item_name LIKE ? 
         OR os.order_id LIKE ?)
         AND os.status IN ("for payment", "paid", "cancelled", "returned")
+        AND o.origin_branch= ?
     ORDER BY
         os.status_date DESC
     LIMIT ? OFFSET ?
@@ -151,7 +154,7 @@ $stmt = mysqli_stmt_init($conn);
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
-    mysqli_stmt_bind_param($stmt, 'sssii', $searchTerm, $searchTerm, $searchTerm, $itemsPerPage, $offset);
+    mysqli_stmt_bind_param($stmt, 'sssii', $searchTerm, $searchTerm, $searchTerm,$store_id, $itemsPerPage, $offset);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10);
     while (mysqli_stmt_fetch($stmt)) {
