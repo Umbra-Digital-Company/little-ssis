@@ -15,6 +15,7 @@ if(!isset($_SESSION['user_login']['username'])) {
 
 		$order_no = $_SESSION["order_no"];
 		$profile_id = $_SESSION["customer_id"];
+		$feedback = $_GET['feedback']; 
 		// unset($_SESSION["customer_page"]);
 	    // unset($_SESSION["login_customer"]);
 	    // unset($_SESSION["customer_id"]);

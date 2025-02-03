@@ -30,7 +30,22 @@
     }
 
 
-
+    .survey-container {
+  padding: 24px;
+  background-color: #ffffff;
+  height: 142px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* Adjust as needed */
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+}
 
 
 
@@ -499,12 +514,15 @@ if (!isset($_SESSION['customer_id'])): ?>
             </select>
         </div>
 
-        <div class="card mt-4 d-flex align-items-left flex-column" style="height: 120px; border-radius: 16px;">
-                <div class="d-flex justify-content-between mb-1" style="font-weight: 700">
-                        <p class="custom-title">How was your experience with us?</p>
-                </div>
-                <input class="form-control p-0" id="feedback" name="feedback" placeholder="Share your feedback..." style="font-size: 14px;"/>
-        </div>
+		<div class="survey-container mt-4" style="height: 232px;">
+			<p class="text-uppercase font-bold">Customer Survey</p>
+			<div class="d-flex mt-4" style="justify-content: center;">
+				<!-- Non-colored images initially displayed -->
+				<img id="happy-btn" class="emoji-btn" src="../assets/images/icons/smile.png" onclick="selectEmoji('happy')" alt="Happy Emoji">
+				<img id="sad-btn" class="emoji-btn" src="../assets/images/icons/frown.png" onclick="selectEmoji('sad')" alt="Sad Emoji">
+			</div>
+			<input type="hidden" id="feedback" name="feedback" value="">					
+		</div>
 
 
 
@@ -1084,6 +1102,35 @@ if (!isset($_SESSION['customer_id'])): ?>
                 }
             });
         });
+
+        function selectEmoji(type) {
+		// Hide both non-colored images
+            document.getElementById('happy-btn').style.display = 'none';
+            document.getElementById('sad-btn').style.display = 'none';
+
+            // Show the corresponding colored image
+            let emojiImage = document.createElement('img');
+            emojiImage.alt = type === 'sad' ? 'Sad Emoji' : 'Happy Emoji';
+            emojiImage.src = type === 'sad' ? '../assets/images/icons/frown_colored.png' : '../assets/images/icons/smile_colored.png'; // Path to the colored image
+            document.querySelector('.survey-container .d-flex').appendChild(emojiImage);
+
+            // Set the feedback value
+            document.getElementById('feedback').value = type; // Set feedback value to 'happy' or 'sad'
+
+            sendFeedback(document.getElementById('feedback').value);
+	    }
+
+        function sendFeedback(feedback){
+		$.ajax({
+			url: "./modules/process/customer_survey.php",
+			type: "POST",
+			data: {
+				feedback: feedback
+			}
+		});
+	}
+
+
     </script>
 
 
