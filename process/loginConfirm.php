@@ -150,8 +150,8 @@ if($valid){
 
 				}
 
-			print_r($_SESSION);
-		//echo '<script>	window.location.href="/brand-select"; </script>';
+			// print_r($_SESSION);
+		echo '<script>	window.location.href="/brand-select"; </script>';
 	
 	}
 	else{
