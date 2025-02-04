@@ -126,6 +126,7 @@ if($valid){
 
 		switch ($position) {
 
+<<<<<<< HEAD
 			case 'laboratory':
 				echo '<script>	window.location.href="/list"; </script>';				
 				break;
@@ -240,6 +241,17 @@ if($valid){
 							break;
 
 		};
+=======
+				}
+				else {
+
+				    echo mysqli_error($conn);
+
+				}
+
+			// print_r($_SESSION);
+		echo '<script>	window.location.href="/brand-select"; </script>';
+>>>>>>> 455a2dc4... staging updates to live
 	
 	}
 	else{
