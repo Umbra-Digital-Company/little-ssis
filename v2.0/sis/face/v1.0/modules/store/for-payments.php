@@ -1,34 +1,31 @@
-
-
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 $sDocRoot = $_SERVER["DOCUMENT_ROOT"];
 
 if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
-	echo '<script>	window.location.href="/v2.0/sis/face/v1.0/?page=store-home"; </script>';
+	//include("./modules/xlog.php");
+	echo '<script>	window.location.href="/v2.0/sis/studios/v1.0/?page=store-home"; </script>';
 } else {
 
 	if (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) != 'ns') {
-		echo '<script>	window.location.href="/v2.0/sis/face/v1.0/?page=store-home"; </script>';
+		echo '<script>	window.location.href="/v2.0/sis/studios/v1.0/?page=store-home"; </script>';
 	}
 
 	include("./modules/includes/products/grab_for_payments.php");
 	include("./modules/includes/date_convert.php");
 
 
-	$itemsPerPage = 10; // Set how many items you want per page
+	$itemsPerPage = 5; // Set how many items you want per page
 	$currentPage = isset($_GET['ppage']) ? (int)$_GET['ppage'] : 1; // Get current page or default to 1
 	$totalItems = getTotalItems(); // Get total number of items
 	$totalPages = ceil($totalItems / $itemsPerPage); // Calculate total pages
 
-	$offset = ($currentPage - 1) * $itemsPerPage;
-
+	$offset = ($currentPage - 1) * $itemsPerPage; // Calculate offset for query
 	$arrForPayments = getForPayments($offset, $itemsPerPage);
-
 ?>
 
 
@@ -79,7 +76,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 
 					<?php if (!empty($arrForPayments)): ?>
-						<select class="pagination-select custom-subtitle" onchange="location = this.value;" style="width: 145px; !important">
+						<select class="pagination-select custom-subtitle" onchange="location = this.value;">
 							<?php for ($i = 1; $i <= $totalPages; $i++): ?>
 								<option value="?page=transactions&active=payment&date=<?= urlencode((isset($_GET['date']) ? $_GET['date'] : '')) ?>&ppage=<?= $i ?>" <?= $i == $currentPage ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
 							<?php endfor; ?>
@@ -90,7 +87,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 
 				<?php if (empty($arrForPayments)): ?>
 					<div class="no-orders-message" style="text-align: center; margin-top: 5rem">
-						<img src="/v2.0/sis/face/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
+						<img src="/v2.0/sis/studios/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
 						<h1 style="color: #B7B7B7;">No Pending Orders</h1>
 					</div>
 				<?php else: ?>
@@ -109,15 +106,17 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 										<td>
 											<div class="row text-nowrap">
 												<span class="col-12 custom-sub-subtitle" style="padding-bottom: 10px; color: #919191">
-													<?= cvdate3($payment['adjusted_date']) ?>
+													<?= cvdate3($payment['date_created']) ?>
 												</span>
 												<div class="col-12">
+												<a href="<?= '?page=customer-details' . '&profile_id=' . htmlspecialchars($payment['profile_id']) . '&order_id=' . htmlspecialchars($payment['order_id']) ?>" class="d-flex align-items-center">
 													<span class="custom-title d-block underline" style="text-decoration: underline">
 														<?= ucwords(strtolower($payment['first_name'] . ' ' . $payment['last_name'])) ?>
 													</span>
+												</a>
 												</div>
 												<span class="col-12 custom-sub-subtitle" style="color: #919191">
-													<?= $payment['orders_specs_id'] ?>
+													<?= $payment['order_id'] ?>
 												</span>
 											</div>
 										</td>
@@ -127,10 +126,10 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 												<div class="col-12" style="padding-bottom: 30px"></div>
 												<div class="col-12">
 													<span class="custom-sub-subtitle" style="font-size: 16px;">
-														<?= $payment['item_name'] ?> <?= $payment['product_code'] ?>
+														<?= $payment['item_description'] ?> <?= $payment['product_code'] ?>
 													</span>
 												</div>
-												<span class="col-12 custom-sub-subtitle mt-1" style="color: #919191">
+												<span class="col-12 custom-sub-subtitle mt-1" style="color: #919191;">
 													<?= $payment['po_number'] ?>
 												</span>
 											</div>
@@ -139,7 +138,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 										<td>
 											<div class="col-12"></div>
 											<span class="custom-sub-subtitle" style="font-size: 16px; color: #919191">
-												<?= $payment['price'] ? number_format($payment['price'], 2) : '0.00' ?>
+												<?= number_format($payment['price'], 2) ?>
 											</span>
 										</td>
 									</tr>
@@ -168,8 +167,5 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			window.location = '?page=transactions&active=payment&date=' + $('#date-from').val() + '|' + $('#date-to').val();
 		}
 	</script>
-
-
-
 
 <?php } ?>

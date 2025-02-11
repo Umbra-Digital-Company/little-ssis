@@ -165,13 +165,14 @@ function get_sidebar($page = "", $main = "") {
 							</a>
 						</li>
 					<?php } ?>
-
+				
 					<?php if(issetVal('sunnies_studios','dispatch_studios')==1) { ?>
 						<li class="text-capitalize">
-							<a href="/studios/dispatch-studios/" class="<?= ($page=="dispatch") ? 'active' : '' ?>">
+							<a href="<?= ($_GET['v2_access'] == 1) ? "/v2.0/sis/studios/v1.0/?page=transactions&active=dispatch#dispatch-content" : "/studios/dispatch-studios/" ?>"  class="<?= ($page=="dispatch") ? 'active' : '' ?>">
 								<?php $icon_history = ( $page == 'dispatch' ) ? 'sidebar-dispatch-active.png' : 'sidebar-dispatch.png' ?>
+
 								<canvas style="background-image: url(<?= get_url('images/icons/'.$icon_history) ?>)"></canvas>
-								Dispatch
+								Dispatch <?php echo ($_GET['v2_access']==1) ? 'v2' : '' ?>
 							</a>
 						</li>
 					<?php } ?>

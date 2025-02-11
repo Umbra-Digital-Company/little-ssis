@@ -136,18 +136,10 @@ $query = '
     LEFT JOIN
         poll_51_studios_new pr ON pr.product_code = os.product_code
     WHERE
-<<<<<<< HEAD
       os.status IN ("for payment", "paid", "cancelled", "returned")
         AND o.origin_branch= ?
         ' . $date_filter . '
         AND  (CONCAT(p.first_name, " ", p.last_name) LIKE ? OR pr.item_name LIKE ? OR os.order_id LIKE ?)
-=======
-        (CONCAT(p.first_name, " ", p.last_name) LIKE ? 
-        OR pr.item_name LIKE ? 
-        OR os.order_id LIKE ?)
-        AND os.status IN ("for payment", "paid", "cancelled", "returned")
-        AND o.origin_branch= ?
->>>>>>> 20c68b56... customer survey and live updates pulling
     ORDER BY
         os.status_date DESC
     LIMIT ? OFFSET ?
@@ -171,11 +163,7 @@ $stmt = mysqli_stmt_init($conn);
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
-<<<<<<< HEAD
     mysqli_stmt_bind_param($stmt, 'ssssii',$store_id, $searchTerm, $searchTerm, $searchTerm, $itemsPerPage, $offset);
-=======
-    mysqli_stmt_bind_param($stmt, 'sssii', $searchTerm, $searchTerm, $searchTerm,$store_id, $itemsPerPage, $offset);
->>>>>>> 20c68b56... customer survey and live updates pulling
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10);
     while (mysqli_stmt_fetch($stmt)) {
