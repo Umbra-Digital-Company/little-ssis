@@ -88,8 +88,8 @@ function getForPayments($offset = 0, $limit = 5)
     if (mysqli_stmt_prepare($stmt, $arrCartQuery)) {
         mysqli_stmt_bind_param($stmt, 'ii', $limit, $offset);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8);
-        // mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15);
+        // mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8);
+        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15);
 
         while (mysqli_stmt_fetch($stmt)) {
 

@@ -165,7 +165,7 @@ $stmt = mysqli_stmt_init($conn);
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
-    mysqli_stmt_bind_param($stmt, 'sssii', $store_id ,$searchTerm, $searchTerm, $searchTerm, $itemsPerPage, $offset);
+    mysqli_stmt_bind_param($stmt, 'ssssii', $store_id ,$searchTerm, $searchTerm, $searchTerm, $itemsPerPage, $offset);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10);
     while (mysqli_stmt_fetch($stmt)) {
@@ -230,7 +230,7 @@ function getTotalResults($conn, $searchTerm, $store_id, $date_filter)
         return 0;
     }
 
-    mysqli_stmt_bind_param($stmt, 'sss', $store_id, $searchTerm, $searchTerm, $searchTerm);
+    mysqli_stmt_bind_param($stmt, 'ssss', $store_id, $searchTerm, $searchTerm, $searchTerm);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $totalResults);
     mysqli_stmt_fetch($stmt);

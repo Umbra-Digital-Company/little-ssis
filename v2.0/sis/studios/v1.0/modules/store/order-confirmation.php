@@ -518,8 +518,8 @@ if (!isset($_SESSION['customer_id'])): ?>
 			<p class="text-uppercase font-bold">Customer Survey</p>
 			<div class="d-flex mt-4" style="justify-content: center;">
 				<!-- Non-colored images initially displayed -->
-				<img id="happy-btn" class="emoji-btn" src="../assets/images/icons/smile.png" onclick="selectEmoji('happy')" alt="Happy Emoji">
-				<img id="sad-btn" class="emoji-btn" src="../assets/images/icons/frown.png" onclick="selectEmoji('sad')" alt="Sad Emoji">
+				<img id="happy-btn" class="emoji-btn" src="../assets/images/icons/smile_colored.png" onclick="selectEmoji('happy')" alt="Happy Emoji">
+				<img id="sad-btn" class="emoji-btn" src="../assets/images/icons/frown_colored.png" onclick="selectEmoji('sad')" alt="Sad Emoji">
 			</div>
 			<input type="hidden" id="feedback" name="feedback" value="">					
 		</div>

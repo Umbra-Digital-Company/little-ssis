@@ -58,6 +58,7 @@ if (!isset($_SESSION['customer_id'])) {
             margin-inline-start: 0px;
             margin-inline-end: 0px;
         }
+        
 
         .panel .pull-right {
             float: right !important;

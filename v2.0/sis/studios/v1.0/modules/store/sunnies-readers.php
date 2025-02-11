@@ -86,6 +86,23 @@ if (!isset($_SESSION['customer_id'])) {
             cursor: pointer;
         }
 
+        .btn-product {
+            /* Should be outline button, text is not bold and padding is small */
+            background-color: #fff;
+            border: 3px solid ;
+            color: #0B5893;
+            padding: 3px 10px;
+            font-size: 16px;
+            line-height: 1; /* Adjust the line-height to reduce height */
+            height: 45px !important;
+        }
+
+        .btn-product:hover {
+            background-color: #0B5893;
+            color: #fff;
+        }
+
+
         label {
             display: inline-block;
             max-width: 100%;
