@@ -79,7 +79,7 @@ if( isset($_GET['search']) ){
 
     $date_filter="";
 }else{
-    $date_filter=" AND os.payment_date > DATE_ADD(NOW(), INTERVAL -1 WEEK)";
+    $date_filter=" AND os.payment_date > DATE_ADD(NOW(), INTERVAL -4 WEEK)";
 }
 
 
@@ -102,7 +102,7 @@ $countQuery = '
 
 $stmt = mysqli_stmt_init($conn);
 mysqli_stmt_prepare($stmt, $countQuery);
-mysqli_stmt_bind_param($stmt, 'ssss',$store_id, $searchTerm, $searchTerm, $searchTerm);
+mysqli_stmt_bind_param($stmt, 'ssss', $store_id, $searchTerm, $searchTerm, $searchTerm);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $totalResults);
 mysqli_stmt_fetch($stmt);

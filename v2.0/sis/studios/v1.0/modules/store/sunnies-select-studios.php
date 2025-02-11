@@ -37,6 +37,21 @@ if (!isset($_SESSION['customer_id'])) {
             padding: 0 20px 100px;
         }
 
+        .btn-product {
+            /* Should be outline button, text is not bold and padding is small */
+            background-color: #fff;
+            border: 3px solid ;
+            color: #0B5893;
+            padding: 3px 10px;
+            font-size: 16px;
+            line-height: 1; /* Adjust the line-height to reduce height */
+            height: 45px !important;
+        }
+
+        .btn-product:hover {
+            background-color: #0B5893;
+            color: #fff;
+        }
 
 
         [type="checkbox"]:not(:checked)+label,
@@ -397,7 +412,7 @@ if (!isset($_SESSION['customer_id'])) {
                                         <?php } ?>
                                     </ul>
 
-                                    <!-- <div class="row d-flex justify-content-center mt-3">
+                                    <div class="row d-flex justify-content-center mt-3" style="height: 50px;">
                                         <form class="col-12 form-quick-add-to-bag" item="antirad"
                                             id="form-quick-add-to-bag<?= $i ?>" method="POST">
                                             <input type="hidden" name="studios_product_code"
@@ -405,9 +420,9 @@ if (!isset($_SESSION['customer_id'])) {
                                                 value="<?= trim($curColors[0]['product_code']) ?>">
                                             <input type="hidden" class="form-control count_num" name="count_num_value" value="1"
                                                 readonly>
-                                            <button type="submit" class="btn btn-primary">add to bag</button>
+                                            <button type="submit" class="btn btn-product">Add To Bag</button>
                                         </form>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
 

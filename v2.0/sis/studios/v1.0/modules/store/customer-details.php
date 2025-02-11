@@ -30,6 +30,24 @@
 		background-color: #f0f0f0;
 	}
 
+	
+	.survey-container {
+  padding: 24px;
+  background-color: #ffffff;
+  height: 142px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* Adjust as needed */
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+}
+
 		.details-header canvas {
 		width: 100%;
 		height: 35px; }
@@ -385,6 +403,25 @@
                 </div>
             </div>
         </div>
+				
+				<div class="survey-container mt-4 d-flex justify-content-between align-items-center" style="height: 80px;">
+					<p class="text-uppercase font-bold">Customer Feedback</p>
+					<div class="d-flex" style="justify-content: center; gap: 20px;">
+						<?php 
+							$feedback = $arrOrdersConfirmed[0]['feedback'];
+							if ($feedback === 'happy') {
+								echo '<img class="emoji-btn" src="../assets/images/icons/smile_colored.png" alt="Happy Emoji" style="width: 48px; height: 48px;">';
+							} elseif ($feedback === 'sad') {
+								echo '<img class="emoji-btn" src="../assets/images/icons/frown_colored.png" alt="Sad Emoji" style="width: 48px; height: 48px;">';
+							} else {
+								// If no feedback, show both emojis
+								echo '<img class="emoji-btn" src="../assets/images/icons/smile_colored.png" alt="Happy Emoji" style="width: 48px; height: 48px;">';
+								echo '<img class="emoji-btn" src="../assets/images/icons/frown_colored.png" alt="Sad Emoji" style="width: 48px; height: 48px;">';
+							}
+						?>
+					</div>
+					<input type="hidden" id="feedback" name="feedback" value="<?php echo htmlspecialchars($feedback); ?>">					
+				</div>
     </div>
 
 	</div>

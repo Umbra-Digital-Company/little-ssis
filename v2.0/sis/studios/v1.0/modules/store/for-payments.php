@@ -109,9 +109,11 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 													<?= cvdate3($payment['date_created']) ?>
 												</span>
 												<div class="col-12">
+												<a href="<?= '?page=customer-details' . '&profile_id=' . htmlspecialchars($payment['profile_id']) . '&order_id=' . htmlspecialchars($payment['order_id']) ?>" class="d-flex align-items-center">
 													<span class="custom-title d-block underline" style="text-decoration: underline">
 														<?= ucwords(strtolower($payment['first_name'] . ' ' . $payment['last_name'])) ?>
 													</span>
+												</a>
 												</div>
 												<span class="col-12 custom-sub-subtitle" style="color: #919191">
 													<?= $payment['order_id'] ?>

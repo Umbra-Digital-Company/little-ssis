@@ -500,6 +500,8 @@ if (!isset($_SESSION['customer_id'])) {
                                     </li>
                                 <?php } ?>
                             </ul>
+
+
                         </div>
                     </div>
 
@@ -646,96 +648,79 @@ if (!isset($_SESSION['customer_id'])) {
                     <?php } ?>
 
                     <div class="row align-items-start align-items-stretch product-show" style="margin: 0;">
-                        <?php
-                        $countData = count($arrProductsSorted);
-                        $showDataCount = ($countData < 10) ? $countData : 10;
-                        // echo '<pre>';
-                        // print_r($showDataCount); exit;
-                        ?>
-
-                        <?php for ($i = 0; $i < $showDataCount; $i++) { ?>
-                            <div class="frame-style col-6 mb-3" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
-                                <div class="frame-style__slider">
-
-                                    <?php
-                                    // Set current colors array
-                                    $curColors = $arrProductsSorted[$i]["colors"];
-
-                                    for ($a = 0; $a < 1; $a++) {
-
-                                    ?>
-
-                                        <div class="product-option"
-                                            data-color-name="<?= $curColors[$a]['color'] ?>"
-                                            data-color-code="<?= $curColors[$a]['product_code'] ?>"
-                                            product-code="<?= $curColors[$a]['product_code'] ?>">
-                                            <input type="radio" name="frame_style" class="sr-only">
-                                            <label
-                                                class="list-item frame-grid d-flex flex-column align-items-center justify-content-center"
-                                                style="background-color: #fff;">
-
-                                                <?php
-                                                $curImageURL = $curColors[$a]["image"];
-                                                ?>
-
-                                                <div class="image-wrapper"
-                                                    style="width: 100%; padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $curImageURL ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center  ;">
-                                                </div>
-                                                <!-- <p style="font-size: 12px; position: absolute; top: 10px; right: 10px;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= $curColors[$a]['price'] ?></p> -->
-                                            </label>
-                                        </div>
-
-                                    <?php } ?>
-                                </div>
-                                <div
-                                    style="background: #fff; border-radius: 0 0 10px 10px; padding: 15px;">
-                                    <div class="d-flex justify-content-between">
-                                        <section
-                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
-                                            <div>
-                                                <h4><?= $arrProductsSorted[$i]['item_description'] !== '' ? $arrProductsSorted[$i]['item_description'] : '-' ?>
-                                                </h4>
-                                                <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span> </h4>
-                                                <?php
-                                                if (isset($_GET['search'])) {
-                                                ?>
-                                                    <h4><span class="blk" style="color:#919191 "><?= $arrProductsSorted[$i]['color_code'] !== '' ? $arrProductsSorted[$i]['color_code'] : '-' ?></span></h4>
-                                                <?php } ?>
-                                            </div>
-                                        </section>
-
-                                        <section
-                                            class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
-                                            <h5>
-                                                <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>
-                                            </h5>
-                                        </section>
-                                    </div>
-                                    <?php
-                                    if (!isset($_GET['search']) || $_GET['search'] == '') {
-                                    ?>
-                                        <div class="row d-flex justify-content-center mt-3">
-                                            <!-- <form class="col-12 form-quick-add-to-bag" id="form-quick-add-to-bag<?= $i ?>" method="POST"> -->
-                                                <div class="col-12">
-                                                    <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($curColors[0]['product_code']) ?>">
-                                                    <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
-                                                    <button type="submit" class="btn btn-product product-option"
-                                                            data-color-name="<?= $curColors[0]['color'] ?>"
-                                                            data-color-code="<?= $curColors[0]['product_code'] ?>"
-                                                            product-code="<?= $curColors[0]['product_code'] ?>">Shop</button>
-                                                </div>
-                                            <!-- </form> -->
-                                        </div>
-
-                                    <?php } ?>
-                                </div>
-
-                            </div>
-
-                        <?php } ?>
-                    </div>
-
+    <?php
+    // Loop through all products
+    $countData = count($arrProductsSorted);
+    for ($i = 0; $i < $countData; $i++) {
+        // Loop through each product's colors
+        $curColors = $arrProductsSorted[$i]["colors"];
+        foreach ($curColors as $color) {
+    ?>
+            
+            <div class="frame-style col-6 mb-3" data-style="<?= $arrProductsSorted[$i]['item_description'] ?>">
+                <!-- Single color frame -->
+                <div class="product-option"
+                     data-color-name="<?= $color['color'] ?>"
+                     data-color-code="<?= $color['product_code'] ?>"
+                     product-code="<?= $color['product_code'] ?>">
+                    <input type="radio" name="frame_style_<?= $i ?>" class="sr-only">
+                    <label class="list-item frame-grid d-flex flex-column align-items-center justify-content-center"
+                           style="background-color: #fff;">
+                        <div class="image-wrapper"
+                             style="width: 100%; padding-bottom: 75%; border-radius: 8px; background-color: #f1f1f1; background-image: url('<?= $color["image"] ?>'); background-repeat: no-repeat; background-size: 100%; background-position: center;">
+                        </div>
+                    </label>
                 </div>
+                <!-- Product details for this color -->
+                <div style="background: #fff; border-radius: 0 0 10px 10px; padding: 15px;">
+                    <div class="d-flex justify-content-between">
+                        <section class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                            <div>
+                                <h4><?= $arrProductsSorted[$i]['item_description'] !== '' ? $arrProductsSorted[$i]['item_description'] : '-' ?></h4>
+                                <h4><span class="blk"><?= trimColor($color['color']); ?></span></h4>
+                                <!-- <?php if (isset($_GET['search'])) { ?>
+                                    <h4><span class="blk" style="color:#919191 "><?= $arrProductsSorted[$i]['color_code'] !== '' ? $arrProductsSorted[$i]['color_code'] : '-' ?></span></h4>
+                                <?php } ?> -->
+                            </div>
+                        </section>
+                        <section class="product-details flex-nowrap no-gutters align-items-start justify-content-between">
+                            <h5>
+                                <span class="item-price">P<?= trim($color['price']); ?></span>
+                            </h5>
+                        </section>
+                    </div>
+                        <div class="row d-flex justify-content-center mt-3">
+                            <div class="col-12">
+                                <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>" value="<?= trim($color['product_code']) ?>">
+                                <form href="#" id="form-add-to-bag">
+                                    <input type="hidden" id="studios-product-code" name="studios_product_code" value="<?= trim($color['product_code']) ?>">
+                                    <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
+                                    <button type="submit" class="btn btn-product"
+                                            data-color-name="<?= $color['color'] ?>"
+                                            data-color-code="<?= $color['product_code'] ?>"
+                                            product-code="<?= $color['product_code'] ?>">Add To Bag</button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+    <?php
+        } // end foreach color
+    } // end for each product
+    ?>
+    <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden "
+            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 492px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+
+        <div id="notification" class="notification d-flex align-items-center justify-content-between "
+            style="width: 100%; padding: 0px 10px;">
+
+            <span class="notification-message text-align-center">Item successfully added to bag</span>
+            <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">
+                <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
+            </button>
+        </div>
+    </div>
+</div>
 
 
             </section>
@@ -846,17 +831,17 @@ if (!isset($_SESSION['customer_id'])) {
     ?>
 
     <script>
-        // function closeNotification() {
-        //     document.getElementById('notification').classList.remove('show');
-        //     document.getElementById('notification').classList.add('hidden');
-        // }
+        function closeNotification() {
+            document.getElementById('notification')?.classList.remove('show');
+            document.getElementById('notification')?.classList.add('hidden');
+        }
 
-        // function openNotification() {
-        //     document.getElementById('notification').classList.remove('hidden');
-        //     document.getElementById('notification').classList.add('show');
-        // }
+        function openNotification() {
+            document.getElementById('notification')?.classList.remove('hidden');
+            document.getElementById('notification')?.classList.add('show');
+        }
 
-        // closeNotification();
+        closeNotification();
 
         let arrProduct = JSON.parse(JSON.stringify(<?= json_encode($arrProduct); ?>));
         let arrCart = JSON.parse(JSON.stringify(<?= json_encode($arrCart); ?>));
@@ -877,9 +862,9 @@ if (!isset($_SESSION['customer_id'])) {
                 });
             });
 
-            $(this).on('click', '.product-option', function() {
-                let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
-                window.location = "?page=<?= $_GET['page'] ?>&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
+           $(this).on('click', '.product-option', function() {
+               let tempProduct = arrProduct.find(x => x.product_code == $(this).attr('product-code'));
+               window.location = "?page=<?= $_GET['page'] ?>&product-detail=true&product-code=" + tempProduct.product_code + "&desc=" + tempProduct.description + "&style=" + tempProduct.item_description + "&color=" + tempProduct.color + "&price=" + tempProduct.price + "&image=" + tempProduct.image_url + "&descr=" + tempProduct.product_description + "&tags=" + tempProduct.tags;
             });
 
             $("#cart").click(function() {
@@ -959,6 +944,7 @@ if (!isset($_SESSION['customer_id'])) {
             });
             $(document).on('submit', "#form-add-to-bag", function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 $.ajax({
                     url: "/v2.0/sis/face/func/process/add_to_bag.php",
                     type: "POST",
@@ -968,7 +954,7 @@ if (!isset($_SESSION['customer_id'])) {
                         window.location = "?page=<?= $_GET['page'] ?>";
                     },
                     error: function() {}
-                }); //END :: AJAX
+                }); 
             });
             $(document).on('submit', ".form-quick-add-to-bag", function(e) {
                 e.preventDefault();

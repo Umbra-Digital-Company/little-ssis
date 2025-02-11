@@ -13,7 +13,7 @@ if(!isset($_SESSION)){
 
 if(isset($_POST['feedback']) && $_POST['feedback']!=''){
 
-	$queryFeedback = "UPDATE orders_studios SET feedback='" . mysqli_real_escape_string($conn, $_POST['feedback']) . "' WHERE order_id='" . mysqli_real_escape_string($conn, $_SESSION['order_no']) . "'";
+	$queryFeedback = "UPDATE orders_face SET feedback='" . mysqli_real_escape_string($conn, $_POST['feedback']) . "' WHERE order_id='" . mysqli_real_escape_string($conn, $_SESSION['order_no']) . "'";
 	
 	$stmt = mysqli_stmt_init($conn);
 	if (mysqli_stmt_prepare($stmt, $queryFeedback)) {	

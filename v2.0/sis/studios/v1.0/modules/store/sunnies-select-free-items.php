@@ -12,7 +12,288 @@ if (!isset($_SESSION['customer_id'])) {
 } else {
     include "./modules/includes/products/grab_select_free_item.php";
     ?>
+ <style>
+        /* Remove Progress Bar */
+        .step-progress {
+            display: none !important;
+        }
 
+        .customer-layout {
+            padding-top: 20px !important;
+        }
+
+        body * {
+            font-size: revert;
+        }
+
+        main.customer-layout .wrapper {
+            padding: 0 20px 100px;
+        }
+
+        .btn-product {
+            /* Should be outline button, text is not bold and padding is small */
+            background-color: #fff;
+            border: 3px solid ;
+            color: #0B5893;
+            padding: 3px 10px;
+            font-size: 16px;
+            line-height: 1; /* Adjust the line-height to reduce height */
+            height: 45px !important;
+        }
+
+        .btn-product:hover {
+            background-color: #0B5893;
+            color: #fff;
+        }
+
+
+        [type="checkbox"]:not(:checked)+label,
+        [type="checkbox"]:checked+label {
+            position: relative;
+            padding-left: 1em;
+            cursor: pointer;
+        }
+
+        .radio-active label,
+        .radio .checked,
+        .checkbox .checked,
+        .checkbox-active label {
+            font-weight: 600;
+        }
+
+        .radio label,
+        .checkbox label {
+            min-height: 20px;
+            padding-left: 20px;
+            margin-bottom: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .frame-style {
+            padding: 0 10px;
+            border-radius: 16px;
+
+        }
+
+        .frame-style .frame-style__slider {
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .frame-style .product-option {
+            cursor: pointer;
+
+        }
+
+        .frame-style .list-item {
+            box-shadow: none;
+
+            margin: 0;
+            height: auto;
+        }
+
+        .list-item.frame-grid {
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        #btn-filter {
+            max-width: 100px;
+            color: #fff;
+            height: 40px;
+        }
+
+        #cart {
+            padding: 5px 5px 0px 5px;
+            vertical-align: center;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        #cart .bag-wrapper {
+            background-image: url(/v2.0/sis/studios/assets/images/icons/icon-bag-black.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 28px;
+            width: 28px;
+        }
+
+        .count {
+            /*background-color: #FFD5C6; padding: 0px 7px; border-radius: 15px;*/
+            height: 100%;
+            text-align: center;
+            padding-top: 8px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        .cart_view .card-body {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .select-store-studios {
+            background-color: white !Important;
+        }
+
+        #ssis_header {
+            background-color: #e8e8e4;
+        }
+
+        ul {
+            list-style: none;
+
+
+        }
+/* 
+        ul li {
+            line-height: 1;
+            padding: 16px 0;
+
+
+        } */
+
+
+
+        ul.tags-list {
+            padding-left: 10px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            list-style: none;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap
+        }
+
+        ul.tags-list li {
+            width: 50%;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            border: 0
+        }
+
+        ul.tags-list li.tag-icon {
+            background-repeat: no-repeat;
+            background-size: 30px;
+            padding-left: 40px;
+            background-position: 0
+        }
+
+        .tag-icon__polycarbonate {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Polycarbonate.png?v=1610094044)
+        }
+
+        .tag-icon__copper {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Copper.png?v=1610094044)
+        }
+
+        .tag-icon__stainless-steel {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Stainless_steel.png?v=1610094044)
+        }
+
+        .tag-icon__acetate {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Acetate.png?v=1610094044)
+        }
+
+        .tag-icon__tr90 {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_TR90.png?v=1610094044)
+        }
+
+        .tag-icon__extra-wide-frame {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Extra_wide_frame.png?v=1610094044)
+        }
+
+        .tag-icon__wide-frame {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Wide_frame.png?v=1610094044)
+        }
+
+        .tag-icon__medium-frame {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Medium_frame.png?v=1610094044)
+        }
+
+        .tag-icon__kids-frame,
+        .tag-icon__narrow-frame {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Narrow_frame.png?v=1610094044)
+        }
+
+        .tag-icon__shiny-finish {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Shiny_finish.png?v=1610094044)
+        }
+
+        .tag-icon__matte-finish {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Matte_finish.png?v=1610094044)
+        }
+
+        .tag-icon__bestseller {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Bestseller.png?v=1610094044)
+        }
+
+        .tag-icon__new-in {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_New_in.png?v=1610094044)
+        }
+
+        .tag-icon__lightweight {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Lightweight.png?v=1610094044)
+        }
+
+        .tag-icon__men-s-daily,
+        .tag-icon__mens-daily {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Men_s_daily.png?v=1610094044)
+        }
+
+        .tag-icon__mixed-material {
+            background-image: url(https://cdn.shopify.com/s/files/1/0172/4383/2374/files/Web_Mixed_Material.png?v=1611803243)
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            ul.tags-list li {
+                font-size: 12px;
+            }
+
+            #form-add-to-bag .d-flex-m {
+                display: block !important;
+            }
+
+            .product-top {
+                flex: 0 0 100%;
+            }
+
+            .product-top .justify-content-center {
+                -ms-flex-pack: left !important;
+                justify-content: left !important;
+            }
+
+            main.customer-layout .wrapper {
+                overflow-y: none;
+            }
+
+            
+        }
+
+        .frame-list {
+            height: auto;
+
+        }
+    </style>
     <div class="packages-list hiding">
         <?php if (isset($_GET['product-detail']) && trim($_GET['product-detail']) != "") { ?>
 
@@ -119,13 +400,13 @@ if (!isset($_SESSION['customer_id'])) {
                                             <li class="more-item">+<?= $remainingColors ?></li>
                                         <?php } ?>
                                     </ul>
-                                    <!-- <div class="row d-flex justify-content-center mt-3">
+                                    <div class="row d-flex justify-content-center mt-3">
                                         <form class="col-12 form-quick-add-to-bag" item="merch" id="form-quick-add-to-bag<?= $i ?>" method="POST">
                                             <input type="hidden" name="studios_product_code" id="input-sku-<?= trim($arrProductsSorted[$i]['item_description']) ?>"  value="<?= trim($curColors[0]['product_code']) ?>">
                                             <input type="hidden" class="form-control count_num" name="count_num_value" value="1" readonly>
-                                            <button type="submit" class="btn btn-primary">add to bag</button>
+                                            <button type="submit" class="btn btn-product">Add To Bag</button>
                                         </form>
-                                    </div>                                 -->
+                                    </div>                                
                                 </div>
                             </div>
 
