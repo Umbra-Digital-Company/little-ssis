@@ -370,7 +370,7 @@ if (!isset($_SESSION['customer_id'])) {
                                             data-color-code="<?= $curColors[$i]['product_code'] ?>"
                                             product-code="<?= $curColors[$i]['product_code'] ?>">
                                         <section
-                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between pt-1">
                                             <h4><?= $arrProductsSorted[$i]['item_description'] ?>
                                             </h4>
                                             <h4><span class="blk"><?= trimColor($curColors[0]['color']); ?></span></h4>
