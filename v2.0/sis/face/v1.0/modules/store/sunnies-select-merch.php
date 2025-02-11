@@ -347,7 +347,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     
                                     <div class="d-flex flex-column justify-content-between align-items-center">
                                         <section
-                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between pt-1">
                                             <h4><?= $arrProductsSorted[$i]['item_description'] ?></h4>
                                             <?php 
                                             ?>

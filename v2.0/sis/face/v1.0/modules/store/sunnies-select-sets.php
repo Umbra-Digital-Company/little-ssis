@@ -346,7 +346,7 @@ if (!isset($_SESSION['customer_id'])) {
                                     style="border-radius: 0 0 16px 16px !important; background-color: #fff; padding: 0 15px 15px 15px;">
                                     <div class="d-flex flex-column justify-content-between align-items-center">
                                         <section
-                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between pt-1">
                                             <h4><?= $arrProductsSorted[$i]['item_description'] ?></h4>
                                             <?php 
                                             ?>

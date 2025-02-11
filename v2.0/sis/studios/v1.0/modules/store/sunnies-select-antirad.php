@@ -360,7 +360,7 @@
                                             data-color-code="<?= $curColors[$i]['product_code'] ?>"
                                             product-code="<?= $curColors[$i]['product_code'] ?>">
                                         <section
-                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between">
+                                            class="product-details row flex-nowrap no-gutters align-items-start justify-content-between pt-1">
                                             <h4><?= ucfirst(strtolower($arrProductsSorted[$i]['item_description'])); ?>
                                             </h4>
                                             
