@@ -358,11 +358,12 @@ if (!isset($_SESSION['customer_id'])) {
                                                 <span class="item-price">P<?= trim($curColors[0]['price']); ?></span>
                                             </h5>
                                         </section>
-                                        <button
-                                            class="btn btn-product product-option" prod-item-link="eyes"
-                                            product-code="<?= $curColors[0]['product_code'] ?>">
-                                            Shop
-                                        </button>
+                                        <a href="./?page=select-store-eyes" class="d-flex justify-content-center w-100">
+                                            <button
+                                                class="btn btn-product product-option">
+                                                Shop
+                                            </button>
+                                        </a>
                                     </div>
 
                                     <!-- <div class="row d-flex justify-content-center mt-3">
