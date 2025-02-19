@@ -58,9 +58,6 @@ $response = curl_exec( $ch );
 $curlInfo = curl_getinfo($ch);
 
 
-
-
-
 $result = json_decode($response,TRUE);
 
 echo $response;
@@ -70,7 +67,7 @@ echo $response;
 if($result["message"]=="Voucher valid."  && $_GET['type']=='use'){
   // echo "success";
 
- $query="UPDATE orders_studios SET
+ $query="UPDATE orders_face SET
                 promo_code='".$voucher_code."',
                 promo_code_amount='".$result["points"]."',
                 promo_code_type='sunnies-circle'

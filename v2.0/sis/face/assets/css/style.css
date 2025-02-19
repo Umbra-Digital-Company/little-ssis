@@ -945,7 +945,7 @@ body.customer-page {
   /* Button text color */
   border-radius: 28px;
   /* Rounded corners */
-  border: 2px solid #cda991;
+  border: 2px solid #956e46;
   /* Border color and thickness */
   font-size: 16px;
   /* Font size */
@@ -954,7 +954,7 @@ body.customer-page {
   font-family: "Surt-Bold" !important;
   white-space: nowrap;
   /* Prevent text wrapping */
-  background-color: #cda991;
+  background-color: #956e46;
   margin-left: 25px !important;
   z-index: 0 !important;
 }

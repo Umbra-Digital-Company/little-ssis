@@ -17,12 +17,13 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, oassis-api-key");
 header("Access-Control-Max-Age: 86400");
 
 $email =  ( isset( $_GET['email'] ) ) ? $_GET['email'] : "" ;
+$email = "pinedacj1020@gmail.com";
 $voucher_code =  ( isset( $_GET['voucher_code'] ) ) ? $_GET['voucher_code'] : "" ;
 // $store_name =  ( isset( $_POST['store_name'] ) ) ? $_POST['store_name'] : "" ;
 
 
 
-$url = "https://sunnies-circle-kml5x.ondigitalocean.app/user-rewards/status/email/$email/in-store-code/$voucher_code";
+$url = "https://api-sclub.umbradigital.com/user-rewards/status/email/$email/in-store-code/$voucher_code";
 
 // $curl = curl_init();
 // curl_setopt_array($curl, array(
@@ -55,7 +56,6 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 $response = curl_exec( $ch );
 $curlInfo = curl_getinfo($ch);
-
 
 
 

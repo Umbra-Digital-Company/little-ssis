@@ -46,7 +46,11 @@
                             s.image_url,
                             img.image_url
                         ),
-                        os.dispatch_type
+                        os.dispatch_type,
+                        p.email_address,
+                        o.order_id,
+                        o.promo_code,
+                        o.promo_code_amount
                     FROM 
                         profiles_info p
                             LEFT JOIN orders_face_details os 
@@ -82,14 +86,18 @@
         "product_upgrade",
         "product_code_order",
         "image_url",
-        "dispatch_type"
+        "dispatch_type",
+        "email_address",
+        "order_id",
+        "promo_code",
+        "promo_code_amount"
     );
     
     $stmt = mysqli_stmt_init($conn);
     if (mysqli_stmt_prepare($stmt, $arrCartQuery)) {
 
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14);
+        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13, $result14, $result15, $result16, $result17, $result18);
 
         while (mysqli_stmt_fetch($stmt)) {
 

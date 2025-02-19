@@ -47,6 +47,52 @@
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
 }
 
+.promo-container {
+        padding: 24px;
+        background-color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        -webkit-border-radius: 16px;
+        -moz-border-radius: 16px;
+        -ms-border-radius: 16px;
+        -o-border-radius: 16px;
+        -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+        -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+        box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+    }
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+/* Modal Content/Box */
+.modal-content-promo {
+  background-color: #fefefe;
+  margin: 10% auto; /* Center the modal */
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 500px; /* Set a maximum width */
+  max-height: 440px;
+}
+
+.modal-data {
+  width: 100%;
+}
+
+.modal-backdrop {
+  z-index: 9 !important;
+}
+
 
 
     .card-others {
@@ -524,63 +570,69 @@ if (!isset($_SESSION['customer_id'])): ?>
 			<input type="hidden" id="feedback" name="feedback" value="">					
 		</div>
 
-
+        <?php if($_SESSION['store_type'] == 'ns' && !strstr($arrCart[0]['email_address'],'guest')){ ?>
+            <?php 
+                    if(  isset($_GET['checkout']) && $_GET['checkout'] == 'guest'){?>
+            
+            <?php } else if (!isset($_SESSION['autologin'])) { ?>
+                <div class="d-flex align-items-center justify-content-between w-100">
+                    <p class="text-uppercase font-bold mb-0">Promo Code/Voucher Code:</p>
+                    <?php if(isset($arrCart[0]['promo_code']) && $arrCart[0]['promo_code']!='') { ?>
+                        <p class="text-uppercase text-primary font-bold mb-0"><?= $arrCart[0]['promo_code'] ?>-<?= $arrCart[0]['promo_code_amount'] ?> off</p>
+                    <?php } else { ?> 
+                        <input type="button" class="btn-promo check-promo-code" id="btn-check-reward" value="Check Promo">
+                    <?php } ?>
+                </div>
+                            
+                    
+            <?php //} 
+                } ?>
+            </div>
+        <?php } ?>
 
         <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1.5rem">
             <?php
-            // $total_price = 0;
-            // $voucher_amount = 0;
-            // $promo_code = '';
-            // $total_count = 0;
-            // foreach ($arrCart as $item):
-            //     if ($item['price'] > 0):
-            //         $voucher_amount += $item['promo_code_amount'];
-            //         $total_price += $item['price'] * $item['count'];
-            //         $total_count += $item['count'];
-            //         if (isset($item['promo_code']) && !empty($item['promo_code'])) {
-            //             $promo_code = $item['promo_code']; // Store the promo code
-            //         }
-            //     endif;
-            // endforeach;
-
             $total_price = 0;
             $voucher_amount = 0;
             $promo_code = '';
             $total_count = 0;
-
-            if (!empty($arrCart) && isset($arrCart[0]['promo_code_amount'])) {
-                $voucher_amount = $arrOrdersConfirmed[0]['promo_code_amount'];
-                $promo_code = $item['promo_code'];
-            }
-
             foreach ($arrCart as $item):
                 if ($item['price'] > 0):
+                    $voucher_amount += $item['promo_code_amount'];
                     $total_price += $item['price'] * $item['count'];
                     $total_count += $item['count'];
+                    if (isset($item['promo_code']) && !empty($item['promo_code'])) {
+                        $promo_code = $item['promo_code']; // Store the promo code
+                    }
                 endif;
             endforeach;
 
+
             ?>
+
 
             <div class="d-flex justify-content-between">
                 <p class="custom-subtitle">Subtotal</p>
-                <p class="custom-subtitle"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price, 2) ?></p>
+                <p class="custom-subtitle">
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= number_format($total_price, 2) ?>
+                </p>
             </div>
             <div class="d-flex justify-content-between">
-                <p class="custom-subtitle">Promo code</p>
-                <p class="custom-subtitle"><?= $promo_code != '' ? $promo_code : '-' ?></p>
-            </div>
-            <div class="d-flex justify-content-between">
-                <p class="custom-subtitle">Promo code amount</p>
-                <p class="custom-subtitle"><?= ($voucher_amount > 0) ? number_format($voucher_amount, 2) : '-' ?></p>
+                <p class="custom-subtitle">Discount</p>
+                <p class="custom-subtitle">
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $voucher_amount != '' ? $voucher_amount : number_format(0, 2) ?>
+                </p>
             </div>
 
             <hr>
 
             <div class="d-flex justify-content-between" style="font-weight: 700">
                 <p class="custom-title">Total amount</p>
-                <p class="custom-title" style="color: #0B5893;"><?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?><?= number_format($total_price - $voucher_amount, 2) ?> </p>
+                <p class="custom-title" style="color: #956E46;">
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= number_format($total_price - $voucher_amount, 2) ?>
+                </p>
             </div>
+
 
         </div>
 
@@ -591,6 +643,7 @@ if (!isset($_SESSION['customer_id'])): ?>
             <?php } ?>
 
             <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
+            <?php $textSend = ($_SESSION['store_type'] == 'ds' || $_SESSION['store_type'] == 'sr' || $_SESSION['store_type'] == 'vs') ? 'Send to Dispatch' : $textSend; ?>
             <a href="/v2.0/sis/studios/func/process/order_payment.php?path_loc=v1.0" id="send-order">
                 <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center" value="<?= $textSend ?>">
             </a>
@@ -610,11 +663,11 @@ if (!isset($_SESSION['customer_id'])): ?>
             $('.check-promo-code').click(function() {
 
 
-                // var modal = document.getElementById("myModal");
-                // var modalData = document.getElementById("modal-data");
+                var modal = document.getElementById("myModal");
+                var modalData = document.getElementById("modal-data");
                 //     console.log(modalData); // Debugging statement
 
-                // modal.style.display = "block";
+                modal.style.display = "block";
                 $("#myVoucher").modal("show");
                 $('input[name=email]').val('<?= $arrCart[0]['email_address'] ?>');
                 $('#email_address_text').text('<?= $arrCart[0]['email_address'] ?>');
@@ -1079,7 +1132,10 @@ if (!isset($_SESSION['customer_id'])): ?>
             }
 
             today = yyyy + '-' + mm + '-' + dd;
-            document.getElementById("bdate2").setAttribute("max", '2019-12-31');
+            const bdateElement = document.getElementById("bdate2");
+            if (bdateElement) {
+                bdateElement.setAttribute("max", '2019-12-31');
+            }
 
             let getAge = (value) => {
                 var today = new Date().getTime(),

@@ -4,8 +4,11 @@ session_start();
 
 $sDocRoot = $_SERVER["DOCUMENT_ROOT"];
 
+
 // Included files
 require $sDocRoot."/includes/connect.php";
+// var_dump($_SESSION);
+// die();
 if(!isset($_SESSION['user_login']['username'])) {
 	header("Location: /");
     exit;
@@ -25,14 +28,14 @@ if(!isset($_SESSION['user_login']['username'])) {
 	     $status = 'for payment';
 	     $payment = 'n';
 	     $payment_date = 'NULL';
-	   	if($_SESSION['store_type'] == 'ds' || $_SESSION['store_type'] == 'sr' || $_SESSION['store_type'] == 'vs'){
+	   	if($_SESSION['store_type'] == 'ds' || $_SESSION['store_type'] == 'sr' || $_SESSION['store_type'] == 'vs' || $_SESSION['store_type'] == 'vn'){
 	   		 $status = 'paid';
 	   		 $payment = 'y';
 	   		 $payment_date = 'ADDTIME(now(), "12:00:00")';
 	   	}
 
 	 	$error = false;
-		$query = 	'UPDATE orders_face_details
+		$query = 	'UPDATE `orders_face_details`
 					SET status ="'.$status.'",
 						status_date = ADDTIME(now(), "12:00:00"),
 						payment ="'.$payment.'",

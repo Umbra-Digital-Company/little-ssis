@@ -206,8 +206,7 @@
 
         <div id="notification" class="notification d-flex align-items-center justify-content-between "
             style="width: 100%; padding: 0px 10px;">
-
-            <span class="notification-message text-align-center">Order has successfully been sent to Cashier</span>
+            <span class="notification-message text-align-center"><?= ($_SESSION['store_type'] == 'ds' || $_SESSION['store_type'] == 'sr' || $_SESSION['store_type'] == 'vs') ? 'Order successfully forwarded to Dispatch' : 'Order has successfully been sent to Cashier' ?></span>
             <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">
                 <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
             </button>

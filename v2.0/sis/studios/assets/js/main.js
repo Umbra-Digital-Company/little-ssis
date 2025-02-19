@@ -1739,8 +1739,7 @@ $('.ssis-overlay').load("/v2.0/sis/face/func/store/cancel-confirmation.php", fun
         var isFormValid = true;
         
         
-        var lastname = document.getElementById('lastname').value.trim();
-        var firstname = document.getElementById('firstname').value.trim();
+       
         var gender = document.getElementById('gender').value;
         var ageRange = document.getElementById('age_range').value;
 
