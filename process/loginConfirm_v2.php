@@ -64,7 +64,9 @@ if($valid){
 
 		mysqli_stmt_bind_param($stmt, 's', $username);
 		mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12,$result13);
+
+        mysqli_stmt_bind_result($stmt, $result1, $result2, $result3, $result4, $result5, $result6, $result7, $result8, $result9, $result10, $result11, $result12, $result13);
+
         mysqli_stmt_fetch($stmt);
 		mysqli_stmt_store_result($stmt);
 
@@ -80,7 +82,8 @@ if($valid){
 		$store_type 	= $result10;
 		$dispatch_access= $result11;
 		$access_brands  = $result12;
-		$password2  = $result13;
+
+		$password2 		= $result13;
 
 		mysqli_stmt_close($stmt);
 
