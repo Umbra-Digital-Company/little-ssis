@@ -469,26 +469,6 @@ if (!isset($_SESSION['customer_id'])) { ?>
 			<input type="hidden" id="feedback" name="feedback" value="">					
 		</div>
 
-        
-<!-- 
-            <?php 
-                    if(  isset($_GET['checkout']) && $_GET['checkout'] == 'guest'){?>
-            
-            <?php } else if (!isset($_SESSION['autologin'])) { ?>
-                <div class="d-flex align-items-center justify-content-between w-100">
-                    <p class="text-uppercase font-bold mb-0">Promo Code/Voucher Code:</p>
-                    <?php if(isset($arrCart[0]['promo_code']) && $arrCart[0]['promo_code']!='') { ?>
-                        <p class="text-uppercase text-primary font-bold mb-0"><?= $arrCart[0]['promo_code'] ?>-<?= $arrCart[0]['promo_code_amount'] ?> off</p>
-                    <?php } else { ?> 
-                        <input type="button" class="btn-promo check-promo-code" id="btn-check-reward" value="Check Promo">
-                    <?php } ?>
-                </div>
-                            
-                    
-            <?php //} 
-                } ?>
-            </div>
-        <?php } ?> -->
 
 
         <div class="card mt-3 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 544px; margin-left: auto; margin-right: auto;">
