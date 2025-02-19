@@ -154,7 +154,7 @@ switch ($page) {
 					</a>
 				</li>
 				<li>
-					<a class="d-flex align-items-center" href="/studios/inventory/store/studios-receive/" target="_blank">
+					<a class="d-flex align-items-center" href="/studios/inventory/store/studios-receive/?v2_access=1" target="_blank">
 						<canvas
 						style="background-image: url(/assets/images/icons/sidebar-inventory.png?v=20250203)"></canvas>
 						<span class="h3 ml-3">Inventory</span>

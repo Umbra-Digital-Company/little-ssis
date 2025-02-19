@@ -1,3 +1,4 @@
+<!-- switch -->
 <div class="switch-layout-transactions mt-2" style="position: relative; z-index: 1;">
     <span class="switch-animation <?= (isset($_SESSION['customer_id']) || isset($_SESSION['temp_data'])) ? 'slide' : '' ?>"></span>
     <div class="transaction-navigation d-flex no-gutters">
@@ -6,11 +7,12 @@
     </div>
 </div>
 
+
 <div class="transactions-content active" id="dispatch-content">
     <?php include("for-dispatch.php"); ?>
 </div>
 
-<div class="transactions-content hide" id="payment-content">
+<div class="transactions-content hide" id="payment-content" >
     <?php include("for-payments.php"); ?>
 </div>
 

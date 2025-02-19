@@ -1,4 +1,3 @@
-
 <style>
     .search-form {
         display: flex;
@@ -48,13 +47,13 @@
         align-items: center;
         justify-content: center;
         color: #ffffff;
-        background-color: #956e46;
+        background-color: #0B5893;
         border-radius: 50%;
         border: none;
     }
 
     .search-button:hover {
-        background-color: #956e46;
+        background-color: #0B5893;
         cursor: pointer;
     }
 
@@ -63,17 +62,13 @@
         box-shadow: 0 0 0 2px #93c5fd;
     }
 
-
-
     .pagination-select {
         color: #342C29;
         border: none;
         background: transparent;
         cursor: pointer;
-       
+       padding-right: 6px;
     }
-
-
 
 
     th {
@@ -132,8 +127,6 @@
     tr:last-child td:last-child {
         border-bottom-right-radius: 16px;
     }
-
-
 
 
 
@@ -225,10 +218,9 @@
 include("./modules/includes/grab_dispatch_order.php");
 ?>
 
-
 <div class="mx-2 mt-4">
     <!-- Search Bar -->
-    <form class="search-form" id="search-form" method="GET" action="">
+    <form class="search-form mb-4" id="search-form" method="GET" action="">
         <div class="search-input-container">
             <input type="search" id="simple-search" name="search" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" class="search-input" placeholder="Search" oninput="toggleClearButton();" />
             <button type="button" class="clearable__clear" onclick="clearSearch();" style="display: none;">
@@ -253,7 +245,7 @@ include("./modules/includes/grab_dispatch_order.php");
 
 
         <?php if (!empty($arrCustomer)): ?>
-            <select class="pagination-select custom-subtitle" onchange="location = this.value;" style="width: 160px; !important">
+            <select class="pagination-select custom-subtitle" onchange="location = this.value;">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                     <option value="?page=transactions&active=dispatch&dpage=<?= $i ?>" <?= $i == $pagination ? 'selected' : '' ?>>Page <?= $i ?> of <?= $totalPages ?></option>
                 <?php endfor; ?>
@@ -266,8 +258,8 @@ include("./modules/includes/grab_dispatch_order.php");
 
     <?php if (empty($arrCustomer)): ?>
         <div class="no-orders-message" style="text-align: center; margin-top: 5rem">
-            <img src="/v2.0/sis/face/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
-            <h1 style="color:rgb(118, 118, 118);">No Pending Orders</h1>
+            <img src="/v2.0/sis/studios/assets/images/icons/party-popper.svg" class="btn-custom-svg mb-3" style="height: 30px; width: auto" alt="No Pending Orders">
+            <h1 style="color: #B7B7B7;">No Pending Orders</h1>
         </div>
     <?php else: ?>
 
@@ -333,66 +325,22 @@ include("./modules/includes/grab_dispatch_order.php");
                                 <?php
 
                                 $storeType = htmlspecialchars($customer['store_type']);
-                                $badgeClass = '';
-                                $displayText = '';
+                                $badgeClass = 'badge-merch';
+                                $displayText = 'Merch';
+
 
                                 switch ($storeType) {
-                                    case 'DCGC0005':
-                                    case 'DCGC0016':
+                                    case 'DCGC0028':
                                         $badgeClass = 'badge-antirad';
-                                        $displayText = 'Brows';
+                                        $displayText = 'Anti-Rad';
                                         break;
                                     case 'DCGC0003':
-                                    case 'DCGC0006':
-                                    case 'DCGC0001':
-                                    case 'DCGC0039':
                                         $badgeClass = 'badge-sunnies';
-                                        $displayText = 'Lips';
+                                        $displayText = 'Sunnies Studios';
                                         break;
-                                    case 'DCGC0036':
-                                    case 'DCGC0040':
-                                    case 'DCGC0042':
-                                    case 'DCGC0052':
-                                    case 'DCGC0053':
-                                        $badgeClass = 'badge-readers';
-                                        $displayText = 'Face';
-                                        break;
-                                    case 'DCGC0047':
-                                    case 'DCGC0029':
-                                    case 'DCGC0032':
-                                        $badgeClass = 'badge-readers';
-                                        $displayText = 'Eyes';
-                                        break;
-                                    case 'DCGC0031':
-                                    case 'DCGC0030':
-                                    case 'DCGC0038':
-                                    case 'DCGC0026':
-                                        $badgeClass = 'badge-readers';
-                                        $displayText = 'Skin';
-                                        break;
-                                    case 'DCGC0017':
-                                    case 'DCGC0020':
-                                    case 'DCGC0024':
-                                    case 'DCGC0004':
-                                    case 'DCGC0019':
-                                        $badgeClass = 'badge-readers';
-                                        $displayText = 'Cheeks';
-                                        break;
-                                    case 'DCGC0025':
-                                        $badgeClass = 'badge-readers';
-                                        $displayText = 'Nails';
-                                        break;
-                                    case 'DCGC0023':
-                                        $badgeClass = 'badge-readers';
-                                        $displayText = 'Sets';
-                                        break;
-                                    case 'DCGC0043':
-                                    case 'DCGC0009':
-                                    case 'DCGC0014':
                                     case 'DCGC0034':
-                                    case 'DCGC0011':
                                         $badgeClass = 'badge-readers';
-                                        $displayText = 'Merch';
+                                        $displayText = 'Readers';
                                         break;
                                 }
                                 ?>
@@ -472,7 +420,7 @@ include("./modules/includes/grab_dispatch_order.php");
                     id: id
                 },
                 type: "POST",
-                url: "/v2.0/sis/face/v1.0/modules/includes/cancel_order.php",
+                url: "/v2.0/sis/studios/v1.0/modules/includes/cancel_order.php",
                 success: function(data) {
                     location.reload();
                     // console.log(data);
