@@ -76,9 +76,7 @@ if(!isset($_SESSION['customer_id'])) {?>
     .card{
         border-radius: 15px;
     }
-  
 }
-  
 </style>
 <div class="packages-list ">
   

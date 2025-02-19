@@ -911,61 +911,44 @@ opacity: 0px;
 	</div>
 </div>
 
-<div class="modal fade" id="myVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">PROMO CODE/VOUCHER CODE</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+<?php if(isset($arrCart)){ ?>
+<div id="myModal" class="modal">
+  <div class="modal-content-promo">
+      
+    <div id="modal-data" class="modal-data" style="padding-top: 15px; padding-left: 17px;">
+      <form id="form-check-promo" method="post">
+        <div class="row mb-3">
+			<div class="col-sm-2">	
+				<label class="placeholder" style="margin-bottom: 0;">Email</label>
 			</div>
-			<div class="modal-body" style="overflow-y:auto;">
-				<form id="form-check-promo" method="post">
+          
+          <div class="col-sm-10" style="font-size: 16px;">
+            <input type="hidden" name="order_id" value="<?= $_SESSION['order_no']?>">
+            <input type="hidden" name="email" class="form-control" value="<?= $arrCart[0]['email_address']?>">
+            <?= $arrCart[0]['email_address']?>
+          </div>
+        </div>
 
-					<table class="table table-borderless">
+        <div class="form-group d-flex">
+          <input type="text" name="voucher_code" class="form-control" required>
+		  <label for="voucher_code" class="placeholder">Voucher Code</label>
+        </div>
 
-						<tr>
-							<td>Email</td>
-							<td><input type="hidden" name="order_id" value="<?= $_SESSION['order_no'] ?>">
-								<input type="hidden" name="email" class="form-control">
-								<span id="email_address_text"></span>
-							</td>
-						</tr>
+        <div class="text-center">
+          <i style="font-size: 14px;">Note that this promo code/voucher is used for sunniesclub only</i>
+        </div>
 
-						<tr>
-							<td>Voucher Code</td>
-							<td>
-								<input type="text" name="voucher_code" class="form-control" required>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>
-								<i>Note this promo code/voucher is used for sunniesclub only</i>
-							</td>
-						</tr>
+        <div class="mt-2 text-center" style="font-size: 16px;">
+          <span id="check-promo-message"></span>
+        </div>
 
-						<tr>
-							<td colspan="2" style="text-align: center; font-size: 15px;">
-								<span id="check-promo-message"> </span>
-							</td>
-						</tr>
-
-						<tr>
-
-							<td>
-								<button type="submit" class="btn btn-primary check_code">Check CODE</button>
-							</td>
-							<td>
-								<button type="submit" class="btn btn-primary use_code">USE CODE</button>
-							</td>
-						</tr>
-					</table>
-				</form>
-
-			</div>
-		</div>
-	</div>
+        <div class="form-group button-group d-flex flex-column">
+          <button type="submit" class="btn btn-primary check_code">Check Code</button>
+          <button type="submit" class="btn btn-primary use_code mt-2">Use Code</button>
+		  <button type="button" class="btn btn-cancel close-button-promo mt-4"  id="closemodalx">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+<?php } ?>

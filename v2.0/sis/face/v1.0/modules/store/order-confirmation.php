@@ -26,21 +26,36 @@
     }
 
     .survey-container {
-  padding: 24px;
-  background-color: #ffffff;
-  height: 142px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px; /* Adjust as needed */
-  border-radius: 16px;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  -ms-border-radius: 16px;
-  -o-border-radius: 16px;
-  -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
-  -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
-  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
-}
+        padding: 24px;
+        background-color: #ffffff;
+        height: 142px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px; /* Adjust as needed */
+        border-radius: 16px;
+        -webkit-border-radius: 16px;
+        -moz-border-radius: 16px;
+        -ms-border-radius: 16px;
+        -o-border-radius: 16px;
+        -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+        -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+        box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .promo-container {
+        padding: 24px;
+        background-color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        -webkit-border-radius: 16px;
+        -moz-border-radius: 16px;
+        -ms-border-radius: 16px;
+        -o-border-radius: 16px;
+        -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+        -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+        box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.06) !important;
+    }
 
 
     .card-others {
@@ -96,6 +111,37 @@
         border: none;
         text-align: center;
     }
+
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+/* Modal Content/Box */
+.modal-content-promo {
+  background-color: #fefefe;
+  margin: 10% auto; /* Center the modal */
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 500px; /* Set a maximum width */
+  max-height: 440px;
+}
+
+.modal-data {
+  width: 100%;
+}
+
+.modal-backdrop {
+  z-index: 9 !important;
+}
 </style>
 
 
@@ -423,40 +469,45 @@ if (!isset($_SESSION['customer_id'])) { ?>
 			<input type="hidden" id="feedback" name="feedback" value="">					
 		</div>
 
-        <div class="card mt-3 w-100 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <?php
-            // $total_price = 0;
-            // $voucher_amount = 0;
-            // $promo_code = '';
-            // $total_count = 0;
-            // foreach ($arrCart as $item):
-            //     if ($item['price'] > 0):
-            //         $voucher_amount += $item['promo_code_amount'];
-            //         $total_price += $item['price'] * $item['count'];
-            //         $total_count += $item['count'];
-            //         if (isset($item['promo_code']) && !empty($item['promo_code'])) {
-            //             $promo_code = $item['promo_code']; // Store the promo code
-            //         }
-            //     endif;
-            // endforeach;
+        
+<!-- 
+            <?php 
+                    if(  isset($_GET['checkout']) && $_GET['checkout'] == 'guest'){?>
+            
+            <?php } else if (!isset($_SESSION['autologin'])) { ?>
+                <div class="d-flex align-items-center justify-content-between w-100">
+                    <p class="text-uppercase font-bold mb-0">Promo Code/Voucher Code:</p>
+                    <?php if(isset($arrCart[0]['promo_code']) && $arrCart[0]['promo_code']!='') { ?>
+                        <p class="text-uppercase text-primary font-bold mb-0"><?= $arrCart[0]['promo_code'] ?>-<?= $arrCart[0]['promo_code_amount'] ?> off</p>
+                    <?php } else { ?> 
+                        <input type="button" class="btn-promo check-promo-code" id="btn-check-reward" value="Check Promo">
+                    <?php } ?>
+                </div>
+                            
+                    
+            <?php //} 
+                } ?>
+            </div>
+        <?php } ?> -->
 
+
+        <div class="card mt-3 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 544px; margin-left: auto; margin-right: auto;">
+            <?php
             $total_price = 0;
             $voucher_amount = 0;
             $promo_code = '';
             $total_count = 0;
-
-            if (!empty($arrCart) && isset($arrCart[0]['promo_code_amount'])) {
-                $voucher_amount = $arrOrdersConfirmed[0]['promo_code_amount'];
-                $promo_code = $item['promo_code'];
-            }
-
             foreach ($arrCart as $item):
                 if ($item['price'] > 0):
+                    $voucher_amount += $item['promo_code_amount'];
                     $total_price += $item['price'] * $item['count'];
                     $total_count += $item['count'];
+                    if (isset($item['promo_code']) && !empty($item['promo_code'])) {
+                        $promo_code = $item['promo_code']; // Store the promo code
+                    }
                 endif;
             endforeach;
-
+            
             ?>
 
             <div class="d-flex justify-content-between">
@@ -468,7 +519,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <div class="d-flex justify-content-between">
                 <p class="custom-subtitle">Discount</p>
                 <p class="custom-subtitle">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $promo_code != '' ? $promo_code : number_format(0, 2) ?>
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $voucher_amount != '' ? $voucher_amount : number_format(0, 2) ?>
                 </p>
             </div>
 
@@ -485,7 +536,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
         </div>
 
         <?php if (!isset($_SESSION["autologin"])) { ?>
-            <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="card mt-4 w-100 p-4 d-flex" style="color: #342C29; gap: 1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 544px !important; margin-left: auto; margin-right: auto;">
                 <div class="d-flex align-items-center ">
                     <div style="height: 40px; width: 40px">
                         <img src="<?= get_url('images/icons') ?>/icon-user.png" alt="user" class="img-fluid">
@@ -513,7 +564,7 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <?php if (isset($_SESSION["autologin"])) { ?>
                 <div id="bottom-content" class=" d-flex text-center align-items-center justify-content-center mt-3 mb-3"
                     style=" bottom: 0; left: 0; width: 100%; ">
-                    <div id="bottom-content-inner" style=" width: 575px; padding: 8px 0;">
+                    <div id="bottom-content-inner" style=" width: 544px; padding: 8px 0;">
 
                         <div class="row">
                             <div class="col-12 ">
@@ -543,14 +594,9 @@ if (!isset($_SESSION['customer_id'])) { ?>
             <?php } else { ?>
 
 
-
-
                 <?php $textSend = (trim($_SESSION['store_type']) == 'ns') ? 'Send to Cashier' : $arrTranslate['Dispatch Order']; ?>
-                <a href="/v2.0/sis/face/func/process/order_payment.php?path_loc=v1.0&bdate=<?= get_customer_data('age') ?>" id="send-order">
-                    <!-- <input type="button" class="btn-custom-blue my-4 w-100  d-flex align-items-center justify-content-center"
-                    value="<?= $textSend ?>"> -->
-
-                    <button class="btn btn-primary mt-4 mb-5" style="height: 56px;"><?php echo $textSend; ?></button>
+                <a href="/v2.0/sis/face/func/process/order_payment.php?path_loc=v1.0&bdate=<?= get_customer_data('age') ?>" id="send-order" style="display: flex; justify-content: center; width: 100%;">
+                    <button class="btn btn-primary mt-4 mb-5" style="height: 56px; width: 544px;"><?php echo $textSend; ?></button>
                 </a>
 
             <?php } ?>
@@ -564,70 +610,89 @@ if (!isset($_SESSION['customer_id'])) { ?>
     <script>
         let total_count = <?= $total_count ?>;
         $(document).ready(function() {
-            $(".use_code").hide();
-            $(".check_code").click(function(e) {
-                e.preventDefault();
+            	$('.close-button-promo').click(function(){
+		location.reload();
+	})
 
-                $.ajax({
 
-                    url: "./modules/promo/check_promo_api.php?type=check",
-                    type: "GET",
-                    data: $("#form-check-promo").serialize(),
-                    dataType: 'json',
-                    success: function(response) {
+	$(".use_code").hide();
+	$('.check-promo-code').click(function(){
+		
+		var modal = document.getElementById("myModal");
+		var modalData = document.getElementById("modal-data");
+			console.log(modalData); // Debugging statement
+		
+			modal.style.display = "block";
+			
+		$("#modal-data").load("modules/promo/check_promo.php");
+		
+		$("#modal-data").modal("show");
+	});
 
-                        color = "red";
-                        if (response.valid == true) {
-                            color = "green";
-                            // location.reload();
-                            $(".use_code").show();
-                        } else {
-                            $(".use_code").hide();
-                        }
 
-                        $("#check-promo-message").text(response.message);
-                        $("#check-promo-message").css("color", color);
+	$(".check_code").click(function(e){
+			
+		e.preventDefault();
 
-                    },
-                    error: function() {
+		$.ajax({
 
-                    }
+			url: "./modules/promo/check_promo_api.php?type=check",
+			type: "GET",
+			data: $("#form-check-promo").serialize(),
+			dataType: 'json',
+			success: function(response){
 
-                }); //END :: AJAX
+					color = "red";
+					if(response.valid==true){
+						color = "green";
+						// location.reload();
+						$(".use_code").show();
+					}else{
+						$(".use_code").hide();
+					}
 
-            });
+					$("#check-promo-message").text(response.message);
+					$("#check-promo-message").css("color",color);
 
-            $("#form-check-promo").submit(function(e) {
-                e.preventDefault();
+			},
+			error: function(){
 
-                $.ajax({
+			}
 
-                    url: "./modules/promo/check_promo_api.php?type=use",
-                    type: "GET",
-                    data: $("#form-check-promo").serialize(),
-                    dataType: 'json',
-                    success: function(response) {
+		});//END :: AJAX
 
-                        color = "red";
-                        if (response.valid == true) {
-                            color = "green";
-                            location.reload();
-                        } else {
-                            $(".use_code").hide();
-                        }
+	});
 
-                        $("#check-promo-message").text(response.message);
-                        $("#check-promo-message").css("color", color);
+	$("#form-check-promo").submit(function(e){
+		e.preventDefault();
 
-                    },
-                    error: function() {
+			$.ajax({
 
-                    }
+				url: "./modules/promo/check_promo_api.php?type=use",
+				type: "GET",
+				data: $("#form-check-promo").serialize(),
+				dataType: 'json',
+				success: function(response){
 
-                }); //END :: AJAX
+						color = "red";
+						if(response.valid==true){
+							color = "green";
+							location.reload();
+						}else{
+							$(".use_code").hide();
+						}
 
-            });
+						$("#check-promo-message").text(response.message);
+						$("#check-promo-message").css("color",color);
 
+				},
+				error: function(){
+
+				}
+
+			});//END :: AJAX
+
+	});
 
 
             $(this).on('click', '.add_count_increment_pbag', function() {
@@ -1061,7 +1126,10 @@ if (!isset($_SESSION['customer_id'])) { ?>
             }
 
             today = yyyy + '-' + mm + '-' + dd;
-            document.getElementById("bdate2").setAttribute("max", '2019-12-31');
+            const bdateElement = document.getElementById("bdate2");
+            if (bdateElement) {
+                bdateElement.setAttribute("max", '2019-12-31');
+            }
 
             let getAge = (value) => {
                 var today = new Date().getTime(),

@@ -135,7 +135,7 @@
 
 
         <div class="alert alert-warning alert-dismissible fade show text-center border-0 mb-0 " role="alert" style="background-color: #9DE356; color: #342C29; font-size: 18px; border-radius: 16px 16px 0 0; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; width: 575px;">
-            Order has successfully been sent to Cashier
+           <?= ($_SESSION['store_type'] == 'ds' || $_SESSION['store_type'] == 'sr' || $_SESSION['store_type'] == 'vs') ? 'Order successfully forwarded to Dispatch' : 'Order has successfully been sent to Cashier' ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
             </button>

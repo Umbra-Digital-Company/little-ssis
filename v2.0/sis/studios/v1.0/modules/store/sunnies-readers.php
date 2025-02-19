@@ -867,8 +867,7 @@ if (!isset($_SESSION['customer_id'])) {
 
         <?php } ?>
 
-        <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden "
-            style="background-color: #9DE356; height: 48px; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; max-width: 575px; width: 100%; margin: 0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+        <div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden initial">
 
             <div id="notification" class="notification d-flex align-items-center justify-content-between "
                 style="width: 100%; padding: 0px 10px; z-index: 1;">
@@ -988,13 +987,14 @@ if (!isset($_SESSION['customer_id'])) {
         function closeNotification() {
             document.getElementById('notification').classList.remove('show');
             document.getElementById('notification').classList.add('hidden');
-
+            console.log('closeNotification');
         }
 
         function openNotification() {
+            document.getElementById('notification').classList.remove('init');
             document.getElementById('notification').classList.remove('hidden');
             document.getElementById('notification').classList.add('show');
-
+            console.log('closeNotification');
         }
 
         

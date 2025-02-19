@@ -1887,7 +1887,7 @@ main.customer-layout .wrapper-2 {
 }
 
 main.customer-layout .wrapper-guest {
-  height: 520px;
+  /* height: 520px; */
   padding: 24px;
   overflow-y: scroll;
 }
@@ -3418,6 +3418,10 @@ main.customer-layout .wrapper {
   animation-fill-mode: forwards;
 }
 
+.notification.initial {
+  display: none;
+}
+
 .notification.show {
   display: block;
   /* animation */
@@ -3548,5 +3552,5 @@ main.customer-layout .wrapper {
 }
 
 .btn {
-  font-family: 'Surt-Bold';
+  font-family: "Surt-Bold";
 }

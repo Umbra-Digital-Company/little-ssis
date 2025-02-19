@@ -462,7 +462,7 @@ if (!isset($_SESSION['customer_id'])) {
 					<?= $arrTranslate['Profile Details'] ?></p>
 				<div class="no-gutters mt-4">
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<input type="text" name="lname" class="form-control" id="lname"
 							value="" required>
 						<label class="placeholder" for="lname"><?= $arrTranslate['Last Name'] ?></label>
@@ -472,7 +472,7 @@ if (!isset($_SESSION['customer_id'])) {
 						<input type="text" name="fname" class="form-control" id="fname"
 							value="" required>
 						<label class="placeholder" for="fname"><?= $arrTranslate['First Name'] ?></label>
-					</div>
+					</div> -->
 
 
 					<!-- <div class="form-group">

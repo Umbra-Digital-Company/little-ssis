@@ -13,7 +13,7 @@ $arrTranslate = grabLanguageTags();
 
 
 <div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content  cancel modal-cancel" style=" width: 400px !important; ">
+		<div class="modal-content  cancel modal-cancel" style=" width: 400px !important; height: 335px !important; ">
 			<div class="modal-body">
 				<div class="text-center" style="margin-bottom: 30px;">
 					<span class="font-bold text-center" style="font-size: 18px; font-weight: 700;">Are you sure you want to leave?</span>
@@ -22,12 +22,13 @@ $arrTranslate = grabLanguageTags();
 					<?php if(isset($_SESSION['language_setting']) && $_SESSION['language_setting'] == 'vn') {?>
 					<p style="font-size: 18px;"><?= $arrTranslate['You are about to cancel this order. If you\'d wish to proceed please type "SSIS" in the input below'] ?>.</p>
 					<?php }else{ ?>
-						<p style="font-size: 18px; margin-bottom: 30px;  font-weight: 400;">You are about to cancel this order. If you'd wish to proceed please type "SSIS" in the input below</p>
+						<p style="font-size: 18px; margin-bottom: 30px;  font-weight: 400;">You are about to cancel this order.</p>
+						<!--  If you'd wish to proceed please type "SSIS" in the input below -->
 					<?php } ?>
 				</div>
-				<div class="form-group mt-2" >
-					<input type="password" id="password_confirmation" class="form-control" required>
-					<label for="password_confirmation" class="placeholder">Type SSIS to confirm</label>
+				<div class="form-group mt-5" >
+					<input type="hidden" id="password_confirmation" class="form-control" value="SSIS">
+					<!-- <label for="password_confirmation" class="placeholder">Type SSIS to confirm</label> -->
 				</div>
 				<div class="text-center mt-4" style="margin-bottom: 20px !important;" >
 					<button class="btn btn-discontinue mb-3" id="yes_button" >Yes, discontinue my order</button>

@@ -328,6 +328,18 @@
         $arrMerchCount = count($arrProduct);
         $arrProductMerge = array_merge($arrProductMerge, $arrProduct);
         ?>
+
+        
+<div id="notification" class="notification p-2 text-center align-items-center justify-content-center hidden initial">
+            <div id="notification" class="notification d-flex align-items-center justify-content-between "
+                style="width: 100%; padding: 0px 10px; z-index: 1;">
+
+                <span class="notification-message text-align-center">Item successfully added to bag</span>
+                <button class="btn notification-close" style="background-color: transparent;" onclick="closeNotification()">
+                    <img src="<?= get_url('images/icons') ?>/icon-close.png" alt="Icon" class="notification-icon">
+                </button>
+            </div>
+        </div>
     </div>
 
     <style>
@@ -613,6 +625,19 @@
             //         }
             //     });//END :: AJAX
             // });
+
+            function closeNotification() {
+            document.getElementById('notification').classList.remove('show');
+            document.getElementById('notification').classList.add('hidden');
+            console.log('closeNotification');
+        }
+
+        function openNotification() {
+            document.getElementById('notification').classList.remove('init');
+            document.getElementById('notification').classList.remove('hidden');
+            document.getElementById('notification').classList.add('show');
+            console.log('closeNotification');
+        }
             $(".form-quick-add-to-bag").submit(function(e) {
                 e.preventDefault();
                 process_file = '';
@@ -625,7 +650,12 @@
                     data: $(this).serialize(),
                     dataType: 'html',
                     success: function(response) {
-                        location.reload();
+                        openNotification();
+                        cartCount += 1;                      
+                        updateBag()
+                        setTimeout(function () {
+                            closeNotification();
+                        }, 3000); // 3 seconds
                     },
                     error: function() {}
                 }); //END :: AJAX

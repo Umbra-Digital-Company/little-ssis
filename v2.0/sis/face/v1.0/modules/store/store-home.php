@@ -130,7 +130,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 			<?php } ?>
 			
 			<!-- recommended -->
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-12 mb-4">
 					<div class="col-md-12 custom-card bg-white-tile " style="border-radius: 16px;">
 					<p class="mb-2 font font-weight-bold ml-3 mt-3" style="font-size: 18px"><?= $arrTranslate['Recommended'] ?></p>
@@ -141,7 +141,7 @@ if (!isset($_SESSION["store_code"]) && $_SESSION["store_code"] == '') {
 						</ol>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<?php if ($arrTextImages[0]['image_1'] != '' && $arrTextImages[0]['image_1_status'] == 1) { ?>
 
 				<div class="d-flex justify-content-center mb-4" style ="border-radius: 16px;">

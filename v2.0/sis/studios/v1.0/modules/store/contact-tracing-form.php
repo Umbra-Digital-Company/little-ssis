@@ -111,15 +111,17 @@ if (!isset($_SESSION['customer_id'])) {
 
 
 
-	<div class="wrapper-guest customer-guest mt-3">
+	<div class="wrapper-guest customer-guest mt-2">
 		<h1 class="text-start mb-4 font-weight-bold text-uppercase" style="font-size: 18px;">GUEST ACCOUNT</h1>
 		<form action="/v2.0/sis/studios/func/process/guest_register.php?path_loc=v1.0" method="post" class="form-guest"
 			id="guestForm" id="guestForm>
 				<input type=" hidden" name="specs_branch" value="<?= 'This Store Name' ?>">
 			<input type="hidden" name="joining_date" value="<?= date('Y/m/d'); ?>">
+			<input type="hidden" id="lastname" name="lastname" class="form-control" value="-">
+			<input type="hidden" id="firstname" name="firstname" class="form-control" value="Guest">
 
 
-			<div class="form-group mt-4">
+			<!-- <div class="form-group mt-4">
 				<input type="text" name="lastname" class="form-control" id="lastname" autocomplete="off" autofocus
 					 />
 				<label class="placeholder" for="lastname">Last Name</label>
@@ -127,8 +129,7 @@ if (!isset($_SESSION['customer_id'])) {
 			<div class="form-group mt-4">
 				<input type="text" name="firstname" class="form-control" id="firstname" autocomplete="off" />
 				<label class="placeholder" for="firstname">First Name</label>
-			</div>
-
+			</div> -->
 
 
 			<div class="form-group mt-4">
