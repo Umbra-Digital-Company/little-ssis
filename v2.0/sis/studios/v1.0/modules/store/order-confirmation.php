@@ -529,7 +529,7 @@ if (!isset($_SESSION['customer_id'])): ?>
             ?>
             <div class="form-check d-flex align-items-center">
 
-                <input name="receipt_holder" class="set_receipt_holder form-check-input" type="checkbox" orders-specs-id="<?= $orders_specs_id_selected ?>" product-code="<?= $arrPaperBag[0]['product_code'] ?>" <?= $orders_specs_id_selected != '' ? 'checked' : '' ?>>
+                <input name="receipt_holder" id="receipt_yes" class="set_receipt_holder form-check-input" type="checkbox" orders-specs-id="<?= $orders_specs_id_selected ?>" product-code="<?= $arrPaperBag[0]['product_code'] ?>" <?= $orders_specs_id_selected != '' ? 'checked' : '' ?>>
                 <label class="form-check-label ml-4" for="flexCheckChecked">
                     Receipt holder?
                 </label>
@@ -944,31 +944,32 @@ if (!isset($_SESSION['customer_id'])): ?>
 
             bool_receipt_holder = ($('.set_receipt_holder').attr('orders-specs-id') == '') ? false : true;
 
-            $(this).on('click', '.set_receipt_holder', function() {
-                bool_receipt_holder = true;
-                if ($(this).val() == 'yes') {
+            $(document).on('click', '.set_receipt_holder', function() {
+                let bool_receipt_holder = true;
+                
+                if ($(this).is(':checked')) { // Correct way to check if checkbox is checked
                     if ($(this).attr('orders-specs-id') == '') {
-                        $('#loading').modal('show');
+                       // $('#loading').modal('show');
                         $.post("/v2.0/sis/studios/func/process/add_to_bag_merch.php", {
                             studios_product_code: $(this).attr('product-code'),
                             paper_bag: true
                         }, function(result) {
                             $('.set_receipt_holder').attr('orders-specs-id', result);
-                            setTimeout(() => {
-                                $('#loading').modal('hide');
-                            }, 200);
+                            // setTimeout(() => {
+                            //     $('#loading').modal('hide');
+                            // }, 200);
                         });
                     }
                 } else {
                     if ($(this).attr('orders-specs-id') != '') {
-                        $('#loading').modal('show');
+                       // $('#loading').modal('show');
                         $.post("/v2.0/sis/studios/func/process/remove_item.php", {
                             orders_specs_id: $(this).attr('orders-specs-id')
                         }, function() {
                             $('.set_receipt_holder').attr('orders-specs-id', '');
-                            setTimeout(() => {
-                                $('#loading').modal('hide');
-                            }, 200);
+                            // setTimeout(() => {
+                            //     $('#loading').modal('hide');
+                            // }, 200);
                         });
                     }
                 }
