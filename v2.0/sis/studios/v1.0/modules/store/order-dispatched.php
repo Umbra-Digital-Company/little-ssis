@@ -12,7 +12,7 @@
             <div>
                 <div class="d-flex justify-content-between align-content-center">
                     <p class="custom-title">Order Details</p>
-                    <div style="height: 24px; width: 24px; cursor: pointer" id="toggle-chevron">
+                    <div style="height: 24px; width: 24px; cursor: pointer; margin: 3px 0 !important;" id="toggle-chevron" >
                         <img src="<?= get_url('images/icons') ?>/icon-down-chevron.png" alt="user" class="img-fluid">
                     </div>
                 </div>
@@ -61,18 +61,17 @@
                 ?>
                     <div class="my-4 order-item">
                         <div class="row no-gutters">
-                            <div class="col-md-4 d-flex align-items-center">
-                                <div class="card-img-container" style="border-radius: 8px; height: 150px; width: 100%; display: flex; justify-content: center; align-items: center;">
-                                    <img src="<?= !empty($order['image_url']) ? $order['image_url'] : '/v2.0/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="object-fit-contain" alt="Product Image" style="max-height: 100%; max-width: 100%; border-radius: 8px;">
+                        <div class="d-flex align-items-center justify-content-start" style="height: 126px !important;  border-radius: 18px !important;">
+                                <div class="card-img-container" style="border-radius: 8px; height: 126px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                                    <img style="border-radius: 8px !important; height: 126px !important; width: 126px !important; <?= !empty($order['image_url']) ? ' object-fit: cover !important;' : ' object-fit: contain !important;' ?> " src="<?= !empty($order['image_url']) ? $order['image_url'] : '/v2.0/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="object-fit-contain" alt="Product Image" style="max-height: 100%; max-width: 100%; border-radius: 8px;">
                                 </div>
                             </div>
-                            <div class="col-md-8 d-flex align-items-center">
+                            <div class="d-flex align-items-center">
                                 <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
                                     <p class="custom-title"><?= $order['item_description'] ?></p>
                                     <p class="custom-subtitle"><?= $order['product_code'] ?></p>
                                     <p class="custom-subtitle" style="color: #919191;">
-                                        <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?>
-                                        <?= number_format($order['price'], 2) ?>
+                                        <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : 'P' ?><?= number_format($order['price'], 2) ?>
                                         <?php if ($order['count'] > 1): ?>
                                             x <?= $order['count'] ?>
                                         <?php endif; ?>
@@ -87,7 +86,7 @@
 
 
 
-                <hr>
+                <hr style="margin: 34px 0;">
 
                 <?php
                 $total_price = 0;

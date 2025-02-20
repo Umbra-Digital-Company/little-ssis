@@ -234,22 +234,21 @@ if (!isset($_SESSION['customer_id'])): ?>
                 }
             ?>
 
-                <div class="customized-card my-4 w-100 p-4 ">
+                <div class="customized-card my-4 w-100 p-3 " style="height: 158px !important;">
                     <div class="row no-gutters">
-                        <div class="col-md-4 d-flex align-items-center justify-content-center">
-                            <img src="<?= !empty($item['image_url']) ? $item['image_url'] : '/v2.0/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="card-img" alt="Product Image">
+                        <div class="d-flex align-items-center justify-content-start" style="height: 126px !important;  border-radius: 18px !important;">
+                            <img style="border-radius: 8px !important; height: 126px !important; width: 126px !important; <?= !empty($item['image_url']) ? ' object-fit: cover !important;' : ' object-fit: contain !important;' ?> " src="<?= !empty($item['image_url']) ? $item['image_url'] : '/v2.0/sis/studios/assets/images/defaults/no_specs_frame_available_b.png' ?>" class="card-img" alt="Product Image">
                         </div>
-                        <div class="col-md-8 d-flex align-items-center">
+                        <div class="d-flex align-items-center" >
                             <div class="card-body d-flex flex-column gap-3 pt-0 pb-0 pr-0">
                                 <p class="custom-title"><?= ucwords($item['style']) ?></p>
                                 <p class="custom-subtitle" style="font-size: 1.125rem; font-weight: 400;"><?= ucwords($item['color']) ?></p>
-                                <p class="custom-subtitle" style="color: #919191;">
+                                <p class="custom-subtitle" style="color: #919191; font-weight: 400 !important;">
                                     <?=
                                     (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs')
                                         ? 'VND '
-                                        : '₱'
-                                    ?>
-                                    <?= number_format($item['price'], 2) ?>
+                                        : 'P'
+                                    ?><?= number_format($item['price'], 0) ?>
                                     <?php if ($item['count'] > 1): ?>
                                         x <?= $item['count'] ?>
                                     <?php endif; ?>
@@ -614,13 +613,13 @@ if (!isset($_SESSION['customer_id'])): ?>
             <div class="d-flex justify-content-between">
                 <p class="custom-subtitle">Subtotal</p>
                 <p class="custom-subtitle">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= number_format($total_price, 2) ?>
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : 'P' ?><?= number_format($total_price, 2) ?>
                 </p>
             </div>
             <div class="d-flex justify-content-between">
                 <p class="custom-subtitle">Discount</p>
                 <p class="custom-subtitle">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= $voucher_amount != '' ? $voucher_amount : number_format(0, 2) ?>
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : 'P' ?><?= $voucher_amount != '' ? $voucher_amount : number_format(0, 2) ?>
                 </p>
             </div>
 
@@ -628,8 +627,8 @@ if (!isset($_SESSION['customer_id'])): ?>
 
             <div class="d-flex justify-content-between" style="font-weight: 700">
                 <p class="custom-title">Total amount</p>
-                <p class="custom-title" style="color: #956E46;">
-                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : '₱' ?> <?= number_format($total_price - $voucher_amount, 2) ?>
+                <p class="custom-title" style="color: #0B5893;">
+                    <?= (isset($_SESSION['store_type']) && trim($_SESSION['store_type']) == 'vs') ? 'VND ' : 'P' ?><?= number_format($total_price - $voucher_amount, 2) ?>
                 </p>
             </div>
 
